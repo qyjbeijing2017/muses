@@ -1,0 +1,19 @@
+Shader "Test" {
+    Properties {
+        
+    }
+    
+    SubShader {
+        Pass {
+            // renderstate
+
+            // glsl
+            GLSLPROGRAM
+            
+
+            ENDGLSL
+        }
+    }
+
+    FallBack "Diffuse"
+}
