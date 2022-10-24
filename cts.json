@@ -1,0 +1,675 @@
+{
+  "name": "shader",
+  "children": {
+    "Shader": [
+      {
+        "image": "Shader",
+        "startOffset": 0,
+        "endOffset": 5,
+        "startLine": 1,
+        "endLine": 1,
+        "startColumn": 1,
+        "endColumn": 6,
+        "tokenTypeIdx": 47,
+        "tokenType": {
+          "name": "Shader",
+          "PATTERN": {},
+          "tokenTypeIdx": 47,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      }
+    ],
+    "name": [
+      {
+        "image": "\"Test\"",
+        "startOffset": 7,
+        "endOffset": 12,
+        "startLine": 1,
+        "endLine": 1,
+        "startColumn": 8,
+        "endColumn": 13,
+        "tokenTypeIdx": 92,
+        "tokenType": {
+          "name": "ConstString",
+          "PATTERN": {},
+          "tokenTypeIdx": 92,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      }
+    ],
+    "LeftBrace": [
+      {
+        "image": "{",
+        "startOffset": 14,
+        "endOffset": 14,
+        "startLine": 1,
+        "endLine": 1,
+        "startColumn": 15,
+        "endColumn": 15,
+        "tokenTypeIdx": 80,
+        "tokenType": {
+          "name": "LeftBrace",
+          "PATTERN": {},
+          "tokenTypeIdx": 80,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      }
+    ],
+    "properties": [
+      {
+        "name": "properties",
+        "children": {
+          "Properties": [
+            {
+              "image": "Properties",
+              "startOffset": 21,
+              "endOffset": 30,
+              "startLine": 2,
+              "endLine": 2,
+              "startColumn": 5,
+              "endColumn": 14,
+              "tokenTypeIdx": 48,
+              "tokenType": {
+                "name": "Properties",
+                "PATTERN": {},
+                "tokenTypeIdx": 48,
+                "CATEGORIES": [],
+                "categoryMatches": [],
+                "categoryMatchesMap": {},
+                "isParent": false
+              }
+            }
+          ],
+          "LeftBrace": [
+            {
+              "image": "{",
+              "startOffset": 32,
+              "endOffset": 32,
+              "startLine": 2,
+              "endLine": 2,
+              "startColumn": 16,
+              "endColumn": 16,
+              "tokenTypeIdx": 80,
+              "tokenType": {
+                "name": "LeftBrace",
+                "PATTERN": {},
+                "tokenTypeIdx": 80,
+                "CATEGORIES": [],
+                "categoryMatches": [],
+                "categoryMatchesMap": {},
+                "isParent": false
+              }
+            }
+          ],
+          "RightBrace": [
+            {
+              "image": "}",
+              "startOffset": 49,
+              "endOffset": 49,
+              "startLine": 4,
+              "endLine": 4,
+              "startColumn": 5,
+              "endColumn": 5,
+              "tokenTypeIdx": 81,
+              "tokenType": {
+                "name": "RightBrace",
+                "PATTERN": {},
+                "tokenTypeIdx": 81,
+                "CATEGORIES": [],
+                "categoryMatches": [],
+                "categoryMatchesMap": {},
+                "isParent": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "subshader": [
+      {
+        "name": "subshader",
+        "children": {
+          "SubShader": [
+            {
+              "image": "SubShader",
+              "startOffset": 62,
+              "endOffset": 70,
+              "startLine": 6,
+              "endLine": 6,
+              "startColumn": 5,
+              "endColumn": 13,
+              "tokenTypeIdx": 49,
+              "tokenType": {
+                "name": "SubShader",
+                "PATTERN": {},
+                "tokenTypeIdx": 49,
+                "CATEGORIES": [],
+                "categoryMatches": [],
+                "categoryMatchesMap": {},
+                "isParent": false
+              }
+            }
+          ],
+          "LeftBrace": [
+            {
+              "image": "{",
+              "startOffset": 72,
+              "endOffset": 72,
+              "startLine": 6,
+              "endLine": 6,
+              "startColumn": 15,
+              "endColumn": 15,
+              "tokenTypeIdx": 80,
+              "tokenType": {
+                "name": "LeftBrace",
+                "PATTERN": {},
+                "tokenTypeIdx": 80,
+                "CATEGORIES": [],
+                "categoryMatches": [],
+                "categoryMatchesMap": {},
+                "isParent": false
+              }
+            }
+          ],
+          "passes": [
+            {
+              "name": "pass",
+              "children": {
+                "Pass": [
+                  {
+                    "image": "Pass",
+                    "startOffset": 83,
+                    "endOffset": 86,
+                    "startLine": 7,
+                    "endLine": 7,
+                    "startColumn": 9,
+                    "endColumn": 12,
+                    "tokenTypeIdx": 51,
+                    "tokenType": {
+                      "name": "Pass",
+                      "PATTERN": {},
+                      "tokenTypeIdx": 51,
+                      "CATEGORIES": [],
+                      "categoryMatches": [],
+                      "categoryMatchesMap": {},
+                      "isParent": false
+                    }
+                  }
+                ],
+                "LeftBrace": [
+                  {
+                    "image": "{",
+                    "startOffset": 88,
+                    "endOffset": 88,
+                    "startLine": 7,
+                    "endLine": 7,
+                    "startColumn": 14,
+                    "endColumn": 14,
+                    "tokenTypeIdx": 80,
+                    "tokenType": {
+                      "name": "LeftBrace",
+                      "PATTERN": {},
+                      "tokenTypeIdx": 80,
+                      "CATEGORIES": [],
+                      "categoryMatches": [],
+                      "categoryMatchesMap": {},
+                      "isParent": false
+                    }
+                  }
+                ],
+                "glsl": [
+                  {
+                    "name": "glsl",
+                    "children": {
+                      "GLSLPROGRAM": [
+                        {
+                          "image": "GLSLPROGRAM",
+                          "startOffset": 154,
+                          "endOffset": 164,
+                          "startLine": 11,
+                          "endLine": 11,
+                          "startColumn": 13,
+                          "endColumn": 23,
+                          "tokenTypeIdx": 52,
+                          "tokenType": {
+                            "name": "GLSLPROGRAM",
+                            "PATTERN": {},
+                            "tokenTypeIdx": 52,
+                            "CATEGORIES": [],
+                            "categoryMatches": [],
+                            "categoryMatchesMap": {},
+                            "isParent": false
+                          }
+                        }
+                      ],
+                      "body": [
+                        {
+                          "name": "variableDeclarationStatement",
+                          "children": {
+                            "variableDeclaration": [
+                              {
+                                "name": "variableDeclaration",
+                                "children": {
+                                  "storage": [
+                                    {
+                                      "name": "storageDeclaration",
+                                      "children": {
+                                        "name": [
+                                          {
+                                            "image": "attribute",
+                                            "startOffset": 181,
+                                            "endOffset": 189,
+                                            "startLine": 13,
+                                            "endLine": 13,
+                                            "startColumn": 13,
+                                            "endColumn": 21,
+                                            "tokenTypeIdx": 36,
+                                            "tokenType": {
+                                              "name": "Attribute",
+                                              "PATTERN": {},
+                                              "tokenTypeIdx": 36,
+                                              "CATEGORIES": [],
+                                              "categoryMatches": [],
+                                              "categoryMatchesMap": {},
+                                              "isParent": false
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "percision": [
+                                    {
+                                      "name": "percisionDeclaration",
+                                      "children": {
+                                        "name": [
+                                          {
+                                            "image": "lowp",
+                                            "startOffset": 191,
+                                            "endOffset": 194,
+                                            "startLine": 13,
+                                            "endLine": 13,
+                                            "startColumn": 23,
+                                            "endColumn": 26,
+                                            "tokenTypeIdx": 44,
+                                            "tokenType": {
+                                              "name": "Lowp",
+                                              "PATTERN": {},
+                                              "tokenTypeIdx": 44,
+                                              "CATEGORIES": [],
+                                              "categoryMatches": [],
+                                              "categoryMatchesMap": {},
+                                              "isParent": false
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "type": [
+                                    {
+                                      "name": "typeDeclaration",
+                                      "children": {
+                                        "name": [
+                                          {
+                                            "image": "float",
+                                            "startOffset": 196,
+                                            "endOffset": 200,
+                                            "startLine": 13,
+                                            "endLine": 13,
+                                            "startColumn": 28,
+                                            "endColumn": 32,
+                                            "tokenTypeIdx": 16,
+                                            "tokenType": {
+                                              "name": "Float",
+                                              "PATTERN": {},
+                                              "tokenTypeIdx": 16,
+                                              "CATEGORIES": [],
+                                              "categoryMatches": [],
+                                              "categoryMatchesMap": {},
+                                              "isParent": false
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ],
+                                  "name": [
+                                    {
+                                      "image": "position",
+                                      "startOffset": 202,
+                                      "endOffset": 209,
+                                      "startLine": 13,
+                                      "endLine": 13,
+                                      "startColumn": 34,
+                                      "endColumn": 41,
+                                      "tokenTypeIdx": 93,
+                                      "tokenType": {
+                                        "name": "Identifier",
+                                        "PATTERN": {},
+                                        "tokenTypeIdx": 93,
+                                        "CATEGORIES": [],
+                                        "categoryMatches": [],
+                                        "categoryMatchesMap": {},
+                                        "isParent": false
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "Semicolon": [
+                              {
+                                "image": ";",
+                                "startOffset": 210,
+                                "endOffset": 210,
+                                "startLine": 13,
+                                "endLine": 13,
+                                "startColumn": 42,
+                                "endColumn": 42,
+                                "tokenTypeIdx": 85,
+                                "tokenType": {
+                                  "name": "Semicolon",
+                                  "PATTERN": {},
+                                  "tokenTypeIdx": 85,
+                                  "CATEGORIES": [],
+                                  "categoryMatches": [],
+                                  "categoryMatchesMap": {},
+                                  "isParent": false
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "name": "functionDeclaration",
+                          "children": {
+                            "returnType": [
+                              {
+                                "name": "typeDeclaration",
+                                "children": {
+                                  "name": [
+                                    {
+                                      "image": "void",
+                                      "startOffset": 227,
+                                      "endOffset": 230,
+                                      "startLine": 15,
+                                      "endLine": 15,
+                                      "startColumn": 13,
+                                      "endColumn": 16,
+                                      "tokenTypeIdx": 14,
+                                      "tokenType": {
+                                        "name": "Void",
+                                        "PATTERN": {},
+                                        "tokenTypeIdx": 14,
+                                        "CATEGORIES": [],
+                                        "categoryMatches": [],
+                                        "categoryMatchesMap": {},
+                                        "isParent": false
+                                      }
+                                    }
+                                  ]
+                                }
+                              }
+                            ],
+                            "name": [
+                              {
+                                "image": "vert",
+                                "startOffset": 232,
+                                "endOffset": 235,
+                                "startLine": 15,
+                                "endLine": 15,
+                                "startColumn": 18,
+                                "endColumn": 21,
+                                "tokenTypeIdx": 93,
+                                "tokenType": {
+                                  "name": "Identifier",
+                                  "PATTERN": {},
+                                  "tokenTypeIdx": 93,
+                                  "CATEGORIES": [],
+                                  "categoryMatches": [],
+                                  "categoryMatchesMap": {},
+                                  "isParent": false
+                                }
+                              }
+                            ],
+                            "LeftParen": [
+                              {
+                                "image": "(",
+                                "startOffset": 236,
+                                "endOffset": 236,
+                                "startLine": 15,
+                                "endLine": 15,
+                                "startColumn": 22,
+                                "endColumn": 22,
+                                "tokenTypeIdx": 78,
+                                "tokenType": {
+                                  "name": "LeftParen",
+                                  "PATTERN": {},
+                                  "tokenTypeIdx": 78,
+                                  "CATEGORIES": [],
+                                  "categoryMatches": [],
+                                  "categoryMatchesMap": {},
+                                  "isParent": false
+                                }
+                              }
+                            ],
+                            "RightParen": [
+                              {
+                                "image": ")",
+                                "startOffset": 237,
+                                "endOffset": 237,
+                                "startLine": 15,
+                                "endLine": 15,
+                                "startColumn": 23,
+                                "endColumn": 23,
+                                "tokenTypeIdx": 79,
+                                "tokenType": {
+                                  "name": "RightParen",
+                                  "PATTERN": {},
+                                  "tokenTypeIdx": 79,
+                                  "CATEGORIES": [],
+                                  "categoryMatches": [],
+                                  "categoryMatchesMap": {},
+                                  "isParent": false
+                                }
+                              }
+                            ],
+                            "LeftBrace": [
+                              {
+                                "image": "{",
+                                "startOffset": 239,
+                                "endOffset": 239,
+                                "startLine": 15,
+                                "endLine": 15,
+                                "startColumn": 25,
+                                "endColumn": 25,
+                                "tokenTypeIdx": 80,
+                                "tokenType": {
+                                  "name": "LeftBrace",
+                                  "PATTERN": {},
+                                  "tokenTypeIdx": 80,
+                                  "CATEGORIES": [],
+                                  "categoryMatches": [],
+                                  "categoryMatchesMap": {},
+                                  "isParent": false
+                                }
+                              }
+                            ],
+                            "RightBrace": [
+                              {
+                                "image": "}",
+                                "startOffset": 330,
+                                "endOffset": 330,
+                                "startLine": 17,
+                                "endLine": 17,
+                                "startColumn": 13,
+                                "endColumn": 13,
+                                "tokenTypeIdx": 81,
+                                "tokenType": {
+                                  "name": "RightBrace",
+                                  "PATTERN": {},
+                                  "tokenTypeIdx": 81,
+                                  "CATEGORIES": [],
+                                  "categoryMatches": [],
+                                  "categoryMatchesMap": {},
+                                  "isParent": false
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      ],
+                      "ENDGLSL": [
+                        {
+                          "image": "ENDGLSL",
+                          "startOffset": 458,
+                          "endOffset": 464,
+                          "startLine": 23,
+                          "endLine": 23,
+                          "startColumn": 13,
+                          "endColumn": 19,
+                          "tokenTypeIdx": 53,
+                          "tokenType": {
+                            "name": "ENDGLSL",
+                            "PATTERN": {},
+                            "tokenTypeIdx": 53,
+                            "CATEGORIES": [],
+                            "categoryMatches": [],
+                            "categoryMatchesMap": {},
+                            "isParent": false
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "RightBrace": [
+                  {
+                    "image": "}",
+                    "startOffset": 475,
+                    "endOffset": 475,
+                    "startLine": 24,
+                    "endLine": 24,
+                    "startColumn": 9,
+                    "endColumn": 9,
+                    "tokenTypeIdx": 81,
+                    "tokenType": {
+                      "name": "RightBrace",
+                      "PATTERN": {},
+                      "tokenTypeIdx": 81,
+                      "CATEGORIES": [],
+                      "categoryMatches": [],
+                      "categoryMatchesMap": {},
+                      "isParent": false
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "RightBrace": [
+            {
+              "image": "}",
+              "startOffset": 482,
+              "endOffset": 482,
+              "startLine": 25,
+              "endLine": 25,
+              "startColumn": 5,
+              "endColumn": 5,
+              "tokenTypeIdx": 81,
+              "tokenType": {
+                "name": "RightBrace",
+                "PATTERN": {},
+                "tokenTypeIdx": 81,
+                "CATEGORIES": [],
+                "categoryMatches": [],
+                "categoryMatchesMap": {},
+                "isParent": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "fallback": [
+      {
+        "name": "fallback",
+        "children": {
+          "FallBack": [
+            {
+              "image": "FallBack",
+              "startOffset": 491,
+              "endOffset": 498,
+              "startLine": 27,
+              "endLine": 27,
+              "startColumn": 5,
+              "endColumn": 12,
+              "tokenTypeIdx": 50,
+              "tokenType": {
+                "name": "FallBack",
+                "PATTERN": {},
+                "tokenTypeIdx": 50,
+                "CATEGORIES": [],
+                "categoryMatches": [],
+                "categoryMatchesMap": {},
+                "isParent": false
+              }
+            }
+          ],
+          "to": [
+            {
+              "image": "\"Diffuse\"",
+              "startOffset": 500,
+              "endOffset": 508,
+              "startLine": 27,
+              "endLine": 27,
+              "startColumn": 14,
+              "endColumn": 22,
+              "tokenTypeIdx": 92,
+              "tokenType": {
+                "name": "ConstString",
+                "PATTERN": {},
+                "tokenTypeIdx": 92,
+                "CATEGORIES": [],
+                "categoryMatches": [],
+                "categoryMatchesMap": {},
+                "isParent": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "RightBrace": [
+      {
+        "image": "}",
+        "startOffset": 511,
+        "endOffset": 511,
+        "startLine": 28,
+        "endLine": 28,
+        "startColumn": 1,
+        "endColumn": 1,
+        "tokenTypeIdx": 81,
+        "tokenType": {
+          "name": "RightBrace",
+          "PATTERN": {},
+          "tokenTypeIdx": 81,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      }
+    ]
+  }
+}

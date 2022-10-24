@@ -6,4 +6,7 @@ export enum MusesAstNodeType {
     Pass = "pass",
     RenderStates = "render-states",
     GLSL = "glsl",
+    FunctionDeclaration = "function-declaration",
+    TypeDeclaration = "type-declaration",
+    VariableDeclaration = "variable-declaration",
 }

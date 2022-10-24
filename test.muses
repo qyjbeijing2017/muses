@@ -9,7 +9,16 @@ Shader "Test" {
 
             // glsl
             GLSLPROGRAM
-            
+
+            attribute lowp float position;
+
+            void vert() {
+                // gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+            }
+
+            // void frag() {
+            //     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+            // }
 
             ENDGLSL
         }

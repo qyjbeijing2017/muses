@@ -1,4 +1,3 @@
-import { CstParser } from "chevrotain";
 import { MusesAstNodeType } from "./nodeType";
 
 export interface IMusesNodeOptions {

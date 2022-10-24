@@ -16,15 +16,39 @@ export enum MusesTokenName {
     Continue = "Continue",
     Struct = "Struct",
 
+    // types
+    Void = "Void",
+    Int = "Int",
+    Float = "Float",
+    Bool = "Bool",
+    Vec2 = "Vec2",
+    Vec3 = "Vec3",
+    Vec4 = "Vec4",
+    BVec2 = "BVec2",
+    BVec3 = "BVec3",
+    BVec4 = "BVec4",
+    IVec2 = "IVec2",
+    IVec3 = "IVec3",
+    IVec4 = "IVec4",
+    Mat2 = "Mat2",
+    Mat3 = "Mat3",
+    Mat4 = "Mat4",
+    Sampler1Dshadow = "Sampler1Dshadow",
+    Sampler2Dshadow = "Sampler2Dshadow",
+    Sampler1D = "Sampler1D",
+    Sampler2D = "Sampler2D",
+    Sampler3D = "Sampler3D",
+    SamplerCube = "SamplerCube",
+
     // qualifier
     Attribute = "Attribute",
     Uniform = "Uniform",
     Varying = "Varying",
+    InOut = "InOut",
+    Invariant = "Invariant",
     In = "In",
     Out = "Out",
-    InOut = "InOut",
     Const = "Const",
-    Invariant = "Invariant",
 
     // precision
     Lowp = "Lowp",
@@ -37,6 +61,8 @@ export enum MusesTokenName {
     SubShader = "SubShader",
     FallBack = "FallBack",
     Pass = "Pass",
+    GLSLPROGRAM = "GLSLPROGRAM",
+    ENDGLSL = "ENDGLSL",
 
     // operators
     GreaterThenEqual = "GreaterThenEqual",
@@ -76,30 +102,6 @@ export enum MusesTokenName {
     Colon = "Colon",
     Dot = "Dot",
 
-    // types
-    Void = "Void",
-    Int = "Int",
-    Float = "Float",
-    Bool = "Bool",
-    Vec2 = "Vec2",
-    Vec3 = "Vec3",
-    Vec4 = "Vec4",
-    BVec2 = "BVec2",
-    BVec3 = "BVec3",
-    BVec4 = "BVec4",
-    IVec2 = "IVec2",
-    IVec3 = "IVec3",
-    IVec4 = "IVec4",
-    Mat2 = "Mat2",
-    Mat3 = "Mat3",
-    Mat4 = "Mat4",
-    Sampler1D = "Sampler1D",
-    Sampler2D = "Sampler2D",
-    Sampler3D = "Sampler3D",
-    SamplerCube = "SamplerCube",
-    Sampler1Dshadow = "Sampler1Dshadow",
-    Sampler2Dshadow = "Sampler2Dshadow",
-
     // constants
     True = "True",
     False = "False",
@@ -128,15 +130,39 @@ export const Break = createToken({ name: MusesTokenName.Break, pattern: /break/ 
 export const Continue = createToken({ name: MusesTokenName.Continue, pattern: /continue/ });
 export const Struct = createToken({ name: MusesTokenName.Struct, pattern: /struct/ });
 
+// Types
+export const Void = createToken({ name: MusesTokenName.Void, pattern: /void/ });
+export const Int = createToken({ name: MusesTokenName.Int, pattern: /int/ });
+export const Float = createToken({ name: MusesTokenName.Float, pattern: /float/ });
+export const Bool = createToken({ name: MusesTokenName.Bool, pattern: /bool/ });
+export const Vec2 = createToken({ name: MusesTokenName.Vec2, pattern: /vec2/ });
+export const Vec3 = createToken({ name: MusesTokenName.Vec3, pattern: /vec3/ });
+export const Vec4 = createToken({ name: MusesTokenName.Vec4, pattern: /vec4/ });
+export const BVec2 = createToken({ name: MusesTokenName.BVec2, pattern: /bvec2/ });
+export const BVec3 = createToken({ name: MusesTokenName.BVec3, pattern: /bvec3/ });
+export const BVec4 = createToken({ name: MusesTokenName.BVec4, pattern: /bvec4/ });
+export const IVec2 = createToken({ name: MusesTokenName.IVec2, pattern: /ivec2/ });
+export const IVec3 = createToken({ name: MusesTokenName.IVec3, pattern: /ivec3/ });
+export const IVec4 = createToken({ name: MusesTokenName.IVec4, pattern: /ivec4/ });
+export const Mat2 = createToken({ name: MusesTokenName.Mat2, pattern: /mat2/ });
+export const Mat3 = createToken({ name: MusesTokenName.Mat3, pattern: /mat3/ });
+export const Mat4 = createToken({ name: MusesTokenName.Mat4, pattern: /mat4/ });
+export const Sampler1DShadow = createToken({ name: MusesTokenName.Sampler1Dshadow, pattern: /sampler1Dshadow/ });
+export const Sampler2DShadow = createToken({ name: MusesTokenName.Sampler2Dshadow, pattern: /sampler2Dshadow/ });
+export const Sampler1D = createToken({ name: MusesTokenName.Sampler1D, pattern: /sampler1D/ });
+export const Sampler2D = createToken({ name: MusesTokenName.Sampler2D, pattern: /sampler2D/ });
+export const Sampler3D = createToken({ name: MusesTokenName.Sampler3D, pattern: /sampler3D/ });
+export const SamplerCube = createToken({ name: MusesTokenName.SamplerCube, pattern: /samplerCube/ });
+
 // Qualifier
 export const Attribute = createToken({ name: MusesTokenName.Attribute, pattern: /attribute/ });
 export const Uniform = createToken({ name: MusesTokenName.Uniform, pattern: /uniform/ });
 export const Varying = createToken({ name: MusesTokenName.Varying, pattern: /varying/ });
+export const InOut = createToken({ name: MusesTokenName.InOut, pattern: /inout/ });
+export const Invariant = createToken({ name: MusesTokenName.Invariant, pattern: /invariant/ });
 export const In = createToken({ name: MusesTokenName.In, pattern: /in/ });
 export const Out = createToken({ name: MusesTokenName.Out, pattern: /out/ });
-export const InOut = createToken({ name: MusesTokenName.InOut, pattern: /inout/ });
 export const Const = createToken({ name: MusesTokenName.Const, pattern: /const/ });
-export const Invariant = createToken({ name: MusesTokenName.Invariant, pattern: /invariant/ });
 
 // Precision
 export const Lowp = createToken({ name: MusesTokenName.Lowp, pattern: /lowp/ });
@@ -149,6 +175,8 @@ export const Properties = createToken({ name: MusesTokenName.Properties, pattern
 export const SubShader = createToken({ name: MusesTokenName.SubShader, pattern: /SubShader/ });
 export const FallBack = createToken({ name: MusesTokenName.FallBack, pattern: /FallBack/ });
 export const Pass = createToken({ name: MusesTokenName.Pass, pattern: /Pass/ });
+export const GLSLPROGRAM = createToken({ name: MusesTokenName.GLSLPROGRAM, pattern: /GLSLPROGRAM/ });
+export const ENDGLSL = createToken({ name: MusesTokenName.ENDGLSL, pattern: /ENDGLSL/ });
 
 // Operators
 export const GreaterThenEqual = createToken({ name: MusesTokenName.GreaterThenEqual, pattern: />=/ });
@@ -188,30 +216,6 @@ export const Semicolon = createToken({ name: MusesTokenName.Semicolon, pattern: 
 export const Dot = createToken({ name: MusesTokenName.Dot, pattern: /\./ });
 export const Colon = createToken({ name: MusesTokenName.Colon, pattern: /:/ });
 
-// Types
-export const Void = createToken({ name: MusesTokenName.Void, pattern: /void/ });
-export const Int = createToken({ name: MusesTokenName.Int, pattern: /int/ });
-export const Float = createToken({ name: MusesTokenName.Float, pattern: /float/ });
-export const Bool = createToken({ name: MusesTokenName.Bool, pattern: /bool/ });
-export const Vec2 = createToken({ name: MusesTokenName.Vec2, pattern: /vec2/ });
-export const Vec3 = createToken({ name: MusesTokenName.Vec3, pattern: /vec3/ });
-export const Vec4 = createToken({ name: MusesTokenName.Vec4, pattern: /vec4/ });
-export const BVec2 = createToken({ name: MusesTokenName.BVec2, pattern: /bvec2/ });
-export const BVec3 = createToken({ name: MusesTokenName.BVec3, pattern: /bvec3/ });
-export const BVec4 = createToken({ name: MusesTokenName.BVec4, pattern: /bvec4/ });
-export const IVec2 = createToken({ name: MusesTokenName.IVec2, pattern: /ivec2/ });
-export const IVec3 = createToken({ name: MusesTokenName.IVec3, pattern: /ivec3/ });
-export const IVec4 = createToken({ name: MusesTokenName.IVec4, pattern: /ivec4/ });
-export const Mat2 = createToken({ name: MusesTokenName.Mat2, pattern: /mat2/ });
-export const Mat3 = createToken({ name: MusesTokenName.Mat3, pattern: /mat3/ });
-export const Mat4 = createToken({ name: MusesTokenName.Mat4, pattern: /mat4/ });
-export const Sampler1D = createToken({ name: MusesTokenName.Sampler1D, pattern: /sampler1D/ });
-export const Sampler2D = createToken({ name: MusesTokenName.Sampler2D, pattern: /sampler2D/ });
-export const Sampler3D = createToken({ name: MusesTokenName.Sampler3D, pattern: /sampler3D/ });
-export const SamplerCube = createToken({ name: MusesTokenName.SamplerCube, pattern: /samplerCube/ });
-export const Sampler1DShadow = createToken({ name: MusesTokenName.Sampler1Dshadow, pattern: /sampler1Dshadow/ });
-export const Sampler2DShadow = createToken({ name: MusesTokenName.Sampler2Dshadow, pattern: /sampler2Dshadow/ });
-
 // Constants
 export const True = createToken({ name: MusesTokenName.True, pattern: /true/ });
 export const False = createToken({ name: MusesTokenName.Float, pattern: /false/ });
@@ -230,6 +234,30 @@ export const musesTokens: TokenType[] = [
     WhiteSpace,                     // 
     Comment,                        // //
 
+    // types
+    Void,                           // void
+    Int,                            // int
+    Float,                          // float
+    Bool,                           // bool
+    Vec2,                           // vec2
+    Vec3,                           // vec3
+    Vec4,                           // vec4
+    BVec2,                          // bvec2
+    BVec3,                          // bvec3
+    BVec4,                          // bvec4
+    IVec2,                          // ivec2
+    IVec3,                          // ivec3
+    IVec4,                          // ivec4
+    Mat2,                           // mat2
+    Mat3,                           // mat3
+    Mat4,                           // mat4
+    Sampler1DShadow,                // sampler1Dshadow
+    Sampler2DShadow,                // sampler2Dshadow
+    Sampler1D,                      // sampler1D
+    Sampler2D,                      // sampler2D
+    Sampler3D,                      // sampler3D
+    SamplerCube,                    // samplerCube
+
     // keywords
     If,                             // if
     Else,                           // else
@@ -245,11 +273,11 @@ export const musesTokens: TokenType[] = [
     Attribute,                      // attribute
     Uniform,                        // uniform
     Varying,                        // varying
+    InOut,                          // inout
+    Invariant,                      // invariant
     In,                             // in
     Out,                            // out
-    InOut,                          // inout
     Const,                          // const
-    Invariant,                      // invariant
 
     // precision
     Lowp,                           // lowp
@@ -262,6 +290,8 @@ export const musesTokens: TokenType[] = [
     SubShader,                      // SubShader
     FallBack,                       // FallBack
     Pass,                           // Pass
+    GLSLPROGRAM,                    // GLSLPROGRAM
+    ENDGLSL,                        // ENDGLSL
 
     // operators
     GreaterThenEqual,               // >=
@@ -300,30 +330,8 @@ export const musesTokens: TokenType[] = [
     Semicolon,                      // ;
     Colon,                          // :
     Dot,                            // .
-    
-    // types
-    Void,                           // void
-    Int,                            // int
-    Float,                          // float
-    Bool,                           // bool
-    Vec2,                           // vec2
-    Vec3,                           // vec3
-    Vec4,                           // vec4
-    BVec2,                          // bvec2
-    BVec3,                          // bvec3
-    BVec4,                          // bvec4
-    IVec2,                          // ivec2
-    IVec3,                          // ivec3
-    IVec4,                          // ivec4
-    Mat2,                           // mat2
-    Mat3,                           // mat3
-    Mat4,                           // mat4
-    Sampler1D,                      // sampler1D
-    Sampler2D,                      // sampler2D
-    Sampler3D,                      // sampler3D
-    SamplerCube,                    // samplerCube
-    Sampler1DShadow,                // sampler1Dshadow
-    Sampler2DShadow,                // sampler2Dshadow
+
+
 
     // constants
     True,                           // true

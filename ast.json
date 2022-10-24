@@ -1,0 +1,63 @@
+{
+  "options": {
+    "name": "Test",
+    "subShaders": [
+      {
+        "options": {
+          "passes": [
+            {
+              "options": {
+                "glsl": {
+                  "options": {
+                    "body": [
+                      {
+                        "options": {
+                          "name": "position",
+                          "type": {
+                            "options": {
+                              "name": "float"
+                            },
+                            "nodeType": "type-declaration"
+                          },
+                          "storage": "attribute",
+                          "percision": "lowp"
+                        },
+                        "nodeType": "variable-declaration"
+                      },
+                      {
+                        "options": {
+                          "returnType": {
+                            "options": {
+                              "name": "void"
+                            },
+                            "nodeType": "type-declaration"
+                          },
+                          "name": "vert"
+                        },
+                        "nodeType": "function-declaration"
+                      }
+                    ]
+                  },
+                  "nodeType": "glsl"
+                }
+              },
+              "nodeType": "pass"
+            }
+          ]
+        },
+        "nodeType": "SubShader"
+      }
+    ],
+    "properties": {
+      "options": {},
+      "nodeType": "Properties"
+    },
+    "fallback": {
+      "options": {
+        "to": "Diffuse"
+      },
+      "nodeType": "FallBack"
+    }
+  },
+  "nodeType": "Shader"
+}

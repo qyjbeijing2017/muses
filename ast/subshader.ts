@@ -1,8 +1,9 @@
 import { IMusesNodeOptions, MusesNode } from "./node";
 import { MusesAstNodeType } from "./nodeType";
+import { MusesPass } from "./pass";
 
 export interface IMusesSubShaderOptions extends IMusesNodeOptions   {
-    name: string;
+    passes: MusesPass[];
 }
 
 export class MusesSubShader extends MusesNode {
