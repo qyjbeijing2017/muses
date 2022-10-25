@@ -1,34 +1,62 @@
 import { CstParser } from "chevrotain";
 import {
+    AddAssign,
+    And,
     Assign,
     Attribute,
     Bool,
     BVec2,
     BVec3,
     BVec4,
+    Colon,
+    Comma,
     Const,
+    ConstFloat,
+    ConstInt,
     ConstString,
+    Dec,
+    DivAssign,
+    Divide,
+    Dot,
     ENDGLSL,
+    Equal,
     FallBack,
+    False,
     Float,
     GLSLPROGRAM,
+    GreaterThen,
+    GreaterThenEqual,
     Highp,
     Identifier,
+    Inc,
     Int,
     IVec2,
     IVec3,
     IVec4,
     LeftBrace,
+    LeftBracket,
     LeftParen,
+    LessThen,
+    LessThenEqual,
     Lowp,
     Mat2,
     Mat3,
     Mat4,
     Mediump,
+    Minus,
+    ModAssign,
+    MulAssign,
+    Multiply,
     musesTokens,
+    Not,
+    NotEqual,
+    Or,
     Pass,
+    Plus,
     Properties,
+    QuestionMark,
     RightBrace,
+    RightBracket,
     RightParen,
     Sampler1D,
     Sampler1DShadow,
@@ -38,7 +66,9 @@ import {
     SamplerCube,
     Semicolon,
     Shader,
+    SubAssign,
     SubShader,
+    True,
     Uniform,
     Varying,
     Vec2,
@@ -60,23 +90,6 @@ export class MusesParser extends CstParser {
     });
 
     // #region GLSL
-
-    storageDeclaration = this.RULE("storageDeclaration", () => {
-        this.OR([
-            { ALT: () => this.CONSUME(Const, { LABEL: 'name' }) },
-            { ALT: () => this.CONSUME(Attribute, { LABEL: 'name' }) },
-            { ALT: () => this.CONSUME(Uniform, { LABEL: 'name' }) },
-            { ALT: () => this.CONSUME(Varying, { LABEL: 'name' }) },
-        ]);
-    });
-
-    percisionDeclaration = this.RULE("percisionDeclaration", () => {
-        this.OR([
-            { ALT: () => this.CONSUME(Highp, { LABEL: 'name' }) },
-            { ALT: () => this.CONSUME(Mediump, { LABEL: 'name' }) },
-            { ALT: () => this.CONSUME(Lowp, { LABEL: 'name' }) },
-        ]);
-    });
 
     typeDeclaration = this.RULE("typeDeclaration", () => {
         this.OR([
@@ -106,18 +119,257 @@ export class MusesParser extends CstParser {
         ]);
     });
 
-    variableDeclaration = this.RULE("variableDeclaration", () => {
-        this.OPTION(() => this.SUBRULE(this.storageDeclaration, { LABEL: 'storage' }));
-        this.OPTION1(() => this.SUBRULE(this.percisionDeclaration, { LABEL: 'percision' }));
-        this.SUBRULE2(this.typeDeclaration, { LABEL: "type" });
-        this.CONSUME(Identifier, { LABEL: "name" });
-        this.OPTION2(() => {
-            this.CONSUME(Assign);
+    variableConstrucor = this.RULE("variableConstrucor", () => {
+        this.SUBRULE(this.typeDeclaration, { LABEL: 'type' });
+        this.OPTION(() => {
+            this.CONSUME(LeftParen);
+            this.MANY_SEP({
+                SEP: Comma,
+                DEF: () => {
+                    this.OR([
+                        { ALT: () => this.CONSUME(ConstFloat, { LABEL: 'args' }) },
+                        { ALT: () => this.CONSUME(ConstInt, { LABEL: 'args' }) },
+                        { ALT: () => this.CONSUME(True, { LABEL: 'args' }) },
+                        { ALT: () => this.CONSUME(False, { LABEL: 'args' }) },
+                        { ALT: () => this.CONSUME(Identifier, { LABEL: 'args' }) },
+                    ]);
+                }
+            });
+            this.CONSUME(RightParen);
         });
     });
 
-    variableDeclarationStatement = this.RULE("variableDeclarationStatement", () => {
-        this.SUBRULE(this.variableDeclaration, { LABEL: 'variableDeclaration' });
+    // #region expression
+    parenExpression = this.RULE("parenExpression", () => {
+        this.CONSUME(LeftParen);
+        this.SUBRULE(this.assignExpression, { LABEL: 'expression' });
+        this.CONSUME(RightParen);
+    });
+
+    atomicExpression = this.RULE("atomicExpression", () => {
+        this.OR([
+            { ALT: () => this.CONSUME(ConstFloat, { LABEL: "const" }) },
+            { ALT: () => this.CONSUME(ConstInt, { LABEL: "const" }) },
+            { ALT: () => this.CONSUME(True, { LABEL: "const" }) },
+            { ALT: () => this.CONSUME(False, { LABEL: "const" }) },
+            { ALT: () => this.SUBRULE(this.variableConstrucor, { LABEL: "subExpression" }) },
+            { ALT: () => this.SUBRULE(this.parenExpression, { LABEL: "subExpression" }) },
+        ]);
+    });
+
+    indexExpression = this.RULE("indexExpression", () => {
+        this.CONSUME(LeftBracket);
+        this.SUBRULE(this.assignExpression, { LABEL: 'index' });
+        this.CONSUME(RightBracket);
+    });
+
+    callExpression = this.RULE("callExpression", () => {
+        this.CONSUME(LeftParen);
+        this.MANY_SEP({
+            SEP: Comma,
+            DEF: () => this.SUBRULE(this.assignExpression, { LABEL: 'args' }),
+        });
+        this.CONSUME(RightParen);
+    });
+
+    dotExpression = this.RULE("dotExpression", () => {
+        this.CONSUME(Dot);
+        this.CONSUME(Identifier);
+    });
+
+    updateExpression = this.RULE("updateExpression", () => {
+        this.OR([
+            { ALT: () => this.CONSUME(Inc, { LABEL: "operator" }) },
+            { ALT: () => this.CONSUME(Dec, { LABEL: "operator" }) },
+        ]);
+    });
+
+    postfixExpression = this.RULE("postfixExpression", () => {
+        this.SUBRULE(this.atomicExpression, { LABEL: "argument" });
+        this.MANY(() => {
+            this.OR([
+                { ALT: () => this.SUBRULE(this.dotExpression, { LABEL: "operator" }) },
+                { ALT: () => this.SUBRULE(this.updateExpression, { LABEL: "operator" }) },
+                { ALT: () => this.SUBRULE(this.callExpression, { LABEL: "operator" }) },
+                { ALT: () => this.SUBRULE(this.indexExpression, { LABEL: "operator" }) },
+            ]);
+        });
+    });
+
+    unaryExpression = this.RULE("unaryExpression", () => {
+        this.OR([
+            {
+                ALT: () => {
+                    this.CONSUME(Minus, { LABEL: "operator" });
+                    this.SUBRULE(this.unaryExpression, { LABEL: "argument" });
+                }
+            },
+            {
+                ALT: () => {
+                    this.CONSUME(Plus, { LABEL: "operator" });
+                    this.SUBRULE1(this.unaryExpression, { LABEL: "argument" });
+                }
+            },
+            {
+                ALT: () => {
+                    this.CONSUME(Inc, { LABEL: "operator" });
+                    this.SUBRULE2(this.unaryExpression, { LABEL: "argument" });
+                }
+            },
+            {
+                ALT: () => {
+                    this.CONSUME(Dec, { LABEL: "operator" });
+                    this.SUBRULE3(this.unaryExpression, { LABEL: "argument" });
+                }
+            },
+            {
+                ALT: () => {
+                    this.CONSUME(Not, { LABEL: "operator" });
+                    this.SUBRULE4(this.unaryExpression, { LABEL: "argument" });
+                }
+            },
+            {
+                ALT: () => {
+                    this.SUBRULE5(this.postfixExpression, { LABEL: "argument" });
+                }
+            }
+        ]);
+    });
+
+    multiplicativeExpression = this.RULE("multiplicativeExpression", () => {
+        this.SUBRULE(this.unaryExpression, { LABEL: "left" });
+        this.MANY(() => {
+            this.OR([
+                { ALT: () => this.CONSUME(Multiply, { LABEL: "operator" }) },
+                { ALT: () => this.CONSUME(Divide, { LABEL: "operator" }) }
+            ]);
+            this.SUBRULE1(this.unaryExpression, { LABEL: "right" });
+        });
+    });
+
+    addtiveExpression = this.RULE("addtiveExpression", () => {
+        this.SUBRULE(this.multiplicativeExpression, { LABEL: "left" });
+        this.MANY(() => {
+            this.OR([
+                { ALT: () => this.CONSUME(Plus, { LABEL: "operator" }) },
+                { ALT: () => this.CONSUME(Minus, { LABEL: "operator" }) }
+            ]);
+            this.SUBRULE1(this.multiplicativeExpression, { LABEL: "right" });
+        });
+    });
+
+    relationExpression = this.RULE("relationExpression", () => {
+        this.SUBRULE(this.addtiveExpression, { LABEL: "left" });
+        this.MANY(() => {
+            this.OR([
+                { ALT: () => this.CONSUME(GreaterThen, { LABEL: "operator" }) },
+                { ALT: () => this.CONSUME(GreaterThenEqual, { LABEL: "operator" }) },
+                { ALT: () => this.CONSUME(LessThen, { LABEL: "operator" }) },
+                { ALT: () => this.CONSUME(LessThenEqual, { LABEL: "operator" }) }
+            ]);
+            this.SUBRULE1(this.addtiveExpression, { LABEL: "right" });
+        });
+    });
+
+    equalityExpression = this.RULE("equalityExpression", () => {
+        this.SUBRULE(this.relationExpression, { LABEL: "left" });
+        this.MANY(() => {
+            this.OR([
+                { ALT: () => this.CONSUME(Equal, { LABEL: "operator" }) },
+                { ALT: () => this.CONSUME(NotEqual, { LABEL: "operator" }) },
+            ]);
+            this.SUBRULE1(this.relationExpression, { LABEL: "right" });
+        });
+    });
+
+    andExpression = this.RULE("andExpression", () => {
+        this.SUBRULE(this.equalityExpression, { LABEL: "left" });
+        this.MANY(() => {
+            this.CONSUME(And, { LABEL: "operator" });
+            this.SUBRULE1(this.equalityExpression, { LABEL: "right" });
+        });
+    });
+
+    xorExpression = this.RULE("xorExpression", () => {
+        this.SUBRULE(this.andExpression, { LABEL: "left" });
+        this.MANY(() => {
+            this.CONSUME(Or);
+            this.SUBRULE1(this.andExpression, { LABEL: "left" });
+        });
+    });
+
+    orExpression = this.RULE("orExpression", () => {
+        this.SUBRULE(this.xorExpression, { LABEL: "left" });
+        this.MANY(() => {
+            this.CONSUME(Or, { LABEL: "operator" });
+            this.SUBRULE1(this.xorExpression, { LABEL: "right" });
+        });
+    });
+
+    conditionalExpression = this.RULE("conditionalExpression", () => {
+        this.SUBRULE(this.orExpression, { LABEL: "testExpression" });
+        this.OPTION(() => {
+            this.CONSUME(QuestionMark);
+            this.SUBRULE1(this.conditionalExpression, { LABEL: "trueExpression" });
+            this.CONSUME(Colon);
+            this.SUBRULE2(this.conditionalExpression, { LABEL: "falseExpression" });
+        });
+    });
+
+    assignExpression = this.RULE("assignExpression", () => {
+        this.SUBRULE(this.conditionalExpression, { LABEL: "left" });
+        this.OPTION(() => {
+            this.OR([
+                { ALT: () => this.CONSUME(Assign, { LABEL: 'operator' }) },
+                { ALT: () => this.CONSUME(AddAssign, { LABEL: 'operator' }) },
+                { ALT: () => this.CONSUME(SubAssign, { LABEL: 'operator' }) },
+                { ALT: () => this.CONSUME(MulAssign, { LABEL: 'operator' }) },
+                { ALT: () => this.CONSUME(DivAssign, { LABEL: 'operator' }) },
+            ]);
+            this.SUBRULE2(this.assignExpression, { LABEL: "right" });
+        });
+    });
+    // #endregion
+
+    // #region statements
+    // #endregion
+
+    // #region declaration
+    storageDeclaration = this.RULE("storageDeclaration", () => {
+        this.OR([
+            { ALT: () => this.CONSUME(Const, { LABEL: 'name' }) },
+            { ALT: () => this.CONSUME(Attribute, { LABEL: 'name' }) },
+            { ALT: () => this.CONSUME(Uniform, { LABEL: 'name' }) },
+            { ALT: () => this.CONSUME(Varying, { LABEL: 'name' }) },
+        ]);
+    });
+
+    percisionDeclaration = this.RULE("percisionDeclaration", () => {
+        this.OR([
+            { ALT: () => this.CONSUME(Highp, { LABEL: 'name' }) },
+            { ALT: () => this.CONSUME(Mediump, { LABEL: 'name' }) },
+            { ALT: () => this.CONSUME(Lowp, { LABEL: 'name' }) },
+        ]);
+    });
+
+    variableAssignment = this.RULE("variableAssignment", () => {
+        this.CONSUME(Identifier, { LABEL: 'name' });
+        this.OPTION(() => {
+            this.CONSUME(Assign);
+            this.SUBRULE(this.assignExpression, { LABEL: 'value' });
+        });
+    });
+
+    variableDeclaration = this.RULE("variableDeclaration", () => {
+        this.OPTION(() => this.SUBRULE(this.storageDeclaration, { LABEL: 'storage' }));
+        this.OPTION1(() => this.SUBRULE1(this.percisionDeclaration, { LABEL: 'percision' }));
+        this.SUBRULE2(this.typeDeclaration, { LABEL: "type" });
+        this.AT_LEAST_ONE_SEP({
+            SEP: Comma,
+            DEF: () => {
+                this.SUBRULE3(this.variableAssignment, { LABEL: 'assignment' });
+            },
+        });
         this.CONSUME(Semicolon);
     });
 
@@ -129,17 +381,19 @@ export class MusesParser extends CstParser {
         this.CONSUME(LeftBrace);
         this.MANY(() => {
             this.OR([
-                { ALT: () => this.SUBRULE(this.variableDeclarationStatement, { LABEL: 'body' }) },
+                { ALT: () => this.SUBRULE(this.variableDeclaration, { LABEL: 'body' }) },
+                { ALT: () => this.SUBRULE(this.assignExpression, { LABEL: 'body' }) },
             ]);
         });
         this.CONSUME(RightBrace);
     });
+    // #endregion
 
     glsl = this.RULE("glsl", () => {
         this.CONSUME(GLSLPROGRAM);
         this.AT_LEAST_ONE(() => {
             this.OR([
-                { ALT: () => this.SUBRULE(this.variableDeclarationStatement, { LABEL: 'body' }) },
+                { ALT: () => this.SUBRULE(this.variableDeclaration, { LABEL: 'body' }) },
                 { ALT: () => this.SUBRULE(this.functionDeclaration, { LABEL: 'body' }) },
             ]);
         });

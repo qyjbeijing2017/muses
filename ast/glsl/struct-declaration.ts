@@ -2,16 +2,16 @@ import { IMusesNodeOptions, MusesNode } from "../node";
 import { MusesAstNodeType } from "../nodeType";
 import { MusesTypeDeclaration } from "./type-declaration";
 
-export interface IMusesFunctionDeclarationOptions extends IMusesNodeOptions {
+export interface IMusesStructDeclarationOptions extends IMusesNodeOptions {
     name: string;
     returnType: MusesTypeDeclaration;
     parameters?: string[];
     body?: any[];
 }
 
-export class MusesFunctionDeclaration extends MusesNode {
+export class MusesStructDeclaration extends MusesNode {
     nodeType: MusesAstNodeType = MusesAstNodeType.FunctionDeclaration;
-    constructor(private readonly options: IMusesFunctionDeclarationOptions) {
+    constructor(private readonly options: IMusesStructDeclarationOptions) {
         super();
     }
 }

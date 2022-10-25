@@ -10,20 +10,48 @@
                 "glsl": {
                   "options": {
                     "body": [
-                      {
-                        "options": {
-                          "name": "position",
-                          "type": {
-                            "options": {
-                              "name": "float"
+                      [
+                        {
+                          "options": {
+                            "name": "position",
+                            "type": {
+                              "options": {
+                                "name": "float"
+                              },
+                              "nodeType": "type-declaration"
                             },
-                            "nodeType": "type-declaration"
+                            "storage": "attribute",
+                            "percision": "lowp",
+                            "value": {
+                              "options": {
+                                "type": {
+                                  "options": {
+                                    "name": "int"
+                                  },
+                                  "nodeType": "type-declaration"
+                                },
+                                "value": 2
+                              },
+                              "nodeType": "constants"
+                            }
                           },
-                          "storage": "attribute",
-                          "percision": "lowp"
+                          "nodeType": "variable-declaration"
                         },
-                        "nodeType": "variable-declaration"
-                      },
+                        {
+                          "options": {
+                            "name": "rotation",
+                            "type": {
+                              "options": {
+                                "name": "float"
+                              },
+                              "nodeType": "type-declaration"
+                            },
+                            "storage": "attribute",
+                            "percision": "lowp"
+                          },
+                          "nodeType": "variable-declaration"
+                        }
+                      ],
                       {
                         "options": {
                           "returnType": {
@@ -32,7 +60,93 @@
                             },
                             "nodeType": "type-declaration"
                           },
-                          "name": "vert"
+                          "name": "vert",
+                          "body": [
+                            {
+                              "options": {
+                                "left": {
+                                  "options": {
+                                    "name": "gl_Position"
+                                  },
+                                  "nodeType": "identify"
+                                },
+                                "operator": "=",
+                                "right": {
+                                  "options": {
+                                    "property": {
+                                      "options": {
+                                        "name": "xyz"
+                                      },
+                                      "nodeType": "identify"
+                                    },
+                                    "object": {
+                                      "options": {
+                                        "type": {
+                                          "options": {
+                                            "name": "vec4"
+                                          },
+                                          "nodeType": "type-declaration"
+                                        },
+                                        "args": [
+                                          {
+                                            "options": {
+                                              "type": {
+                                                "options": {
+                                                  "name": "float"
+                                                },
+                                                "nodeType": "type-declaration"
+                                              },
+                                              "value": 0
+                                            },
+                                            "nodeType": "constants"
+                                          },
+                                          {
+                                            "options": {
+                                              "type": {
+                                                "options": {
+                                                  "name": "float"
+                                                },
+                                                "nodeType": "type-declaration"
+                                              },
+                                              "value": 0
+                                            },
+                                            "nodeType": "constants"
+                                          },
+                                          {
+                                            "options": {
+                                              "type": {
+                                                "options": {
+                                                  "name": "float"
+                                                },
+                                                "nodeType": "type-declaration"
+                                              },
+                                              "value": 0
+                                            },
+                                            "nodeType": "constants"
+                                          },
+                                          {
+                                            "options": {
+                                              "type": {
+                                                "options": {
+                                                  "name": "int"
+                                                },
+                                                "nodeType": "type-declaration"
+                                              },
+                                              "value": 1
+                                            },
+                                            "nodeType": "constants"
+                                          }
+                                        ]
+                                      },
+                                      "nodeType": "variable-constructor"
+                                    }
+                                  },
+                                  "nodeType": "dot-expression"
+                                }
+                              },
+                              "nodeType": "assign-expression"
+                            }
+                          ]
                         },
                         "nodeType": "function-declaration"
                       }

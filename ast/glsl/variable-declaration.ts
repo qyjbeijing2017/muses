@@ -1,5 +1,8 @@
 import { IMusesNodeOptions, MusesNode } from "../node";
 import { MusesAstNodeType } from "../nodeType";
+import { MusesConstants } from "./constants";
+import { MusesExpression } from "./expression/express";
+import { MusesIdentify } from "./Identify";
 import { MusesTypeDeclaration } from "./type-declaration";
 
 
@@ -22,6 +25,7 @@ export interface IMusesVariableDeclarationOptions extends IMusesNodeOptions {
     type: MusesTypeDeclaration;
     storage?: MusesGLSLStorage;
     percision?: MusesGLSLPercision;
+    value?: MusesExpression | MusesConstants | MusesIdentify;
 }
 
 export class MusesVariableDeclaration extends MusesNode {

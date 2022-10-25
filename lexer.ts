@@ -74,6 +74,11 @@ export enum MusesTokenName {
     XOr = "XOr",
     Inc = "Inc",
     Dec = "Dec",
+    BitLeftShift = "BitLeftShift",
+    BitRightShift = "BitRightShift",
+    BitAnd = "BitAnd",
+    BitOr = "BitOr",
+    BitXOr = "BitXOr",
     AddAssign = "AddAssign",
     SubAssign = "SubAssign",
     MulAssign = "MulAssign",
@@ -188,6 +193,11 @@ export const Or = createToken({ name: MusesTokenName.Or, pattern: /\|\|/ });
 export const XOr = createToken({ name: MusesTokenName.XOr, pattern: /\^\^/ });
 export const Inc = createToken({ name: MusesTokenName.Inc, pattern: /\+\+/ });
 export const Dec = createToken({ name: MusesTokenName.Dec, pattern: /--/ });
+export const BitLeftShift = createToken({ name: MusesTokenName.BitLeftShift, pattern: /<</ });
+export const BitRightShift = createToken({ name: MusesTokenName.BitRightShift, pattern: />>/ });
+export const BitAnd = createToken({ name: MusesTokenName.BitAnd, pattern: /&/ });
+export const BitOr = createToken({ name: MusesTokenName.BitOr, pattern: /\|/ });
+export const BitXOr = createToken({ name: MusesTokenName.BitXOr, pattern: /\^/ });
 export const AddAssign = createToken({ name: MusesTokenName.AddAssign, pattern: /\+=/ });
 export const SubAssign = createToken({ name: MusesTokenName.SubAssign, pattern: /-=/ });
 export const MulAssign = createToken({ name: MusesTokenName.MulAssign, pattern: /\*=/ });
@@ -219,8 +229,8 @@ export const Colon = createToken({ name: MusesTokenName.Colon, pattern: /:/ });
 // Constants
 export const True = createToken({ name: MusesTokenName.True, pattern: /true/ });
 export const False = createToken({ name: MusesTokenName.Float, pattern: /false/ });
+export const ConstFloat = createToken({ name: MusesTokenName.ConstFloat, pattern: /(0|[1-9]+)\.\d*/ });
 export const ConstInt = createToken({ name: MusesTokenName.ConstInt, pattern: /0|[1-9]\d*/ });
-export const ConstFloat = createToken({ name: MusesTokenName.ConstFloat, pattern: /0|[1-9]\d*\.\d*/ });
 export const ConstString = createToken({ name: MusesTokenName.ConstString, pattern: /"[^"]*"/ });
 
 // Identifiers
@@ -303,6 +313,11 @@ export const musesTokens: TokenType[] = [
     XOr,                            // ^^
     Inc,                            // ++
     Dec,                            // --
+    BitLeftShift,                   // <<
+    BitRightShift,                  // >>
+    BitAnd,                         // &
+    BitOr,                          // |
+    BitXOr,                         // ^
     AddAssign,                      // +=
     SubAssign,                      // -=
     MulAssign,                      // *=
@@ -331,13 +346,11 @@ export const musesTokens: TokenType[] = [
     Colon,                          // :
     Dot,                            // .
 
-
-
     // constants
     True,                           // true
     False,                          // false
-    ConstInt,                       // 0|[1-9]\d*
     ConstFloat,                     // 0|[1-9]\d*\.\d*
+    ConstInt,                       // 0|[1-9]\d*
     ConstString,                    // "[^"]*"
 
     // identifiers
