@@ -10,10 +10,14 @@ Shader "Test" {
             // glsl
             GLSLPROGRAM
 
-            attribute lowp float position=2, rotation;
-
             void vert() {
-                gl_Position = vec4(0.0,0.0,0.0,1).xyz
+                gl_Position = vec4(0.0,0.0,0.0,1).xyz;
+                if(a){
+
+                } else {
+                    
+                }
+
                 // gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
             }
 

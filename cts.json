@@ -253,317 +253,6 @@
                       ],
                       "body": [
                         {
-                          "name": "variableDeclaration",
-                          "children": {
-                            "storage": [
-                              {
-                                "name": "storageDeclaration",
-                                "children": {
-                                  "name": [
-                                    {
-                                      "image": "attribute",
-                                      "startOffset": 181,
-                                      "endOffset": 189,
-                                      "startLine": 13,
-                                      "endLine": 13,
-                                      "startColumn": 13,
-                                      "endColumn": 21,
-                                      "tokenTypeIdx": 36,
-                                      "tokenType": {
-                                        "name": "Attribute",
-                                        "PATTERN": {},
-                                        "tokenTypeIdx": 36,
-                                        "CATEGORIES": [],
-                                        "categoryMatches": [],
-                                        "categoryMatchesMap": {},
-                                        "isParent": false
-                                      }
-                                    }
-                                  ]
-                                }
-                              }
-                            ],
-                            "percision": [
-                              {
-                                "name": "percisionDeclaration",
-                                "children": {
-                                  "name": [
-                                    {
-                                      "image": "lowp",
-                                      "startOffset": 191,
-                                      "endOffset": 194,
-                                      "startLine": 13,
-                                      "endLine": 13,
-                                      "startColumn": 23,
-                                      "endColumn": 26,
-                                      "tokenTypeIdx": 44,
-                                      "tokenType": {
-                                        "name": "Lowp",
-                                        "PATTERN": {},
-                                        "tokenTypeIdx": 44,
-                                        "CATEGORIES": [],
-                                        "categoryMatches": [],
-                                        "categoryMatchesMap": {},
-                                        "isParent": false
-                                      }
-                                    }
-                                  ]
-                                }
-                              }
-                            ],
-                            "type": [
-                              {
-                                "name": "typeDeclaration",
-                                "children": {
-                                  "name": [
-                                    {
-                                      "image": "float",
-                                      "startOffset": 196,
-                                      "endOffset": 200,
-                                      "startLine": 13,
-                                      "endLine": 13,
-                                      "startColumn": 28,
-                                      "endColumn": 32,
-                                      "tokenTypeIdx": 16,
-                                      "tokenType": {
-                                        "name": "Float",
-                                        "PATTERN": {},
-                                        "tokenTypeIdx": 16,
-                                        "CATEGORIES": [],
-                                        "categoryMatches": [],
-                                        "categoryMatchesMap": {},
-                                        "isParent": false
-                                      }
-                                    }
-                                  ]
-                                }
-                              }
-                            ],
-                            "assignment": [
-                              {
-                                "name": "variableAssignment",
-                                "children": {
-                                  "name": [
-                                    {
-                                      "image": "position",
-                                      "startOffset": 202,
-                                      "endOffset": 209,
-                                      "startLine": 13,
-                                      "endLine": 13,
-                                      "startColumn": 34,
-                                      "endColumn": 41,
-                                      "tokenTypeIdx": 98,
-                                      "tokenType": {
-                                        "name": "Identifier",
-                                        "PATTERN": {},
-                                        "tokenTypeIdx": 98,
-                                        "CATEGORIES": [],
-                                        "categoryMatches": [],
-                                        "categoryMatchesMap": {},
-                                        "isParent": false
-                                      }
-                                    }
-                                  ],
-                                  "Assign": [
-                                    {
-                                      "image": "=",
-                                      "startOffset": 210,
-                                      "endOffset": 210,
-                                      "startLine": 13,
-                                      "endLine": 13,
-                                      "startColumn": 42,
-                                      "endColumn": 42,
-                                      "tokenTypeIdx": 78,
-                                      "tokenType": {
-                                        "name": "Assign",
-                                        "PATTERN": {},
-                                        "tokenTypeIdx": 78,
-                                        "CATEGORIES": [],
-                                        "categoryMatches": [],
-                                        "categoryMatchesMap": {},
-                                        "isParent": false
-                                      }
-                                    }
-                                  ],
-                                  "value": [
-                                    {
-                                      "name": "assignExpression",
-                                      "children": {
-                                        "left": [
-                                          {
-                                            "name": "conditionalExpression",
-                                            "children": {
-                                              "testExpression": [
-                                                {
-                                                  "name": "orExpression",
-                                                  "children": {
-                                                    "left": [
-                                                      {
-                                                        "name": "xorExpression",
-                                                        "children": {
-                                                          "left": [
-                                                            {
-                                                              "name": "andExpression",
-                                                              "children": {
-                                                                "left": [
-                                                                  {
-                                                                    "name": "equalityExpression",
-                                                                    "children": {
-                                                                      "left": [
-                                                                        {
-                                                                          "name": "relationExpression",
-                                                                          "children": {
-                                                                            "left": [
-                                                                              {
-                                                                                "name": "addtiveExpression",
-                                                                                "children": {
-                                                                                  "left": [
-                                                                                    {
-                                                                                      "name": "multiplicativeExpression",
-                                                                                      "children": {
-                                                                                        "left": [
-                                                                                          {
-                                                                                            "name": "unaryExpression",
-                                                                                            "children": {
-                                                                                              "argument": [
-                                                                                                {
-                                                                                                  "name": "postfixExpression",
-                                                                                                  "children": {
-                                                                                                    "argument": [
-                                                                                                      {
-                                                                                                        "name": "atomicExpression",
-                                                                                                        "children": {
-                                                                                                          "const": [
-                                                                                                            {
-                                                                                                              "image": "2",
-                                                                                                              "startOffset": 211,
-                                                                                                              "endOffset": 211,
-                                                                                                              "startLine": 13,
-                                                                                                              "endLine": 13,
-                                                                                                              "startColumn": 43,
-                                                                                                              "endColumn": 43,
-                                                                                                              "tokenTypeIdx": 96,
-                                                                                                              "tokenType": {
-                                                                                                                "name": "ConstInt",
-                                                                                                                "PATTERN": {},
-                                                                                                                "tokenTypeIdx": 96,
-                                                                                                                "CATEGORIES": [],
-                                                                                                                "categoryMatches": [],
-                                                                                                                "categoryMatchesMap": {},
-                                                                                                                "isParent": false
-                                                                                                              }
-                                                                                                            }
-                                                                                                          ]
-                                                                                                        }
-                                                                                                      }
-                                                                                                    ]
-                                                                                                  }
-                                                                                                }
-                                                                                              ]
-                                                                                            }
-                                                                                          }
-                                                                                        ]
-                                                                                      }
-                                                                                    }
-                                                                                  ]
-                                                                                }
-                                                                              }
-                                                                            ]
-                                                                          }
-                                                                        }
-                                                                      ]
-                                                                    }
-                                                                  }
-                                                                ]
-                                                              }
-                                                            }
-                                                          ]
-                                                        }
-                                                      }
-                                                    ]
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "name": "variableAssignment",
-                                "children": {
-                                  "name": [
-                                    {
-                                      "image": "rotation",
-                                      "startOffset": 214,
-                                      "endOffset": 221,
-                                      "startLine": 13,
-                                      "endLine": 13,
-                                      "startColumn": 46,
-                                      "endColumn": 53,
-                                      "tokenTypeIdx": 98,
-                                      "tokenType": {
-                                        "name": "Identifier",
-                                        "PATTERN": {},
-                                        "tokenTypeIdx": 98,
-                                        "CATEGORIES": [],
-                                        "categoryMatches": [],
-                                        "categoryMatchesMap": {},
-                                        "isParent": false
-                                      }
-                                    }
-                                  ]
-                                }
-                              }
-                            ],
-                            "Comma": [
-                              {
-                                "image": ",",
-                                "startOffset": 212,
-                                "endOffset": 212,
-                                "startLine": 13,
-                                "endLine": 13,
-                                "startColumn": 44,
-                                "endColumn": 44,
-                                "tokenTypeIdx": 89,
-                                "tokenType": {
-                                  "name": "Comma",
-                                  "PATTERN": {},
-                                  "tokenTypeIdx": 89,
-                                  "CATEGORIES": [],
-                                  "categoryMatches": [],
-                                  "categoryMatchesMap": {},
-                                  "isParent": false
-                                }
-                              }
-                            ],
-                            "Semicolon": [
-                              {
-                                "image": ";",
-                                "startOffset": 222,
-                                "endOffset": 222,
-                                "startLine": 13,
-                                "endLine": 13,
-                                "startColumn": 54,
-                                "endColumn": 54,
-                                "tokenTypeIdx": 90,
-                                "tokenType": {
-                                  "name": "Semicolon",
-                                  "PATTERN": {},
-                                  "tokenTypeIdx": 90,
-                                  "CATEGORIES": [],
-                                  "categoryMatches": [],
-                                  "categoryMatchesMap": {},
-                                  "isParent": false
-                                }
-                              }
-                            ]
-                          }
-                        },
-                        {
                           "name": "functionDeclaration",
                           "children": {
                             "returnType": [
@@ -573,10 +262,10 @@
                                   "name": [
                                     {
                                       "image": "void",
-                                      "startOffset": 239,
-                                      "endOffset": 242,
-                                      "startLine": 15,
-                                      "endLine": 15,
+                                      "startOffset": 181,
+                                      "endOffset": 184,
+                                      "startLine": 13,
+                                      "endLine": 13,
                                       "startColumn": 13,
                                       "endColumn": 16,
                                       "tokenTypeIdx": 14,
@@ -597,10 +286,10 @@
                             "name": [
                               {
                                 "image": "vert",
-                                "startOffset": 244,
-                                "endOffset": 247,
-                                "startLine": 15,
-                                "endLine": 15,
+                                "startOffset": 186,
+                                "endOffset": 189,
+                                "startLine": 13,
+                                "endLine": 13,
                                 "startColumn": 18,
                                 "endColumn": 21,
                                 "tokenTypeIdx": 98,
@@ -618,10 +307,10 @@
                             "LeftParen": [
                               {
                                 "image": "(",
-                                "startOffset": 248,
-                                "endOffset": 248,
-                                "startLine": 15,
-                                "endLine": 15,
+                                "startOffset": 190,
+                                "endOffset": 190,
+                                "startLine": 13,
+                                "endLine": 13,
                                 "startColumn": 22,
                                 "endColumn": 22,
                                 "tokenTypeIdx": 83,
@@ -639,10 +328,10 @@
                             "RightParen": [
                               {
                                 "image": ")",
-                                "startOffset": 249,
-                                "endOffset": 249,
-                                "startLine": 15,
-                                "endLine": 15,
+                                "startOffset": 191,
+                                "endOffset": 191,
+                                "startLine": 13,
+                                "endLine": 13,
                                 "startColumn": 23,
                                 "endColumn": 23,
                                 "tokenTypeIdx": 84,
@@ -657,101 +346,115 @@
                                 }
                               }
                             ],
-                            "LeftBrace": [
-                              {
-                                "image": "{",
-                                "startOffset": 251,
-                                "endOffset": 251,
-                                "startLine": 15,
-                                "endLine": 15,
-                                "startColumn": 25,
-                                "endColumn": 25,
-                                "tokenTypeIdx": 85,
-                                "tokenType": {
-                                  "name": "LeftBrace",
-                                  "PATTERN": {},
-                                  "tokenTypeIdx": 85,
-                                  "CATEGORIES": [],
-                                  "categoryMatches": [],
-                                  "categoryMatchesMap": {},
-                                  "isParent": false
-                                }
-                              }
-                            ],
                             "body": [
                               {
-                                "name": "assignExpression",
+                                "name": "blockStatement",
                                 "children": {
-                                  "left": [
+                                  "LeftBrace": [
                                     {
-                                      "name": "conditionalExpression",
+                                      "image": "{",
+                                      "startOffset": 193,
+                                      "endOffset": 193,
+                                      "startLine": 13,
+                                      "endLine": 13,
+                                      "startColumn": 25,
+                                      "endColumn": 25,
+                                      "tokenTypeIdx": 85,
+                                      "tokenType": {
+                                        "name": "LeftBrace",
+                                        "PATTERN": {},
+                                        "tokenTypeIdx": 85,
+                                        "CATEGORIES": [],
+                                        "categoryMatches": [],
+                                        "categoryMatchesMap": {},
+                                        "isParent": false
+                                      }
+                                    }
+                                  ],
+                                  "statement": [
+                                    {
+                                      "name": "expressionStatement",
                                       "children": {
-                                        "testExpression": [
+                                        "expression": [
                                           {
-                                            "name": "orExpression",
+                                            "name": "assignExpression",
                                             "children": {
                                               "left": [
                                                 {
-                                                  "name": "xorExpression",
+                                                  "name": "conditionalExpression",
                                                   "children": {
-                                                    "left": [
+                                                    "testExpression": [
                                                       {
-                                                        "name": "andExpression",
+                                                        "name": "orExpression",
                                                         "children": {
                                                           "left": [
                                                             {
-                                                              "name": "equalityExpression",
+                                                              "name": "xorExpression",
                                                               "children": {
                                                                 "left": [
                                                                   {
-                                                                    "name": "relationExpression",
+                                                                    "name": "andExpression",
                                                                     "children": {
                                                                       "left": [
                                                                         {
-                                                                          "name": "addtiveExpression",
+                                                                          "name": "equalityExpression",
                                                                           "children": {
                                                                             "left": [
                                                                               {
-                                                                                "name": "multiplicativeExpression",
+                                                                                "name": "relationExpression",
                                                                                 "children": {
                                                                                   "left": [
                                                                                     {
-                                                                                      "name": "unaryExpression",
+                                                                                      "name": "addtiveExpression",
                                                                                       "children": {
-                                                                                        "argument": [
+                                                                                        "left": [
                                                                                           {
-                                                                                            "name": "postfixExpression",
+                                                                                            "name": "multiplicativeExpression",
                                                                                             "children": {
-                                                                                              "argument": [
+                                                                                              "left": [
                                                                                                 {
-                                                                                                  "name": "atomicExpression",
+                                                                                                  "name": "unaryExpression",
                                                                                                   "children": {
-                                                                                                    "subExpression": [
+                                                                                                    "argument": [
                                                                                                       {
-                                                                                                        "name": "variableConstrucor",
+                                                                                                        "name": "postfixExpression",
                                                                                                         "children": {
-                                                                                                          "type": [
+                                                                                                          "argument": [
                                                                                                             {
-                                                                                                              "name": "typeDeclaration",
+                                                                                                              "name": "atomicExpression",
                                                                                                               "children": {
-                                                                                                                "name": [
+                                                                                                                "subExpression": [
                                                                                                                   {
-                                                                                                                    "image": "gl_Position",
-                                                                                                                    "startOffset": 270,
-                                                                                                                    "endOffset": 280,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 17,
-                                                                                                                    "endColumn": 27,
-                                                                                                                    "tokenTypeIdx": 98,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "Identifier",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 98,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
+                                                                                                                    "name": "variableConstrucor",
+                                                                                                                    "children": {
+                                                                                                                      "type": [
+                                                                                                                        {
+                                                                                                                          "name": "typeDeclaration",
+                                                                                                                          "children": {
+                                                                                                                            "name": [
+                                                                                                                              {
+                                                                                                                                "image": "gl_Position",
+                                                                                                                                "startOffset": 212,
+                                                                                                                                "endOffset": 222,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 17,
+                                                                                                                                "endColumn": 27,
+                                                                                                                                "tokenTypeIdx": 98,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "Identifier",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 98,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            ]
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      ]
                                                                                                                     }
                                                                                                                   }
                                                                                                                 ]
@@ -787,104 +490,332 @@
                                                     ]
                                                   }
                                                 }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      }
-                                    }
-                                  ],
-                                  "operator": [
-                                    {
-                                      "image": "=",
-                                      "startOffset": 282,
-                                      "endOffset": 282,
-                                      "startLine": 16,
-                                      "endLine": 16,
-                                      "startColumn": 29,
-                                      "endColumn": 29,
-                                      "tokenTypeIdx": 78,
-                                      "tokenType": {
-                                        "name": "Assign",
-                                        "PATTERN": {},
-                                        "tokenTypeIdx": 78,
-                                        "CATEGORIES": [],
-                                        "categoryMatches": [],
-                                        "categoryMatchesMap": {},
-                                        "isParent": false
-                                      }
-                                    }
-                                  ],
-                                  "right": [
-                                    {
-                                      "name": "assignExpression",
-                                      "children": {
-                                        "left": [
-                                          {
-                                            "name": "conditionalExpression",
-                                            "children": {
-                                              "testExpression": [
+                                              ],
+                                              "operator": [
                                                 {
-                                                  "name": "orExpression",
+                                                  "image": "=",
+                                                  "startOffset": 224,
+                                                  "endOffset": 224,
+                                                  "startLine": 14,
+                                                  "endLine": 14,
+                                                  "startColumn": 29,
+                                                  "endColumn": 29,
+                                                  "tokenTypeIdx": 78,
+                                                  "tokenType": {
+                                                    "name": "Assign",
+                                                    "PATTERN": {},
+                                                    "tokenTypeIdx": 78,
+                                                    "CATEGORIES": [],
+                                                    "categoryMatches": [],
+                                                    "categoryMatchesMap": {},
+                                                    "isParent": false
+                                                  }
+                                                }
+                                              ],
+                                              "right": [
+                                                {
+                                                  "name": "assignExpression",
                                                   "children": {
                                                     "left": [
                                                       {
-                                                        "name": "xorExpression",
+                                                        "name": "conditionalExpression",
                                                         "children": {
-                                                          "left": [
+                                                          "testExpression": [
                                                             {
-                                                              "name": "andExpression",
+                                                              "name": "orExpression",
                                                               "children": {
                                                                 "left": [
                                                                   {
-                                                                    "name": "equalityExpression",
+                                                                    "name": "xorExpression",
                                                                     "children": {
                                                                       "left": [
                                                                         {
-                                                                          "name": "relationExpression",
+                                                                          "name": "andExpression",
                                                                           "children": {
                                                                             "left": [
                                                                               {
-                                                                                "name": "addtiveExpression",
+                                                                                "name": "equalityExpression",
                                                                                 "children": {
                                                                                   "left": [
                                                                                     {
-                                                                                      "name": "multiplicativeExpression",
+                                                                                      "name": "relationExpression",
                                                                                       "children": {
                                                                                         "left": [
                                                                                           {
-                                                                                            "name": "unaryExpression",
+                                                                                            "name": "addtiveExpression",
                                                                                             "children": {
-                                                                                              "argument": [
+                                                                                              "left": [
                                                                                                 {
-                                                                                                  "name": "postfixExpression",
+                                                                                                  "name": "multiplicativeExpression",
                                                                                                   "children": {
-                                                                                                    "argument": [
+                                                                                                    "left": [
                                                                                                       {
-                                                                                                        "name": "atomicExpression",
+                                                                                                        "name": "unaryExpression",
                                                                                                         "children": {
-                                                                                                          "subExpression": [
+                                                                                                          "argument": [
                                                                                                             {
-                                                                                                              "name": "variableConstrucor",
+                                                                                                              "name": "postfixExpression",
                                                                                                               "children": {
-                                                                                                                "type": [
+                                                                                                                "argument": [
                                                                                                                   {
-                                                                                                                    "name": "typeDeclaration",
+                                                                                                                    "name": "atomicExpression",
                                                                                                                     "children": {
-                                                                                                                      "name": [
+                                                                                                                      "subExpression": [
                                                                                                                         {
-                                                                                                                          "image": "vec4",
-                                                                                                                          "startOffset": 284,
-                                                                                                                          "endOffset": 287,
-                                                                                                                          "startLine": 16,
-                                                                                                                          "endLine": 16,
-                                                                                                                          "startColumn": 31,
-                                                                                                                          "endColumn": 34,
-                                                                                                                          "tokenTypeIdx": 20,
+                                                                                                                          "name": "variableConstrucor",
+                                                                                                                          "children": {
+                                                                                                                            "type": [
+                                                                                                                              {
+                                                                                                                                "name": "typeDeclaration",
+                                                                                                                                "children": {
+                                                                                                                                  "name": [
+                                                                                                                                    {
+                                                                                                                                      "image": "vec4",
+                                                                                                                                      "startOffset": 226,
+                                                                                                                                      "endOffset": 229,
+                                                                                                                                      "startLine": 14,
+                                                                                                                                      "endLine": 14,
+                                                                                                                                      "startColumn": 31,
+                                                                                                                                      "endColumn": 34,
+                                                                                                                                      "tokenTypeIdx": 20,
+                                                                                                                                      "tokenType": {
+                                                                                                                                        "name": "Vec4",
+                                                                                                                                        "PATTERN": {},
+                                                                                                                                        "tokenTypeIdx": 20,
+                                                                                                                                        "CATEGORIES": [],
+                                                                                                                                        "categoryMatches": [],
+                                                                                                                                        "categoryMatchesMap": {},
+                                                                                                                                        "isParent": false
+                                                                                                                                      }
+                                                                                                                                    }
+                                                                                                                                  ]
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            ],
+                                                                                                                            "LeftParen": [
+                                                                                                                              {
+                                                                                                                                "image": "(",
+                                                                                                                                "startOffset": 230,
+                                                                                                                                "endOffset": 230,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 35,
+                                                                                                                                "endColumn": 35,
+                                                                                                                                "tokenTypeIdx": 83,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "LeftParen",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 83,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            ],
+                                                                                                                            "args": [
+                                                                                                                              {
+                                                                                                                                "image": "0.0",
+                                                                                                                                "startOffset": 231,
+                                                                                                                                "endOffset": 233,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 36,
+                                                                                                                                "endColumn": 38,
+                                                                                                                                "tokenTypeIdx": 95,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "ConstFloat",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 95,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              },
+                                                                                                                              {
+                                                                                                                                "image": "0.0",
+                                                                                                                                "startOffset": 235,
+                                                                                                                                "endOffset": 237,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 40,
+                                                                                                                                "endColumn": 42,
+                                                                                                                                "tokenTypeIdx": 95,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "ConstFloat",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 95,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              },
+                                                                                                                              {
+                                                                                                                                "image": "0.0",
+                                                                                                                                "startOffset": 239,
+                                                                                                                                "endOffset": 241,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 44,
+                                                                                                                                "endColumn": 46,
+                                                                                                                                "tokenTypeIdx": 95,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "ConstFloat",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 95,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              },
+                                                                                                                              {
+                                                                                                                                "image": "1",
+                                                                                                                                "startOffset": 243,
+                                                                                                                                "endOffset": 243,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 48,
+                                                                                                                                "endColumn": 48,
+                                                                                                                                "tokenTypeIdx": 96,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "ConstInt",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 96,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            ],
+                                                                                                                            "Comma": [
+                                                                                                                              {
+                                                                                                                                "image": ",",
+                                                                                                                                "startOffset": 234,
+                                                                                                                                "endOffset": 234,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 39,
+                                                                                                                                "endColumn": 39,
+                                                                                                                                "tokenTypeIdx": 89,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "Comma",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 89,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              },
+                                                                                                                              {
+                                                                                                                                "image": ",",
+                                                                                                                                "startOffset": 238,
+                                                                                                                                "endOffset": 238,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 43,
+                                                                                                                                "endColumn": 43,
+                                                                                                                                "tokenTypeIdx": 89,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "Comma",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 89,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              },
+                                                                                                                              {
+                                                                                                                                "image": ",",
+                                                                                                                                "startOffset": 242,
+                                                                                                                                "endOffset": 242,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 47,
+                                                                                                                                "endColumn": 47,
+                                                                                                                                "tokenTypeIdx": 89,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "Comma",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 89,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            ],
+                                                                                                                            "RightParen": [
+                                                                                                                              {
+                                                                                                                                "image": ")",
+                                                                                                                                "startOffset": 244,
+                                                                                                                                "endOffset": 244,
+                                                                                                                                "startLine": 14,
+                                                                                                                                "endLine": 14,
+                                                                                                                                "startColumn": 49,
+                                                                                                                                "endColumn": 49,
+                                                                                                                                "tokenTypeIdx": 84,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "RightParen",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 84,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            ]
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      ]
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                ],
+                                                                                                                "operator": [
+                                                                                                                  {
+                                                                                                                    "name": "dotExpression",
+                                                                                                                    "children": {
+                                                                                                                      "Dot": [
+                                                                                                                        {
+                                                                                                                          "image": ".",
+                                                                                                                          "startOffset": 245,
+                                                                                                                          "endOffset": 245,
+                                                                                                                          "startLine": 14,
+                                                                                                                          "endLine": 14,
+                                                                                                                          "startColumn": 50,
+                                                                                                                          "endColumn": 50,
+                                                                                                                          "tokenTypeIdx": 91,
                                                                                                                           "tokenType": {
-                                                                                                                            "name": "Vec4",
+                                                                                                                            "name": "Dot",
                                                                                                                             "PATTERN": {},
-                                                                                                                            "tokenTypeIdx": 20,
+                                                                                                                            "tokenTypeIdx": 91,
+                                                                                                                            "CATEGORIES": [],
+                                                                                                                            "categoryMatches": [],
+                                                                                                                            "categoryMatchesMap": {},
+                                                                                                                            "isParent": false
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      ],
+                                                                                                                      "Identifier": [
+                                                                                                                        {
+                                                                                                                          "image": "xyz",
+                                                                                                                          "startOffset": 246,
+                                                                                                                          "endOffset": 248,
+                                                                                                                          "startLine": 14,
+                                                                                                                          "endLine": 14,
+                                                                                                                          "startColumn": 51,
+                                                                                                                          "endColumn": 53,
+                                                                                                                          "tokenTypeIdx": 98,
+                                                                                                                          "tokenType": {
+                                                                                                                            "name": "Identifier",
+                                                                                                                            "PATTERN": {},
+                                                                                                                            "tokenTypeIdx": 98,
                                                                                                                             "CATEGORIES": [],
                                                                                                                             "categoryMatches": [],
                                                                                                                             "categoryMatchesMap": {},
@@ -894,235 +825,7 @@
                                                                                                                       ]
                                                                                                                     }
                                                                                                                   }
-                                                                                                                ],
-                                                                                                                "LeftParen": [
-                                                                                                                  {
-                                                                                                                    "image": "(",
-                                                                                                                    "startOffset": 288,
-                                                                                                                    "endOffset": 288,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 35,
-                                                                                                                    "endColumn": 35,
-                                                                                                                    "tokenTypeIdx": 83,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "LeftParen",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 83,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
-                                                                                                                    }
-                                                                                                                  }
-                                                                                                                ],
-                                                                                                                "args": [
-                                                                                                                  {
-                                                                                                                    "image": "0.0",
-                                                                                                                    "startOffset": 289,
-                                                                                                                    "endOffset": 291,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 36,
-                                                                                                                    "endColumn": 38,
-                                                                                                                    "tokenTypeIdx": 95,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "ConstFloat",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 95,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
-                                                                                                                    }
-                                                                                                                  },
-                                                                                                                  {
-                                                                                                                    "image": "0.0",
-                                                                                                                    "startOffset": 293,
-                                                                                                                    "endOffset": 295,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 40,
-                                                                                                                    "endColumn": 42,
-                                                                                                                    "tokenTypeIdx": 95,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "ConstFloat",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 95,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
-                                                                                                                    }
-                                                                                                                  },
-                                                                                                                  {
-                                                                                                                    "image": "0.0",
-                                                                                                                    "startOffset": 297,
-                                                                                                                    "endOffset": 299,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 44,
-                                                                                                                    "endColumn": 46,
-                                                                                                                    "tokenTypeIdx": 95,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "ConstFloat",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 95,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
-                                                                                                                    }
-                                                                                                                  },
-                                                                                                                  {
-                                                                                                                    "image": "1",
-                                                                                                                    "startOffset": 301,
-                                                                                                                    "endOffset": 301,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 48,
-                                                                                                                    "endColumn": 48,
-                                                                                                                    "tokenTypeIdx": 96,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "ConstInt",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 96,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
-                                                                                                                    }
-                                                                                                                  }
-                                                                                                                ],
-                                                                                                                "Comma": [
-                                                                                                                  {
-                                                                                                                    "image": ",",
-                                                                                                                    "startOffset": 292,
-                                                                                                                    "endOffset": 292,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 39,
-                                                                                                                    "endColumn": 39,
-                                                                                                                    "tokenTypeIdx": 89,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "Comma",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 89,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
-                                                                                                                    }
-                                                                                                                  },
-                                                                                                                  {
-                                                                                                                    "image": ",",
-                                                                                                                    "startOffset": 296,
-                                                                                                                    "endOffset": 296,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 43,
-                                                                                                                    "endColumn": 43,
-                                                                                                                    "tokenTypeIdx": 89,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "Comma",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 89,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
-                                                                                                                    }
-                                                                                                                  },
-                                                                                                                  {
-                                                                                                                    "image": ",",
-                                                                                                                    "startOffset": 300,
-                                                                                                                    "endOffset": 300,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 47,
-                                                                                                                    "endColumn": 47,
-                                                                                                                    "tokenTypeIdx": 89,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "Comma",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 89,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
-                                                                                                                    }
-                                                                                                                  }
-                                                                                                                ],
-                                                                                                                "RightParen": [
-                                                                                                                  {
-                                                                                                                    "image": ")",
-                                                                                                                    "startOffset": 302,
-                                                                                                                    "endOffset": 302,
-                                                                                                                    "startLine": 16,
-                                                                                                                    "endLine": 16,
-                                                                                                                    "startColumn": 49,
-                                                                                                                    "endColumn": 49,
-                                                                                                                    "tokenTypeIdx": 84,
-                                                                                                                    "tokenType": {
-                                                                                                                      "name": "RightParen",
-                                                                                                                      "PATTERN": {},
-                                                                                                                      "tokenTypeIdx": 84,
-                                                                                                                      "CATEGORIES": [],
-                                                                                                                      "categoryMatches": [],
-                                                                                                                      "categoryMatchesMap": {},
-                                                                                                                      "isParent": false
-                                                                                                                    }
-                                                                                                                  }
                                                                                                                 ]
-                                                                                                              }
-                                                                                                            }
-                                                                                                          ]
-                                                                                                        }
-                                                                                                      }
-                                                                                                    ],
-                                                                                                    "operator": [
-                                                                                                      {
-                                                                                                        "name": "dotExpression",
-                                                                                                        "children": {
-                                                                                                          "Dot": [
-                                                                                                            {
-                                                                                                              "image": ".",
-                                                                                                              "startOffset": 303,
-                                                                                                              "endOffset": 303,
-                                                                                                              "startLine": 16,
-                                                                                                              "endLine": 16,
-                                                                                                              "startColumn": 50,
-                                                                                                              "endColumn": 50,
-                                                                                                              "tokenTypeIdx": 91,
-                                                                                                              "tokenType": {
-                                                                                                                "name": "Dot",
-                                                                                                                "PATTERN": {},
-                                                                                                                "tokenTypeIdx": 91,
-                                                                                                                "CATEGORIES": [],
-                                                                                                                "categoryMatches": [],
-                                                                                                                "categoryMatchesMap": {},
-                                                                                                                "isParent": false
-                                                                                                              }
-                                                                                                            }
-                                                                                                          ],
-                                                                                                          "Identifier": [
-                                                                                                            {
-                                                                                                              "image": "xyz",
-                                                                                                              "startOffset": 304,
-                                                                                                              "endOffset": 306,
-                                                                                                              "startLine": 16,
-                                                                                                              "endLine": 16,
-                                                                                                              "startColumn": 51,
-                                                                                                              "endColumn": 53,
-                                                                                                              "tokenTypeIdx": 98,
-                                                                                                              "tokenType": {
-                                                                                                                "name": "Identifier",
-                                                                                                                "PATTERN": {},
-                                                                                                                "tokenTypeIdx": 98,
-                                                                                                                "CATEGORIES": [],
-                                                                                                                "categoryMatches": [],
-                                                                                                                "categoryMatchesMap": {},
-                                                                                                                "isParent": false
                                                                                                               }
                                                                                                             }
                                                                                                           ]
@@ -1158,31 +861,358 @@
                                               ]
                                             }
                                           }
+                                        ],
+                                        "Semicolon": [
+                                          {
+                                            "image": ";",
+                                            "startOffset": 249,
+                                            "endOffset": 249,
+                                            "startLine": 14,
+                                            "endLine": 14,
+                                            "startColumn": 54,
+                                            "endColumn": 54,
+                                            "tokenTypeIdx": 90,
+                                            "tokenType": {
+                                              "name": "Semicolon",
+                                              "PATTERN": {},
+                                              "tokenTypeIdx": 90,
+                                              "CATEGORIES": [],
+                                              "categoryMatches": [],
+                                              "categoryMatchesMap": {},
+                                              "isParent": false
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    },
+                                    {
+                                      "name": "ifStatement",
+                                      "children": {
+                                        "If": [
+                                          {
+                                            "image": "if",
+                                            "startOffset": 268,
+                                            "endOffset": 269,
+                                            "startLine": 15,
+                                            "endLine": 15,
+                                            "startColumn": 17,
+                                            "endColumn": 18,
+                                            "tokenTypeIdx": 5,
+                                            "tokenType": {
+                                              "name": "If",
+                                              "PATTERN": {},
+                                              "tokenTypeIdx": 5,
+                                              "CATEGORIES": [],
+                                              "categoryMatches": [],
+                                              "categoryMatchesMap": {},
+                                              "isParent": false
+                                            }
+                                          }
+                                        ],
+                                        "LeftParen": [
+                                          {
+                                            "image": "(",
+                                            "startOffset": 270,
+                                            "endOffset": 270,
+                                            "startLine": 15,
+                                            "endLine": 15,
+                                            "startColumn": 19,
+                                            "endColumn": 19,
+                                            "tokenTypeIdx": 83,
+                                            "tokenType": {
+                                              "name": "LeftParen",
+                                              "PATTERN": {},
+                                              "tokenTypeIdx": 83,
+                                              "CATEGORIES": [],
+                                              "categoryMatches": [],
+                                              "categoryMatchesMap": {},
+                                              "isParent": false
+                                            }
+                                          }
+                                        ],
+                                        "test": [
+                                          {
+                                            "name": "assignExpression",
+                                            "children": {
+                                              "left": [
+                                                {
+                                                  "name": "conditionalExpression",
+                                                  "children": {
+                                                    "testExpression": [
+                                                      {
+                                                        "name": "orExpression",
+                                                        "children": {
+                                                          "left": [
+                                                            {
+                                                              "name": "xorExpression",
+                                                              "children": {
+                                                                "left": [
+                                                                  {
+                                                                    "name": "andExpression",
+                                                                    "children": {
+                                                                      "left": [
+                                                                        {
+                                                                          "name": "equalityExpression",
+                                                                          "children": {
+                                                                            "left": [
+                                                                              {
+                                                                                "name": "relationExpression",
+                                                                                "children": {
+                                                                                  "left": [
+                                                                                    {
+                                                                                      "name": "addtiveExpression",
+                                                                                      "children": {
+                                                                                        "left": [
+                                                                                          {
+                                                                                            "name": "multiplicativeExpression",
+                                                                                            "children": {
+                                                                                              "left": [
+                                                                                                {
+                                                                                                  "name": "unaryExpression",
+                                                                                                  "children": {
+                                                                                                    "argument": [
+                                                                                                      {
+                                                                                                        "name": "postfixExpression",
+                                                                                                        "children": {
+                                                                                                          "argument": [
+                                                                                                            {
+                                                                                                              "name": "atomicExpression",
+                                                                                                              "children": {
+                                                                                                                "subExpression": [
+                                                                                                                  {
+                                                                                                                    "name": "variableConstrucor",
+                                                                                                                    "children": {
+                                                                                                                      "type": [
+                                                                                                                        {
+                                                                                                                          "name": "typeDeclaration",
+                                                                                                                          "children": {
+                                                                                                                            "name": [
+                                                                                                                              {
+                                                                                                                                "image": "a",
+                                                                                                                                "startOffset": 271,
+                                                                                                                                "endOffset": 271,
+                                                                                                                                "startLine": 15,
+                                                                                                                                "endLine": 15,
+                                                                                                                                "startColumn": 20,
+                                                                                                                                "endColumn": 20,
+                                                                                                                                "tokenTypeIdx": 98,
+                                                                                                                                "tokenType": {
+                                                                                                                                  "name": "Identifier",
+                                                                                                                                  "PATTERN": {},
+                                                                                                                                  "tokenTypeIdx": 98,
+                                                                                                                                  "CATEGORIES": [],
+                                                                                                                                  "categoryMatches": [],
+                                                                                                                                  "categoryMatchesMap": {},
+                                                                                                                                  "isParent": false
+                                                                                                                                }
+                                                                                                                              }
+                                                                                                                            ]
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                      ]
+                                                                                                                    }
+                                                                                                                  }
+                                                                                                                ]
+                                                                                                              }
+                                                                                                            }
+                                                                                                          ]
+                                                                                                        }
+                                                                                                      }
+                                                                                                    ]
+                                                                                                  }
+                                                                                                }
+                                                                                              ]
+                                                                                            }
+                                                                                          }
+                                                                                        ]
+                                                                                      }
+                                                                                    }
+                                                                                  ]
+                                                                                }
+                                                                              }
+                                                                            ]
+                                                                          }
+                                                                        }
+                                                                      ]
+                                                                    }
+                                                                  }
+                                                                ]
+                                                              }
+                                                            }
+                                                          ]
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ],
+                                        "RightParen": [
+                                          {
+                                            "image": ")",
+                                            "startOffset": 272,
+                                            "endOffset": 272,
+                                            "startLine": 15,
+                                            "endLine": 15,
+                                            "startColumn": 21,
+                                            "endColumn": 21,
+                                            "tokenTypeIdx": 84,
+                                            "tokenType": {
+                                              "name": "RightParen",
+                                              "PATTERN": {},
+                                              "tokenTypeIdx": 84,
+                                              "CATEGORIES": [],
+                                              "categoryMatches": [],
+                                              "categoryMatchesMap": {},
+                                              "isParent": false
+                                            }
+                                          }
+                                        ],
+                                        "consequent": [
+                                          {
+                                            "name": "blockStatement",
+                                            "children": {
+                                              "LeftBrace": [
+                                                {
+                                                  "image": "{",
+                                                  "startOffset": 273,
+                                                  "endOffset": 273,
+                                                  "startLine": 15,
+                                                  "endLine": 15,
+                                                  "startColumn": 22,
+                                                  "endColumn": 22,
+                                                  "tokenTypeIdx": 85,
+                                                  "tokenType": {
+                                                    "name": "LeftBrace",
+                                                    "PATTERN": {},
+                                                    "tokenTypeIdx": 85,
+                                                    "CATEGORIES": [],
+                                                    "categoryMatches": [],
+                                                    "categoryMatchesMap": {},
+                                                    "isParent": false
+                                                  }
+                                                }
+                                              ],
+                                              "RightBrace": [
+                                                {
+                                                  "image": "}",
+                                                  "startOffset": 294,
+                                                  "endOffset": 294,
+                                                  "startLine": 17,
+                                                  "endLine": 17,
+                                                  "startColumn": 17,
+                                                  "endColumn": 17,
+                                                  "tokenTypeIdx": 86,
+                                                  "tokenType": {
+                                                    "name": "RightBrace",
+                                                    "PATTERN": {},
+                                                    "tokenTypeIdx": 86,
+                                                    "CATEGORIES": [],
+                                                    "categoryMatches": [],
+                                                    "categoryMatchesMap": {},
+                                                    "isParent": false
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
+                                        ],
+                                        "Else": [
+                                          {
+                                            "image": "else",
+                                            "startOffset": 296,
+                                            "endOffset": 299,
+                                            "startLine": 17,
+                                            "endLine": 17,
+                                            "startColumn": 19,
+                                            "endColumn": 22,
+                                            "tokenTypeIdx": 6,
+                                            "tokenType": {
+                                              "name": "Else",
+                                              "PATTERN": {},
+                                              "tokenTypeIdx": 6,
+                                              "CATEGORIES": [],
+                                              "categoryMatches": [],
+                                              "categoryMatchesMap": {},
+                                              "isParent": false
+                                            }
+                                          }
+                                        ],
+                                        "alternate": [
+                                          {
+                                            "name": "blockStatement",
+                                            "children": {
+                                              "LeftBrace": [
+                                                {
+                                                  "image": "{",
+                                                  "startOffset": 301,
+                                                  "endOffset": 301,
+                                                  "startLine": 17,
+                                                  "endLine": 17,
+                                                  "startColumn": 24,
+                                                  "endColumn": 24,
+                                                  "tokenTypeIdx": 85,
+                                                  "tokenType": {
+                                                    "name": "LeftBrace",
+                                                    "PATTERN": {},
+                                                    "tokenTypeIdx": 85,
+                                                    "CATEGORIES": [],
+                                                    "categoryMatches": [],
+                                                    "categoryMatchesMap": {},
+                                                    "isParent": false
+                                                  }
+                                                }
+                                              ],
+                                              "RightBrace": [
+                                                {
+                                                  "image": "}",
+                                                  "startOffset": 342,
+                                                  "endOffset": 342,
+                                                  "startLine": 19,
+                                                  "endLine": 19,
+                                                  "startColumn": 17,
+                                                  "endColumn": 17,
+                                                  "tokenTypeIdx": 86,
+                                                  "tokenType": {
+                                                    "name": "RightBrace",
+                                                    "PATTERN": {},
+                                                    "tokenTypeIdx": 86,
+                                                    "CATEGORIES": [],
+                                                    "categoryMatches": [],
+                                                    "categoryMatchesMap": {},
+                                                    "isParent": false
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          }
                                         ]
                                       }
                                     }
+                                  ],
+                                  "RightBrace": [
+                                    {
+                                      "image": "}",
+                                      "startOffset": 435,
+                                      "endOffset": 435,
+                                      "startLine": 22,
+                                      "endLine": 22,
+                                      "startColumn": 13,
+                                      "endColumn": 13,
+                                      "tokenTypeIdx": 86,
+                                      "tokenType": {
+                                        "name": "RightBrace",
+                                        "PATTERN": {},
+                                        "tokenTypeIdx": 86,
+                                        "CATEGORIES": [],
+                                        "categoryMatches": [],
+                                        "categoryMatchesMap": {},
+                                        "isParent": false
+                                      }
+                                    }
                                   ]
-                                }
-                              }
-                            ],
-                            "RightBrace": [
-                              {
-                                "image": "}",
-                                "startOffset": 397,
-                                "endOffset": 397,
-                                "startLine": 18,
-                                "endLine": 18,
-                                "startColumn": 13,
-                                "endColumn": 13,
-                                "tokenTypeIdx": 86,
-                                "tokenType": {
-                                  "name": "RightBrace",
-                                  "PATTERN": {},
-                                  "tokenTypeIdx": 86,
-                                  "CATEGORIES": [],
-                                  "categoryMatches": [],
-                                  "categoryMatchesMap": {},
-                                  "isParent": false
                                 }
                               }
                             ]
@@ -1192,10 +1222,10 @@
                       "ENDGLSL": [
                         {
                           "image": "ENDGLSL",
-                          "startOffset": 525,
-                          "endOffset": 531,
-                          "startLine": 24,
-                          "endLine": 24,
+                          "startOffset": 563,
+                          "endOffset": 569,
+                          "startLine": 28,
+                          "endLine": 28,
                           "startColumn": 13,
                           "endColumn": 19,
                           "tokenTypeIdx": 53,
@@ -1216,10 +1246,10 @@
                 "RightBrace": [
                   {
                     "image": "}",
-                    "startOffset": 542,
-                    "endOffset": 542,
-                    "startLine": 25,
-                    "endLine": 25,
+                    "startOffset": 580,
+                    "endOffset": 580,
+                    "startLine": 29,
+                    "endLine": 29,
                     "startColumn": 9,
                     "endColumn": 9,
                     "tokenTypeIdx": 86,
@@ -1240,10 +1270,10 @@
           "RightBrace": [
             {
               "image": "}",
-              "startOffset": 549,
-              "endOffset": 549,
-              "startLine": 26,
-              "endLine": 26,
+              "startOffset": 587,
+              "endOffset": 587,
+              "startLine": 30,
+              "endLine": 30,
               "startColumn": 5,
               "endColumn": 5,
               "tokenTypeIdx": 86,
@@ -1268,10 +1298,10 @@
           "FallBack": [
             {
               "image": "FallBack",
-              "startOffset": 558,
-              "endOffset": 565,
-              "startLine": 28,
-              "endLine": 28,
+              "startOffset": 596,
+              "endOffset": 603,
+              "startLine": 32,
+              "endLine": 32,
               "startColumn": 5,
               "endColumn": 12,
               "tokenTypeIdx": 50,
@@ -1289,10 +1319,10 @@
           "to": [
             {
               "image": "\"Diffuse\"",
-              "startOffset": 567,
-              "endOffset": 575,
-              "startLine": 28,
-              "endLine": 28,
+              "startOffset": 605,
+              "endOffset": 613,
+              "startLine": 32,
+              "endLine": 32,
               "startColumn": 14,
               "endColumn": 22,
               "tokenTypeIdx": 97,
@@ -1313,10 +1343,10 @@
     "RightBrace": [
       {
         "image": "}",
-        "startOffset": 578,
-        "endOffset": 578,
-        "startLine": 29,
-        "endLine": 29,
+        "startOffset": 616,
+        "endOffset": 616,
+        "startLine": 33,
+        "endLine": 33,
         "startColumn": 1,
         "endColumn": 1,
         "tokenTypeIdx": 86,

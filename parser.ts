@@ -5,6 +5,7 @@ import {
     Assign,
     Attribute,
     Bool,
+    Break,
     BVec2,
     BVec3,
     BVec4,
@@ -14,20 +15,25 @@ import {
     ConstFloat,
     ConstInt,
     ConstString,
+    Continue,
     Dec,
     DivAssign,
     Divide,
+    Do,
     Dot,
+    Else,
     ENDGLSL,
     Equal,
     FallBack,
     False,
     Float,
+    For,
     GLSLPROGRAM,
     GreaterThen,
     GreaterThenEqual,
     Highp,
     Identifier,
+    If,
     Inc,
     Int,
     IVec2,
@@ -55,6 +61,7 @@ import {
     Plus,
     Properties,
     QuestionMark,
+    Return,
     RightBrace,
     RightBracket,
     RightParen,
@@ -66,6 +73,7 @@ import {
     SamplerCube,
     Semicolon,
     Shader,
+    Struct,
     SubAssign,
     SubShader,
     True,
@@ -74,7 +82,8 @@ import {
     Vec2,
     Vec3,
     Vec4,
-    Void
+    Void,
+    While
 } from "./lexer";
 
 export class MusesParser extends CstParser {
@@ -332,9 +341,124 @@ export class MusesParser extends CstParser {
     // #endregion
 
     // #region statements
+    blockStatement = this.RULE("blockStatement", () => {
+        this.CONSUME(LeftBrace);
+        this.MANY(() => {
+            this.OR([
+                { ALT: () => this.SUBRULE(this.expressionStatement, { LABEL: "statement" }) },
+                { ALT: () => this.SUBRULE(this.ifStatement, { LABEL: "statement" }) },
+                { ALT: () => this.SUBRULE(this.whileStatement, { LABEL: "statement" }) },
+                { ALT: () => this.SUBRULE(this.doWhileStatement, { LABEL: "statement" }) },
+                { ALT: () => this.SUBRULE(this.forStatement, { LABEL: "statement" }) },
+                { ALT: () => this.SUBRULE(this.returnStatement, { LABEL: "statement" }) },
+                { ALT: () => this.SUBRULE(this.breakStatement, { LABEL: "statement" }) },
+                { ALT: () => this.SUBRULE(this.continueStatement, { LABEL: "statement" }) },
+                { ALT: () => this.SUBRULE(this.variableDeclaration, { LABEL: "statement" }) },
+                { ALT: () => this.SUBRULE(this.blockStatement, { LABEL: "statement" }) },
+            ]);
+        });
+        this.CONSUME(RightBrace);
+    });
+
+    ifStatement = this.RULE("ifStatement", () => {
+        this.CONSUME(If);
+        this.CONSUME(LeftParen);
+        this.SUBRULE(this.assignExpression, { LABEL: "test" });
+        this.CONSUME(RightParen);
+        this.SUBRULE(this.blockStatement, { LABEL: "consequent" });
+        this.OPTION(() => {
+            this.CONSUME(Else);
+            this.OR([
+                { ALT: () => this.SUBRULE1(this.blockStatement, { LABEL: "alternate" }) },
+                { ALT: () => this.SUBRULE(this.ifStatement, { LABEL: "alternate" }) },
+            ]);
+        });
+    });
+
+    whileStatement = this.RULE("whileStatement", () => {
+        this.CONSUME(While);
+        this.CONSUME(LeftParen);
+        this.SUBRULE(this.assignExpression, { LABEL: "testExpression" });
+        this.CONSUME(RightParen);
+        this.SUBRULE(this.blockStatement, { LABEL: "statement" });
+    });
+
+    doWhileStatement = this.RULE("doWhileStatement", () => {
+        this.CONSUME(Do);
+        this.SUBRULE(this.blockStatement, { LABEL: "statement" });
+        this.CONSUME(While);
+        this.CONSUME(LeftParen);
+        this.SUBRULE(this.assignExpression, { LABEL: "testExpression" });
+        this.CONSUME(RightParen);
+        this.CONSUME(Semicolon);
+    });
+
+    forStatement = this.RULE("forStatement", () => {
+        this.CONSUME(For);
+        this.CONSUME(LeftParen);
+        this.OPTION(() => {
+            this.OR([
+                { ALT: () => this.SUBRULE(this.variableDeclaration, { LABEL: "init" }) },
+                { ALT: () => this.SUBRULE(this.expressionStatement, { LABEL: "init" }) },
+            ]);
+        });
+        this.CONSUME(Semicolon);
+        this.SUBRULE(this.assignExpression, { LABEL: "test" });
+        this.CONSUME1(Semicolon);
+        this.OPTION1(() => {
+            this.SUBRULE1(this.assignExpression, { LABEL: "update" });
+        });
+        this.CONSUME(RightParen);
+        this.SUBRULE2(this.blockStatement, { LABEL: "statement" });
+    });
+
+    expressionStatement = this.RULE("expressionStatement", () => {
+        this.SUBRULE(this.assignExpression, { LABEL: "expression" });
+        this.CONSUME(Semicolon);
+    });
+
+    returnStatement = this.RULE("returnStatement", () => {
+        this.CONSUME(Return);
+        this.OPTION(() => {
+            this.SUBRULE(this.assignExpression, { LABEL: "expression" });
+        });
+        this.CONSUME(Semicolon);
+    });
+
+    continueStatement = this.RULE("continueStatement", () => {
+        this.CONSUME(Continue);
+        this.CONSUME(Semicolon);
+    });
+
+    breakStatement = this.RULE("breakStatement", () => {
+        this.CONSUME(Break);
+        this.CONSUME(Semicolon);
+    });
     // #endregion
 
     // #region declaration
+    structMemberDeclaration = this.RULE("structMemberDeclaration", () => {
+        this.OPTION1(() => this.SUBRULE1(this.percisionDeclaration, { LABEL: 'percision' }));
+        this.SUBRULE2(this.typeDeclaration, { LABEL: "type" });
+        this.CONSUME(Identifier, { LABEL: "name" });
+        this.CONSUME(Semicolon);
+    });
+
+    structDeclaration = this.RULE("structDeclaration", () => {
+        this.CONSUME(Struct);
+        this.CONSUME(Identifier, { LABEL: "name" });
+        this.CONSUME(LeftBrace);
+        this.MANY(() => {
+            this.SUBRULE(this.structMemberDeclaration, { LABEL: "members" });
+        });
+        this.CONSUME(RightBrace);
+        this.MANY_SEP({
+            SEP: Comma,
+            DEF: () => this.CONSUME2(Identifier, { LABEL: "variables" })
+        });
+        this.CONSUME(Semicolon);
+    });
+
     storageDeclaration = this.RULE("storageDeclaration", () => {
         this.OR([
             { ALT: () => this.CONSUME(Const, { LABEL: 'name' }) },
@@ -373,19 +497,23 @@ export class MusesParser extends CstParser {
         this.CONSUME(Semicolon);
     });
 
+    functionParameterDeclaration = this.RULE("functionParameterDeclaration", () => {
+
+        this.OPTION(() => this.SUBRULE(this.percisionDeclaration, { LABEL: 'percision' }));
+        this.SUBRULE(this.typeDeclaration, { LABEL: "type" });
+        this.CONSUME(Identifier, { LABEL: "name" });
+    });
+
     functionDeclaration = this.RULE("functionDeclaration", () => {
         this.SUBRULE(this.typeDeclaration, { LABEL: "returnType" });
         this.CONSUME(Identifier, { LABEL: "name" });
         this.CONSUME(LeftParen);
-        this.CONSUME(RightParen);
-        this.CONSUME(LeftBrace);
-        this.MANY(() => {
-            this.OR([
-                { ALT: () => this.SUBRULE(this.variableDeclaration, { LABEL: 'body' }) },
-                { ALT: () => this.SUBRULE(this.assignExpression, { LABEL: 'body' }) },
-            ]);
+        this.MANY_SEP({
+            SEP: Comma,
+            DEF: () => this.SUBRULE(this.variableDeclaration, { LABEL: "parameters" }),
         });
-        this.CONSUME(RightBrace);
+        this.CONSUME(RightParen);
+        this.SUBRULE(this.blockStatement, { LABEL: "body" });
     });
     // #endregion
 
@@ -395,6 +523,7 @@ export class MusesParser extends CstParser {
             this.OR([
                 { ALT: () => this.SUBRULE(this.variableDeclaration, { LABEL: 'body' }) },
                 { ALT: () => this.SUBRULE(this.functionDeclaration, { LABEL: 'body' }) },
+                { ALT: () => this.SUBRULE(this.structDeclaration, { LABEL: 'body' }) },
             ]);
         });
         this.CONSUME(ENDGLSL);

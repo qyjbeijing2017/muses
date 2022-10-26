@@ -20,4 +20,13 @@ export enum MusesAstNodeType {
     UpdateExpression = "update-expression",
     BinaryExpression = "binary-expression",
     VariableConstructor = "variable-constructor",
+    StructDeclaration = "struct-declaration",
+    ReturnStatement = "return-statement",
+    ContinueStatement = "continue-statement",
+    BreakStatement = "break-statement",
+    IfStatement = "if-statement",
+    WhileStatement = "while-statement",
+    DoWhileStatement = "do-while-statement",
+    ForStatement = "for-statement",
+    ExpressionStatement = "expression-statement",
 }
