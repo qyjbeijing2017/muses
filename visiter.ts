@@ -7,7 +7,7 @@ import { MusesIdentify } from "./ast/glsl/Identify";
 import { MusesBinaryExpression } from "./ast/glsl/expression/binary-expression";
 import { MusesFunctionDeclaration } from "./ast/glsl/function-declaration";
 import { MusesTypeDeclaration } from "./ast/glsl/type-declaration";
-import { MusesVariableDeclaration } from "./ast/glsl/variable-declaration";
+import { MusesGLSLParmerters, MusesVariableDeclaration } from "./ast/glsl/variable-declaration";
 import { MusesPass } from "./ast/pass";
 import { MusesProperties } from "./ast/properties";
 import { MusesShader } from "./ast/shader";
@@ -408,6 +408,15 @@ export class MusesVisitor extends CstVisiter {
             delclarations.push(variableDeclaration);
         }
         return delclarations;
+    }
+
+    functionParameterDeclaration(ctx: CstChildrenDictionary) {
+        const type = this.visit(ctx.type[0] as CstNode);
+        const name = (ctx.name[0] as IToken).image;
+        const percision = ctx.percision ? this.visit(ctx.percision[0] as CstNode) : undefined;
+        const parameters = ctx.parameters ? (ctx.parameters[0] as IToken).image as MusesGLSLParmerters : undefined;
+        const parameterDeclaration = new MusesVariableDeclaration({ name, type, percision, parameters });
+        return parameterDeclaration;
     }
 
     functionDeclaration(ctx: CstChildrenDictionary) {

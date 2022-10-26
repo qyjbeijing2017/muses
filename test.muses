@@ -10,7 +10,7 @@ Shader "Test" {
             // glsl
             GLSLPROGRAM
 
-            void vert() {
+            void vert(in lowp vec4 vertex) {
                 gl_Position = vec4(0.0,0.0,0.0,1).xyz;
                 if(a){
 

@@ -34,7 +34,9 @@ import {
     Highp,
     Identifier,
     If,
+    In,
     Inc,
+    InOut,
     Int,
     IVec2,
     IVec3,
@@ -57,6 +59,7 @@ import {
     Not,
     NotEqual,
     Or,
+    Out,
     Pass,
     Plus,
     Properties,
@@ -498,8 +501,14 @@ export class MusesParser extends CstParser {
     });
 
     functionParameterDeclaration = this.RULE("functionParameterDeclaration", () => {
-
-        this.OPTION(() => this.SUBRULE(this.percisionDeclaration, { LABEL: 'percision' }));
+        this.OPTION(() => {
+            this.OR([
+                { ALT: () => this.CONSUME(In, { LABEL: 'parameters' }) },
+                { ALT: () => this.CONSUME(Out, { LABEL: 'parameters' }) },
+                { ALT: () => this.CONSUME(InOut, { LABEL: 'parameters' }) },
+            ]);
+        });
+        this.OPTION1(() => this.SUBRULE(this.percisionDeclaration, { LABEL: 'percision' }));
         this.SUBRULE(this.typeDeclaration, { LABEL: "type" });
         this.CONSUME(Identifier, { LABEL: "name" });
     });
@@ -510,7 +519,7 @@ export class MusesParser extends CstParser {
         this.CONSUME(LeftParen);
         this.MANY_SEP({
             SEP: Comma,
-            DEF: () => this.SUBRULE(this.variableDeclaration, { LABEL: "parameters" }),
+            DEF: () => this.SUBRULE(this.functionParameterDeclaration, { LABEL: "parameters" }),
         });
         this.CONSUME(RightParen);
         this.SUBRULE(this.blockStatement, { LABEL: "body" });

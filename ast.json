@@ -125,7 +125,22 @@
                               }
                             ]
                           ],
-                          "parameters": []
+                          "parameters": [
+                            {
+                              "options": {
+                                "name": "vertex",
+                                "type": {
+                                  "options": {
+                                    "name": "vec4"
+                                  },
+                                  "nodeType": "type-declaration"
+                                },
+                                "percision": "lowp",
+                                "parameters": "in"
+                              },
+                              "nodeType": "variable-declaration"
+                            }
+                          ]
                         },
                         "nodeType": "function-declaration"
                       }

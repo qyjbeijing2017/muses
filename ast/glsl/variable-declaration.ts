@@ -19,6 +19,12 @@ export enum MusesGLSLPercision{
     mediump = "mediump",
     highp = "highp",
 }
+export enum MusesGLSLParmerters{
+    in = "in",
+    out = "out",
+    inout = "inout",
+}
+
 
 export interface IMusesVariableDeclarationOptions extends IMusesNodeOptions {
     name: string;
@@ -26,6 +32,7 @@ export interface IMusesVariableDeclarationOptions extends IMusesNodeOptions {
     storage?: MusesGLSLStorage;
     percision?: MusesGLSLPercision;
     value?: MusesExpression | MusesConstants | MusesIdentify;
+    parameters?: MusesGLSLParmerters;
 }
 
 export class MusesVariableDeclaration extends MusesNode {
