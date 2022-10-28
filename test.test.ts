@@ -1,12 +1,12 @@
-import { musesLexer } from "./lexer";
+import { musesLexer } from "./muses/lexer";
 import * as fs from 'fs';
-import { musesParser } from "./parser";
-import { musesVisitor } from "./visiter";
+import { musesParser } from "./muses/parser";
+import { musesVisitor } from "./muses/visiter";
 
-const filePath = './test.muses';
-const outLexPath = './lex.json';
-const outCstPath = './cts.json';
-const outAstPath = './ast.json';
+const filePath = './test/test.muses';
+const outLexPath = './test/lex.json';
+const outCstPath = './test/cts.json';
+const outAstPath = './test/ast.json';
 const text = fs.readFileSync(filePath, 'utf8');
 
 const lexingResult = musesLexer.tokenize(text);
