@@ -16,6 +16,17 @@ export enum MusesTokenName {
     Continue = "Continue",
     Struct = "Struct",
 
+    // properties
+
+    PropertiesColor = "PropertiesColor",
+    PropertiesInt = "PropertiesInt",
+    PropertiesFloat = "PropertiesFloat",
+    PropertiesRange = "PropertiesRange",
+    PropertiesVector = "PropertiesVector",
+    Properties2D = "Properties2D",
+    Properties3D = "Properties3D",
+    PropertiesCube = "PropertiesCube",
+
     // types
     Void = "Void",
     Int = "Int",
@@ -134,6 +145,17 @@ export const Return = createToken({ name: MusesTokenName.Return, pattern: /retur
 export const Break = createToken({ name: MusesTokenName.Break, pattern: /break/ });
 export const Continue = createToken({ name: MusesTokenName.Continue, pattern: /continue/ });
 export const Struct = createToken({ name: MusesTokenName.Struct, pattern: /struct/ });
+
+// Properties Types
+
+export const PropertiesColor = createToken({ name: MusesTokenName.PropertiesColor, pattern: /Color/ });
+export const PropertiesInt = createToken({ name: MusesTokenName.PropertiesInt, pattern: /Int/ });
+export const PropertiesFloat = createToken({ name: MusesTokenName.PropertiesFloat, pattern: /Float/ });
+export const PropertiesRange = createToken({ name: MusesTokenName.PropertiesRange, pattern: /Range/ });
+export const PropertiesVector = createToken({ name: MusesTokenName.PropertiesVector, pattern: /Vector/ });
+export const Properties2D = createToken({ name: MusesTokenName.Properties2D, pattern: /2D/ });
+export const Properties3D = createToken({ name: MusesTokenName.Properties3D, pattern: /3D/ });
+export const PropertiesCube = createToken({ name: MusesTokenName.PropertiesCube, pattern: /Cube/ });
 
 // Types
 export const Void = createToken({ name: MusesTokenName.Void, pattern: /void/ });
@@ -267,6 +289,16 @@ export const musesTokens: TokenType[] = [
     Sampler2D,                      // sampler2D
     Sampler3D,                      // sampler3D
     SamplerCube,                    // samplerCube
+
+    // properties
+    PropertiesColor,                // color
+    PropertiesInt,                  // int
+    PropertiesFloat,                // float
+    PropertiesRange,                // range
+    PropertiesVector,               // vector
+    Properties2D,                   // texture2D
+    Properties3D,                   // texture3D
+    PropertiesCube,                 // cube
 
     // keywords
     If,                             // if
@@ -444,7 +476,15 @@ export const musesToken = {
     Vec3,
     Vec4,
     Void,
-    While
+    While,
+    PropertiesColor,                // color
+    PropertiesInt,                  // int
+    PropertiesFloat,                // float
+    PropertiesRange,                // range
+    PropertiesVector,               // vector
+    Properties2D,                   // texture2D
+    Properties3D,                   // texture3D
+    PropertiesCube,                 // cube
 }
 
 // Lexer

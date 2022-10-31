@@ -1,7 +1,7 @@
-import { musesLexer } from "./muses/lexer";
+import { musesLexer } from "../muses/lexer";
 import * as fs from 'fs';
-import { musesParser } from "./muses/parser";
-import { musesVisitor } from "./muses/visiter";
+import { musesParser } from "../muses/parser";
+import { musesVisitor } from "../muses/visiter";
 
 const filePath = './test/test.muses';
 const outLexPath = './test/lex.json';

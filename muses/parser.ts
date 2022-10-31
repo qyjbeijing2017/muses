@@ -1,94 +1,5 @@
 import { CstParser } from "chevrotain";
 import { musesToken, musesTokens } from "./lexer";
-// import {
-//     AddAssign,
-//     And,
-//     Assign,
-//     Attribute,
-//     Bool,
-//     Break,
-//     BVec2,
-//     BVec3,
-//     BVec4,
-//     Colon,
-//     Comma,
-//     Const,
-//     ConstFloat,
-//     ConstInt,
-//     ConstString,
-//     Continue,
-//     Dec,
-//     DivAssign,
-//     Divide,
-//     Do,
-//     Dot,
-//     Else,
-//     ENDGLSL,
-//     Equal,
-//     FallBack,
-//     False,
-//     Float,
-//     For,
-//     GLSLPROGRAM,
-//     GreaterThen,
-//     GreaterThenEqual,
-//     Highp,
-//     Identifier,
-//     If,
-//     In,
-//     Inc,
-//     InOut,
-//     Int,
-//     IVec2,
-//     IVec3,
-//     IVec4,
-//     LeftBrace,
-//     LeftBracket,
-//     LeftParen,
-//     LessThen,
-//     LessThenEqual,
-//     Lowp,
-//     Mat2,
-//     Mat3,
-//     Mat4,
-//     Mediump,
-//     Minus,
-//     ModAssign,
-//     MulAssign,
-//     Multiply,
-//     musesTokens,
-//     Not,
-//     NotEqual,
-//     Or,
-//     Out,
-//     Pass,
-//     Plus,
-//     Properties,
-//     QuestionMark,
-//     Return,
-//     RightBrace,
-//     RightBracket,
-//     RightParen,
-//     Sampler1D,
-//     Sampler1DShadow,
-//     Sampler2D,
-//     Sampler2DShadow,
-//     Sampler3D,
-//     SamplerCube,
-//     Semicolon,
-//     Shader,
-//     Struct,
-//     SubAssign,
-//     SubShader,
-//     True,
-//     Uniform,
-//     Varying,
-//     Vec2,
-//     Vec3,
-//     Vec4,
-//     Void,
-//     While
-// } from "./lexer";
 
 export class MusesParser extends CstParser {
     constructor() {
@@ -96,9 +7,96 @@ export class MusesParser extends CstParser {
         this.performSelfAnalysis();
     }
 
+    textureProperty = this.RULE("textureProperty", () => {
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.Properties2D, { LABEL: 'type' }) },
+            { ALT: () => this.CONSUME(musesToken.Properties3D, { LABEL: 'type' }) },
+            { ALT: () => this.CONSUME(musesToken.PropertiesCube, { LABEL: 'type' }) },
+        ]);
+        this.CONSUME(musesToken.RightParen);
+        this.CONSUME(musesToken.Assign);
+        this.CONSUME(musesToken.ConstString, { LABEL: "value" });
+        this.CONSUME(musesToken.LeftBrace);
+        this.CONSUME(musesToken.RightBrace);
+    });
+
+    vectorProperty = this.RULE("vectorProperty", () => {
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.PropertiesVector, { LABEL: 'type' }) },
+            { ALT: () => this.CONSUME(musesToken.PropertiesColor, { LABEL: 'type' }) },
+        ]);
+        this.CONSUME(musesToken.RightParen);
+        this.CONSUME(musesToken.Assign);
+        this.CONSUME(musesToken.LeftParen);
+        this.OR1([
+            { ALT: () => this.CONSUME(musesToken.ConstFloat, { LABEL: "value" }) },
+            { ALT: () => this.CONSUME(musesToken.ConstInt, { LABEL: "value" }) },
+        ]);
+        this.CONSUME(musesToken.Comma);
+        this.OR2([
+            { ALT: () => this.CONSUME1(musesToken.ConstFloat, { LABEL: "value" }) },
+            { ALT: () => this.CONSUME1(musesToken.ConstInt, { LABEL: "value" }) },
+        ]);
+        this.CONSUME1(musesToken.Comma);
+        this.OR3([
+            { ALT: () => this.CONSUME2(musesToken.ConstFloat, { LABEL: "value" }) },
+            { ALT: () => this.CONSUME2(musesToken.ConstInt, { LABEL: "value" }) },
+        ]);
+        this.CONSUME2(musesToken.Comma);
+        this.OR4([
+            { ALT: () => this.CONSUME3(musesToken.ConstFloat, { LABEL: "value" }) },
+            { ALT: () => this.CONSUME3(musesToken.ConstInt, { LABEL: "value" }) },
+        ]);
+        this.CONSUME1(musesToken.RightParen);
+    });
+
+    floatProperty = this.RULE("floatProperty", () => {
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.PropertiesFloat, { LABEL: 'type' }) },
+            { ALT: () => {
+                this.CONSUME(musesToken.PropertiesRange, { LABEL: 'type' });
+                this.CONSUME(musesToken.LeftParen);
+                this.OR1([
+                    { ALT: () => this.CONSUME2(musesToken.ConstFloat, { LABEL: "range" }) },
+                    { ALT: () => this.CONSUME2(musesToken.ConstInt, { LABEL: "range" }) },
+                ]);
+                this.CONSUME(musesToken.Comma);
+                this.OR2([
+                    { ALT: () => this.CONSUME1(musesToken.ConstFloat, { LABEL: "range" }) },
+                    { ALT: () => this.CONSUME1(musesToken.ConstInt, { LABEL: "range" }) },
+                ]);
+                this.CONSUME1(musesToken.RightParen);
+            } },
+        ]);
+        this.CONSUME(musesToken.RightParen);
+        this.CONSUME(musesToken.Assign);
+        this.CONSUME(musesToken.ConstFloat, { LABEL: "value" });
+    });
+
+    intProperty = this.RULE("intProperty", () => {
+        this.CONSUME(musesToken.PropertiesInt, { LABEL: 'type' });
+        this.CONSUME(musesToken.RightParen);
+        this.CONSUME(musesToken.Assign);
+        this.CONSUME(musesToken.ConstInt, { LABEL: "value" });
+    });
+
+    property = this.RULE("property", () => {
+        this.CONSUME(musesToken.Identifier, { LABEL: "name" });
+        this.CONSUME(musesToken.LeftParen);
+        this.CONSUME(musesToken.ConstString, { LABEL: "displayName" });
+        this.CONSUME(musesToken.Comma);
+        this.OR([
+            { ALT: () => this.SUBRULE(this.floatProperty, { LABEL: 'variable' }) },
+            { ALT: () => this.SUBRULE(this.intProperty, { LABEL: 'variable' }) },
+            { ALT: () => this.SUBRULE(this.vectorProperty, { LABEL: 'variable' }) },
+            { ALT: () => this.SUBRULE(this.textureProperty, { LABEL: 'variable' }) },
+        ]);
+    });
+
     properties = this.RULE("properties", () => {
         this.CONSUME(musesToken.Properties);
         this.CONSUME(musesToken.LeftBrace);
+        this.MANY(() => this.SUBRULE(this.property, { LABEL: 'property' }));
         this.CONSUME(musesToken.RightBrace);
     });
 

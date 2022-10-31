@@ -9,7 +9,7 @@ import { MusesFunctionDeclaration } from "./ast/glsl/function-declaration";
 import { MusesTypeDeclaration } from "./ast/glsl/type-declaration";
 import { MusesGLSLParmerters, MusesVariableDeclaration } from "./ast/glsl/variable-declaration";
 import { MusesPass } from "./ast/pass";
-import { MusesProperties } from "./ast/properties";
+import { MusesProperty } from "./ast/property";
 import { MusesShader } from "./ast/shader";
 import { MusesSubShader } from "./ast/subshader";
 import { musesParser } from "./parser";
@@ -38,9 +38,39 @@ export class MusesVisitor extends CstVisiter {
         this.validateVisitor();
     }
 
+    textureProperty(ctx: CstChildrenDictionary) {
+        const type = (ctx.type[0] as IToken).image;
+        const value = (ctx.value[0] as IToken).image;
+        return { type, value };
+    }
+
+    vectorProperty(ctx: CstChildrenDictionary) {
+        const type = (ctx.type[0] as IToken).image;
+        const value = ctx.value.map(value =>  parseFloat((value as IToken).image));
+        return { type, value };
+    }
+
+    floatProperty(ctx: CstChildrenDictionary) {
+        const type = (ctx.type[0] as IToken).image;
+        const value = parseFloat((ctx.value[0] as IToken).image);
+        const range = ctx.range?.map(range => parseFloat((range as IToken).image));
+        return { type, value, range };
+    }
+
+    intProperty(ctx: CstChildrenDictionary) {
+        const type = (ctx.type[0] as IToken).image;
+        const value = parseInt((ctx.value[0] as IToken).image);
+        return { type, value };
+    }
+
+    property(ctx: CstChildrenDictionary) {
+        const name = (ctx.name[0] as IToken).image;
+        const variable = this.visit(ctx.variable[0] as CstNode);
+        return new MusesProperty({ name, ...variable });
+    }
+
     properties(ctx: CstChildrenDictionary) {
-        const properties = new MusesProperties({});
-        return properties;
+        return ctx.property?.map((property) => this.visit(property as CstNode));
     }
 
     // #region GLSL

@@ -156,10 +156,78 @@
         "nodeType": "SubShader"
       }
     ],
-    "properties": {
-      "options": {},
-      "nodeType": "Properties"
-    },
+    "properties": [
+      {
+        "options": {
+          "name": "_Int",
+          "type": "Int",
+          "value": 2
+        },
+        "nodeType": "Properties"
+      },
+      {
+        "options": {
+          "name": "_Float",
+          "type": "Float",
+          "value": 1.5
+        },
+        "nodeType": "Properties"
+      },
+      {
+        "options": {
+          "name": "_Range",
+          "type": "Range",
+          "value": 3,
+          "range": [
+            2,
+            3
+          ]
+        },
+        "nodeType": "Properties"
+      },
+      {
+        "options": {
+          "name": "_Color",
+          "type": "Color",
+          "value": [
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        "nodeType": "Properties"
+      },
+      {
+        "options": {
+          "name": "_Vector",
+          "type": "Vector",
+          "value": [
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        "nodeType": "Properties"
+      },
+      {
+        "options": {
+          "name": "_2D",
+          "type": "2D",
+          "value": "\"white\""
+        },
+        "nodeType": "Properties"
+      },
+      {
+        "options": {
+          "name": "_3D",
+          "type": "3D",
+          "value": "\"black\""
+        },
+        "nodeType": "Properties"
+      }
+    ],
     "fallback": {
       "options": {
         "to": "Diffuse"
