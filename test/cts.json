@@ -2622,24 +2622,31 @@
                                                                                                                                                                                           {
                                                                                                                                                                                             "name": "atomicExpression",
                                                                                                                                                                                             "children": {
-                                                                                                                                                                                              "const": [
+                                                                                                                                                                                              "type": [
                                                                                                                                                                                                 {
-                                                                                                                                                                                                  "image": "2",
-                                                                                                                                                                                                  "startOffset": 607,
-                                                                                                                                                                                                  "endOffset": 607,
-                                                                                                                                                                                                  "startLine": 25,
-                                                                                                                                                                                                  "endLine": 25,
-                                                                                                                                                                                                  "startColumn": 43,
-                                                                                                                                                                                                  "endColumn": 43,
-                                                                                                                                                                                                  "tokenTypeIdx": 104,
-                                                                                                                                                                                                  "tokenType": {
-                                                                                                                                                                                                    "name": "ConstInt",
-                                                                                                                                                                                                    "PATTERN": {},
-                                                                                                                                                                                                    "tokenTypeIdx": 104,
-                                                                                                                                                                                                    "CATEGORIES": [],
-                                                                                                                                                                                                    "categoryMatches": [],
-                                                                                                                                                                                                    "categoryMatchesMap": {},
-                                                                                                                                                                                                    "isParent": false
+                                                                                                                                                                                                  "name": "typeDeclaration",
+                                                                                                                                                                                                  "children": {
+                                                                                                                                                                                                    "name": [
+                                                                                                                                                                                                      {
+                                                                                                                                                                                                        "image": "_Float",
+                                                                                                                                                                                                        "startOffset": 607,
+                                                                                                                                                                                                        "endOffset": 612,
+                                                                                                                                                                                                        "startLine": 25,
+                                                                                                                                                                                                        "endLine": 25,
+                                                                                                                                                                                                        "startColumn": 43,
+                                                                                                                                                                                                        "endColumn": 48,
+                                                                                                                                                                                                        "tokenTypeIdx": 106,
+                                                                                                                                                                                                        "tokenType": {
+                                                                                                                                                                                                          "name": "Identifier",
+                                                                                                                                                                                                          "PATTERN": {},
+                                                                                                                                                                                                          "tokenTypeIdx": 106,
+                                                                                                                                                                                                          "CATEGORIES": [],
+                                                                                                                                                                                                          "categoryMatches": [],
+                                                                                                                                                                                                          "categoryMatchesMap": {},
+                                                                                                                                                                                                          "isParent": false
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                      }
+                                                                                                                                                                                                    ]
                                                                                                                                                                                                   }
                                                                                                                                                                                                 }
                                                                                                                                                                                               ]
@@ -2725,31 +2732,24 @@
                                                                                                                                                                                           {
                                                                                                                                                                                             "name": "atomicExpression",
                                                                                                                                                                                             "children": {
-                                                                                                                                                                                              "type": [
+                                                                                                                                                                                              "const": [
                                                                                                                                                                                                 {
-                                                                                                                                                                                                  "name": "typeDeclaration",
-                                                                                                                                                                                                  "children": {
-                                                                                                                                                                                                    "name": [
-                                                                                                                                                                                                      {
-                                                                                                                                                                                                        "image": "_Float",
-                                                                                                                                                                                                        "startOffset": 609,
-                                                                                                                                                                                                        "endOffset": 614,
-                                                                                                                                                                                                        "startLine": 25,
-                                                                                                                                                                                                        "endLine": 25,
-                                                                                                                                                                                                        "startColumn": 45,
-                                                                                                                                                                                                        "endColumn": 50,
-                                                                                                                                                                                                        "tokenTypeIdx": 106,
-                                                                                                                                                                                                        "tokenType": {
-                                                                                                                                                                                                          "name": "Identifier",
-                                                                                                                                                                                                          "PATTERN": {},
-                                                                                                                                                                                                          "tokenTypeIdx": 106,
-                                                                                                                                                                                                          "CATEGORIES": [],
-                                                                                                                                                                                                          "categoryMatches": [],
-                                                                                                                                                                                                          "categoryMatchesMap": {},
-                                                                                                                                                                                                          "isParent": false
-                                                                                                                                                                                                        }
-                                                                                                                                                                                                      }
-                                                                                                                                                                                                    ]
+                                                                                                                                                                                                  "image": "2",
+                                                                                                                                                                                                  "startOffset": 614,
+                                                                                                                                                                                                  "endOffset": 614,
+                                                                                                                                                                                                  "startLine": 25,
+                                                                                                                                                                                                  "endLine": 25,
+                                                                                                                                                                                                  "startColumn": 50,
+                                                                                                                                                                                                  "endColumn": 50,
+                                                                                                                                                                                                  "tokenTypeIdx": 104,
+                                                                                                                                                                                                  "tokenType": {
+                                                                                                                                                                                                    "name": "ConstInt",
+                                                                                                                                                                                                    "PATTERN": {},
+                                                                                                                                                                                                    "tokenTypeIdx": 104,
+                                                                                                                                                                                                    "CATEGORIES": [],
+                                                                                                                                                                                                    "categoryMatches": [],
+                                                                                                                                                                                                    "categoryMatchesMap": {},
+                                                                                                                                                                                                    "isParent": false
                                                                                                                                                                                                   }
                                                                                                                                                                                                 }
                                                                                                                                                                                               ]
@@ -2792,12 +2792,12 @@
                                                                                                                       "Comma": [
                                                                                                                         {
                                                                                                                           "image": ",",
-                                                                                                                          "startOffset": 608,
-                                                                                                                          "endOffset": 608,
+                                                                                                                          "startOffset": 613,
+                                                                                                                          "endOffset": 613,
                                                                                                                           "startLine": 25,
                                                                                                                           "endLine": 25,
-                                                                                                                          "startColumn": 44,
-                                                                                                                          "endColumn": 44,
+                                                                                                                          "startColumn": 49,
+                                                                                                                          "endColumn": 49,
                                                                                                                           "tokenTypeIdx": 97,
                                                                                                                           "tokenType": {
                                                                                                                             "name": "Comma",

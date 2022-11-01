@@ -22,7 +22,7 @@ Shader "Test" {
             };
 
             void vert() {
-                testStruct f = testStruct(2,_Float);
+                testStruct f = testStruct(_Float,2);
             }
 
             void frag() {

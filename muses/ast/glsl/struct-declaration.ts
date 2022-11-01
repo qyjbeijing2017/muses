@@ -18,11 +18,11 @@ export class MusesStructDeclaration extends MusesNode {
             isStruct: true,
             rules: [
                 {
-                    test: new RegExp(`${this.options.name}\\(${membersTypes.map(m => m.name).join(",")}\\)`),
+                    test: new RegExp(`^${this.options.name}\\(${membersTypes.map(m => m.name).join(",")}\\)$`),
                 },
                 ...membersTypes.map((m, i) => {
                     return {
-                        test: new RegExp(`${this.options.name}\.${this.options.members[i].name}`),
+                        test: new RegExp(`^${this.options.name}\.${this.options.members[i].name}$`),
                         returnType: m,
                     }
                 }),

@@ -66,6 +66,12 @@
                                     "arguments": [
                                       {
                                         "options": {
+                                          "name": "_Float"
+                                        },
+                                        "nodeType": "identify"
+                                      },
+                                      {
+                                        "options": {
                                           "type": {
                                             "options": {
                                               "name": "int"
@@ -75,12 +81,6 @@
                                           "value": 2
                                         },
                                         "nodeType": "constants"
-                                      },
-                                      {
-                                        "options": {
-                                          "name": "_Float"
-                                        },
-                                        "nodeType": "identify"
                                       }
                                     ],
                                     "callee": {

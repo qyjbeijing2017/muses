@@ -112,11 +112,35 @@
   "types": [
     {
       "name": "vec2",
-      "rules": []
+      "rules": [
+        {
+          "test": {},
+          "returnType": {
+            "name": "float",
+            "rules": [
+              {
+                "test": {}
+              }
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "vec3",
-      "rules": []
+      "rules": [
+        {
+          "test": {},
+          "returnType": {
+            "name": "float",
+            "rules": [
+              {
+                "test": {}
+              }
+            ]
+          }
+        }
+      ]
     },
     {
       "name": "vec4",
