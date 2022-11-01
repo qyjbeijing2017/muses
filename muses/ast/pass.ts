@@ -1,3 +1,4 @@
+import { MusesContext } from "./context/context";
 import { MusesGLSL } from "./glsl";
 import { IMusesNodeOptions, MusesNode } from "./node";
 import { MusesAstNodeType } from "./nodeType";
@@ -7,6 +8,10 @@ export interface IMusesPassOptions extends IMusesNodeOptions {
 }
 
 export class MusesPass extends MusesNode{
+    check(ctx: MusesContext): void {
+        this.options.glsl?.check(ctx);
+    }
+
     nodeType: MusesAstNodeType = MusesAstNodeType.Pass;
     constructor(private readonly options:IMusesPassOptions) {
         super();

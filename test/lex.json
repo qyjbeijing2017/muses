@@ -1749,11 +1749,220 @@
       }
     },
     {
-      "image": "void",
-      "startOffset": 451,
+      "image": "struct",
+      "startOffset": 449,
       "endOffset": 454,
+      "startLine": 19,
+      "endLine": 19,
+      "startColumn": 13,
+      "endColumn": 18,
+      "tokenTypeIdx": 13,
+      "tokenType": {
+        "name": "Struct",
+        "PATTERN": {},
+        "tokenTypeIdx": 13,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "testStruct",
+      "startOffset": 456,
+      "endOffset": 465,
+      "startLine": 19,
+      "endLine": 19,
+      "startColumn": 20,
+      "endColumn": 29,
+      "tokenTypeIdx": 106,
+      "tokenType": {
+        "name": "Identifier",
+        "PATTERN": {},
+        "tokenTypeIdx": 106,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "{",
+      "startOffset": 466,
+      "endOffset": 466,
+      "startLine": 19,
+      "endLine": 19,
+      "startColumn": 30,
+      "endColumn": 30,
+      "tokenTypeIdx": 93,
+      "tokenType": {
+        "name": "LeftBrace",
+        "PATTERN": {},
+        "tokenTypeIdx": 93,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "float",
+      "startOffset": 485,
+      "endOffset": 489,
       "startLine": 20,
       "endLine": 20,
+      "startColumn": 17,
+      "endColumn": 21,
+      "tokenTypeIdx": 24,
+      "tokenType": {
+        "name": "Float",
+        "PATTERN": {},
+        "tokenTypeIdx": 24,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "a",
+      "startOffset": 491,
+      "endOffset": 491,
+      "startLine": 20,
+      "endLine": 20,
+      "startColumn": 23,
+      "endColumn": 23,
+      "tokenTypeIdx": 106,
+      "tokenType": {
+        "name": "Identifier",
+        "PATTERN": {},
+        "tokenTypeIdx": 106,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": ";",
+      "startOffset": 492,
+      "endOffset": 492,
+      "startLine": 20,
+      "endLine": 20,
+      "startColumn": 24,
+      "endColumn": 24,
+      "tokenTypeIdx": 98,
+      "tokenType": {
+        "name": "Semicolon",
+        "PATTERN": {},
+        "tokenTypeIdx": 98,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "int",
+      "startOffset": 511,
+      "endOffset": 513,
+      "startLine": 21,
+      "endLine": 21,
+      "startColumn": 17,
+      "endColumn": 19,
+      "tokenTypeIdx": 23,
+      "tokenType": {
+        "name": "Int",
+        "PATTERN": {},
+        "tokenTypeIdx": 23,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "vb",
+      "startOffset": 515,
+      "endOffset": 516,
+      "startLine": 21,
+      "endLine": 21,
+      "startColumn": 21,
+      "endColumn": 22,
+      "tokenTypeIdx": 106,
+      "tokenType": {
+        "name": "Identifier",
+        "PATTERN": {},
+        "tokenTypeIdx": 106,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": ";",
+      "startOffset": 517,
+      "endOffset": 517,
+      "startLine": 21,
+      "endLine": 21,
+      "startColumn": 23,
+      "endColumn": 23,
+      "tokenTypeIdx": 98,
+      "tokenType": {
+        "name": "Semicolon",
+        "PATTERN": {},
+        "tokenTypeIdx": 98,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "}",
+      "startOffset": 532,
+      "endOffset": 532,
+      "startLine": 22,
+      "endLine": 22,
+      "startColumn": 13,
+      "endColumn": 13,
+      "tokenTypeIdx": 94,
+      "tokenType": {
+        "name": "RightBrace",
+        "PATTERN": {},
+        "tokenTypeIdx": 94,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": ";",
+      "startOffset": 533,
+      "endOffset": 533,
+      "startLine": 22,
+      "endLine": 22,
+      "startColumn": 14,
+      "endColumn": 14,
+      "tokenTypeIdx": 98,
+      "tokenType": {
+        "name": "Semicolon",
+        "PATTERN": {},
+        "tokenTypeIdx": 98,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "void",
+      "startOffset": 550,
+      "endOffset": 553,
+      "startLine": 24,
+      "endLine": 24,
       "startColumn": 13,
       "endColumn": 16,
       "tokenTypeIdx": 22,
@@ -1769,10 +1978,10 @@
     },
     {
       "image": "vert",
-      "startOffset": 456,
-      "endOffset": 459,
-      "startLine": 20,
-      "endLine": 20,
+      "startOffset": 555,
+      "endOffset": 558,
+      "startLine": 24,
+      "endLine": 24,
       "startColumn": 18,
       "endColumn": 21,
       "tokenTypeIdx": 106,
@@ -1788,10 +1997,10 @@
     },
     {
       "image": "(",
-      "startOffset": 460,
-      "endOffset": 460,
-      "startLine": 20,
-      "endLine": 20,
+      "startOffset": 559,
+      "endOffset": 559,
+      "startLine": 24,
+      "endLine": 24,
       "startColumn": 22,
       "endColumn": 22,
       "tokenTypeIdx": 91,
@@ -1806,469 +2015,13 @@
       }
     },
     {
-      "image": "in",
-      "startOffset": 461,
-      "endOffset": 462,
-      "startLine": 20,
-      "endLine": 20,
-      "startColumn": 23,
-      "endColumn": 24,
-      "tokenTypeIdx": 49,
-      "tokenType": {
-        "name": "In",
-        "PATTERN": {},
-        "tokenTypeIdx": 49,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "lowp",
-      "startOffset": 464,
-      "endOffset": 467,
-      "startLine": 20,
-      "endLine": 20,
-      "startColumn": 26,
-      "endColumn": 29,
-      "tokenTypeIdx": 52,
-      "tokenType": {
-        "name": "Lowp",
-        "PATTERN": {},
-        "tokenTypeIdx": 52,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "vec4",
-      "startOffset": 469,
-      "endOffset": 472,
-      "startLine": 20,
-      "endLine": 20,
-      "startColumn": 31,
-      "endColumn": 34,
-      "tokenTypeIdx": 28,
-      "tokenType": {
-        "name": "Vec4",
-        "PATTERN": {},
-        "tokenTypeIdx": 28,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "vertex",
-      "startOffset": 474,
-      "endOffset": 479,
-      "startLine": 20,
-      "endLine": 20,
-      "startColumn": 36,
-      "endColumn": 41,
-      "tokenTypeIdx": 106,
-      "tokenType": {
-        "name": "Identifier",
-        "PATTERN": {},
-        "tokenTypeIdx": 106,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
       "image": ")",
-      "startOffset": 480,
-      "endOffset": 480,
-      "startLine": 20,
-      "endLine": 20,
-      "startColumn": 42,
-      "endColumn": 42,
-      "tokenTypeIdx": 92,
-      "tokenType": {
-        "name": "RightParen",
-        "PATTERN": {},
-        "tokenTypeIdx": 92,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "{",
-      "startOffset": 482,
-      "endOffset": 482,
-      "startLine": 20,
-      "endLine": 20,
-      "startColumn": 44,
-      "endColumn": 44,
-      "tokenTypeIdx": 93,
-      "tokenType": {
-        "name": "LeftBrace",
-        "PATTERN": {},
-        "tokenTypeIdx": 93,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "gl_Position",
-      "startOffset": 501,
-      "endOffset": 511,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 17,
-      "endColumn": 27,
-      "tokenTypeIdx": 106,
-      "tokenType": {
-        "name": "Identifier",
-        "PATTERN": {},
-        "tokenTypeIdx": 106,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "=",
-      "startOffset": 513,
-      "endOffset": 513,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 29,
-      "endColumn": 29,
-      "tokenTypeIdx": 86,
-      "tokenType": {
-        "name": "Assign",
-        "PATTERN": {},
-        "tokenTypeIdx": 86,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "vec4",
-      "startOffset": 515,
-      "endOffset": 518,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 31,
-      "endColumn": 34,
-      "tokenTypeIdx": 28,
-      "tokenType": {
-        "name": "Vec4",
-        "PATTERN": {},
-        "tokenTypeIdx": 28,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "(",
-      "startOffset": 519,
-      "endOffset": 519,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 35,
-      "endColumn": 35,
-      "tokenTypeIdx": 91,
-      "tokenType": {
-        "name": "LeftParen",
-        "PATTERN": {},
-        "tokenTypeIdx": 91,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "0.0",
-      "startOffset": 520,
-      "endOffset": 522,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 36,
-      "endColumn": 38,
-      "tokenTypeIdx": 103,
-      "tokenType": {
-        "name": "ConstFloat",
-        "PATTERN": {},
-        "tokenTypeIdx": 103,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": ",",
-      "startOffset": 523,
-      "endOffset": 523,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 39,
-      "endColumn": 39,
-      "tokenTypeIdx": 97,
-      "tokenType": {
-        "name": "Comma",
-        "PATTERN": {},
-        "tokenTypeIdx": 97,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "0.0",
-      "startOffset": 524,
-      "endOffset": 526,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 40,
-      "endColumn": 42,
-      "tokenTypeIdx": 103,
-      "tokenType": {
-        "name": "ConstFloat",
-        "PATTERN": {},
-        "tokenTypeIdx": 103,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": ",",
-      "startOffset": 527,
-      "endOffset": 527,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 43,
-      "endColumn": 43,
-      "tokenTypeIdx": 97,
-      "tokenType": {
-        "name": "Comma",
-        "PATTERN": {},
-        "tokenTypeIdx": 97,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "0.0",
-      "startOffset": 528,
-      "endOffset": 530,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 44,
-      "endColumn": 46,
-      "tokenTypeIdx": 103,
-      "tokenType": {
-        "name": "ConstFloat",
-        "PATTERN": {},
-        "tokenTypeIdx": 103,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": ",",
-      "startOffset": 531,
-      "endOffset": 531,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 47,
-      "endColumn": 47,
-      "tokenTypeIdx": 97,
-      "tokenType": {
-        "name": "Comma",
-        "PATTERN": {},
-        "tokenTypeIdx": 97,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "1",
-      "startOffset": 532,
-      "endOffset": 532,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 48,
-      "endColumn": 48,
-      "tokenTypeIdx": 104,
-      "tokenType": {
-        "name": "ConstInt",
-        "PATTERN": {},
-        "tokenTypeIdx": 104,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": ")",
-      "startOffset": 533,
-      "endOffset": 533,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 49,
-      "endColumn": 49,
-      "tokenTypeIdx": 92,
-      "tokenType": {
-        "name": "RightParen",
-        "PATTERN": {},
-        "tokenTypeIdx": 92,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": ".",
-      "startOffset": 534,
-      "endOffset": 534,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 50,
-      "endColumn": 50,
-      "tokenTypeIdx": 99,
-      "tokenType": {
-        "name": "Dot",
-        "PATTERN": {},
-        "tokenTypeIdx": 99,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "xyz",
-      "startOffset": 535,
-      "endOffset": 537,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 51,
-      "endColumn": 53,
-      "tokenTypeIdx": 106,
-      "tokenType": {
-        "name": "Identifier",
-        "PATTERN": {},
-        "tokenTypeIdx": 106,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": ";",
-      "startOffset": 538,
-      "endOffset": 538,
-      "startLine": 21,
-      "endLine": 21,
-      "startColumn": 54,
-      "endColumn": 54,
-      "tokenTypeIdx": 98,
-      "tokenType": {
-        "name": "Semicolon",
-        "PATTERN": {},
-        "tokenTypeIdx": 98,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "if",
-      "startOffset": 557,
-      "endOffset": 558,
-      "startLine": 22,
-      "endLine": 22,
-      "startColumn": 17,
-      "endColumn": 18,
-      "tokenTypeIdx": 5,
-      "tokenType": {
-        "name": "If",
-        "PATTERN": {},
-        "tokenTypeIdx": 5,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "(",
-      "startOffset": 559,
-      "endOffset": 559,
-      "startLine": 22,
-      "endLine": 22,
-      "startColumn": 19,
-      "endColumn": 19,
-      "tokenTypeIdx": 91,
-      "tokenType": {
-        "name": "LeftParen",
-        "PATTERN": {},
-        "tokenTypeIdx": 91,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "a",
       "startOffset": 560,
       "endOffset": 560,
-      "startLine": 22,
-      "endLine": 22,
-      "startColumn": 20,
-      "endColumn": 20,
-      "tokenTypeIdx": 106,
-      "tokenType": {
-        "name": "Identifier",
-        "PATTERN": {},
-        "tokenTypeIdx": 106,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": ")",
-      "startOffset": 561,
-      "endOffset": 561,
-      "startLine": 22,
-      "endLine": 22,
-      "startColumn": 21,
-      "endColumn": 21,
+      "startLine": 24,
+      "endLine": 24,
+      "startColumn": 23,
+      "endColumn": 23,
       "tokenTypeIdx": 92,
       "tokenType": {
         "name": "RightParen",
@@ -2284,10 +2037,10 @@
       "image": "{",
       "startOffset": 562,
       "endOffset": 562,
-      "startLine": 22,
-      "endLine": 22,
-      "startColumn": 22,
-      "endColumn": 22,
+      "startLine": 24,
+      "endLine": 24,
+      "startColumn": 25,
+      "endColumn": 25,
       "tokenTypeIdx": 93,
       "tokenType": {
         "name": "LeftBrace",
@@ -2300,56 +2053,189 @@
       }
     },
     {
-      "image": "}",
-      "startOffset": 583,
-      "endOffset": 583,
-      "startLine": 24,
-      "endLine": 24,
-      "startColumn": 17,
-      "endColumn": 17,
-      "tokenTypeIdx": 94,
-      "tokenType": {
-        "name": "RightBrace",
-        "PATTERN": {},
-        "tokenTypeIdx": 94,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "else",
-      "startOffset": 585,
-      "endOffset": 588,
-      "startLine": 24,
-      "endLine": 24,
-      "startColumn": 19,
-      "endColumn": 22,
-      "tokenTypeIdx": 6,
-      "tokenType": {
-        "name": "Else",
-        "PATTERN": {},
-        "tokenTypeIdx": 6,
-        "CATEGORIES": [],
-        "categoryMatches": [],
-        "categoryMatchesMap": {},
-        "isParent": false
-      }
-    },
-    {
-      "image": "{",
-      "startOffset": 590,
+      "image": "testStruct",
+      "startOffset": 581,
       "endOffset": 590,
-      "startLine": 24,
-      "endLine": 24,
-      "startColumn": 24,
-      "endColumn": 24,
-      "tokenTypeIdx": 93,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 17,
+      "endColumn": 26,
+      "tokenTypeIdx": 106,
       "tokenType": {
-        "name": "LeftBrace",
+        "name": "Identifier",
         "PATTERN": {},
-        "tokenTypeIdx": 93,
+        "tokenTypeIdx": 106,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "f",
+      "startOffset": 592,
+      "endOffset": 592,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 28,
+      "endColumn": 28,
+      "tokenTypeIdx": 106,
+      "tokenType": {
+        "name": "Identifier",
+        "PATTERN": {},
+        "tokenTypeIdx": 106,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "=",
+      "startOffset": 594,
+      "endOffset": 594,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 30,
+      "endColumn": 30,
+      "tokenTypeIdx": 86,
+      "tokenType": {
+        "name": "Assign",
+        "PATTERN": {},
+        "tokenTypeIdx": 86,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "testStruct",
+      "startOffset": 596,
+      "endOffset": 605,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 32,
+      "endColumn": 41,
+      "tokenTypeIdx": 106,
+      "tokenType": {
+        "name": "Identifier",
+        "PATTERN": {},
+        "tokenTypeIdx": 106,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "(",
+      "startOffset": 606,
+      "endOffset": 606,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 42,
+      "endColumn": 42,
+      "tokenTypeIdx": 91,
+      "tokenType": {
+        "name": "LeftParen",
+        "PATTERN": {},
+        "tokenTypeIdx": 91,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "2",
+      "startOffset": 607,
+      "endOffset": 607,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 43,
+      "endColumn": 43,
+      "tokenTypeIdx": 104,
+      "tokenType": {
+        "name": "ConstInt",
+        "PATTERN": {},
+        "tokenTypeIdx": 104,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": ",",
+      "startOffset": 608,
+      "endOffset": 608,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 44,
+      "endColumn": 44,
+      "tokenTypeIdx": 97,
+      "tokenType": {
+        "name": "Comma",
+        "PATTERN": {},
+        "tokenTypeIdx": 97,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "_Float",
+      "startOffset": 609,
+      "endOffset": 614,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 45,
+      "endColumn": 50,
+      "tokenTypeIdx": 106,
+      "tokenType": {
+        "name": "Identifier",
+        "PATTERN": {},
+        "tokenTypeIdx": 106,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": ")",
+      "startOffset": 615,
+      "endOffset": 615,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 51,
+      "endColumn": 51,
+      "tokenTypeIdx": 92,
+      "tokenType": {
+        "name": "RightParen",
+        "PATTERN": {},
+        "tokenTypeIdx": 92,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": ";",
+      "startOffset": 616,
+      "endOffset": 616,
+      "startLine": 25,
+      "endLine": 25,
+      "startColumn": 52,
+      "endColumn": 52,
+      "tokenTypeIdx": 98,
+      "tokenType": {
+        "name": "Semicolon",
+        "PATTERN": {},
+        "tokenTypeIdx": 98,
         "CATEGORIES": [],
         "categoryMatches": [],
         "categoryMatchesMap": {},
@@ -2362,8 +2248,8 @@
       "endOffset": 631,
       "startLine": 26,
       "endLine": 26,
-      "startColumn": 17,
-      "endColumn": 17,
+      "startColumn": 13,
+      "endColumn": 13,
       "tokenTypeIdx": 94,
       "tokenType": {
         "name": "RightBrace",
@@ -2376,9 +2262,104 @@
       }
     },
     {
+      "image": "void",
+      "startOffset": 648,
+      "endOffset": 651,
+      "startLine": 28,
+      "endLine": 28,
+      "startColumn": 13,
+      "endColumn": 16,
+      "tokenTypeIdx": 22,
+      "tokenType": {
+        "name": "Void",
+        "PATTERN": {},
+        "tokenTypeIdx": 22,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "frag",
+      "startOffset": 653,
+      "endOffset": 656,
+      "startLine": 28,
+      "endLine": 28,
+      "startColumn": 18,
+      "endColumn": 21,
+      "tokenTypeIdx": 106,
+      "tokenType": {
+        "name": "Identifier",
+        "PATTERN": {},
+        "tokenTypeIdx": 106,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "(",
+      "startOffset": 657,
+      "endOffset": 657,
+      "startLine": 28,
+      "endLine": 28,
+      "startColumn": 22,
+      "endColumn": 22,
+      "tokenTypeIdx": 91,
+      "tokenType": {
+        "name": "LeftParen",
+        "PATTERN": {},
+        "tokenTypeIdx": 91,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": ")",
+      "startOffset": 658,
+      "endOffset": 658,
+      "startLine": 28,
+      "endLine": 28,
+      "startColumn": 23,
+      "endColumn": 23,
+      "tokenTypeIdx": 92,
+      "tokenType": {
+        "name": "RightParen",
+        "PATTERN": {},
+        "tokenTypeIdx": 92,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
+      "image": "{",
+      "startOffset": 660,
+      "endOffset": 660,
+      "startLine": 28,
+      "endLine": 28,
+      "startColumn": 25,
+      "endColumn": 25,
+      "tokenTypeIdx": 93,
+      "tokenType": {
+        "name": "LeftBrace",
+        "PATTERN": {},
+        "tokenTypeIdx": 93,
+        "CATEGORIES": [],
+        "categoryMatches": [],
+        "categoryMatchesMap": {},
+        "isParent": false
+      }
+    },
+    {
       "image": "}",
-      "startOffset": 724,
-      "endOffset": 724,
+      "startOffset": 675,
+      "endOffset": 675,
       "startLine": 29,
       "endLine": 29,
       "startColumn": 13,
@@ -2396,10 +2377,10 @@
     },
     {
       "image": "ENDGLSL",
-      "startOffset": 852,
-      "endOffset": 858,
-      "startLine": 35,
-      "endLine": 35,
+      "startOffset": 692,
+      "endOffset": 698,
+      "startLine": 31,
+      "endLine": 31,
       "startColumn": 13,
       "endColumn": 19,
       "tokenTypeIdx": 61,
@@ -2415,10 +2396,10 @@
     },
     {
       "image": "}",
-      "startOffset": 869,
-      "endOffset": 869,
-      "startLine": 36,
-      "endLine": 36,
+      "startOffset": 709,
+      "endOffset": 709,
+      "startLine": 32,
+      "endLine": 32,
       "startColumn": 9,
       "endColumn": 9,
       "tokenTypeIdx": 94,
@@ -2434,10 +2415,10 @@
     },
     {
       "image": "}",
-      "startOffset": 876,
-      "endOffset": 876,
-      "startLine": 37,
-      "endLine": 37,
+      "startOffset": 716,
+      "endOffset": 716,
+      "startLine": 33,
+      "endLine": 33,
       "startColumn": 5,
       "endColumn": 5,
       "tokenTypeIdx": 94,
@@ -2453,10 +2434,10 @@
     },
     {
       "image": "FallBack",
-      "startOffset": 885,
-      "endOffset": 892,
-      "startLine": 39,
-      "endLine": 39,
+      "startOffset": 725,
+      "endOffset": 732,
+      "startLine": 35,
+      "endLine": 35,
       "startColumn": 5,
       "endColumn": 12,
       "tokenTypeIdx": 58,
@@ -2472,10 +2453,10 @@
     },
     {
       "image": "\"Diffuse\"",
-      "startOffset": 894,
-      "endOffset": 902,
-      "startLine": 39,
-      "endLine": 39,
+      "startOffset": 734,
+      "endOffset": 742,
+      "startLine": 35,
+      "endLine": 35,
       "startColumn": 14,
       "endColumn": 22,
       "tokenTypeIdx": 105,
@@ -2491,10 +2472,10 @@
     },
     {
       "image": "}",
-      "startOffset": 905,
-      "endOffset": 905,
-      "startLine": 40,
-      "endLine": 40,
+      "startOffset": 745,
+      "endOffset": 745,
+      "startLine": 36,
+      "endLine": 36,
       "startColumn": 1,
       "endColumn": 1,
       "tokenTypeIdx": 94,

@@ -1,3 +1,4 @@
+import { MusesContext } from "../../context/context";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
 import { MusesExpression } from "../expression/express";
@@ -12,6 +13,12 @@ export interface IMusesIfStatementOptions extends IMusesStatementOptions {
 }
 
 export class MusesIfStatement extends MusesStatement {
+    check(ctx: MusesContext): void {
+        
+    }
+    get optionsChildren(){
+        return this.options as IMusesIfStatementOptions
+    }
     nodeType: MusesAstNodeType = MusesAstNodeType.IfStatement;
     constructor(options: IMusesIfStatementOptions) {
         super(options);

@@ -5,7 +5,7 @@ export interface IMusesStatementOptions extends IMusesNodeOptions {
 }
 
 export abstract class MusesStatement extends MusesNode {
-    constructor(private readonly options: IMusesStatementOptions) {
+    constructor(readonly options: IMusesStatementOptions) {
         super();
     }
 }

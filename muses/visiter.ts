@@ -18,7 +18,7 @@ import { MusesDotExpression } from "./ast/glsl/expression/dot-expression";
 import { MusesIndexExpression } from "./ast/glsl/expression/index-expression";
 import { MusesCallExpression } from "./ast/glsl/expression/call-expression";
 import { MusesUpdateExpression } from "./ast/glsl/expression/update-expression";
-import { MusesVariableConstructor } from "./ast/glsl/variable-constructor";
+import { MusesVariableConstructor } from "./ast/glsl/expression/variable-constructor";
 import { MusesTokenName } from "./lexer";
 import { MusesConstants } from "./ast/glsl/constants";
 import { MusesStructDeclaration } from "./ast/glsl/struct-declaration";
@@ -40,13 +40,13 @@ export class MusesVisitor extends CstVisiter {
 
     textureProperty(ctx: CstChildrenDictionary) {
         const type = (ctx.type[0] as IToken).image;
-        const value = (ctx.value[0] as IToken).image;
+        const value = (ctx.value[0] as IToken).image.replace(/"/g, "");
         return { type, value };
     }
 
     vectorProperty(ctx: CstChildrenDictionary) {
         const type = (ctx.type[0] as IToken).image;
-        const value = ctx.value.map(value =>  parseFloat((value as IToken).image));
+        const value = ctx.value.map(value => parseFloat((value as IToken).image));
         return { type, value };
     }
 
@@ -130,6 +130,9 @@ export class MusesVisitor extends CstVisiter {
     atomicExpression(ctx: CstChildrenDictionary) {
         if (ctx.subExpression) {
             return this.visit(ctx.subExpression[0] as CstNode);
+        } else if (ctx.type) {
+            const type: MusesTypeDeclaration = this.visit(ctx.type[0] as CstNode);
+            return new MusesIdentify({ name: type.name });
         } else {
             const token = ctx.const[0] as IToken;
             const conVal = this.createConst(token);
@@ -143,9 +146,9 @@ export class MusesVisitor extends CstVisiter {
     }
 
     callExpression(ctx: CstChildrenDictionary) {
-        const args = ctx.args.map((expression) => {
+        const args = ctx.args?.map((expression) => {
             return this.visit(expression as CstNode);
-        });
+        }) || [];
         return args;
     }
 
@@ -326,7 +329,15 @@ export class MusesVisitor extends CstVisiter {
     // #region statements
     blockStatement(ctx: CstChildrenDictionary) {
         const statements = ctx.statement?.map((statement) => this.visit(statement as CstNode)) || [];
-        return statements;
+        const statementsOut: any[] = [];
+        statements.forEach((statement) => {
+            if (Array.isArray(statement)) {
+                statementsOut.push(...statement);
+            } else {
+                statementsOut.push(statement);
+            }
+        });
+        return statementsOut;
     }
 
     ifStatement(ctx: CstChildrenDictionary) {
@@ -443,16 +454,17 @@ export class MusesVisitor extends CstVisiter {
     functionParameterDeclaration(ctx: CstChildrenDictionary) {
         const type = this.visit(ctx.type[0] as CstNode);
         const name = (ctx.name[0] as IToken).image;
+        const storage = ctx.storage ? this.visit(ctx.storage[0] as CstNode) : undefined;
         const percision = ctx.percision ? this.visit(ctx.percision[0] as CstNode) : undefined;
         const parameters = ctx.parameters ? (ctx.parameters[0] as IToken).image as MusesGLSLParmerters : undefined;
-        const parameterDeclaration = new MusesVariableDeclaration({ name, type, percision, parameters });
+        const parameterDeclaration = new MusesVariableDeclaration({ name, type, percision, parameters, storage });
         return parameterDeclaration;
     }
 
     functionDeclaration(ctx: CstChildrenDictionary) {
         const returnType = this.visit(ctx.returnType[0] as CstNode);
         const name = (ctx.name[0] as IToken).image;
-        const body = ctx.body.map((statement) => this.visit(statement as CstNode));
+        const body = this.visit(ctx.body[0] as CstNode);
         const parameters = ctx.parameters?.map((parameter) => this.visit(parameter as CstNode)) || [];
         const functionDeclaration = new MusesFunctionDeclaration({ returnType, name, body, parameters });
         return functionDeclaration;
@@ -460,8 +472,18 @@ export class MusesVisitor extends CstVisiter {
     // #endregion
 
     glsl(ctx: CstChildrenDictionary) {
+        const body = ctx.body.map((statement) => this.visit(statement as CstNode));
+        const bodyStatements: any[] = [];
+        body.forEach((statement) => {
+            if (Array.isArray(statement)) {
+                bodyStatements.push(...statement);
+            } else {
+                bodyStatements.push(statement);
+            }
+        });
+
         const glsl = new MusesGLSL({
-            body: ctx.body.map((statement) => this.visit(statement as CstNode)),
+            body: bodyStatements,
         });
         return glsl;
     }

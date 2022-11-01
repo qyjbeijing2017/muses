@@ -16,21 +16,17 @@ Shader "Test" {
 
             // glsl
             GLSLPROGRAM
+            struct testStruct{
+                float a;
+                int vb;
+            };
 
-            void vert(in lowp vec4 vertex) {
-                gl_Position = vec4(0.0,0.0,0.0,1).xyz;
-                if(a){
-
-                } else {
-                    
-                }
-
-                // gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+            void vert() {
+                testStruct f = testStruct(2,_Float);
             }
 
-            // void frag() {
-            //     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
-            // }
+            void frag() {
+            }
 
             ENDGLSL
         }
