@@ -1,6 +1,6 @@
-import { MusesContext } from "../context/context";
-import { MusesContextType } from "../context/type";
-import { IMusesNodeOptions, MusesNode } from "../node";
+import { MusesGLSLContext } from "../../context/glsl";
+import { MusesContextType } from "../../context/type";
+import { IMusesNodeOptions, MusesGLSLNode } from "../node";
 import { MusesAstNodeType } from "../nodeType";
 import { MusesVariableDeclaration } from "./variable-declaration";
 
@@ -9,8 +9,16 @@ export interface IMusesStructDeclarationOptions extends IMusesNodeOptions {
     members: MusesVariableDeclaration[];
 }
 
-export class MusesStructDeclaration extends MusesNode {
-    check(ctx: MusesContext): void {
+export class MusesStructDeclaration extends MusesGLSLNode {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `struct ${this.options.name} {
+    ${this.options.members.map((member) => member.toGLSL()).join("\n    ")}
+};`;
+    }
+    check(ctx: MusesGLSLContext): void {
         const membersTypes = this.options.members.map(m => m.toCtxType(ctx));
 
         ctx.types.push(new MusesContextType({

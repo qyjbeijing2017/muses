@@ -2,8 +2,8 @@ import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
 import { IMusesExpressionOptions, MusesExpression } from "./express";
 import { MusesIdentify } from "../Identify";
-import { MusesContext } from "../../context/context";
-import { MusesContextType } from "../../context/type";
+import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesContextType } from "../../../context/type";
 
 export interface IMusesIndexExpressionOptions extends IMusesExpressionOptions {
     object: MusesIdentify | MusesExpression | MusesConstants;
@@ -11,7 +11,13 @@ export interface IMusesIndexExpressionOptions extends IMusesExpressionOptions {
 }
 
 export class MusesIndexExpression extends MusesExpression {
-    check(ctx: MusesContext): MusesContextType {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `${this.optionsChildren.object.toGLSL()}[${this.optionsChildren.index.toGLSL()}]`;
+    }
+    check(ctx: MusesGLSLContext): MusesContextType {
         const objectType = this.getExpressionType(ctx, this.optionsChildren.object);
         const indexType = this.getExpressionType(ctx, this.optionsChildren.index);
         return objectType.checkRule(`${objectType.name}[${indexType.name}]`);

@@ -12,14 +12,14 @@
                     "body": [
                       {
                         "options": {
-                          "name": "testStruct",
+                          "name": "VertexInput",
                           "members": [
                             {
                               "options": {
-                                "name": "a",
+                                "name": "position",
                                 "type": {
                                   "options": {
-                                    "name": "float"
+                                    "name": "vec3"
                                   },
                                   "nodeType": "type-declaration"
                                 }
@@ -28,10 +28,22 @@
                             },
                             {
                               "options": {
-                                "name": "vb",
+                                "name": "normal",
                                 "type": {
                                   "options": {
-                                    "name": "int"
+                                    "name": "vec3"
+                                  },
+                                  "nodeType": "type-declaration"
+                                }
+                              },
+                              "nodeType": "variable-declaration"
+                            },
+                            {
+                              "options": {
+                                "name": "texcoord",
+                                "type": {
+                                  "options": {
+                                    "name": "vec2"
                                   },
                                   "nodeType": "type-declaration"
                                 }
@@ -54,49 +66,105 @@
                           "body": [
                             {
                               "options": {
-                                "name": "f",
-                                "type": {
+                                "expression": {
                                   "options": {
-                                    "name": "testStruct"
-                                  },
-                                  "nodeType": "type-declaration"
-                                },
-                                "value": {
-                                  "options": {
-                                    "arguments": [
-                                      {
-                                        "options": {
-                                          "name": "_Float"
-                                        },
-                                        "nodeType": "identify"
-                                      },
-                                      {
-                                        "options": {
-                                          "type": {
-                                            "options": {
-                                              "name": "int"
-                                            },
-                                            "nodeType": "type-declaration"
-                                          },
-                                          "value": 2
-                                        },
-                                        "nodeType": "constants"
-                                      }
-                                    ],
-                                    "callee": {
+                                    "left": {
                                       "options": {
-                                        "name": "testStruct"
+                                        "name": "gl_Position"
                                       },
                                       "nodeType": "identify"
+                                    },
+                                    "operator": "=",
+                                    "right": {
+                                      "options": {
+                                        "arguments": [
+                                          {
+                                            "options": {
+                                              "property": {
+                                                "options": {
+                                                  "name": "xy"
+                                                },
+                                                "nodeType": "identify"
+                                              },
+                                              "object": {
+                                                "options": {
+                                                  "property": {
+                                                    "options": {
+                                                      "name": "position"
+                                                    },
+                                                    "nodeType": "identify"
+                                                  },
+                                                  "object": {
+                                                    "options": {
+                                                      "name": "a2v"
+                                                    },
+                                                    "nodeType": "identify"
+                                                  }
+                                                },
+                                                "nodeType": "dot-expression"
+                                              }
+                                            },
+                                            "nodeType": "dot-expression"
+                                          },
+                                          {
+                                            "options": {
+                                              "property": {
+                                                "options": {
+                                                  "name": "yz"
+                                                },
+                                                "nodeType": "identify"
+                                              },
+                                              "object": {
+                                                "options": {
+                                                  "property": {
+                                                    "options": {
+                                                      "name": "position"
+                                                    },
+                                                    "nodeType": "identify"
+                                                  },
+                                                  "object": {
+                                                    "options": {
+                                                      "name": "a2v"
+                                                    },
+                                                    "nodeType": "identify"
+                                                  }
+                                                },
+                                                "nodeType": "dot-expression"
+                                              }
+                                            },
+                                            "nodeType": "dot-expression"
+                                          }
+                                        ],
+                                        "callee": {
+                                          "options": {
+                                            "name": "vec4"
+                                          },
+                                          "nodeType": "identify"
+                                        }
+                                      },
+                                      "nodeType": "call-expression"
                                     }
                                   },
-                                  "nodeType": "call-expression"
+                                  "nodeType": "assign-expression"
+                                }
+                              },
+                              "nodeType": "expression-statement"
+                            }
+                          ],
+                          "parameters": [
+                            {
+                              "options": {
+                                "name": "a2v",
+                                "type": {
+                                  "options": {
+                                    "name": "VertexInput"
+                                  },
+                                  "nodeType": "type-declaration"
                                 }
                               },
                               "nodeType": "variable-declaration"
                             }
-                          ],
-                          "parameters": []
+                          ]
                         },
                         "nodeType": "function-declaration"
                       },
@@ -109,7 +177,86 @@
                             "nodeType": "type-declaration"
                           },
                           "name": "frag",
-                          "body": [],
+                          "body": [
+                            {
+                              "options": {
+                                "expression": {
+                                  "options": {
+                                    "left": {
+                                      "options": {
+                                        "name": "gl_FragColor"
+                                      },
+                                      "nodeType": "identify"
+                                    },
+                                    "operator": "=",
+                                    "right": {
+                                      "options": {
+                                        "arguments": [
+                                          {
+                                            "options": {
+                                              "type": {
+                                                "options": {
+                                                  "name": "int"
+                                                },
+                                                "nodeType": "type-declaration"
+                                              },
+                                              "value": 0
+                                            },
+                                            "nodeType": "constants"
+                                          },
+                                          {
+                                            "options": {
+                                              "type": {
+                                                "options": {
+                                                  "name": "int"
+                                                },
+                                                "nodeType": "type-declaration"
+                                              },
+                                              "value": 0
+                                            },
+                                            "nodeType": "constants"
+                                          },
+                                          {
+                                            "options": {
+                                              "type": {
+                                                "options": {
+                                                  "name": "int"
+                                                },
+                                                "nodeType": "type-declaration"
+                                              },
+                                              "value": 0
+                                            },
+                                            "nodeType": "constants"
+                                          },
+                                          {
+                                            "options": {
+                                              "type": {
+                                                "options": {
+                                                  "name": "int"
+                                                },
+                                                "nodeType": "type-declaration"
+                                              },
+                                              "value": 0
+                                            },
+                                            "nodeType": "constants"
+                                          }
+                                        ],
+                                        "callee": {
+                                          "options": {
+                                            "name": "vec4"
+                                          },
+                                          "nodeType": "identify"
+                                        }
+                                      },
+                                      "nodeType": "call-expression"
+                                    }
+                                  },
+                                  "nodeType": "assign-expression"
+                                }
+                              },
+                              "nodeType": "expression-statement"
+                            }
+                          ],
                           "parameters": []
                         },
                         "nodeType": "function-declaration"
@@ -129,71 +276,41 @@
     "properties": [
       {
         "options": {
-          "name": "_Int",
-          "type": "Int",
-          "value": 2
-        },
-        "nodeType": "Properties"
-      },
-      {
-        "options": {
-          "name": "_Float",
-          "type": "Float",
-          "value": 1.5
-        },
-        "nodeType": "Properties"
-      },
-      {
-        "options": {
-          "name": "_Range",
-          "type": "Range",
-          "value": 3,
-          "range": [
-            2,
-            3
-          ]
-        },
-        "nodeType": "Properties"
-      },
-      {
-        "options": {
-          "name": "_Color",
-          "type": "Color",
-          "value": [
-            1,
-            1,
-            1,
-            1
-          ]
-        },
-        "nodeType": "Properties"
-      },
-      {
-        "options": {
-          "name": "_Vector",
-          "type": "Vector",
-          "value": [
-            2,
-            3,
-            4,
-            5
-          ]
-        },
-        "nodeType": "Properties"
-      },
-      {
-        "options": {
-          "name": "_2D",
+          "name": "_DiffuseTex",
           "type": "2D",
-          "value": "white"
+          "value": "white",
+          "displayName": "Diffuse Texture"
         },
         "nodeType": "Properties"
       },
       {
         "options": {
-          "name": "_3D",
-          "type": "3D",
-          "value": "black"
+          "name": "_NormalTex",
+          "type": "2D",
+          "value": "white",
+          "displayName": "Normal Texture"
+        },
+        "nodeType": "Properties"
+      },
+      {
+        "options": {
+          "name": "_SpecularTex",
+          "type": "2D",
+          "value": "white",
+          "displayName": "Specular Texture"
+        },
+        "nodeType": "Properties"
+      },
+      {
+        "options": {
+          "name": "_Shininess",
+          "type": "Range",
+          "value": 0.5,
+          "range": [
+            0,
+            1
+          ],
+          "displayName": "Shininess"
         },
         "nodeType": "Properties"
       }

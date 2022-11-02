@@ -422,7 +422,6 @@ export class MusesParser extends CstParser {
                 { ALT: () => this.SUBRULE(this.expressionStatement, { LABEL: "init" }) },
             ]);
         });
-        this.CONSUME(musesToken.Semicolon);
         this.SUBRULE(this.assignExpression, { LABEL: "test" });
         this.CONSUME1(musesToken.Semicolon);
         this.OPTION1(() => {

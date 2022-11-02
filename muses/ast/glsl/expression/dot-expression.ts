@@ -3,8 +3,8 @@ import { MusesTypeDeclaration } from "../type-declaration";
 import { MusesConstants } from "../constants";
 import { IMusesExpressionOptions, MusesExpression } from "./express";
 import { MusesIdentify } from "../Identify";
-import { MusesContext } from "../../context/context";
-import { MusesContextType } from "../../context/type";
+import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesContextType } from "../../../context/type";
 
 export interface IMusesDotExpressionOptions extends IMusesExpressionOptions {
     object: MusesIdentify | MusesExpression | MusesConstants;
@@ -12,10 +12,16 @@ export interface IMusesDotExpressionOptions extends IMusesExpressionOptions {
 }
 
 export class MusesDotExpression extends MusesExpression {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `${this.optionsChildren.object.toGLSL()}.${this.optionsChildren.property.toGLSL()}`;
+    }
     get optionsChildren(){
         return this.options as IMusesDotExpressionOptions
     }
-    check(ctx: MusesContext): MusesContextType {
+    check(ctx: MusesGLSLContext): MusesContextType {
         const objectType = this.getExpressionType(ctx, this.optionsChildren.object);
         return objectType.checkRule(`${objectType.name}.${this.optionsChildren.property.name}`);
     }

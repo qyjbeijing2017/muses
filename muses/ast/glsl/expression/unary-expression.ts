@@ -2,8 +2,8 @@ import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
 import { IMusesExpressionOptions, MusesExpression } from "./express";
 import { MusesIdentify } from "../Identify";
-import { MusesContext } from "../../context/context";
-import { MusesContextType } from "../../context/type";
+import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesContextType } from "../../../context/type";
 
 export interface IMusesUnaryExpressionOptions extends IMusesExpressionOptions {
     operator: string;
@@ -11,9 +11,15 @@ export interface IMusesUnaryExpressionOptions extends IMusesExpressionOptions {
 }
 
 export class MusesUnaryExpression extends MusesExpression {
-    check(ctx: MusesContext): MusesContextType {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `${this.optionsChildren.operator}${this.optionsChildren.argument.toGLSL()}`;
+    }
+    check(ctx: MusesGLSLContext): MusesContextType {
         const argumentType = this.getExpressionType(ctx, this.optionsChildren.argument);
-        return argumentType;
+        return argumentType.checkRule(`${this.optionsChildren.operator}${argumentType.name}`);
     }
     get optionsChildren(){
         return this.options as IMusesUnaryExpressionOptions

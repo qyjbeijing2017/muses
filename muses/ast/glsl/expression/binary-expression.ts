@@ -2,8 +2,8 @@ import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
 import { IMusesExpressionOptions, MusesExpression } from "./express";
 import { MusesIdentify } from "../Identify";
-import { MusesContext } from "../../context/context";
-import { MusesContextType } from "../../context/type";
+import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesContextType } from "../../../context/type";
 
 export interface IMusesBinaryExpressionOptions extends IMusesExpressionOptions {
     operator: string;
@@ -12,16 +12,19 @@ export interface IMusesBinaryExpressionOptions extends IMusesExpressionOptions {
 }
 
 export class MusesBinaryExpression extends MusesExpression {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `${this.optionsChildren.left.toGLSL()} ${this.optionsChildren.operator} ${this.optionsChildren.right.toGLSL()}`;
+    }
     get optionsChildren(){
         return this.options as IMusesBinaryExpressionOptions
     }
-    check(ctx: MusesContext): MusesContextType {
+    check(ctx: MusesGLSLContext): MusesContextType {
         const leftType = this.getExpressionType(ctx, this.optionsChildren.left);
         const rightType = this.getExpressionType(ctx, this.optionsChildren.right);
-        if(leftType.name != rightType.name){
-            throw new Error(`The ${rightType.name} cannot ${this.optionsChildren.operator} to ${leftType.name}`);
-        }
-        return leftType;
+        return leftType.checkRule(`${leftType.name}${this.optionsChildren.operator}${rightType.name}`);
     }
 
     nodeType: MusesAstNodeType = MusesAstNodeType.BinaryExpression;

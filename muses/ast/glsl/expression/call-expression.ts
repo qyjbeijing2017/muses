@@ -2,8 +2,8 @@ import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
 import { IMusesExpressionOptions, MusesExpression } from "./express";
 import { MusesIdentify } from "../Identify";
-import { MusesContext } from "../../context/context";
-import { MusesContextType } from "../../context/type";
+import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesContextType } from "../../../context/type";
 
 export interface IMusesCallExpressionOptions extends IMusesExpressionOptions {
     callee: MusesIdentify;
@@ -11,31 +11,28 @@ export interface IMusesCallExpressionOptions extends IMusesExpressionOptions {
 }
 
 export class MusesCallExpression extends MusesExpression {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `${this.optionsChildren.callee.toGLSL()}(${this.optionsChildren.arguments.map(a => a.toGLSL()).join(',')})`;
+    }
     get optionsChildren() {
         return this.options as IMusesCallExpressionOptions
     }
 
-    check(ctx: MusesContext): MusesContextType {
-        const funcName = ctx.functions.find(func => func.name === this.optionsChildren.callee.name);
+    check(ctx: MusesGLSLContext): MusesContextType {
+        const parameterTypes = this.optionsChildren.arguments.map(a => this.getExpressionType(ctx, a));
+        const sign = `${this.optionsChildren.callee.name}(${parameterTypes.map(types => types.name).join(',')})`;
+        const funcName = ctx.functions.find(func => func.sign === sign);
         if (funcName) {
-            if (funcName.parameter.length !== this.optionsChildren.arguments.length) {
-                throw new Error(`the function ${funcName.name} need ${funcName.parameter.length} arguments, but you give ${this.optionsChildren.arguments.length} arguments!`);
-            }
-            for (let index = 0; index < funcName.parameter.length; index++) {
-                const parameter = funcName.parameter[index];
-                const argument = this.optionsChildren.arguments[index];
-                const argumentType = this.getExpressionType(ctx, argument);
-                if (argumentType.name !== parameter.type.name) {
-                    throw new Error(`the function ${funcName.name} need ${parameter.type.name} type argument, but you give ${argumentType.name} type argument!`);
-                }
-            }
             return funcName.returnType;
         }
         const structName = ctx.types.find(type => type.name === this.optionsChildren.callee.name);
         if (structName) {
-            return structName.checkRule(`${structName.name}(${this.optionsChildren.arguments.map(m=>this.getExpressionType(ctx, m).name).join(",")})`);
+            return structName.checkRule(sign);
         }
-        throw new Error(`The function ${this.optionsChildren.callee.name} not defined!!`)
+        throw new Error(`The function ${sign} is not defined!!!`);
     }
 
     nodeType: MusesAstNodeType = MusesAstNodeType.CallExpression;

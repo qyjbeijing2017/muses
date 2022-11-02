@@ -1,4 +1,4 @@
-import { MusesContext } from "../../context/context";
+import { MusesGLSLContext } from "../../../context/glsl";
 import { IMusesNodeOptions } from "../../node";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
@@ -11,7 +11,16 @@ export interface IMusesRetrunStatementOptions extends IMusesNodeOptions {
 }
 
 export class MusesRetrunStatement extends MusesStatement {
-    check(ctx: MusesContext): void {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        if (this.optionsChildren.argument) {
+            return `return ${this.optionsChildren.argument.toGLSL()};`;
+        }
+        return `return;`;
+    }
+    check(ctx: MusesGLSLContext): void {
         if (!ctx.funcName) {
             throw new Error(`found a return out of the function`);
         }
@@ -27,7 +36,7 @@ export class MusesRetrunStatement extends MusesStatement {
         }
     }
 
-    getExpressionType(ctx: MusesContext, value: MusesExpression | MusesConstants | MusesIdentify) {
+    getExpressionType(ctx: MusesGLSLContext, value: MusesExpression | MusesConstants | MusesIdentify) {
         switch (value.nodeType) {
             case MusesAstNodeType.Identify:
                 const variables = ctx.variables.find(variable => variable.name === (value as MusesIdentify).name);

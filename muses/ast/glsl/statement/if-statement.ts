@@ -1,4 +1,4 @@
-import { MusesContext } from "../../context/context";
+import { MusesGLSLContext } from "../../../context/glsl";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
 import { MusesExpression } from "../expression/express";
@@ -13,7 +13,13 @@ export interface IMusesIfStatementOptions extends IMusesStatementOptions {
 }
 
 export class MusesIfStatement extends MusesStatement {
-    check(ctx: MusesContext): void {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        throw new Error("Method not implemented.");
+    }
+    check(ctx: MusesGLSLContext): void {
         
     }
     get optionsChildren(){

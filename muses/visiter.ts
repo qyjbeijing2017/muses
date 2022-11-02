@@ -7,7 +7,7 @@ import { MusesIdentify } from "./ast/glsl/Identify";
 import { MusesBinaryExpression } from "./ast/glsl/expression/binary-expression";
 import { MusesFunctionDeclaration } from "./ast/glsl/function-declaration";
 import { MusesTypeDeclaration } from "./ast/glsl/type-declaration";
-import { MusesGLSLParmerters, MusesVariableDeclaration } from "./ast/glsl/variable-declaration";
+import { MusesGLSLParmerters, MusesGLSLStorage, MusesVariableDeclaration } from "./ast/glsl/variable-declaration";
 import { MusesPass } from "./ast/pass";
 import { MusesProperty } from "./ast/property";
 import { MusesShader } from "./ast/shader";
@@ -65,8 +65,9 @@ export class MusesVisitor extends CstVisiter {
 
     property(ctx: CstChildrenDictionary) {
         const name = (ctx.name[0] as IToken).image;
+        const displayName = (ctx.displayName[0] as IToken).image.replace(/"/g, "");
         const variable = this.visit(ctx.variable[0] as CstNode);
-        return new MusesProperty({ name, ...variable });
+        return new MusesProperty({ name, ...variable, displayName });
     }
 
     properties(ctx: CstChildrenDictionary) {
@@ -378,7 +379,7 @@ export class MusesVisitor extends CstVisiter {
     }
 
     returnStatement(ctx: CstChildrenDictionary) {
-        const argument = this.visit(ctx.argument[0] as CstNode);
+        const argument = ctx.argument?this.visit(ctx.argument[0] as CstNode): undefined;
         const returnStatement = new MusesRetrunStatement({ argument });
         return returnStatement;
     }
@@ -454,7 +455,7 @@ export class MusesVisitor extends CstVisiter {
     functionParameterDeclaration(ctx: CstChildrenDictionary) {
         const type = this.visit(ctx.type[0] as CstNode);
         const name = (ctx.name[0] as IToken).image;
-        const storage = ctx.storage ? this.visit(ctx.storage[0] as CstNode) : undefined;
+        const storage = ctx.storage ? MusesGLSLStorage.const : undefined;
         const percision = ctx.percision ? this.visit(ctx.percision[0] as CstNode) : undefined;
         const parameters = ctx.parameters ? (ctx.parameters[0] as IToken).image as MusesGLSLParmerters : undefined;
         const parameterDeclaration = new MusesVariableDeclaration({ name, type, percision, parameters, storage });

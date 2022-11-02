@@ -1,13 +1,9 @@
 Shader "Test" {
     Properties {
-        _Int("Int", Int) = 2
-        _Float("Float", Float) = 1.5
-        _Range("Range", Range(2.0,3.0)) = 3.0
-
-        _Color("Color", Color) = (1,1,1,1)
-        _Vector("Vector", Vector) = (2,3,4,5)
-        _2D("2D", 2D) = "white" {}
-        _3D("3D", 3D) = "black" {}
+        _DiffuseTex ("Diffuse Texture", 2D) = "white" {}
+        _NormalTex ("Normal Texture", 2D) = "white" {}
+        _SpecularTex ("Specular Texture", 2D) = "white" {}
+        _Shininess ("Shininess", Range(0, 1)) = 0.5
     }
     
     SubShader {
@@ -16,16 +12,19 @@ Shader "Test" {
 
             // glsl
             GLSLPROGRAM
-            struct testStruct{
-                float a;
-                int vb;
+
+            struct VertexInput {
+                vec3 position;
+                vec3 normal;
+                vec2 texcoord;
             };
 
-            void vert() {
-                testStruct f = testStruct(_Float,2);
+            void vert(VertexInput a2v) {
+                gl_Position = vec4(a2v.position.xy, a2v.position.yz);
             }
 
             void frag() {
+                gl_FragColor = vec4(0, 0, 0, 0);
             }
 
             ENDGLSL

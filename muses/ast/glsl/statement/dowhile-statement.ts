@@ -1,4 +1,4 @@
-import { MusesContext } from "../../context/context";
+import { MusesGLSLContext } from "../../../context/glsl";
 import { IMusesNodeOptions } from "../../node";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
@@ -11,7 +11,15 @@ export interface IMusesDoWhileStatementOptions extends IMusesNodeOptions {
 }
 
 export class MusesDoWhileStatement extends MusesStatement {
-    check(ctx: MusesContext): void {
+    toMuses(): string {
+       return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `do{
+        ${this.optionsChildren.body.map((item) => item.toGLSL()).join("\n        ")}
+    }while(${this.optionsChildren.test.toGLSL()});`;
+    }
+    check(ctx: MusesGLSLContext): void {
         this.optionsChildren.test.check(ctx);
         ctx.loop.push(true);
         this.optionsChildren.body?.forEach((item) => {

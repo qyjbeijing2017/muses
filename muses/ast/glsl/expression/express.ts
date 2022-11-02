@@ -1,6 +1,6 @@
-import { MusesContext } from "../../context/context";
-import { MusesContextType } from "../../context/type";
-import { IMusesNodeOptions, MusesNode } from "../../node";
+import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesContextType } from "../../../context/type";
+import { IMusesNodeOptions, MusesGLSLNode } from "../../node";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
 import { MusesIdentify } from "../Identify";
@@ -9,10 +9,10 @@ export interface IMusesExpressionOptions extends IMusesNodeOptions {
 
 }
 
-export abstract class MusesExpression extends MusesNode {
-    abstract check(ctx: MusesContext): MusesContextType;
+export abstract class MusesExpression extends MusesGLSLNode {
+    abstract check(ctx: MusesGLSLContext): MusesContextType;
 
-    getExpressionType(ctx: MusesContext, value: MusesExpression | MusesConstants | MusesIdentify) {
+    getExpressionType(ctx: MusesGLSLContext, value: MusesExpression | MusesConstants | MusesIdentify) {
         switch(value.nodeType){
             case MusesAstNodeType.Identify:
                 const variables = ctx.variables.find(variable=> variable.name === (value as MusesIdentify).name);

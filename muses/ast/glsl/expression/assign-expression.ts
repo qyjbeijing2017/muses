@@ -2,8 +2,8 @@ import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
 import { IMusesExpressionOptions, MusesExpression } from "./express";
 import { MusesIdentify } from "../Identify";
-import { MusesContext } from "../../context/context";
-import { MusesContextType } from "../../context/type";
+import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesContextType } from "../../../context/type";
 
 export interface IMusesAssignExpressionOptions extends IMusesExpressionOptions {
     operator: string;
@@ -12,16 +12,16 @@ export interface IMusesAssignExpressionOptions extends IMusesExpressionOptions {
 }
 
 export class MusesAssignExpression extends MusesExpression {
-    check(ctx: MusesContext): MusesContextType {
-        if(this.optionsChildren.left.nodeType != MusesAstNodeType.Identify){
-            throw new Error('the left value must be assignable value');
-        }
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `${this.optionsChildren.left.toGLSL()} ${this.optionsChildren.operator} ${this.optionsChildren.right.toGLSL()}`;
+    }
+    check(ctx: MusesGLSLContext): MusesContextType {
         const leftType = this.getExpressionType(ctx, this.optionsChildren.left);
         const rightType = this.getExpressionType(ctx, this.optionsChildren.right);
-        if(leftType.name != rightType.name){
-            throw new Error(`The ${rightType.name} cannot ${this.optionsChildren.operator} to ${leftType.name}`);
-        }
-        return leftType;
+        return leftType.checkRule(`${leftType.name}${this.optionsChildren.operator}${rightType.name}`);
     }
     get optionsChildren(){
         return this.options as IMusesAssignExpressionOptions

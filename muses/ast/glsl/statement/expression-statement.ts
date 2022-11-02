@@ -1,4 +1,4 @@
-import { MusesContext } from "../../context/context";
+import { MusesGLSLContext } from "../../../context/glsl";
 import { IMusesNodeOptions } from "../../node";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesExpression } from "../expression/express";
@@ -9,7 +9,13 @@ export interface IMusesExpressionStatementOptions extends IMusesNodeOptions {
 }
 
 export class MusesExpressionStatement extends MusesStatement {
-    check(ctx: MusesContext): void {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `${this.optionsChildren.expression.toGLSL()};`;
+    }
+    check(ctx: MusesGLSLContext): void {
         this.optionsChildren.expression.check(ctx);
     }
     get optionsChildren(){

@@ -1,0 +1,32 @@
+Shader "Test"{
+
+    Properties {
+        _DiffuseTex("Diffuse Texture",2D) = "white" {}
+        _NormalTex("Normal Texture",2D) = "white" {}
+        _SpecularTex("Specular Texture",2D) = "white" {}
+        _Shininess("Shininess",Range(0,1)) = 0.5
+    }
+
+    SubShader {
+        Pass {
+            //glsl
+            GLSLPROGRAM
+
+struct VertexInput {
+    vec3 position;
+    vec3 normal;
+    vec2 texcoord;
+};
+void vert(VertexInput a2v) {
+    gl_Position = vec4(a2v.position.xy,a2v.position.yz);
+}
+void frag() {
+    gl_FragColor = vec4(0,0,0,0);
+}
+
+            ENDGLSLPROGRAM
+        }
+    }
+
+    FallBack Diffuse
+}

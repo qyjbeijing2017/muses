@@ -1,12 +1,12 @@
-import { MusesGLSLStorage, MusesGLSLParmerters, MusesGLSLPercision } from "../glsl/variable-declaration";
+import { MusesGLSLStorage, MusesGLSLParmerters, MusesGLSLPercision } from "../ast/glsl/variable-declaration";
 
 export class MusesContextType {
-    name: string;
-    rules?: {test:RegExp, returnType?: MusesContextType}[];
-    storage?: MusesGLSLStorage;
-    percision?: MusesGLSLPercision;
-    parameters?: MusesGLSLParmerters;
-    isStruct?: boolean;
+    readonly name: string;
+    readonly rules?: {test:RegExp, returnType?: MusesContextType}[];
+    readonly storage?: MusesGLSLStorage;
+    readonly percision?: MusesGLSLPercision;
+    readonly parameters?: MusesGLSLParmerters;
+    readonly isStruct?: boolean;
     constructor(
         desc: {
             name: string,
@@ -15,7 +15,7 @@ export class MusesContextType {
             storage?: MusesGLSLStorage;
             percision?: MusesGLSLPercision;
             parameters?: MusesGLSLParmerters;
-            rules?: {test:RegExp, returnType?: MusesContextType}[]; 
+            rules?: {test:RegExp, returnType?: MusesContextType}[];
         },
     ) {
         this.name = desc.name;

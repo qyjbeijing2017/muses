@@ -1,7 +1,7 @@
-import { MusesContext } from "../context/context";
-import { MusesContextFunction } from "../context/functional";
-import { MusesContextType } from "../context/type";
-import { IMusesNodeOptions, MusesNode } from "../node";
+import { MusesGLSLContext } from "../../context/glsl";
+import { MusesContextFunction } from "../../context/functional";
+import { MusesContextType } from "../../context/type";
+import { IMusesNodeOptions, MusesGLSLNode } from "../node";
 import { MusesAstNodeType } from "../nodeType";
 import { MusesStatement } from "./statement/statement";
 import { MusesTypeDeclaration } from "./type-declaration";
@@ -14,8 +14,16 @@ export interface IMusesFunctionDeclarationOptions extends IMusesNodeOptions {
     body?: (MusesStatement | MusesVariableDeclaration)[];
 }
 
-export class MusesFunctionDeclaration extends MusesNode {
-    check(ctx: MusesContext): void {
+export class MusesFunctionDeclaration extends MusesGLSLNode {
+    toMuses(): string {
+        return this.toGLSL();
+    }
+    toGLSL(): string {
+        return `${this.options.returnType.toMuses()} ${this.options.name}(${this.options.parameters.map(parameter => parameter.toMuses().replace(/;/, '')).join(", ")}) {
+    ${this.options.body?.map((item) => item.toMuses()).join("\n    ")}
+}`;
+    }
+    check(ctx: MusesGLSLContext): void {
         ctx.functions.push(new MusesContextFunction(this.options.name, this.options.returnType.toCtxType(ctx), this.options.parameters.map(parameter => parameter.toCtxVariable(ctx))));
         ctx.variables.push(...this.options.parameters.map(parameter => parameter.toCtxVariable(ctx)));
         ctx.funcName = this.options.name;
