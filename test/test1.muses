@@ -16,8 +16,16 @@ struct VertexInput {
     vec3 position;
     vec3 normal;
     vec2 texcoord;
+    float y;
 };
 void vert(VertexInput a2v) {
+    if(a2v.y < 3.){
+        gl_Position = vec4(a2v.position,1.);
+    } else if(a2v.y > 4. && a2v.y < 7.){
+        gl_Position = vec4(a2v.position,1.);
+    } else{
+        gl_Position = vec4(a2v.position,1.);
+    }
     gl_Position = vec4(a2v.position.xy,a2v.position.yz);
 }
 void frag() {

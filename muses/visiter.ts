@@ -344,7 +344,7 @@ export class MusesVisitor extends CstVisiter {
     ifStatement(ctx: CstChildrenDictionary) {
         const test = this.visit(ctx.test[0] as CstNode);
         const consequent = this.visit(ctx.consequent[0] as CstNode);
-        const alternate = this.visit(ctx.alternate[0] as CstNode);
+        const alternate = ctx.alternate?this.visit(ctx.alternate[0] as CstNode):undefined;
         const ifStatement = new MusesIfStatement({ test, consequent, alternate });
         return ifStatement;
     }
