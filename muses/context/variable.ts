@@ -1,17 +1,19 @@
+import { MusesVariableDeclaration } from "../ast/glsl/variable-declaration";
 import { MusesContextType } from "./type";
+
 
 export class MusesContextVariable {
     readonly type: MusesContextType;
     readonly name: string;
-    readonly isCompilerVariable: boolean;
+    readonly variable?: MusesVariableDeclaration;
 
     constructor(desc: {
         type: MusesContextType,
         name: string,
-        isCompilerVariable?: boolean,
+        variable?: MusesVariableDeclaration,
     }) {
         this.type = desc.type;
         this.name = desc.name;
-        this.isCompilerVariable = desc.isCompilerVariable || false;
+        this.variable = desc.variable;
     }
 }

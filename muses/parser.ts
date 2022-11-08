@@ -53,20 +53,22 @@ export class MusesParser extends CstParser {
     floatProperty = this.RULE("floatProperty", () => {
         this.OR([
             { ALT: () => this.CONSUME(musesToken.PropertiesFloat, { LABEL: 'type' }) },
-            { ALT: () => {
-                this.CONSUME(musesToken.PropertiesRange, { LABEL: 'type' });
-                this.CONSUME(musesToken.LeftParen);
-                this.OR1([
-                    { ALT: () => this.CONSUME2(musesToken.ConstFloat, { LABEL: "range" }) },
-                    { ALT: () => this.CONSUME2(musesToken.ConstInt, { LABEL: "range" }) },
-                ]);
-                this.CONSUME(musesToken.Comma);
-                this.OR2([
-                    { ALT: () => this.CONSUME1(musesToken.ConstFloat, { LABEL: "range" }) },
-                    { ALT: () => this.CONSUME1(musesToken.ConstInt, { LABEL: "range" }) },
-                ]);
-                this.CONSUME1(musesToken.RightParen);
-            } },
+            {
+                ALT: () => {
+                    this.CONSUME(musesToken.PropertiesRange, { LABEL: 'type' });
+                    this.CONSUME(musesToken.LeftParen);
+                    this.OR1([
+                        { ALT: () => this.CONSUME2(musesToken.ConstFloat, { LABEL: "range" }) },
+                        { ALT: () => this.CONSUME2(musesToken.ConstInt, { LABEL: "range" }) },
+                    ]);
+                    this.CONSUME(musesToken.Comma);
+                    this.OR2([
+                        { ALT: () => this.CONSUME1(musesToken.ConstFloat, { LABEL: "range" }) },
+                        { ALT: () => this.CONSUME1(musesToken.ConstInt, { LABEL: "range" }) },
+                    ]);
+                    this.CONSUME1(musesToken.RightParen);
+                }
+            },
         ]);
         this.CONSUME(musesToken.RightParen);
         this.CONSUME(musesToken.Assign);
@@ -131,25 +133,13 @@ export class MusesParser extends CstParser {
     });
 
     variableConstrucor = this.RULE("variableConstrucor", () => {
-        this.OR([
-            { ALT: () => this.CONSUME(musesToken.Void, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.Int, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME1(musesToken.Float, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.Bool, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.Vec2, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.Vec3, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.Vec4, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.BVec2, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.BVec3, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.BVec4, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.IVec2, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.IVec3, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.IVec4, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.Mat2, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.Mat3, { LABEL: 'type' }) },
-            { ALT: () => this.CONSUME(musesToken.Mat4, { LABEL: 'type' }) },
-        ]);
         this.OPTION(() => {
+            this.CONSUME(musesToken.LeftBracket, { LABEL: 'array' });
+            this.OPTION2(()=>this.SUBRULE(this.assignExpression, { LABEL: 'size' }));
+            this.CONSUME(musesToken.RightBracket);
+        });
+
+        this.OPTION1(() => {
             this.CONSUME(musesToken.LeftParen);
             this.MANY_SEP({
                 SEP: musesToken.Comma,
@@ -188,7 +178,7 @@ export class MusesParser extends CstParser {
 
     indexExpression = this.RULE("indexExpression", () => {
         this.CONSUME(musesToken.LeftBracket);
-        this.SUBRULE(this.assignExpression, { LABEL: 'index' });
+        this.OPTION(() => this.SUBRULE(this.assignExpression, { LABEL: 'index' }));
         this.CONSUME(musesToken.RightBracket);
     });
 
@@ -495,11 +485,20 @@ export class MusesParser extends CstParser {
         ]);
     });
 
+    sizeDeclaration = this.RULE("sizeDeclaration", () => {
+        this.CONSUME(musesToken.LeftBracket);
+        this.OPTION(() => this.SUBRULE(this.assignExpression, { LABEL: 'size' }));
+        this.CONSUME(musesToken.RightBracket);
+    });
+
     variableAssignment = this.RULE("variableAssignment", () => {
         this.CONSUME(musesToken.Identifier, { LABEL: 'name' });
         this.OPTION(() => {
+            this.SUBRULE(this.sizeDeclaration, { LABEL: 'size' });
+        });
+        this.OPTION1(() => {
             this.CONSUME(musesToken.Assign);
-            this.SUBRULE(this.assignExpression, { LABEL: 'value' });
+            this.SUBRULE2(this.assignExpression, { LABEL: 'value' });
         });
     });
 

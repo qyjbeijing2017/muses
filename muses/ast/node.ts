@@ -1,5 +1,6 @@
 import { MusesContextBase } from "../context/base";
 import { MusesGLSLContext } from "../context/glsl";
+import { MusesGLSLTree } from "./glsltree";
 import { MusesAstNodeType } from "./nodeType";
 
 export interface IMusesNodeOptions {
@@ -14,5 +15,5 @@ export abstract class MusesNode{
 
 export abstract class MusesGLSLNode extends MusesNode{
     check(ctx: MusesGLSLContext): void{};
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree):void {};
 }
-

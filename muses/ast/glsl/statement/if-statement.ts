@@ -1,4 +1,5 @@
 import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesGLSLTree } from "../../glsltree";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
 import { MusesExpression } from "../expression/express";
@@ -13,6 +14,21 @@ export interface IMusesIfStatementOptions extends IMusesStatementOptions {
 }
 
 export class MusesIfStatement extends MusesStatement {
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        this.optionsChildren.test.subTree(ctx, tree);
+        this.optionsChildren.consequent.forEach((item) => {
+            item.subTree(ctx, tree);
+        });
+        if (this.optionsChildren.alternate) {
+            if (Array.isArray(this.optionsChildren.alternate)) {
+                this.optionsChildren.alternate.forEach((item) => {
+                    item.subTree(ctx, tree);
+                });
+            } else {
+                this.optionsChildren.alternate.subTree(ctx, tree);
+            }
+        }
+    }
     toMuses(): string {
         return this.toGLSL();
     }

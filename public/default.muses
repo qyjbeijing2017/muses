@@ -1,0 +1,34 @@
+Shader "Default" {
+    Properties {
+        _DiffuseTex ("Diffuse", 2D) = "./white.jpg" {}
+        _Shininess ("Shininess", Range(0, 1)) = 0.2
+        _Float ("Float", Float) = 0.7
+        _Color ("Color", Color) = (0.3, 0.2, 0.5, 1)
+        _Vector ("Vector", Vector) = (0, 3, 0, 0)
+    }
+    
+    SubShader {
+        Pass {
+            // renderstate
+
+            // glsl
+            GLSLPROGRAM
+
+            varying vec4 vPos;
+            varying vec3 vNormal;
+            void vert() {
+                vPos = MUSES_POSITION;
+                vNormal = MUSES_NORMAL;
+                gl_Position = MUSES_MATRIX_MVP * MUSES_POSITION;
+            }
+            
+            void frag() {
+                gl_FragColor = vec4(vNormal, 1.) * 0.5 + 0.5;
+            }
+
+            ENDGLSL
+        }
+    }
+
+    FallBack "Diffuse"
+}

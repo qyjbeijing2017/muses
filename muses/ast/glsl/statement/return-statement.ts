@@ -1,4 +1,5 @@
 import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesGLSLTree } from "../../glsltree";
 import { IMusesNodeOptions } from "../../node";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
@@ -11,6 +12,11 @@ export interface IMusesRetrunStatementOptions extends IMusesNodeOptions {
 }
 
 export class MusesRetrunStatement extends MusesStatement {
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        if (this.optionsChildren.argument) {
+            this.optionsChildren.argument.subTree(ctx, tree);
+        }
+    }
     toMuses(): string {
         return this.toGLSL();
     }
@@ -27,12 +33,12 @@ export class MusesRetrunStatement extends MusesStatement {
         const func = ctx.functions.find(func => func.name === ctx.funcName)!;
         if (this.optionsChildren.argument) {
             const type = this.getExpressionType(ctx, this.optionsChildren.argument);
-            if(type.name !== func.returnType.name){
-                throw new Error(`Cannot return the type ${type.name} for ${func.returnType.name} in ${ctx.funcName}`);
+            if(type.sign !== func.returnType.sign){
+                throw new Error(`Cannot return the type ${type.sign} for ${func.returnType.sign} in ${ctx.funcName}`);
             }
         }
-        if (func.returnType.name !== 'void') {
-            throw new Error(`Not return anything for ${func.returnType.name} in ${ctx.funcName}`);
+        if (func.returnType.sign === 'void') {
+            throw new Error(`Not return anything for ${func.returnType.sign} in ${ctx.funcName}`);
         }
     }
 

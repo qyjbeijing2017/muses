@@ -1,10 +1,10 @@
 import { MusesAstNodeType } from "../../nodeType";
-import { MusesTypeDeclaration } from "../type-declaration";
 import { MusesConstants } from "../constants";
 import { IMusesExpressionOptions, MusesExpression } from "./express";
 import { MusesIdentify } from "../Identify";
 import { MusesGLSLContext } from "../../../context/glsl";
 import { MusesContextType } from "../../../context/type";
+import { MusesGLSLTree } from "../../glsltree";
 
 export interface IMusesDotExpressionOptions extends IMusesExpressionOptions {
     object: MusesIdentify | MusesExpression | MusesConstants;
@@ -12,6 +12,10 @@ export interface IMusesDotExpressionOptions extends IMusesExpressionOptions {
 }
 
 export class MusesDotExpression extends MusesExpression {
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        this.optionsChildren.object.subTree(ctx, tree);
+        this.optionsChildren.property.subTree(ctx, tree);
+    }
     toMuses(): string {
         return this.toGLSL();
     }
@@ -23,7 +27,7 @@ export class MusesDotExpression extends MusesExpression {
     }
     check(ctx: MusesGLSLContext): MusesContextType {
         const objectType = this.getExpressionType(ctx, this.optionsChildren.object);
-        return objectType.checkRule(`${objectType.name}.${this.optionsChildren.property.name}`);
+        return objectType.checkRule(`${objectType.sign}.${this.optionsChildren.property.name}`);
     }
     nodeType: MusesAstNodeType = MusesAstNodeType.DotExpression;
     constructor(options: IMusesDotExpressionOptions) {

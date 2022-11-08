@@ -1,4 +1,5 @@
 import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesGLSLTree } from "../../glsltree";
 import { IMusesNodeOptions } from "../../node";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
@@ -15,6 +16,18 @@ export interface IMusesForStatementOptions extends IMusesNodeOptions {
 }
 
 export class MusesForStatement extends MusesStatement {
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        if(this.optionsChildren.init && Array.isArray(this.optionsChildren.init)){
+            this.optionsChildren.init.forEach((item) => item.subTree(ctx, tree));
+        }else{
+            this.optionsChildren.init?.subTree(ctx, tree);
+        }
+        this.optionsChildren.test.subTree(ctx, tree);
+        this.optionsChildren.update?.subTree(ctx, tree);
+        this.optionsChildren.body?.forEach((item) => {
+            item.subTree(ctx, tree);
+        });
+    }
     toMuses(): string {
         return this.toGLSL();
     }

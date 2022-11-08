@@ -1,0 +1,8 @@
+{
+  "passes": [
+    {
+      "vert": "\n\nvoid vert(VertexInput a2v) {\n    if(a2v.y < 3.){\n        gl_Position = vec4(a2v.position,1.);\n    } else if(a2v.y > 4. && a2v.y < 7.){\n        gl_Position = vec4(a2v.position,1.);\n    } else{\n        gl_Position = vec4(a2v.position,1.);\n    }\n    gl_Position = vec4(a2v.position.xy,a2v.position.yz);\n}",
+      "frag": "\n\nvoid frag() {\n    gl_FragColor = vec4(0,0,0,0);\n}"
+    }
+  ]
+}

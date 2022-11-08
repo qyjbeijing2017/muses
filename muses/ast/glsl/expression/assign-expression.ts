@@ -4,6 +4,7 @@ import { IMusesExpressionOptions, MusesExpression } from "./express";
 import { MusesIdentify } from "../Identify";
 import { MusesGLSLContext } from "../../../context/glsl";
 import { MusesContextType } from "../../../context/type";
+import { MusesGLSLTree } from "../../glsltree";
 
 export interface IMusesAssignExpressionOptions extends IMusesExpressionOptions {
     operator: string;
@@ -12,6 +13,10 @@ export interface IMusesAssignExpressionOptions extends IMusesExpressionOptions {
 }
 
 export class MusesAssignExpression extends MusesExpression {
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        this.optionsChildren.left.subTree(ctx, tree);
+        this.optionsChildren.right.subTree(ctx, tree);
+    }
     toMuses(): string {
         return this.toGLSL();
     }
@@ -21,7 +26,7 @@ export class MusesAssignExpression extends MusesExpression {
     check(ctx: MusesGLSLContext): MusesContextType {
         const leftType = this.getExpressionType(ctx, this.optionsChildren.left);
         const rightType = this.getExpressionType(ctx, this.optionsChildren.right);
-        return leftType.checkRule(`${leftType.name}${this.optionsChildren.operator}${rightType.name}`);
+        return leftType.checkRule(`${leftType.sign}${this.optionsChildren.operator}${rightType.sign}`);
     }
     get optionsChildren(){
         return this.options as IMusesAssignExpressionOptions

@@ -23,7 +23,7 @@ export class MusesGLSL extends MusesNode{
         });
     }
     nodeType: MusesAstNodeType = MusesAstNodeType.GLSL;
-    constructor(private readonly options:IMusesGLSLOptions) {
+    constructor(readonly options:IMusesGLSLOptions) {
         super();
     }
 }

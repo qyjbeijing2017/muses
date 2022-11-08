@@ -1,4 +1,5 @@
 import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesGLSLTree } from "../../glsltree";
 import { IMusesNodeOptions } from "../../node";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesConstants } from "../constants";
@@ -11,6 +12,12 @@ export interface IMusesDoWhileStatementOptions extends IMusesNodeOptions {
 }
 
 export class MusesDoWhileStatement extends MusesStatement {
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        this.optionsChildren.test.subTree(ctx, tree);
+        this.optionsChildren.body?.forEach((item) => {
+            item.subTree(ctx, tree);
+        });
+    }
     toMuses(): string {
        return this.toGLSL();
     }

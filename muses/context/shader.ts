@@ -27,11 +27,11 @@ export class MusesShaderContext extends MusesContextBase {
 
     createSubShaderContext(): MusesSubShaderContext {
         const defines = {
-            functions: this.defines.functions,
+            functions: [...this.defines.functions ?? []],
             variables: [...this.properties.variables, ...(this.defines.variables || [])],
-            types: this.defines.types,
+            types: [...this.defines.types ?? []],
         }
-        const ctx = new MusesSubShaderContext(this.defines);
+        const ctx = new MusesSubShaderContext(defines);
         this.subShaders.push(ctx);
         return ctx;
     }

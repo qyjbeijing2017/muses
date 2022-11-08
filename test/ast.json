@@ -70,6 +70,50 @@
                         "options": {
                           "returnType": {
                             "options": {
+                              "name": "vec3"
+                            },
+                            "nodeType": "type-declaration"
+                          },
+                          "name": "cross",
+                          "body": [
+                            {
+                              "options": {},
+                              "nodeType": "return-statement"
+                            }
+                          ],
+                          "parameters": [
+                            {
+                              "options": {
+                                "name": "a",
+                                "type": {
+                                  "options": {
+                                    "name": "vec3"
+                                  },
+                                  "nodeType": "type-declaration"
+                                }
+                              },
+                              "nodeType": "variable-declaration"
+                            },
+                            {
+                              "options": {
+                                "name": "b",
+                                "type": {
+                                  "options": {
+                                    "name": "vec3"
+                                  },
+                                  "nodeType": "type-declaration"
+                                }
+                              },
+                              "nodeType": "variable-declaration"
+                            }
+                          ]
+                        },
+                        "nodeType": "function-declaration"
+                      },
+                      {
+                        "options": {
+                          "returnType": {
+                            "options": {
                               "name": "void"
                             },
                             "nodeType": "type-declaration"
@@ -78,307 +122,81 @@
                           "body": [
                             {
                               "options": {
-                                "test": {
+                                "name": "model",
+                                "type": {
                                   "options": {
-                                    "left": {
+                                    "name": "mat4"
+                                  },
+                                  "nodeType": "type-declaration"
+                                },
+                                "value": {
+                                  "options": {
+                                    "arguments": [],
+                                    "callee": {
                                       "options": {
-                                        "property": {
-                                          "options": {
-                                            "name": "y"
-                                          },
-                                          "nodeType": "identify"
-                                        },
-                                        "object": {
-                                          "options": {
-                                            "name": "a2v"
-                                          },
-                                          "nodeType": "identify"
-                                        }
+                                        "name": "mat4"
                                       },
-                                      "nodeType": "dot-expression"
-                                    },
-                                    "operator": "<",
-                                    "right": {
+                                      "nodeType": "identify"
+                                    }
+                                  },
+                                  "nodeType": "call-expression",
+                                  "name": "mat4",
+                                  "isIndexConstructor": false
+                                }
+                              },
+                              "nodeType": "variable-declaration"
+                            },
+                            {
+                              "options": {
+                                "name": "pos3",
+                                "type": {
+                                  "options": {
+                                    "name": "float"
+                                  },
+                                  "nodeType": "type-declaration"
+                                },
+                                "value": {
+                                  "options": {
+                                    "index": {
                                       "options": {
                                         "type": {
                                           "options": {
-                                            "name": "float"
+                                            "name": "int"
                                           },
                                           "nodeType": "type-declaration"
                                         },
-                                        "value": 3
+                                        "value": 2
                                       },
                                       "nodeType": "constants"
-                                    }
-                                  },
-                                  "nodeType": "binary-expression"
-                                },
-                                "consequent": [
-                                  {
-                                    "options": {
-                                      "expression": {
-                                        "options": {
-                                          "left": {
-                                            "options": {
-                                              "name": "gl_Position"
-                                            },
-                                            "nodeType": "identify"
-                                          },
-                                          "operator": "=",
-                                          "right": {
-                                            "options": {
-                                              "arguments": [
-                                                {
-                                                  "options": {
-                                                    "property": {
-                                                      "options": {
-                                                        "name": "position"
-                                                      },
-                                                      "nodeType": "identify"
-                                                    },
-                                                    "object": {
-                                                      "options": {
-                                                        "name": "a2v"
-                                                      },
-                                                      "nodeType": "identify"
-                                                    }
-                                                  },
-                                                  "nodeType": "dot-expression"
-                                                },
-                                                {
-                                                  "options": {
-                                                    "type": {
-                                                      "options": {
-                                                        "name": "float"
-                                                      },
-                                                      "nodeType": "type-declaration"
-                                                    },
-                                                    "value": 1
-                                                  },
-                                                  "nodeType": "constants"
-                                                }
-                                              ],
-                                              "callee": {
-                                                "options": {
-                                                  "name": "vec4"
-                                                },
-                                                "nodeType": "identify"
-                                              }
-                                            },
-                                            "nodeType": "call-expression"
-                                          }
-                                        },
-                                        "nodeType": "assign-expression"
-                                      }
                                     },
-                                    "nodeType": "expression-statement"
-                                  }
-                                ],
-                                "alternate": {
-                                  "options": {
-                                    "test": {
+                                    "object": {
                                       "options": {
-                                        "left": {
+                                        "index": {
                                           "options": {
-                                            "left": {
+                                            "type": {
                                               "options": {
-                                                "property": {
-                                                  "options": {
-                                                    "name": "y"
-                                                  },
-                                                  "nodeType": "identify"
-                                                },
-                                                "object": {
-                                                  "options": {
-                                                    "name": "a2v"
-                                                  },
-                                                  "nodeType": "identify"
-                                                }
+                                                "name": "int"
                                               },
-                                              "nodeType": "dot-expression"
+                                              "nodeType": "type-declaration"
                                             },
-                                            "operator": ">",
-                                            "right": {
-                                              "options": {
-                                                "type": {
-                                                  "options": {
-                                                    "name": "float"
-                                                  },
-                                                  "nodeType": "type-declaration"
-                                                },
-                                                "value": 4
-                                              },
-                                              "nodeType": "constants"
-                                            }
+                                            "value": 1
                                           },
-                                          "nodeType": "binary-expression"
+                                          "nodeType": "constants"
                                         },
-                                        "operator": "&&",
-                                        "right": {
+                                        "object": {
                                           "options": {
-                                            "left": {
-                                              "options": {
-                                                "property": {
-                                                  "options": {
-                                                    "name": "y"
-                                                  },
-                                                  "nodeType": "identify"
-                                                },
-                                                "object": {
-                                                  "options": {
-                                                    "name": "a2v"
-                                                  },
-                                                  "nodeType": "identify"
-                                                }
-                                              },
-                                              "nodeType": "dot-expression"
-                                            },
-                                            "operator": "<",
-                                            "right": {
-                                              "options": {
-                                                "type": {
-                                                  "options": {
-                                                    "name": "float"
-                                                  },
-                                                  "nodeType": "type-declaration"
-                                                },
-                                                "value": 7
-                                              },
-                                              "nodeType": "constants"
-                                            }
+                                            "name": "model"
                                           },
-                                          "nodeType": "binary-expression"
+                                          "nodeType": "identify"
                                         }
                                       },
-                                      "nodeType": "binary-expression"
-                                    },
-                                    "consequent": [
-                                      {
-                                        "options": {
-                                          "expression": {
-                                            "options": {
-                                              "left": {
-                                                "options": {
-                                                  "name": "gl_Position"
-                                                },
-                                                "nodeType": "identify"
-                                              },
-                                              "operator": "=",
-                                              "right": {
-                                                "options": {
-                                                  "arguments": [
-                                                    {
-                                                      "options": {
-                                                        "property": {
-                                                          "options": {
-                                                            "name": "position"
-                                                          },
-                                                          "nodeType": "identify"
-                                                        },
-                                                        "object": {
-                                                          "options": {
-                                                            "name": "a2v"
-                                                          },
-                                                          "nodeType": "identify"
-                                                        }
-                                                      },
-                                                      "nodeType": "dot-expression"
-                                                    },
-                                                    {
-                                                      "options": {
-                                                        "type": {
-                                                          "options": {
-                                                            "name": "float"
-                                                          },
-                                                          "nodeType": "type-declaration"
-                                                        },
-                                                        "value": 1
-                                                      },
-                                                      "nodeType": "constants"
-                                                    }
-                                                  ],
-                                                  "callee": {
-                                                    "options": {
-                                                      "name": "vec4"
-                                                    },
-                                                    "nodeType": "identify"
-                                                  }
-                                                },
-                                                "nodeType": "call-expression"
-                                              }
-                                            },
-                                            "nodeType": "assign-expression"
-                                          }
-                                        },
-                                        "nodeType": "expression-statement"
-                                      }
-                                    ],
-                                    "alternate": [
-                                      {
-                                        "options": {
-                                          "expression": {
-                                            "options": {
-                                              "left": {
-                                                "options": {
-                                                  "name": "gl_Position"
-                                                },
-                                                "nodeType": "identify"
-                                              },
-                                              "operator": "=",
-                                              "right": {
-                                                "options": {
-                                                  "arguments": [
-                                                    {
-                                                      "options": {
-                                                        "property": {
-                                                          "options": {
-                                                            "name": "position"
-                                                          },
-                                                          "nodeType": "identify"
-                                                        },
-                                                        "object": {
-                                                          "options": {
-                                                            "name": "a2v"
-                                                          },
-                                                          "nodeType": "identify"
-                                                        }
-                                                      },
-                                                      "nodeType": "dot-expression"
-                                                    },
-                                                    {
-                                                      "options": {
-                                                        "type": {
-                                                          "options": {
-                                                            "name": "float"
-                                                          },
-                                                          "nodeType": "type-declaration"
-                                                        },
-                                                        "value": 1
-                                                      },
-                                                      "nodeType": "constants"
-                                                    }
-                                                  ],
-                                                  "callee": {
-                                                    "options": {
-                                                      "name": "vec4"
-                                                    },
-                                                    "nodeType": "identify"
-                                                  }
-                                                },
-                                                "nodeType": "call-expression"
-                                              }
-                                            },
-                                            "nodeType": "assign-expression"
-                                          }
-                                        },
-                                        "nodeType": "expression-statement"
-                                      }
-                                    ]
+                                      "nodeType": "index-expression"
+                                    }
                                   },
-                                  "nodeType": "if-statement"
+                                  "nodeType": "index-expression"
                                 }
                               },
-                              "nodeType": "if-statement"
+                              "nodeType": "variable-declaration"
                             },
                             {
                               "options": {
@@ -393,72 +211,21 @@
                                     "operator": "=",
                                     "right": {
                                       "options": {
-                                        "arguments": [
-                                          {
-                                            "options": {
-                                              "property": {
-                                                "options": {
-                                                  "name": "xy"
-                                                },
-                                                "nodeType": "identify"
-                                              },
-                                              "object": {
-                                                "options": {
-                                                  "property": {
-                                                    "options": {
-                                                      "name": "position"
-                                                    },
-                                                    "nodeType": "identify"
-                                                  },
-                                                  "object": {
-                                                    "options": {
-                                                      "name": "a2v"
-                                                    },
-                                                    "nodeType": "identify"
-                                                  }
-                                                },
-                                                "nodeType": "dot-expression"
-                                              }
-                                            },
-                                            "nodeType": "dot-expression"
-                                          },
-                                          {
-                                            "options": {
-                                              "property": {
-                                                "options": {
-                                                  "name": "yz"
-                                                },
-                                                "nodeType": "identify"
-                                              },
-                                              "object": {
-                                                "options": {
-                                                  "property": {
-                                                    "options": {
-                                                      "name": "position"
-                                                    },
-                                                    "nodeType": "identify"
-                                                  },
-                                                  "object": {
-                                                    "options": {
-                                                      "name": "a2v"
-                                                    },
-                                                    "nodeType": "identify"
-                                                  }
-                                                },
-                                                "nodeType": "dot-expression"
-                                              }
-                                            },
-                                            "nodeType": "dot-expression"
-                                          }
-                                        ],
-                                        "callee": {
+                                        "left": {
                                           "options": {
-                                            "name": "vec4"
+                                            "name": "MUSES_MATRIX_MVP"
+                                          },
+                                          "nodeType": "identify"
+                                        },
+                                        "operator": "*",
+                                        "right": {
+                                          "options": {
+                                            "name": "MUSES_POSITION"
                                           },
                                           "nodeType": "identify"
                                         }
                                       },
-                                      "nodeType": "call-expression"
+                                      "nodeType": "binary-expression"
                                     }
                                   },
                                   "nodeType": "assign-expression"
@@ -467,20 +234,7 @@
                               "nodeType": "expression-statement"
                             }
                           ],
-                          "parameters": [
-                            {
-                              "options": {
-                                "name": "a2v",
-                                "type": {
-                                  "options": {
-                                    "name": "VertexInput"
-                                  },
-                                  "nodeType": "type-declaration"
-                                }
-                              },
-                              "nodeType": "variable-declaration"
-                            }
-                          ]
+                          "parameters": []
                         },
                         "nodeType": "function-declaration"
                       },
@@ -512,7 +266,7 @@
                                             "options": {
                                               "type": {
                                                 "options": {
-                                                  "name": "int"
+                                                  "name": "float"
                                                 },
                                                 "nodeType": "type-declaration"
                                               },
@@ -524,7 +278,7 @@
                                             "options": {
                                               "type": {
                                                 "options": {
-                                                  "name": "int"
+                                                  "name": "float"
                                                 },
                                                 "nodeType": "type-declaration"
                                               },
@@ -536,7 +290,7 @@
                                             "options": {
                                               "type": {
                                                 "options": {
-                                                  "name": "int"
+                                                  "name": "float"
                                                 },
                                                 "nodeType": "type-declaration"
                                               },
@@ -548,11 +302,11 @@
                                             "options": {
                                               "type": {
                                                 "options": {
-                                                  "name": "int"
+                                                  "name": "float"
                                                 },
                                                 "nodeType": "type-declaration"
                                               },
-                                              "value": 0
+                                              "value": 1
                                             },
                                             "nodeType": "constants"
                                           }
@@ -564,7 +318,9 @@
                                           "nodeType": "identify"
                                         }
                                       },
-                                      "nodeType": "call-expression"
+                                      "nodeType": "call-expression",
+                                      "name": "vec4",
+                                      "isIndexConstructor": false
                                     }
                                   },
                                   "nodeType": "assign-expression"

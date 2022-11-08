@@ -115,11 +115,12 @@ export class MusesVisitor extends CstVisiter {
             return new MusesIdentify({ name });
         }
         const type = this.visit(ctx.type[0] as CstNode) as MusesTypeDeclaration;
+        const size = ctx.size ? this.visit(ctx.size[0] as CstNode) as MusesConstants : undefined;
         const args = ctx.args.map((expression) => {
             const conVal = this.createConst(expression as IToken);
             return conVal;
         });
-        const variableConstrucor = new MusesVariableConstructor({ type, args });
+        const variableConstrucor = new MusesVariableConstructor({ type, args, size });
         return variableConstrucor;
     }
 
@@ -142,7 +143,7 @@ export class MusesVisitor extends CstVisiter {
     }
 
     indexExpression(ctx: CstChildrenDictionary) {
-        const index = this.visit(ctx.index[0] as CstNode);
+        const index = ctx.index?this.visit(ctx.index[0] as CstNode):undefined;
         return index;
     }
 
@@ -344,7 +345,7 @@ export class MusesVisitor extends CstVisiter {
     ifStatement(ctx: CstChildrenDictionary) {
         const test = this.visit(ctx.test[0] as CstNode);
         const consequent = this.visit(ctx.consequent[0] as CstNode);
-        const alternate = ctx.alternate?this.visit(ctx.alternate[0] as CstNode):undefined;
+        const alternate = ctx.alternate ? this.visit(ctx.alternate[0] as CstNode) : undefined;
         const ifStatement = new MusesIfStatement({ test, consequent, alternate });
         return ifStatement;
     }
@@ -379,7 +380,7 @@ export class MusesVisitor extends CstVisiter {
     }
 
     returnStatement(ctx: CstChildrenDictionary) {
-        const argument = ctx.argument?this.visit(ctx.argument[0] as CstNode): undefined;
+        const argument = ctx.argument ? this.visit(ctx.argument[0] as CstNode) : undefined;
         const returnStatement = new MusesRetrunStatement({ argument });
         return returnStatement;
     }
@@ -427,26 +428,33 @@ export class MusesVisitor extends CstVisiter {
         return percision;
     }
 
+    sizeDeclaration(ctx: CstChildrenDictionary) {
+        const size = ctx.size?this.visit(ctx.size[0] as CstNode): undefined;
+        return size;
+    }
+
     variableAssignment(ctx: CstChildrenDictionary) {
         const name = (ctx.name[0] as IToken).image;
         let value: any = undefined;
         if (ctx.value) {
             value = this.visit(ctx.value[0] as CstNode);
         }
+        const size = ctx.size ? this.visit(ctx.size[0] as CstNode) : undefined;
         return {
             name,
-            value
+            value,
+            size,
         };
     }
 
     variableDeclaration(ctx: CstChildrenDictionary) {
-        const type = this.visit(ctx.type[0] as CstNode);
+        const type = this.visit(ctx.type[0] as CstNode) as MusesTypeDeclaration;
         const storage = ctx.storage ? this.visit(ctx.storage[0] as CstNode) : undefined;
         const percision = ctx.percision ? this.visit(ctx.percision[0] as CstNode) : undefined;
         const delclarations: MusesVariableDeclaration[] = [];
         for (let index = 0; index < ctx.assignment.length; index++) {
-            const { name, value } = this.visit(ctx.assignment[index] as CstNode);
-            const variableDeclaration = new MusesVariableDeclaration({ name, type, storage, percision, value });
+            const { name, value, size } = this.visit(ctx.assignment[index] as CstNode);
+            const variableDeclaration = new MusesVariableDeclaration({ name, type, storage, percision, value, size });
             delclarations.push(variableDeclaration);
         }
         return delclarations;

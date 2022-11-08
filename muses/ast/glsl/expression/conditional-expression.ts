@@ -4,6 +4,7 @@ import { IMusesExpressionOptions, MusesExpression } from "./express";
 import { MusesIdentify } from "../Identify";
 import { MusesGLSLContext } from "../../../context/glsl";
 import { MusesContextType } from "../../../context/type";
+import { MusesGLSLTree } from "../../glsltree";
 
 export interface IMusesConditionalExpressionOptions extends IMusesExpressionOptions {
     testExpression: MusesExpression | MusesConstants | MusesIdentify;
@@ -12,6 +13,11 @@ export interface IMusesConditionalExpressionOptions extends IMusesExpressionOpti
 }
 
 export class MusesConditionalExpression extends MusesExpression {
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        this.optionsChildren.testExpression.subTree(ctx, tree);
+        this.optionsChildren.trueExpression.subTree(ctx, tree);
+        this.optionsChildren.falseExpression.subTree(ctx, tree);
+    }
     toMuses(): string {
         return this.toGLSL();
     }
@@ -24,7 +30,7 @@ export class MusesConditionalExpression extends MusesExpression {
     check(ctx: MusesGLSLContext): MusesContextType {
         const trueType = this.getExpressionType(ctx, this.optionsChildren.trueExpression);
         const falseType = this.getExpressionType(ctx, this.optionsChildren.falseExpression);
-        if(trueType.name != falseType.name){
+        if(trueType.sign != falseType.sign){
             throw new Error("true or false type must be the same type!!");
         }
         return trueType;

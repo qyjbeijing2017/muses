@@ -23,10 +23,10 @@ export class MusesStructDeclaration extends MusesGLSLNode {
 
         ctx.types.push(new MusesContextType({
             name: this.options.name,
-            isStruct: true,
+            struct: this,
             rules: [
                 {
-                    test: new RegExp(`^${this.options.name}\\(${membersTypes.map(m => m.name).join(",")}\\)$`),
+                    test: new RegExp(`^${this.options.name}\\(${membersTypes.map(m => m.name + m.isArray ? `\\[\\]` : '').join(",")}\\)$`),
                 },
                 ...membersTypes.map((m, i) => {
                     return {
@@ -39,7 +39,7 @@ export class MusesStructDeclaration extends MusesGLSLNode {
     }
 
     nodeType: MusesAstNodeType = MusesAstNodeType.StructDeclaration;
-    constructor(private readonly options: IMusesStructDeclarationOptions) {
+    constructor(readonly options: IMusesStructDeclarationOptions) {
         super();
     }
 }

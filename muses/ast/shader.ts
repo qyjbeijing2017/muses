@@ -43,7 +43,7 @@ export class MusesShader extends MusesNode {
         });
     }
     nodeType: MusesAstNodeType = MusesAstNodeType.Shader;
-    constructor(private readonly options: IMusesShaderOptions) {
+    constructor(readonly options: IMusesShaderOptions) {
         super();
     }
 }

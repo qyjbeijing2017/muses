@@ -37,6 +37,23 @@ const muses2glslTypeMap = new Map<MusesPropertyType, MusesContextType>([
 
 
 export class MusesProperty extends MusesGLSLNode {
+    get type(){
+        return this.options.type;
+    }
+    get defaultValue() {
+        return this.options.value;
+    }
+    get range(): number[] | undefined {
+        return this.options.range;
+    }
+    get name(): string {
+        return this.options.name;
+    }
+    get displayName(): string {
+        return this.options.displayName;
+    }
+
+
     toMuses(): string {
         const typeStr = this.options.range?`${this.options.type}(${this.options.range.join(',')})`: this.options.type;
         const name = this.options.name;

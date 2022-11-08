@@ -1,4 +1,5 @@
 import { MusesGLSLContext } from "../../../context/glsl";
+import { MusesGLSLTree } from "../../glsltree";
 import { IMusesNodeOptions } from "../../node";
 import { MusesAstNodeType } from "../../nodeType";
 import { MusesExpression } from "../expression/express";
@@ -9,6 +10,9 @@ export interface IMusesExpressionStatementOptions extends IMusesNodeOptions {
 }
 
 export class MusesExpressionStatement extends MusesStatement {
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        this.optionsChildren.expression.subTree(ctx, tree);
+    }
     toMuses(): string {
         return this.toGLSL();
     }

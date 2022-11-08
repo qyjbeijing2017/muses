@@ -13,23 +13,21 @@ Shader "Test"{
             GLSLPROGRAM
 
 struct VertexInput {
-    vec3 position;
-    vec3 normal;
-    vec2 texcoord;
-    float y;
+    highp vec3 position;
+    highp vec3 normal;
+    highp vec2 texcoord;
+    highp float y;
 };
-void vert(VertexInput a2v) {
-    if(a2v.y < 3.){
-        gl_Position = vec4(a2v.position,1.);
-    } else if(a2v.y > 4. && a2v.y < 7.){
-        gl_Position = vec4(a2v.position,1.);
-    } else{
-        gl_Position = vec4(a2v.position,1.);
-    }
-    gl_Position = vec4(a2v.position.xy,a2v.position.yz);
+vec3 cross(highp vec3 a, highp vec3 b) {
+    return;
+}
+void vert() {
+    highp mat4 model = mat4();
+    highp float pos3 = model[1][2];
+    gl_Position = MUSES_MATRIX_MVP * MUSES_POSITION;
 }
 void frag() {
-    gl_FragColor = vec4(0,0,0,0);
+    gl_FragColor = vec4(0.,0.,0.,1.);
 }
 
             ENDGLSLPROGRAM

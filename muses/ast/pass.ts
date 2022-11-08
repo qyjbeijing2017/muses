@@ -28,7 +28,7 @@ ${this.options.glsl?.toMuses()}
     }
 
     nodeType: MusesAstNodeType = MusesAstNodeType.Pass;
-    constructor(private readonly options:IMusesPassOptions) {
+    constructor(readonly options:IMusesPassOptions) {
         super();
     }
 }
