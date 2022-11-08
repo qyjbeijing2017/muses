@@ -14,7 +14,7 @@ export class MusesGLSL extends MusesNode{
         return this.toGLSL();
     }
     toGLSL(): string {
-        return this.options.body.map((item) => item.toMuses()).join("\n");
+        return this.options.body.map((item) => item.toGLSL()).join("\n");
     }
     check(ctx: MusesPassContext): void {
         const glslCtx = ctx.createGLSLContext();

@@ -12,7 +12,7 @@ export class MusesIdentify extends MusesGLSLNode {
     subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
         const variable = ctx.variables.find(variable=> variable.name === this.name);
         if(variable?.variable && tree.variables.find(variable=> variable.name === this.name) === undefined){
-            tree.variables.push(variable?.variable);
+            tree.variables.unshift(variable?.variable);
             variable.variable.subTree(ctx, tree);
         }
     }

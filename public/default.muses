@@ -16,6 +16,7 @@ Shader "Default" {
 
             varying vec4 vPos;
             varying vec3 vNormal;
+
             void vert() {
                 vPos = MUSES_POSITION;
                 vNormal = MUSES_NORMAL;
@@ -23,7 +24,8 @@ Shader "Default" {
             }
             
             void frag() {
-                gl_FragColor = vec4(vNormal, 1.) * 0.5 + 0.5;
+                vec3 vRR = vNormal * 0.5;
+                gl_FragColor = vec4(vRR, 1.) * 0.5 + 0.5;
             }
 
             ENDGLSL

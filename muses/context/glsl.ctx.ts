@@ -15,6 +15,10 @@ const boolType = new MusesContextType({
         { test: /^bool!=bool$/ },
         { test: /^bool==bool$/ },
         { test: /^!bool$/ },
+        { test: /^bool\[\]\[int\]/ },
+        { test: /^bool\[\]\(\)$/, returnArray: true },
+        { test: /^bool\[\]\(bool(,bool)*\)/, returnArray: true },
+        { test: /^bool\[\]=bool\[\]$/, returnArray: true },
     ],
 });
 const intType = new MusesContextType({
