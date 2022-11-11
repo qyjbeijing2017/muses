@@ -11,9 +11,10 @@ import { MusesGLSLTree } from "../ast/glsltree";
 import { MusesProperty } from "../ast/property";
 import { v4 } from 'uuid';
 import { MusesMaterial } from "./material";
-import { IMusesLight, MusesLightType } from './light';
+import { IMusesLight } from './light';
 import { IMusesObject } from "./object";
 import { MusesRenderStates } from "../ast/render-states";
+import { MusesLightType } from "./light.type";
 
 export interface IMusesGLSL {
     passes: { vert: string, frag: string, state: MusesRenderStates }[];
@@ -28,8 +29,11 @@ attribute vec4 MUSES_TANGENT;
 uniform mat4 MUSES_MATRIX_M;
 uniform mat4 MUSES_MATRIX_V;
 uniform mat4 MUSES_MATRIX_P;
+uniform mat4 MUSES_MATRIX_MVP;
+uniform mat4 MUSES_MATRIX_VDPI;
 
-mat4 MUSES_MATRIX_MVP;
+uniform samplerCube MUSES_SKYBOX;
+uniform vec3 MUSES_CAMERA_POS;
 
 struct Light {
     vec3 position;
@@ -84,7 +88,6 @@ uniform int MUSES_TIME;
 
 const musesGLSLEndDefine = `
 void vertMain() {
-    MUSES_MATRIX_MVP = MUSES_MATRIX_P * MUSES_MATRIX_V * MUSES_MATRIX_M;
     vert();
 }
 void fragMain() {

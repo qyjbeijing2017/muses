@@ -1,17 +1,14 @@
 Shader "Default" {
     Properties {
         _DiffuseTex ("Diffuse", 2D) = "./white.jpg" {}
-        _Shininess ("Shininess", Range(0, 1)) = 0.2
-        _Float ("Float", Float) = 0.7
-        _Color ("Color", Color) = (1, 1, 1, 1)
-        _Vector ("Vector", Vector) = (0, 3, 0, 0)
+        _Border ("Border", Color) = (0.,1.,0.,1.)
     }
     
     SubShader {
         Pass {
             // renderstate
             
-            Cull OFF
+            // Cull OFF
             ZWrite OFF
 
             // glsl        
@@ -25,7 +22,7 @@ Shader "Default" {
             }
             
             void frag() {
-                gl_FragColor = vec4(0., 1., 0., 1.);
+                gl_FragColor = _Border;
             }
 
             ENDGLSL
@@ -41,8 +38,10 @@ Shader "Default" {
             varying vec4 FragPos;
             varying vec3 vNormal;
             varying vec2 vTexCoords;
+            varying vec4 pos;
 
             void vert() {
+                pos = MUSES_POSITION;
                 FragPos = MUSES_MATRIX_M * MUSES_POSITION;
                 vNormal = MUSES_NORMAL;
                 vTexCoords = MUSES_TEXCOORD0;
@@ -50,9 +49,12 @@ Shader "Default" {
             }
             
             void frag() {
+                vec3 I = normalize(FragPos.xyz - MUSES_CAMERA_POS);
+                vec3 R = reflect(I, normalize(vNormal));
+                vec3 RColor = textureCube(MUSES_SKYBOX, R).rgb;
+
                 vec3 result = texture2D(_DiffuseTex ,vTexCoords).xyz *  MusesLightAll(FragPos, normalize(vNormal));
-                // vec3 result = _Color.xyz *  MusesLightAll(FragPos, normalize(vNormal));
-                gl_FragColor = vec4(result,1.);
+                gl_FragColor = vec4(RColor,1.);
             }
 
             ENDGLSL

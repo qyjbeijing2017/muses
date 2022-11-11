@@ -3,6 +3,7 @@ import { MusesVM } from "./vm";
 
 export interface IMusesUniform {
     name: string;
+    displayName: string;
     type: MusesPropertyType;
     value: string | Iterable<number> | number;
     range?: [number, number];
@@ -22,6 +23,7 @@ export class MusesMaterial {
                 type: property.type,
                 value: property.defaultValue,
                 range: property.range ? [property.range[0], property.range[1]] : undefined,
+                displayName: property.displayName,
             });
         });
     }

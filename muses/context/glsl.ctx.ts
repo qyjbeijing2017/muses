@@ -25,6 +25,7 @@ const intType = new MusesContextType({
         { test: /^int\+=int$/ },
         { test: /^int\-=int$/ },
         { test: /^int\*=int$/ },
+        { test: /^int\/=int$/ },
         { test: /^int\(float\)$/ },
         { test: /^int\(bool\)$/ },
         { test: /^int+int$/ },
@@ -54,6 +55,7 @@ const floatType = new MusesContextType({
         { test: /^float\+=float$/ },
         { test: /^float\-=float$/ },
         { test: /^float\*=float$/ },
+        { test: /^float\/=float$/ },
         { test: /^float\(int\)$/ },
         { test: /^float\(bool\)$/ },
         { test: /^float\+float$/ },
@@ -94,6 +96,7 @@ const vec2Type = new MusesContextType({
         { test: /^vec2\(float(,float){0,1}\)$/ },
         { test: /^vec2\(int(,int){0,1}\)$/ },
         { test: /^vec2\*float$/ },
+        { test: /^vec2\/float$/ },
         { test: /^vec2\*mat2$/ },
         { test: /^vec2\+vec2$/ },
         { test: /^vec2\*vec2$/ },
@@ -134,6 +137,7 @@ const vec3Type = new MusesContextType({
         { test: /^vec3\-vec3$/ },
         { test: /^vec3\*vec3$/ },
         { test: /^vec3\-float$/ },
+        { test: /^vec3\/float$/ },
         { test: /^-vec3$/ },
         { test: /^vec3\[\]\[int\]/ },
         { test: /^vec3\[\]\(\)$/, returnArray: true },
@@ -172,13 +176,14 @@ const vec4Type = new MusesContextType({
         { test: /^vec4\((float,){0,1}vec3\)$/ },
         { test: /^vec4\((int,){0,1}vec3\)$/ },
         { test: /^vec4\(vec2,(vec2){0,1}\)$/ },
-        { test: /^vec4\*float$/ },
         { test: /^vec4\*mat4$/ },
         { test: /^vec4\*vec4$/ },
         { test: /^vec4\+vec4$/ },
         { test: /^vec4\-vec4$/ },
         { test: /^vec4\+float$/ },
         { test: /^vec4\-float$/ },
+        { test: /^vec4\*float$/ },
+        { test: /^vec4\/float$/ },
         { test: /^-vec4$/ },
         { test: /^vec4\[\]\[int\]/ },
         { test: /^vec4\[\]\(\)$/, returnArray: true },
@@ -196,6 +201,7 @@ const mat2Type = new MusesContextType({
         { test: /^mat2\(vec2(,vec2){0,1}\)$/ },
         { test: /^mat2\*mat2$/ },
         { test: /^mat2\*float$/ },
+        { test: /^mat2\/float$/ },
         { test: /^mat2\*vec2$/, returnType: vec2Type },
         { test: /^-mat2$/ },
         { test: /^mat2\[\]\[int\]/ },
@@ -212,8 +218,10 @@ const mat3Type = new MusesContextType({
         { test: /^mat3\(float(,float){0,8}\)$/ },
         { test: /^mat3\(int(,int){0,8}\)$/ },
         { test: /^mat3\(vec3(,vec3){0,2}\)$/ },
+        { test: /^mat3\(mat4\)$/ },
         { test: /^mat3\*mat3$/ },
         { test: /^mat3\*float$/ },
+        { test: /^mat3\/float$/ },
         { test: /^mat3\*vec3$/, returnType: vec3Type },
         { test: /^-mat3$/ },
         { test: /^mat3\[\]\[int\]/ },
@@ -232,6 +240,7 @@ const mat4Type = new MusesContextType({
         { test: /^mat4\(vec4(,vec4){0,3}\)$/ },
         { test: /^mat4\*mat4$/ },
         { test: /^mat4\*float$/ },
+        { test: /^mat4\/float$/ },
         { test: /^mat4\*vec4$/, returnType: vec4Type },
         { test: /^-mat4$/ },
         { test: /^mat4\[\]\[int\]/ },
@@ -252,6 +261,12 @@ floatType.rules!.push(
     { test: /^float\*vec2$/, returnType: vec2Type },
     { test: /^float\*vec3$/, returnType: vec3Type },
     { test: /^float\*vec4$/, returnType: vec4Type },
+    { test: /^float\/mat2$/, returnType: mat2Type },
+    { test: /^float\/mat3$/, returnType: mat3Type },
+    { test: /^float\/mat4$/, returnType: mat4Type },
+    { test: /^float\/vec2$/, returnType: vec2Type },
+    { test: /^float\/vec3$/, returnType: vec3Type },
+    { test: /^float\/vec4$/, returnType: vec4Type },
 );
 
 export const glslTypes = {
@@ -474,6 +489,33 @@ export const glslCtxDefine = {
             new MusesContextVariable({ name: 'sample', type: sampler2DType }),
             new MusesContextVariable({ name: 'tex', type: vec2Type })
         ]),
-
+        new MusesContextFunction('textureCube', vec4Type, [
+            new MusesContextVariable({ name: 'sample', type: samplerCubeType }),
+            new MusesContextVariable({ name: 'tex', type: vec3Type }),
+        ]),
+        new MusesContextFunction('dFdx' , floatType, [
+            new MusesContextVariable({ name: 'x', type: floatType })
+        ]),
+        new MusesContextFunction('dFdx' , vec2Type, [
+            new MusesContextVariable({ name: 'x', type: vec2Type })
+        ]),
+        new MusesContextFunction('dFdx' , vec3Type, [
+            new MusesContextVariable({ name: 'x', type: vec3Type })
+        ]),
+        new MusesContextFunction('dFdx' , vec4Type, [
+            new MusesContextVariable({ name: 'x', type: vec4Type })
+        ]),
+        new MusesContextFunction('dFdy' , floatType, [
+            new MusesContextVariable({ name: 'x', type: floatType })
+        ]),
+        new MusesContextFunction('dFdy' , vec2Type, [
+            new MusesContextVariable({ name: 'x', type: vec2Type })
+        ]),
+        new MusesContextFunction('dFdy' , vec3Type, [
+            new MusesContextVariable({ name: 'x', type: vec3Type })
+        ]),
+        new MusesContextFunction('dFdy' , vec4Type, [
+            new MusesContextVariable({ name: 'x', type: vec4Type })
+        ]),
     ],
 };

@@ -1,10 +1,12 @@
 import { mat4, vec2, vec3, vec4 } from 'gl-matrix';
 import React, { useEffect, useRef, useState } from 'react';
-import { IMusesLight, MusesPropertyType, MusesRenderStates, MusesVM, MusesMaterial, IMusesUniform, MusesLightType } from '../muses';
+import { MusesPropertyType, MusesRenderStates, MusesVM, MusesMaterial, MusesLightType } from '../muses';
 import { Layout, Divider, Form, Input, Button, Popover, InputNumber, Row, Slider, Col } from 'antd';
 import './App.css';
 import EventEmitter from 'events';
 import { SketchPicker } from 'react-color';
+import { IMusesLight } from '../muses/vm/light';
+import { IMusesUniform } from '../muses/vm/material';
 const { Header, Content, Footer, Sider } = Layout;
 
 // #region shader
@@ -159,7 +161,69 @@ const cubeIndex = [
     4, 0, 3, 4, 3, 7     // bottom
 ];
 
-// #endregion
+const skyBoxCube = [
+    // positions            // normals         // texture Coords    //tangent
+
+    // Font face
+    -1.0, 1.0, -1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0,  // left-top-front
+    -1.0, -1.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,  // left-bottom-front
+    1.0, -1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0,  // right-bottom-front
+    1.0, -1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0,  // right-bottom-front
+    1.0, 1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0,  // right-top-front
+    -1.0, 1.0, -1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0,  // left-top-front
+
+    // Left face
+    -1.0, -1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, // left-bottom-left
+    -1.0, -1.0, -1.0, 1.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, 0.0, // right-bottom-left
+    -1.0, 1.0, -1.0, 1.0, 0.0, 0.0, 1.0, 1.0, -1.0, 0.0, 0.0, // right-top-left
+    -1.0, 1.0, -1.0, 1.0, 0.0, 0.0, 1.0, 1.0, -1.0, 0.0, 0.0, // right-top-left
+    -1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, -1.0, 0.0, 0.0, // left-top-left
+    -1.0, -1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, 0.0, // left-bottom-left
+
+    // Right face
+    1.0, -1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, // left-bottom-right
+    1.0, -1.0, 1.0, -1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, -1.0, // right-bottom-right
+    1.0, 1.0, 1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, -1.0, // right-top-right
+    1.0, 1.0, 1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, -1.0, // right-top-right
+    1.0, 1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, -1.0, // left-top-right
+    1.0, -1.0, -1.0, -1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0, // left-bottom-right
+
+    // Back face
+    -1.0, -1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, // right-bottom-back
+    -1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, // right-top-back
+    1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, // left-top-back
+    1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, // left-top-back
+    1.0, -1.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, // left-bottom-back
+    -1.0, -1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0, // right-bottom-back
+
+    // Top face
+    -1.0, 1.0, -1.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, // left-buttom-top
+    1.0, 1.0, -1.0, 0.0, -1.0, 0.0, 1.0, 0.0, 0.0, -1.0, 0.0, // right-buttom-top
+    1.0, 1.0, 1.0, 0.0, -1.0, 0.0, 1.0, 1.0, 0.0, -1.0, 0.0, // right-top-top
+    1.0, 1.0, 1.0, 0.0, -1.0, 0.0, 1.0, 1.0, 0.0, -1.0, 0.0, // right-top-top
+    -1.0, 1.0, 1.0, 0.0, -1.0, 0.0, 0.0, 1.0, 0.0, -1.0, 0.0, // left-top-top
+    -1.0, 1.0, -1.0, 0.0, -1.0, 0.0, 0.0, 0.0, 0.0, -1.0, 0.0, // left-buttom-top
+
+    // Buttom face
+    -1.0, -1.0, -1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, // left-top-buttom
+    -1.0, -1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, // left-bottom-buttom
+    1.0, -1.0, -1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, // right-top-buttom
+    1.0, -1.0, -1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, // right-top-buttom
+    -1.0, -1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, // left-buttom-buttom
+    1.0, -1.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0  // right-buttom-buttom
+]
+
+const skyBoxPlain = [
+    // Font face
+    -1.0, -1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0,  // left-top-front
+    1.0, -1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,  // left-bottom-front
+    -1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0,  // right-bottom-front
+    -1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0,  // right-bottom-front
+    1.0, -1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0,  // right-top-front
+    1.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0,  // left-top-front
+]
+
+//#endregion
 
 // #region vbo
 function createVbo(gl: WebGL2RenderingContext, buffer: number[]) {
@@ -221,7 +285,46 @@ function createTexture(gl: WebGL2RenderingContext, image: HTMLImageElement) {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
     return texture;
 }
+function createCubeTexture(gl: WebGL2RenderingContext, image: HTMLImageElement) {
+    const texture = gl.createTexture()!;
+    const canvas = document.createElement("canvas");
+    canvas.width = image.width;
+    canvas.height = image.height;
+    const ctx = canvas.getContext("2d")!;
+    ctx.drawImage(image, 0, 0);
+    const pX = ctx.getImageData(image.width / 4 * 2, image.height / 3, image.width / 4, image.height / 3);
+    const nX = ctx.getImageData(0, image.height / 3, image.width / 4, image.height / 3);
+    const pY = ctx.getImageData(image.width / 4, 0, image.width / 4, image.height / 3);
+    const nY = ctx.getImageData(image.width / 4, image.height / 3 * 2, image.width / 4, image.height / 3);
+    const pZ = ctx.getImageData(image.width / 4, image.height / 3, image.width / 4, image.height / 3);
+    const nZ = ctx.getImageData(image.width / 4 * 3, image.height / 3, image.width / 4, image.height / 3);
+
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, texture);
+    gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_X, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, pX);
+    gl.texImage2D(gl.TEXTURE_CUBE_MAP_NEGATIVE_X, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, nX);
+    gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_Y, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, pY);
+    gl.texImage2D(gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, nY);
+    gl.texImage2D(gl.TEXTURE_CUBE_MAP_POSITIVE_Z, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, pZ);
+    gl.texImage2D(gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, nZ);
+    gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
+    gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, gl.REPEAT);
+    gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, gl.REPEAT);
+    return texture;
+}
 // #endregion
+
+
+interface IRenderObject {
+    muses: MusesVM;
+    material: MusesMaterial;
+    commands: {
+        state: MusesRenderStates;
+        program: WebGLProgram;
+        vao: WebGLVertexArrayObject;
+    }[];
+}
 
 class Engine extends EventEmitter {
     private gl: WebGL2RenderingContext;
@@ -265,8 +368,29 @@ class Engine extends EventEmitter {
         return m;
     }
 
-    private muses?: MusesVM;
-    private material?: MusesMaterial;
+    get mvpMatrix() {
+        const m = mat4.create();
+        mat4.multiply(m, this.perspectiveMatrix, this.viewMatrix);
+        mat4.multiply(m, m, this.modelMatrix);
+        return m;
+    }
+
+    get vpdiMatrix() {
+        const m = mat4.create();
+        const view = this.viewMatrix;
+        const viewDirectionMatrix = mat4.fromValues(
+            view[0], view[1], view[2], 0,
+            view[4], view[5], view[6], 0,
+            view[8], view[9], view[10], 0,
+            0, 0, 0, 1
+        );
+        mat4.multiply(m, this.perspectiveMatrix, viewDirectionMatrix);
+        mat4.invert(m, m);
+        return m;
+    }
+
+    private object?: IRenderObject;
+
     set background(value: vec4) {
         this.gl.clearColor(value[0], value[1], value[2], value[3]);
     }
@@ -280,28 +404,64 @@ class Engine extends EventEmitter {
         this.loadShader(url);
     }
     set shaderText(text: string) {
-        this.loadFromShaderCode(text);
+        this.loadFromShaderCode(text, this.vbo).then(obj => {
+            const old = this.object;
+            this.object = obj;
+            this.emit('materialChanged', obj.material);
+            if (!old) return;
+            old.commands.forEach(p => this.gl.deleteProgram(p.program));
+            console.log("load shader", "success");
+        });
     }
     get shader() {
-        return this.muses;
+        return this.object?.muses;
     }
-    private commands: {
-        state: MusesRenderStates;
-        program: WebGLProgram;
-        vao: WebGLVertexArrayObject;
-    }[] = [];
+
+    private skybox?: IRenderObject;
+    private _skyBoxVbo: WebGLBuffer;
+    private skyBoxTexture: WebGLTexture;
+    setSkyBox(url: string) {
+        const image = new Image();
+        image.src = url;
+        image.onload = () => {
+            this.skyBoxTexture = createCubeTexture(this.gl, image);
+        }
+    }
+
+    setSkyBoxShader(url: string) {
+        this.loadSkyBoxShader(url);
+    }
+
+    async loadSkyBoxShader(url: string) {
+        console.log("load skybox shader", url);
+        const shader = await fetch(url).then(res => res.text());
+        this.loadFromShaderCode(shader, this._skyBoxVbo).then((obj) => {
+            const old = this.skybox;
+            this.skybox = obj;
+            if (!old) return;
+            old.commands.forEach(p => this.gl.deleteProgram(p.program));
+            console.log("load skybox shader", "success");
+        });
+    }
 
     async loadShader(url: string) {
         console.log("load shader", url);
         const code = await fetch(url).then(res => res.text());
-        this.loadFromShaderCode(code);
+        this.loadFromShaderCode(code, this.vbo).then((obj) => {
+            const old = this.object;
+            this.object = obj;
+            this.emit('materialChanged', obj.material);
+            if (!old) return;
+            old.commands.forEach(p => this.gl.deleteProgram(p.program));
+            console.log("load shader", "success");
+        });
     }
 
-    async loadFromShaderCode(code: string) {
+    async loadFromShaderCode(code: string, vbo: WebGLBuffer) {
         console.log("load shader");
-        this.muses = new MusesVM(code);
+        const muses = new MusesVM(code);
         const commands: { state: MusesRenderStates; program: WebGLProgram; vao: WebGLVertexArrayObject; }[] = [];
-        this.muses.glsl?.passes.forEach((pass, index) => {
+        muses.glsl?.passes.forEach((pass, index) => {
             console.log(`pass ${index} shader`);
             console.log(pass.vert);
             console.log(pass.frag);
@@ -310,19 +470,19 @@ class Engine extends EventEmitter {
             commands.push({
                 state: pass.state,
                 program,
-                vao: createVao(this.gl, this.vbo ? this.vbo : this.vbo = createVbo(this.gl, cubeBuffer), program),
+                vao: createVao(this.gl, vbo, program),
             });
             console.log("pass", index, "shader loaded");
         });
-        const old = this.commands;
-        this.commands = commands;
-        this.material = this.muses.createMaterial();
-        this.emit('materialChanged', this.material);
-        old.forEach(p => this.gl.deleteProgram(p.program));
-        console.log("load shader", "success");
+        const material = muses.createMaterial();
+        return {
+            muses,
+            commands,
+            material,
+        }
     }
 
-    private vbo?: WebGLBuffer;
+    private vbo: WebGLBuffer;
     private ebo?: WebGLBuffer;
     private vertexcount: number = 0;
     setObject(obj: number[], index?: number[]) {
@@ -406,7 +566,7 @@ class Engine extends EventEmitter {
     ];
 
     private setUniforms(program: WebGLProgram, uniforms: IMusesUniform[]) {
-        let textureIndex = 0
+        let textureIndex = 1;
         uniforms.forEach(uniform => {
             const location = this.gl.getUniformLocation(program, uniform.name);
             if (location === null) {
@@ -429,7 +589,7 @@ class Engine extends EventEmitter {
                     this.gl.uniform4f(location, uniform.value[0], uniform.value[1], uniform.value[2], uniform.value[3]);
                     break;
                 case MusesPropertyType._2D:
-                    if(uniform.deprecated){
+                    if (uniform.deprecated) {
                         this.gl.deleteTexture(uniform.deprecated as WebGLTexture);
                         uniform.deprecated = undefined;
                     }
@@ -447,6 +607,22 @@ class Engine extends EventEmitter {
                     }
                     break;
                 case MusesPropertyType.Cube:
+                    if (uniform.deprecated) {
+                        this.gl.deleteTexture(uniform.deprecated as WebGLTexture);
+                        uniform.deprecated = undefined;
+                    }
+                    if (uniform.texture) {
+                        this.gl.activeTexture(this.gl.TEXTURE0 + textureIndex);
+                        this.gl.bindTexture(this.gl.TEXTURE_CUBE_MAP, uniform.texture);
+                        this.gl.uniform1i(location, textureIndex);
+                        textureIndex++;
+                    } else {
+                        const image = new Image();
+                        image.src = uniform.value as string;
+                        image.onload = () => {
+                            uniform.texture = createCubeTexture(this.gl, image);
+                        }
+                    }
                     break;
                 case MusesPropertyType._3D:
                     break;
@@ -523,22 +699,27 @@ class Engine extends EventEmitter {
         }
     }
 
-    private loop() {
-        this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
-        this.commands.forEach(command => {
+    render(object: IRenderObject) {
+        object.commands.forEach(command => {
             this.gl.useProgram(command.program);
             this.setState(command.state);
             this.gl.bindVertexArray(command.vao);
             const posM = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_M");
             const posV = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_V");
             const posP = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_P");
+            const posMVP = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_MVP");
+            const posVPDI = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_VDPI");
             const posTime = this.gl.getUniformLocation(command.program, "MUSES_TIME");
+            const posCameraPos = this.gl.getUniformLocation(command.program, "MUSES_CAMERA_POS");
             if (posM) this.gl.uniformMatrix4fv(posM, false, this.modelMatrix);
             if (posV) this.gl.uniformMatrix4fv(posV, false, this.viewMatrix);
             if (posP) this.gl.uniformMatrix4fv(posP, false, this.perspectiveMatrix);
+            if (posMVP) this.gl.uniformMatrix4fv(posMVP, false, this.mvpMatrix);
+            if (posVPDI) this.gl.uniformMatrix4fv(posVPDI, false, this.vpdiMatrix);
             if (posTime) this.gl.uniform1i(posTime, this.time);
+            if (posCameraPos) this.gl.uniform3f(posCameraPos, this.cameraPos[0], this.cameraPos[1], this.cameraPos[2]);
 
-            this.setUniforms(command.program, this.material!.uniforms);
+            this.setUniforms(command.program, object.material!.uniforms);
             this.setLights(command.program, this.lights);
 
             if (this.ebo) {
@@ -548,6 +729,41 @@ class Engine extends EventEmitter {
                 this.gl.drawArrays(this.gl.TRIANGLES, 0, this.vertexcount);
             }
         });
+    }
+
+    renderSkyBox(object: IRenderObject) {
+        object.commands.forEach(command => {
+            this.gl.useProgram(command.program);
+            this.setState(command.state);
+            this.gl.bindVertexArray(command.vao);
+            const posM = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_M");
+            const posV = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_V");
+            const posP = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_P");
+            const posMVP = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_MVP");
+            const posVPDI = this.gl.getUniformLocation(command.program, "MUSES_MATRIX_VDPI");
+            const posTime = this.gl.getUniformLocation(command.program, "MUSES_TIME");
+            const skyBox = this.gl.getUniformLocation(command.program, "MUSES_SKYBOX");
+            if (posM) this.gl.uniformMatrix4fv(posM, false, mat4.create());
+            if (posV) this.gl.uniformMatrix4fv(posV, false, this.viewMatrix);
+            if (posP) this.gl.uniformMatrix4fv(posP, false, this.perspectiveMatrix);
+            if (posMVP) this.gl.uniformMatrix4fv(posMVP, false, this.mvpMatrix);
+            if (posVPDI) this.gl.uniformMatrix4fv(posVPDI, false, this.vpdiMatrix);
+            if (posTime) this.gl.uniform1i(posTime, this.time);
+            if (skyBox && this.skyBoxTexture) {
+                this.gl.activeTexture(this.gl.TEXTURE0);
+                this.gl.bindTexture(this.gl.TEXTURE_CUBE_MAP, this.skyBoxTexture);
+                this.gl.uniform1i(skyBox, 0);
+            }
+            this.gl.drawArrays(this.gl.TRIANGLES, 0, 6);
+        });
+    }
+
+    private loop() {
+        this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+        if (this.skybox)
+            this.renderSkyBox(this.skybox);
+        if (this.object)
+            this.render(this.object);
         if (this._runnig)
             requestAnimationFrame(this.loop.bind(this));
     }
@@ -568,7 +784,11 @@ class Engine extends EventEmitter {
         this.stop();
         if (this.vbo)
             this.gl.deleteBuffer(this.vbo);
-        this.commands.forEach(c => {
+        this.object?.commands.forEach(c => {
+            this.gl.deleteProgram(c);
+            this.gl.deleteVertexArray(c);
+        });
+        this.skybox?.commands.forEach(c => {
             this.gl.deleteProgram(c);
             this.gl.deleteVertexArray(c);
         });
@@ -608,11 +828,15 @@ class Engine extends EventEmitter {
     constructor(gl: WebGL2RenderingContext) {
         super();
         this.gl = gl;
+        this.setObject(cubeBuffer);
+        this._skyBoxVbo = createVbo(this.gl, skyBoxPlain);
         gl.clearColor(0.0, 0.0, 0.0, 1.0);
         gl.cullFace(gl.BACK);
         gl.enable(gl.CULL_FACE);
         gl.enable(gl.DEPTH_TEST);
         gl.depthFunc(gl.LEQUAL);
+        this.setSkyBoxShader('./skybox.muses');
+        this.setSkyBox('./cubemaps_skybox.png');
     }
 
     emit(eventName: 'cameraChanged', pos: vec3): boolean;
@@ -750,49 +974,49 @@ function Properties({ onChange, material }:
         {material?.uniforms.map((p, i) => {
             switch (p.type) {
                 case MusesPropertyType.Color:
-                    return <Form.Item label={p.name} key={i}>
+                    return <Form.Item label={p.displayName} key={i}>
                         <ColorSelector
                             color={vec4.fromValues(p.value[0], p.value[1], p.value[2], p.value[3])}
                             onChange={(color) => setUniform(material.uniforms.map((u, j) => i === j ? { ...u, value: color } : u))}
                         />
                     </Form.Item>
                 case MusesPropertyType._2D:
-                    return <Form.Item label={p.name} key={i}>
+                    return <Form.Item label={p.displayName} key={i}>
                         <ImageSelector
                             defaultImage={p.value as string}
                             onChanged={image => setUniform(material.uniforms.map((u, j) => i === j ? { ...u, value: image } : u))}
                         />
                     </Form.Item>
                 case MusesPropertyType._3D:
-                    return <Form.Item label={p.name} key={i}>
+                    return <Form.Item label={p.displayName} key={i}>
                         <ImageSelector
                             defaultImage={p.value as string}
                             onChanged={image => setUniform(material.uniforms.map((u, j) => i === j ? { ...u, value: image } : u))}
                         />
                     </Form.Item>
                 case MusesPropertyType.Cube:
-                    return <Form.Item label={p.name} key={i}>
+                    return <Form.Item label={p.displayName} key={i}>
                         <ImageSelector
                             defaultImage={p.value as string}
                             onChanged={image => setUniform(material.uniforms.map((u, j) => i === j ? { ...u, value: image } : u))}
                         />
                     </Form.Item>
                 case MusesPropertyType.Float:
-                    return <Form.Item label={p.name} key={i}>
+                    return <Form.Item label={p.displayName} key={i}>
                         <InputNumber
                             defaultValue={p.value as number}
                             onChange={value => setUniform(material.uniforms.map((u, j) => i === j ? { ...u, value: value || 0 } : u))}
                         />
                     </Form.Item>
                 case MusesPropertyType.Int:
-                    return <Form.Item label={p.name} key={i}>
+                    return <Form.Item label={p.displayName} key={i}>
                         <InputNumber
                             defaultValue={p.value as number}
                             onChange={value => setUniform(material.uniforms.map((u, j) => i === j ? { ...u, value: Math.floor(value || 0) } : u))}
                         />
                     </Form.Item>
                 case MusesPropertyType.Range:
-                    return <Form.Item label={p.name} key={i}>
+                    return <Form.Item label={p.displayName} key={i}>
                         <Row>
                             <Col span={15}>
                                 <Slider
@@ -814,7 +1038,7 @@ function Properties({ onChange, material }:
                         </Row>
                     </Form.Item>
                 case MusesPropertyType.Vector:
-                    return <Form.Item label={p.name} key={i} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }}>
+                    return <Form.Item label={p.displayName} key={i} labelCol={{ span: 6 }} wrapperCol={{ span: 18 }}>
                         <Row>
                             <Col span={6}>
                                 <InputNumber
@@ -843,7 +1067,7 @@ function Properties({ onChange, material }:
                         </Row>
                     </Form.Item>
                 default:
-                    return <Form.Item label={p.name} key={i}>
+                    return <Form.Item label={p.displayName} key={i}>
                         <Input />
                     </Form.Item>
             }
@@ -857,7 +1081,7 @@ export default function App() {
     const [mouseDown, setMouseDown] = useState(false);
     const [collapsed, setCollapsed] = useState(false);
     const [camPos, setCamPos] = useState<vec3>(vec3.fromValues(1, 0, 0));
-    const [fileName, setFileName] = useState<string>('default.muses');
+    const [fileName, setFileName] = useState<string>('pbr.muses');
     const [shader, setShader] = useState<MusesMaterial>();
 
     useEffect(() => {
@@ -900,7 +1124,7 @@ export default function App() {
                         name="camera"
                         labelCol={{ span: 6 }}
                         wrapperCol={{ span: 18 }}
-                        style={{ width: '100%', overflowY: 'auto', overflowX: 'hidden', height: 'calc(100vh - 200px)' }}
+                        style={{ width: '100%', overflowY: 'auto', overflowX: 'hidden', height: 'calc(100vh - 230px)' }}
                     >
                         <Divider plain > background </Divider>
                         <Divider plain > camera </Divider>
@@ -937,9 +1161,16 @@ export default function App() {
                             </Input.Group>
                         </Form.Item>
                         <Properties material={shader} />
+                        <canvas id='skyBox' style={{ width: '100%' }} />
+                        <canvas id='skyBoxLeft' style={{ width: '100%' }} />
+                        <canvas id='skyBoxFont' style={{ width: '100%' }} />
+                        <canvas id='skyBoxBack' style={{ width: '100%' }} />
+                        <canvas id='skyBoxRight' style={{ width: '100%' }} />
+                        <canvas id='skyBoxTop' style={{ width: '100%' }} />
+                        <canvas id='skyBoxBottom' style={{ width: '100%' }} />
                     </Form>
                     : null}
-
+                <Divider />
             </div>
         </Sider>
         <Layout className="site-layout">
