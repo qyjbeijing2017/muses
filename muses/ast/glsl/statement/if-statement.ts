@@ -15,6 +15,7 @@ export interface IMusesIfStatementOptions extends IMusesStatementOptions {
 
 export class MusesIfStatement extends MusesStatement {
     subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        let variableCount = ctx.variables.length;
         this.optionsChildren.test.subTree(ctx, tree);
         this.optionsChildren.consequent.forEach((item) => {
             item.subTree(ctx, tree);
@@ -27,6 +28,9 @@ export class MusesIfStatement extends MusesStatement {
             } else {
                 this.optionsChildren.alternate.subTree(ctx, tree);
             }
+        }
+        while (ctx.variables.length > variableCount) {
+            ctx.variables.pop();
         }
     }
     toMuses(): string {
@@ -50,6 +54,7 @@ export class MusesIfStatement extends MusesStatement {
     }
 
     check(ctx: MusesGLSLContext): void {
+        let variableCount = ctx.variables.length;
         this.optionsChildren.test.check(ctx);
         this.optionsChildren.consequent.forEach((item) => {
             item.check(ctx);
@@ -62,6 +67,9 @@ export class MusesIfStatement extends MusesStatement {
             } else {
                 this.optionsChildren.alternate.check(ctx);
             }
+        }        
+        while (ctx.variables.length > variableCount) {
+            ctx.variables.pop();
         }
     }
     get optionsChildren() {

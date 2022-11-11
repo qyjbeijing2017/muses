@@ -27,18 +27,18 @@ export class MusesRetrunStatement extends MusesStatement {
         return `return;`;
     }
     check(ctx: MusesGLSLContext): void {
-        if (!ctx.funcName) {
+        if (ctx.funcNames.length<=0) {
             throw new Error(`found a return out of the function`);
         }
-        const func = ctx.functions.find(func => func.name === ctx.funcName)!;
+        const func = ctx.functions.find(func => func.name === ctx.funcNames[ctx.funcNames.length -1])!;
         if (this.optionsChildren.argument) {
             const type = this.getExpressionType(ctx, this.optionsChildren.argument);
             if(type.sign !== func.returnType.sign){
-                throw new Error(`Cannot return the type ${type.sign} for ${func.returnType.sign} in ${ctx.funcName}`);
+                throw new Error(`Cannot return the type ${type.sign} for ${func.returnType.sign} in ${ctx.funcNames[ctx.funcNames.length -1]}`);
             }
         }
         if (func.returnType.sign === 'void') {
-            throw new Error(`Not return anything for ${func.returnType.sign} in ${ctx.funcName}`);
+            throw new Error(`Not return anything for ${func.returnType.sign} in ${ctx.funcNames[ctx.funcNames.length -1]}`);
         }
     }
 

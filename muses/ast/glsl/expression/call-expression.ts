@@ -18,12 +18,14 @@ export class MusesCallExpression extends MusesExpression {
         const sign = `${this.name}(${this.optionsChildren.arguments.map(a => this.getExpressionType(ctx, a).name).join(',')})`;
         const func = ctx.functions.find(func => func.sign === sign);
         if (func && func.userFunction && tree.functions.find(f => f.options.name === func.userFunction?.options.name) === undefined) {
-            tree.functions.push(func.userFunction);
+            func.userFunction.subTree(ctx, tree);
+            // tree.functions.unshift(func.userFunction);
             return;
         }
         const type = ctx.types.find(type => type.name === this.name);
         if (type && type.struct && tree.structs.find(s => s.options.name === type.struct?.options.name) === undefined) {
-            tree.structs.push(type.struct);
+            type.struct.subTree(ctx, tree);
+            // tree.structs.push(type.struct);
             return;
         }
     }

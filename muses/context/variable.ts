@@ -11,6 +11,7 @@ export class MusesContextVariable {
         type: MusesContextType,
         name: string,
         variable?: MusesVariableDeclaration,
+        local?: boolean,
     }) {
         this.type = desc.type;
         this.name = desc.name;

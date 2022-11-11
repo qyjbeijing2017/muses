@@ -429,7 +429,7 @@ export class MusesParser extends CstParser {
     returnStatement = this.RULE("returnStatement", () => {
         this.CONSUME(musesToken.Return);
         this.OPTION(() => {
-            this.SUBRULE(this.assignExpression, { LABEL: "expression" });
+            this.SUBRULE(this.assignExpression, { LABEL: "argument" });
         });
         this.CONSUME(musesToken.Semicolon);
     });
@@ -463,7 +463,8 @@ export class MusesParser extends CstParser {
         this.CONSUME(musesToken.RightBrace);
         this.MANY_SEP({
             SEP: musesToken.Comma,
-            DEF: () => this.CONSUME2(musesToken.Identifier, { LABEL: "variables" })
+            // DEF: () => this.CONSUME2(musesToken.Identifier, { LABEL: "variables" })
+            DEF: () => this.SUBRULE1(this.variableAssignment, { LABEL: 'variables' }),
         });
         this.CONSUME(musesToken.Semicolon);
     });
@@ -555,9 +556,113 @@ export class MusesParser extends CstParser {
     });
     // #endregion
 
+    zTest = this.RULE("zTest", () => {
+        this.CONSUME(musesToken.ZTest);
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.OFF, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.ALWAY, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.NEVER, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.LESS, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.EQUAL, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.LEQUAL, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.GREATER, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.NOTEQUAL, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.GEQUAL, { LABEL: 'value' }) },
+        ]);
+    });
+
+    zWrite = this.RULE("zWrite", () => {
+        this.CONSUME(musesToken.ZWrite);
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.OFF, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.ON, { LABEL: 'value' }) },
+        ]);
+    });
+
+    stencil = this.RULE("stencil", () => {
+        this.CONSUME(musesToken.Stencil);
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.ALWAY, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.NEVER, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.LESS, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.EQUAL, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.LEQUAL, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.GREATER, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.NOTEQUAL, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.GEQUAL, { LABEL: 'value' }) },
+        ]);
+        this.CONSUME(musesToken.ConstInt, { LABEL: 'value' });
+        this.CONSUME1(musesToken.ConstInt, { LABEL: 'value' });
+    });
+
+    stencilMask = this.RULE("stencilMask", () => {
+        this.CONSUME(musesToken.StencilMask);
+        this.CONSUME(musesToken.ConstInt, { LABEL: 'value' });
+    });
+
+    blend = this.RULE("blend", () => {
+        this.CONSUME(musesToken.Blend);
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.ZERO, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.ONE, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.SRC_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.ONE_MINUS_SRC_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.DST_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.ONE_MINUS_DST_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.SRC_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.ONE_MINUS_SRC_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.DST_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.ONE_MINUS_DST_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.CONSTANT_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.ONE_MINUS_CONSTANT_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.CONSTANT_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.ONE_MINUS_CONSTANT_ALPHA, { LABEL: 'value' }) },  
+        ]);
+        this.OR1([
+            { ALT: () => this.CONSUME1(musesToken.ZERO, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.ONE, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.SRC_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.ONE_MINUS_SRC_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.DST_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.ONE_MINUS_DST_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.SRC_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.ONE_MINUS_SRC_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.DST_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.ONE_MINUS_DST_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.CONSTANT_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.ONE_MINUS_CONSTANT_COLOR, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.CONSTANT_ALPHA, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME1(musesToken.ONE_MINUS_CONSTANT_ALPHA, { LABEL: 'value' }) },  
+        ]);
+
+    });
+
+    cull = this.RULE("cull", () => {
+        this.CONSUME(musesToken.Cull);
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.OFF, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.FRONT, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.BACK, { LABEL: 'value' }) },
+            { ALT: () => this.CONSUME(musesToken.FRONT_AND_BACK, { LABEL: 'value' }) },
+        ]);
+    });
+
+    renderState = this.RULE("renderState", () => {
+        this.MANY(() => {
+            this.OR([
+                { ALT: () => this.SUBRULE(this.zTest, { LABEL: 'zTest' }) },
+                { ALT: () => this.SUBRULE(this.zWrite, { LABEL: 'zWrite' }) },
+                { ALT: () => this.SUBRULE(this.stencil, { LABEL: 'stencil' }) },
+                { ALT: () => this.SUBRULE(this.blend, { LABEL: 'blend' }) },
+                { ALT: () => this.SUBRULE(this.cull, { LABEL: 'cull' }) },
+            ]);
+        });
+    });
+
     pass = this.RULE("pass", () => {
         this.CONSUME(musesToken.Pass);
         this.CONSUME(musesToken.LeftBrace);
+        this.SUBRULE(this.renderState, { LABEL: "renderState" });
         this.OR([
             { ALT: () => this.SUBRULE(this.glsl, { LABEL: 'glsl' }) },
         ]);

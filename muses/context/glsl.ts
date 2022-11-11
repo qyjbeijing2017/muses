@@ -8,7 +8,7 @@ export class MusesGLSLContext extends MusesContextBase {
     readonly variables: MusesContextVariable[] = [];
     readonly types: MusesContextType[] = [];
     loop: boolean[] = [];
-    funcName: undefined | string;
+    funcNames:  string[] = [];
 
     constructor(defines: {
         functions?: MusesContextFunction[],

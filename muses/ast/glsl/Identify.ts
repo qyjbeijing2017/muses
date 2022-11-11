@@ -10,8 +10,11 @@ export interface IMusesIdentifyOptions extends IMusesNodeOptions {
 
 export class MusesIdentify extends MusesGLSLNode {
     subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
-        const variable = ctx.variables.find(variable=> variable.name === this.name);
-        if(variable?.variable && tree.variables.find(variable=> variable.name === this.name) === undefined){
+        const variable = ctx.variables.find(variable => variable.name === this.name);
+        if (
+            variable?.variable &&
+            tree.variables.find(variable => variable.name === this.name) === undefined
+        ) {
             tree.variables.unshift(variable?.variable);
             variable.variable.subTree(ctx, tree);
         }
@@ -23,13 +26,13 @@ export class MusesIdentify extends MusesGLSLNode {
         return this.name;
     }
     check(ctx: MusesGLSLContext): MusesContextType {
-        const variables = ctx.variables.find(variable=> variable.name === this.name);
-        if(!variables){
+        const variables = ctx.variables.find(variable => variable.name === this.name);
+        if (!variables) {
             throw new Error(`Variable ${this.name} is not defined`);
         }
         return variables.type;
     }
-    get name(){
+    get name() {
         return this.options.name;
     }
     nodeType: MusesAstNodeType = MusesAstNodeType.Identify;

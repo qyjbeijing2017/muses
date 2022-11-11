@@ -4,6 +4,9 @@ import { MusesContextVariable } from "../context/variable";
 import { MusesGLSLPercision, MusesGLSLStorage } from "./glsl/variable-declaration";
 import { IMusesNodeOptions, MusesGLSLNode } from "./node";
 import { MusesAstNodeType } from "./nodeType";
+import {MusesVariableDeclaration} from "./glsl/variable-declaration";
+import { MusesTypeDeclaration } from "./glsl/type-declaration";
+import { glslTypes } from "../context/glsl.ctx";
 
 export enum MusesPropertyType {
     Float = "Float",
@@ -25,14 +28,14 @@ export interface IMusesPropertyOptions extends IMusesNodeOptions {
 }
 
 const muses2glslTypeMap = new Map<MusesPropertyType, MusesContextType>([
-    [MusesPropertyType.Color, new MusesContextType({ name: 'vec4', storage: MusesGLSLStorage.uniform, percision: MusesGLSLPercision.lowp })],
-    [MusesPropertyType.Float, new MusesContextType({ name: 'float', storage: MusesGLSLStorage.uniform })],
-    [MusesPropertyType.Int, new MusesContextType({ name: 'int', storage: MusesGLSLStorage.uniform })],
-    [MusesPropertyType.Vector, new MusesContextType({ name: 'vec4', storage: MusesGLSLStorage.uniform })],
-    [MusesPropertyType.Range, new MusesContextType({ name: 'float', storage: MusesGLSLStorage.uniform })],
-    [MusesPropertyType._2D, new MusesContextType({ name: 'sampler2D', storage: MusesGLSLStorage.uniform })],
-    [MusesPropertyType._3D, new MusesContextType({ name: 'sampler3D', storage: MusesGLSLStorage.uniform })],
-    [MusesPropertyType.Cube, new MusesContextType({ name: 'samplerCube', storage: MusesGLSLStorage.uniform })],
+    [MusesPropertyType.Color, glslTypes.vec4Type ],
+    [MusesPropertyType.Float, glslTypes.floatType ],
+    [MusesPropertyType.Int, glslTypes.intType ],
+    [MusesPropertyType.Vector, glslTypes.vec4Type ],
+    [MusesPropertyType.Range, glslTypes.floatType ],
+    [MusesPropertyType._2D, glslTypes.sampler2DType ],
+    [MusesPropertyType._3D, glslTypes.sampler3DType ],
+    [MusesPropertyType.Cube, glslTypes.samplerCubeType ],
 ]);
 
 
@@ -76,6 +79,11 @@ export class MusesProperty extends MusesGLSLNode {
         ctx.variables.push(new MusesContextVariable({
             type: muses2glslTypeMap.get(this.options.type)!.copy(),
             name: this.options.name,
+            variable: new MusesVariableDeclaration({
+                name: this.options.name,
+                type: new MusesTypeDeclaration({name: muses2glslTypeMap.get(this.options.type)!.name}),
+                storage: MusesGLSLStorage.uniform,
+            }),
         }));
     }
     nodeType: MusesAstNodeType = MusesAstNodeType.Properties;

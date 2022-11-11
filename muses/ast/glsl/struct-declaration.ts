@@ -1,5 +1,6 @@
 import { MusesGLSLContext } from "../../context/glsl";
 import { MusesContextType } from "../../context/type";
+import { MusesGLSLTree } from "../glsltree";
 import { IMusesNodeOptions, MusesGLSLNode } from "../node";
 import { MusesAstNodeType } from "../nodeType";
 import { MusesVariableDeclaration } from "./variable-declaration";
@@ -10,6 +11,9 @@ export interface IMusesStructDeclarationOptions extends IMusesNodeOptions {
 }
 
 export class MusesStructDeclaration extends MusesGLSLNode {
+    subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        this.options.members.map(member=>member.subTree(ctx, tree));
+    }
     toMuses(): string {
         return this.toGLSL();
     }
@@ -27,6 +31,21 @@ export class MusesStructDeclaration extends MusesGLSLNode {
             rules: [
                 {
                     test: new RegExp(`^${this.options.name}\\(${membersTypes.map(m => m.name + m.isArray ? `\\[\\]` : '').join(",")}\\)$`),
+                },
+                {
+                    test: new RegExp(`^${this.options.name}\\[\\]\\[int\\]$`),
+                },
+                {
+                    test: new RegExp(`^${this.options.name}\\[\\]\\(\\)$`),
+                    returnArray: true,
+                },
+                {
+                    test: new RegExp(`^${this.options.name}\\[\\]\\(${this.options.name},(${this.options.name})*\\)$`),
+                    returnArray: true,
+                },
+                {
+                    test: new RegExp(`^${this.options.name}=${this.options.name}$`),
+                    returnArray: true,
                 },
                 ...membersTypes.map((m, i) => {
                     return {

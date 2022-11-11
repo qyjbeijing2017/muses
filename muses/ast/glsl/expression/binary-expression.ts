@@ -21,10 +21,7 @@ export class MusesBinaryExpression extends MusesExpression {
         return this.toGLSL();
     }
     toGLSL(): string {
-        if(this.optionsChildren.right instanceof MusesExpression){
-            return `${this.optionsChildren.left.toGLSL()} ${this.optionsChildren.operator} (${this.optionsChildren.right.toGLSL()})`;
-        }
-        return `${this.optionsChildren.left.toGLSL()} ${this.optionsChildren.operator} ${this.optionsChildren.right.toGLSL()}`;
+        return `(${this.optionsChildren.left.toGLSL()}) ${this.optionsChildren.operator} (${this.optionsChildren.right.toGLSL()})`;
     }
     get optionsChildren(){
         return this.options as IMusesBinaryExpressionOptions

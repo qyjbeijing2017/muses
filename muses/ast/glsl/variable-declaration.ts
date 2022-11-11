@@ -48,11 +48,11 @@ export class MusesVariableDeclaration extends MusesGLSLNode {
         return this.toGLSL();
     }
     toGLSL(): string {
-        return `${this.options.storage ? this.options.storage + ' ' : ''}${this.options.parameters ? this.options.parameters + ' ' : ''}${this.options.percision ? this.options.percision + ' ' : 'highp '}${this.options.type.toGLSL()} ${this.options.name}${this.options.size? `[${this.options.size.toGLSL()}]`: ''}${this.options.value ? ` = ${this.options.value.toGLSL()}` : ''};`;
+        return `${this.options.storage ? this.options.storage + ' ' : ''}${this.options.parameters ? this.options.parameters + ' ' : ''}${this.options.percision ? this.options.percision + ' ' : ''}${this.options.type.toGLSL()} ${this.options.name}${this.options.size ? `[${this.options.size.toGLSL()}]` : ''}${this.options.value ? ` = ${this.options.value.toGLSL()}` : ''};`;
     }
     static arrayToGLSL(variables: MusesVariableDeclaration[]): string {
         const options = variables[0].options;
-        return `${options.storage ? options.storage + ' ' : ''}${options.parameters ? options.parameters + ' ' : ''}${options.percision ? options.percision + ' ' : 'highp '}${options.type.toGLSL()} ${variables.map(variable => `${variable.options.name}${variable.options.value ? ` = ${variable.options.value.toGLSL()}` : ''}`)};`;
+        return `${options.storage ? options.storage + ' ' : ''}${options.parameters ? options.parameters + ' ' : ''}${options.percision ? options.percision + ' ' : ''}${options.type.toGLSL()} ${variables.map(variable => `${variable.options.name}${variable.options.value ? ` = ${variable.options.value.toGLSL()}` : ''}`)};`;
     }
     get name() {
         return this.options.name;
@@ -60,9 +60,9 @@ export class MusesVariableDeclaration extends MusesGLSLNode {
 
     check(ctx: MusesGLSLContext): void {
         const variable = this.toCtxVariable(ctx);
-        if(this.options.size){
+        if (this.options.size) {
             const sizeType = this.getExpressionType(ctx, this.options.size);
-            if(sizeType.sign !== 'int'){
+            if (sizeType.sign !== 'int') {
                 throw new Error(`Type ${sizeType.sign} is not assignable to int`);
             }
         }
@@ -107,7 +107,7 @@ export class MusesVariableDeclaration extends MusesGLSLNode {
                 parameters: this.options.parameters,
                 isArray: !!this.options.size,
             }),
-            variable: ctx.funcName ? undefined : this,
+            variable: ctx.funcNames.length > 0 ? undefined : this,
         });
     }
 

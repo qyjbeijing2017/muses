@@ -30,6 +30,7 @@ import { MusesExpressionStatement } from "./ast/glsl/statement/expression-statem
 import { MusesRetrunStatement } from "./ast/glsl/statement/return-statement";
 import { MusesBreakStatement } from "./ast/glsl/statement/break-statement";
 import { MusesContinueStatement } from "./ast/glsl/statement/continue-statement";
+import { MusesRenderStates } from "./ast/render-states";
 const CstVisiter = musesParser.getBaseCstVisitorConstructor();
 
 export class MusesVisitor extends CstVisiter {
@@ -143,7 +144,7 @@ export class MusesVisitor extends CstVisiter {
     }
 
     indexExpression(ctx: CstChildrenDictionary) {
-        const index = ctx.index?this.visit(ctx.index[0] as CstNode):undefined;
+        const index = ctx.index ? this.visit(ctx.index[0] as CstNode) : undefined;
         return index;
     }
 
@@ -410,9 +411,12 @@ export class MusesVisitor extends CstVisiter {
         const members = ctx.members?.map((member) => this.visit(member as CstNode)) || [];
         const structDeclaration = new MusesStructDeclaration({ name, members });
         const outArray: (MusesStructDeclaration | MusesVariableDeclaration)[] = [structDeclaration];
+        const type = new MusesTypeDeclaration({ name });
         if (ctx.variables) {
-            const type = new MusesTypeDeclaration({ name });
-            const variables = ctx.variables.map((variable) => new MusesVariableDeclaration({ name: (variable as IToken).image, type }));
+            const variables = ctx.variables.map((variable) => {
+                const { name, value, size, } = this.visit(variable as CstNode);
+                return new MusesVariableDeclaration({ name, type, value, size });
+            });
             outArray.push(...variables);
         }
         return outArray;
@@ -429,7 +433,7 @@ export class MusesVisitor extends CstVisiter {
     }
 
     sizeDeclaration(ctx: CstChildrenDictionary) {
-        const size = ctx.size?this.visit(ctx.size[0] as CstNode): undefined;
+        const size = ctx.size ? this.visit(ctx.size[0] as CstNode) : undefined;
         return size;
     }
 
@@ -498,9 +502,44 @@ export class MusesVisitor extends CstVisiter {
     }
     // #endregion
 
+    zTest(ctx: CstChildrenDictionary) {
+        return (ctx.value[0] as IToken).image;
+    }
+
+    zWrite(ctx: CstChildrenDictionary) {
+        return (ctx.value[0] as IToken).image;
+    }
+
+    stencil(ctx: CstChildrenDictionary) {
+        return ctx.value.map((value, index) => index ? parseInt((value as IToken).image) : (value as IToken).image);
+    }
+
+    stencilMask(ctx: CstChildrenDictionary) {
+        return ctx;
+    }
+
+    blend(ctx: CstChildrenDictionary) {
+        return ctx.value.map((value) => (value as IToken).image);
+    }
+
+    cull(ctx: CstChildrenDictionary) {
+        return (ctx.value[0] as IToken).image;
+    }
+
+    renderState(ctx: CstChildrenDictionary) {
+        return new MusesRenderStates({
+            zTest: ctx.zTest ? this.visit(ctx.zTest[0] as CstNode) : undefined,
+            zWrite: ctx.zWrite ? this.visit(ctx.zWrite[0] as CstNode) : undefined,
+            stencil: ctx.stencil ? this.visit(ctx.stencil[0] as CstNode) : undefined,
+            blend: ctx.blend ? this.visit(ctx.blend[0] as CstNode) : undefined,
+            cull: ctx.cull ? this.visit(ctx.cull[0] as CstNode) : undefined,
+        });
+    }
+
     pass(ctx: CstChildrenDictionary) {
         const pass = new MusesPass({
             glsl: ctx.glsl ? this.visit(ctx.glsl[0] as CstNode) : undefined,
+            renderStates: ctx.renderState ? this.visit(ctx.renderState[0] as CstNode) : undefined,
         });
         return pass;
     }

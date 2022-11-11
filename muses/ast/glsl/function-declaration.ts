@@ -16,8 +16,8 @@ export interface IMusesFunctionDeclarationOptions extends IMusesNodeOptions {
 
 export class MusesFunctionDeclaration extends MusesGLSLNode {
     subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
-        tree.functions.push(this);
-        ctx.funcName = this.options.name;
+        tree.functions.unshift(this);
+        ctx.funcNames.push(this.options.name);
         let variableCount = ctx.variables.length;
         ctx.variables.push(...this.options.parameters.map(parameter => parameter.toCtxVariable(ctx)));
         this.options.parameters.forEach(parameter => parameter.subTree(ctx, tree));
@@ -27,7 +27,7 @@ export class MusesFunctionDeclaration extends MusesGLSLNode {
         while (ctx.variables.length > variableCount) {
             ctx.variables.pop();
         }
-        ctx.funcName = undefined;
+        ctx.funcNames.pop();
     }
     toMuses(): string {
         return this.toGLSL();
@@ -52,7 +52,7 @@ export class MusesFunctionDeclaration extends MusesGLSLNode {
         ));
         let variableCount = ctx.variables.length;
         ctx.variables.push(...this.options.parameters.map(parameter => parameter.toCtxVariable(ctx)));
-        ctx.funcName = this.options.name;
+        ctx.funcNames.push(this.options.name);
         this.options.body?.forEach((item) => {
             item.check(ctx);
         });
@@ -60,7 +60,7 @@ export class MusesFunctionDeclaration extends MusesGLSLNode {
         while (ctx.variables.length > variableCount) {
             ctx.variables.pop();
         }
-        ctx.funcName = undefined;
+        ctx.funcNames.pop();
     }
     nodeType: MusesAstNodeType = MusesAstNodeType.FunctionDeclaration;
     constructor(readonly options: IMusesFunctionDeclarationOptions) {

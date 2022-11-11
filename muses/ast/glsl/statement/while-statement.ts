@@ -15,10 +15,14 @@ export interface IMusesWhileStatementOptions extends IMusesNodeOptions {
 
 export class MusesWhileStatement extends MusesStatement {
     subTree(ctx: MusesGLSLContext, tree: MusesGLSLTree): void {
+        let variableCount = ctx.variables.length;
         this.optionsChildren.test.subTree(ctx, tree);
         this.optionsChildren.body.forEach((item) => {
             item.subTree(ctx, tree);
         });
+        while (ctx.variables.length > variableCount) {
+            ctx.variables.pop();
+        }
     }
     toMuses(): string {
         return this.toGLSL();
@@ -29,12 +33,16 @@ export class MusesWhileStatement extends MusesStatement {
     }`;
     }
     check(ctx: MusesGLSLContext): void {
+        let variableCount = ctx.variables.length;
         this.optionsChildren.test.check(ctx);
         ctx.loop.push(true);
         this.optionsChildren.body?.forEach((item) => {
             item.check(ctx);
         });
         ctx.loop.pop();
+        while (ctx.variables.length > variableCount) {
+            ctx.variables.pop();
+        }
     }
 
     get optionsChildren(){

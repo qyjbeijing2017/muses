@@ -19,7 +19,12 @@ export class MusesSubShaderContext extends MusesContextBase {
     }
 
     createPassContext(): MusesPassContext{
-        const ctx = new MusesPassContext(this.defines);
+        const defines = {
+            functions: [...this.defines.functions ?? []],
+            variables: [...this.defines.variables ?? []],
+            types: [...this.defines.types ?? []],
+        }
+        const ctx = new MusesPassContext(defines);
         this.passes.push(ctx);
         return ctx;
     }

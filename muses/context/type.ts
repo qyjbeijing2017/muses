@@ -29,14 +29,15 @@ export class MusesContextType {
         this.rules = desc.rules;
         this.isArray = desc.isArray;
 
-        if (this.struct && (this.storage || this.percision)) {
-            throw new Error(`Struct ${this.name} can not have storage or percision limit`);
+        if (this.struct && (this.percision)) {
+            throw new Error(`Struct ${this.name} can not have percision limit`);
         }
     }
 
     checkRule(sign: string): MusesContextType {
         const rule = this.rules?.find(r => r.test.test(sign));
         if (!rule) {
+            console.log(rule);
             throw new Error(`Type ${this.sign} has no rule for ${sign}`);
         }
         return rule.returnType || (rule.returnArray ? this.copy({ isArray: true }) : this.copy());
