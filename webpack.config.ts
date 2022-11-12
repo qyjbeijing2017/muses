@@ -5,7 +5,7 @@ import 'webpack-dev-server';
 
 const config: Configuration = {
     mode: 'development',
-    entry: { index: './src/index.tsx' },
+    entry: { index: './app/index.tsx' },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',

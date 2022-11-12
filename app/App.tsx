@@ -1,12 +1,12 @@
 import { mat4, vec2, vec3, vec4 } from 'gl-matrix';
 import React, { useEffect, useRef, useState } from 'react';
-import { MusesPropertyType, MusesRenderStates, MusesVM, MusesMaterial, MusesLightType } from '../muses';
+import { MusesPropertyType, MusesRenderStates, MusesVM, MusesMaterial, MusesLightType } from '../src';
 import { Layout, Divider, Form, Input, Button, Popover, InputNumber, Row, Slider, Col } from 'antd';
 import './App.css';
 import EventEmitter from 'events';
 import { SketchPicker } from 'react-color';
-import { IMusesLight } from '../muses/vm/light';
-import { IMusesUniform } from '../muses/vm/material';
+import { IMusesLight } from '../src/vm/light';
+import { IMusesUniform } from '../src/vm/material';
 const { Header, Content, Footer, Sider } = Layout;
 
 // #region shader

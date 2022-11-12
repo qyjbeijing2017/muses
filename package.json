@@ -2,7 +2,7 @@
   "name": "muses",
   "version": "0.0.1",
   "description": "a web shader compiler",
-  "main": "/src/index.ts",
+  "main": "src/index.ts",
   "author": "qyjbeijing",
   "license": "MIT",
   "scripts": {
