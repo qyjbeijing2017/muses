@@ -1,0 +1,43 @@
+Shader "Test" {
+    Properties {
+        _DiffuseTex ("Diffuse Texture", 2D) = "white" {}
+        _NormalTex ("Normal Texture", 2D) = "white" {}
+        _SpecularTex ("Specular Texture", 2D) = "white" {}
+        _Shininess ("Shininess", Range(0, 1)) = 0.5
+    }
+    
+    SubShader {
+        Pass {
+            // renderstate
+
+            // glsl
+            GLSLPROGRAM
+
+            struct VertexInput {
+                vec3 position;
+                vec3 normal;
+                vec2 texcoord;
+                float y;
+            };
+
+            vec3 cross(vec3 a, vec3 b){
+                return vec3(a.y*b.z - a.z*b.y, a.z*b.x - a.x*b.z, a.x*b.y - a.y*b.x);
+            }
+
+            void vert() {
+                mat4 model = mat4();
+                float pos3 = model[1][2];
+                gl_Position = MUSES_MATRIX_MVP * MUSES_POSITION;
+            }
+            
+
+            void frag() {
+                gl_FragColor = vec4(0., 0., 0., 1.);
+            }
+
+            ENDGLSL
+        }
+    }
+
+    FallBack "Diffuse"
+}

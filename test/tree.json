@@ -1,0 +1,8 @@
+{
+  "passes": [
+    {
+      "vert": "\nuniform highp mat4 MUSES_MATRIX_MVP;\nattribute highp vec4 MUSES_POSITION;\nvoid main() {\n    highp mat4 model = mat4();\n    highp float pos3 = model[1][2];\n    gl_Position = MUSES_MATRIX_MVP * MUSES_POSITION;\n}",
+      "frag": "\n\nvoid main() {\n    gl_FragColor = vec4(0.,0.,0.,1.);\n}"
+    }
+  ]
+}
