@@ -1,6 +1,6 @@
 {
   "name": "muses",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "a web shader compiler",
   "main": "src/index.ts",
   "author": "qyjbeijing",

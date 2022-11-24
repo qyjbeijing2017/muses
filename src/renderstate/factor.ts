@@ -1,0 +1,17 @@
+export enum Factor{
+    One = 'One',
+    Zero = 'Zero',
+    SrcColor = 'SrcColor',
+    OneMinusSrcColor = 'OneMinusSrcColor',
+    DstColor = 'DstColor',
+    OneMinusDstColor = 'OneMinusDstColor',
+    SrcAlpha = 'SrcAlpha',
+    OneMinusSrcAlpha = 'OneMinusSrcAlpha',
+    DstAlpha = 'DstAlpha',
+    OneMinusDstAlpha = 'OneMinusDstAlpha',
+    SrcAlphaSaturate = 'SrcAlphaSaturate',
+    ConstantColor = 'ConstantColor',
+    OneMinusConstantColor = 'OneMinusConstantColor',
+    ConstantAlpha = 'ConstantAlpha',
+    OneMinusConstantAlpha = 'OneMinusConstantAlpha',
+}
