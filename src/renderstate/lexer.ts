@@ -26,11 +26,9 @@ export const On = createToken({ name: "On", pattern: /On/ });
 
 
 //blend factor
-export const BlendFactorValue = createToken({
-    name: "BlendFactorAdd", pattern: Lexer.NA
-});
+export const BlendFactorValue = createToken({ name: "BlendFactorValue", pattern: Lexer.NA });
 
-export const Zero = createToken({ name: "Zero", pattern: /Zero/ });
+export const Zero = createToken({ name: "Zero", pattern: /Zero/, categories: [BlendFactorValue] });
 export const One = createToken({ name: "One", pattern: /One/, categories: [BlendFactorValue] });
 export const SrcColor = createToken({ name: "SrcColor", pattern: /SrcColor/, categories: [BlendFactorValue] });
 export const OneMinusSrcColor = createToken({ name: "OneMinusSrcColor", pattern: /OneMinusSrcColor/, categories: [BlendFactorValue] });
@@ -51,85 +49,46 @@ export const OneMinusConstantAlpha = createToken({ name: "OneMinusConstantAlpha"
 
 
 //blend op
-export const Add = createToken({ name: "Add", pattern: /Add/ });
-export const Subtract = createToken({ name: "Subtract", pattern: /Subtract/ });
-export const ReverseSubtract = createToken({ name: "ReverseSubtract", pattern: /ReverseSubtract/ });
-export const Min = createToken({ name: "Min", pattern: /Min/ });
-export const Max = createToken({ name: "Max", pattern: /Max/ });
-export const LogicalClear = createToken({ name: "LogicalClear", pattern: /LogicalClear/ });
-export const LogicalSet = createToken({ name: "LogicalSet", pattern: /LogicalSet/ });
-export const LogicalCopy = createToken({ name: "LogicalCopy", pattern: /LogicalCopy/ });
-export const LogicalCopyInverted = createToken({ name: "LogicalCopyInverted", pattern: /LogicalCopyInverted/ });
-export const LogicalNoop = createToken({ name: "LogicalNoop", pattern: /LogicalNoop/ });
-export const LogicalInvert = createToken({ name: "LogicalInvert", pattern: /LogicalInvert/ });
-export const LogicalAnd = createToken({ name: "LogicalAnd", pattern: /LogicalAnd/ });
-export const LogicalNand = createToken({ name: "LogicalNand", pattern: /LogicalNand/ });
-export const LogicalOr = createToken({ name: "LogicalOr", pattern: /LogicalOr/ });
-export const LogicalNor = createToken({ name: "LogicalNor", pattern: /LogicalNor/ });
-export const LogicalXor = createToken({ name: "LogicalXor", pattern: /LogicalXor/ });
-export const LogicalEquiv = createToken({ name: "LogicalEquiv", pattern: /LogicalEquiv/ });
-export const LogicalAndReverse = createToken({ name: "LogicalAndReverse", pattern: /LogicalAndReverse/ });
-export const LogicalAndInverted = createToken({ name: "LogicalAndInverted", pattern: /LogicalAndInverted/ });
-export const LogicalOrReverse = createToken({ name: "LogicalOrReverse", pattern: /LogicalOrReverse/ });
-export const LogicalOrInverted = createToken({ name: "LogicalOrInverted", pattern: /LogicalOrInverted/ });
+export const BlendOpValue = createToken({ name: "BlendOpValue", pattern: Lexer.NA });
+export const Add = createToken({ name: "Add", pattern: /Add/, categories: [BlendOpValue] });
+export const Subtract = createToken({ name: "Subtract", pattern: /Subtract/, categories: [BlendOpValue] });
+export const ReverseSubtract = createToken({ name: "ReverseSubtract", pattern: /ReverseSubtract/, categories: [BlendOpValue] });
+export const Min = createToken({ name: "Min", pattern: /Min/, categories: [BlendOpValue] });
+export const Max = createToken({ name: "Max", pattern: /Max/, categories: [BlendOpValue] });
+export const LogicalClear = createToken({ name: "LogicalClear", pattern: /LogicalClear/, categories: [BlendOpValue] });
+export const LogicalSet = createToken({ name: "LogicalSet", pattern: /LogicalSet/, categories: [BlendOpValue] });
+export const LogicalCopy = createToken({ name: "LogicalCopy", pattern: /LogicalCopy/, categories: [BlendOpValue] });
+export const LogicalCopyInverted = createToken({ name: "LogicalCopyInverted", pattern: /LogicalCopyInverted/, categories: [BlendOpValue] });
+export const LogicalNoop = createToken({ name: "LogicalNoop", pattern: /LogicalNoop/, categories: [BlendOpValue] });
+export const LogicalInvert = createToken({ name: "LogicalInvert", pattern: /LogicalInvert/, categories: [BlendOpValue] });
+export const LogicalAnd = createToken({ name: "LogicalAnd", pattern: /LogicalAnd/, categories: [BlendOpValue] });
+export const LogicalNand = createToken({ name: "LogicalNand", pattern: /LogicalNand/, categories: [BlendOpValue] });
+export const LogicalOr = createToken({ name: "LogicalOr", pattern: /LogicalOr/, categories: [BlendOpValue] });
+export const LogicalNor = createToken({ name: "LogicalNor", pattern: /LogicalNor/, categories: [BlendOpValue] });
+export const LogicalXor = createToken({ name: "LogicalXor", pattern: /LogicalXor/, categories: [BlendOpValue] });
+export const LogicalEquiv = createToken({ name: "LogicalEquiv", pattern: /LogicalEquiv/, categories: [BlendOpValue] });
+export const LogicalAndReverse = createToken({ name: "LogicalAndReverse", pattern: /LogicalAndReverse/, categories: [BlendOpValue] });
+export const LogicalAndInverted = createToken({ name: "LogicalAndInverted", pattern: /LogicalAndInverted/, categories: [BlendOpValue] });
+export const LogicalOrReverse = createToken({ name: "LogicalOrReverse", pattern: /LogicalOrReverse/, categories: [BlendOpValue] });
+export const LogicalOrInverted = createToken({ name: "LogicalOrInverted", pattern: /LogicalOrInverted/, categories: [BlendOpValue] });
 
-export const Mutiply = createToken({ name: "Mutiply", pattern: /Mutiply/ });
-export const Screen = createToken({ name: "Screen", pattern: /Screen/ });
-export const Overlay = createToken({ name: "Overlay", pattern: /Overlay/ });
-export const Darken = createToken({ name: "Darken", pattern: /Darken/ });
-export const Lighten = createToken({ name: "Lighten", pattern: /Lighten/ });
-export const ColorDodge = createToken({ name: "ColorDodge", pattern: /ColorDodge/ });
-export const ColorBurn = createToken({ name: "ColorBurn", pattern: /ColorBurn/ });
-export const HardLight = createToken({ name: "HardLight", pattern: /HardLight/ });
-export const SoftLight = createToken({ name: "SoftLight", pattern: /SoftLight/ });
-export const Difference = createToken({ name: "Difference", pattern: /Difference/ });
-export const Exclusion = createToken({ name: "Exclusion", pattern: /Exclusion/ });
-export const HSLHue = createToken({ name: "HSLHue", pattern: /HSLHue/ });
-export const HSLSaturation = createToken({ name: "HSLSaturation", pattern: /HSLSaturation/ });
-export const HSLColor = createToken({ name: "HSLColor", pattern: /HSLColor/ });
-export const HSLLuminosity = createToken({ name: "HSLLuminosity", pattern: /HSLLuminosity/ });
+export const Mutiply = createToken({ name: "Mutiply", pattern: /Mutiply/, categories: [BlendOpValue] });
+export const Screen = createToken({ name: "Screen", pattern: /Screen/, categories: [BlendOpValue] });
+export const Overlay = createToken({ name: "Overlay", pattern: /Overlay/, categories: [BlendOpValue] });
+export const Darken = createToken({ name: "Darken", pattern: /Darken/, categories: [BlendOpValue] });
+export const Lighten = createToken({ name: "Lighten", pattern: /Lighten/, categories: [BlendOpValue] });
+export const ColorDodge = createToken({ name: "ColorDodge", pattern: /ColorDodge/, categories: [BlendOpValue] });
+export const ColorBurn = createToken({ name: "ColorBurn", pattern: /ColorBurn/, categories: [BlendOpValue] });
+export const HardLight = createToken({ name: "HardLight", pattern: /HardLight/, categories: [BlendOpValue] });
+export const SoftLight = createToken({ name: "SoftLight", pattern: /SoftLight/, categories: [BlendOpValue] });
+export const Difference = createToken({ name: "Difference", pattern: /Difference/, categories: [BlendOpValue] });
+export const Exclusion = createToken({ name: "Exclusion", pattern: /Exclusion/, categories: [BlendOpValue] });
+export const HSLHue = createToken({ name: "HSLHue", pattern: /HSLHue/, categories: [BlendOpValue] });
+export const HSLSaturation = createToken({ name: "HSLSaturation", pattern: /HSLSaturation/, categories: [BlendOpValue] });
+export const HSLColor = createToken({ name: "HSLColor", pattern: /HSLColor/, categories: [BlendOpValue] });
+export const HSLLuminosity = createToken({ name: "HSLLuminosity", pattern: /HSLLuminosity/, categories: [BlendOpValue] });
 
-export const BlendOpValue = createToken({
-    name: "BlendOpValue", pattern: Lexer.NA, categories: [
-        Add,
-        Subtract,
-        ReverseSubtract,
-        Min,
-        Max,
-        LogicalClear,
-        LogicalSet,
-        LogicalCopyInverted,
-        LogicalCopy,
-        LogicalNoop,
-        LogicalInvert,
-        LogicalAnd,
-        LogicalNand,
-        LogicalOr,
-        LogicalNor,
-        LogicalXor,
-        LogicalEquiv,
-        LogicalAndReverse,
-        LogicalAndInverted,
-        LogicalOrReverse,
-        LogicalOrInverted,
 
-        Mutiply,
-        Screen,
-        Overlay,
-        Darken,
-        Lighten,
-        ColorDodge,
-        ColorBurn,
-        HardLight,
-        SoftLight,
-        Difference,
-        Exclusion,
-        HSLHue,
-        HSLSaturation,
-        HSLColor,
-        HSLLuminosity,
-    ]
-});
 
 // stencil key
 export const Ref = createToken({ name: "Ref", pattern: /Ref/ });
@@ -150,88 +109,50 @@ export const ZFailFront = createToken({ name: "ZFailFront", pattern: /ZFailFront
 
 
 //stencil op
+export const StencilOpValue = createToken({ name: "StencilOpValue", pattern: Lexer.NA });
+export const Keep = createToken({ name: "Keep", pattern: /Keep/, categories: [StencilOpValue] });
+export const Replace = createToken({ name: "Replace", pattern: /Replace/, categories: [StencilOpValue] });
+export const IncrSat = createToken({ name: "IncrSat", pattern: /IncrSat/, categories: [StencilOpValue] });
+export const DecrSat = createToken({ name: "DecrSat", pattern: /DecrSat/, categories: [StencilOpValue] });
+export const Invert = createToken({ name: "Invert", pattern: /Invert/, categories: [StencilOpValue] });
+export const IncrWrap = createToken({ name: "IncrWrap", pattern: /IncrWrap/, categories: [StencilOpValue] });
+export const DecrWrap = createToken({ name: "DecrWrap", pattern: /DecrWrap/, categories: [StencilOpValue] });
 
-export const Keep = createToken({ name: "Keep", pattern: /Keep/ });
-export const Replace = createToken({ name: "Replace", pattern: /Replace/ });
-export const IncrSat = createToken({ name: "IncrSat", pattern: /IncrSat/ });
-export const DecrSat = createToken({ name: "DecrSat", pattern: /DecrSat/ });
-export const Invert = createToken({ name: "Invert", pattern: /Invert/ });
-export const IncrWrap = createToken({ name: "IncrWrap", pattern: /IncrWrap/ });
-export const DecrWrap = createToken({ name: "DecrWrap", pattern: /DecrWrap/ });
 
-export const StencilOpValue = createToken({
-    name: "StencilOpValue", pattern: Lexer.NA, categories: [
-        Keep,
-        Replace,
-        IncrSat,
-        DecrSat,
-        Invert,
-        IncrWrap,
-        DecrWrap,
-    ]
-});
 
 //compare op
-export const Never = createToken({ name: "Never", pattern: /Never/ });
-export const Less = createToken({ name: "Less", pattern: /Less/ });
-export const Equal = createToken({ name: "Equal", pattern: /Equal/ });
-export const LEqual = createToken({ name: "LEqual", pattern: /LEqual/ });
-export const Greater = createToken({ name: "Greater", pattern: /Greater/ });
-export const NotEqual = createToken({ name: "NotEqual", pattern: /NotEqual/ });
-export const GEqual = createToken({ name: "GEqual", pattern: /GEqual/ });
-export const Always = createToken({ name: "Always", pattern: /Always/ });
+export const CompareOpValue = createToken({ name: "CompareOpValue", pattern: Lexer.NA });
+export const Never = createToken({ name: "Never", pattern: /Never/, categories: [CompareOpValue] });
+export const Less = createToken({ name: "Less", pattern: /Less/, categories: [CompareOpValue] });
+export const Equal = createToken({ name: "Equal", pattern: /Equal/, categories: [CompareOpValue] });
+export const LEqual = createToken({ name: "LEqual", pattern: /LEqual/, categories: [CompareOpValue] });
+export const Greater = createToken({ name: "Greater", pattern: /Greater/, categories: [CompareOpValue] });
+export const NotEqual = createToken({ name: "NotEqual", pattern: /NotEqual/, categories: [CompareOpValue] });
+export const GEqual = createToken({ name: "GEqual", pattern: /GEqual/, categories: [CompareOpValue] });
+export const Always = createToken({ name: "Always", pattern: /Always/, categories: [CompareOpValue] });
 
-export const CompareOpValue = createToken({
-    name: "CompareOpValue", pattern: Lexer.NA, categories: [
-        Never,
-        Less,
-        LEqual,
-        GEqual,
-        NotEqual,
-        Equal,
-        Greater,
-        Always,
-    ]
-});
+
 
 
 // z clip
-export const ZClipValue = createToken({
-    name: "ZClipValue", pattern: Lexer.NA, categories: [
-        True,
-        False,
-    ]
-});
-
-export const True = createToken({ name: "True", pattern: /True/ });
-export const False = createToken({ name: "False", pattern: /False/ });
+export const ZClipValue = createToken({ name: "ZClipValue", pattern: Lexer.NA });
+export const True = createToken({ name: "True", pattern: /True/, categories: [ZClipValue] });
+export const False = createToken({ name: "False", pattern: /False/, categories: [ZClipValue] });
 
 
 // color mask
-export const R = createToken({ name: "R", pattern: /R/ });
-export const G = createToken({ name: "G", pattern: /G/ });
-export const B = createToken({ name: "B", pattern: /B/ });
-export const A = createToken({ name: "A", pattern: /A/ });
+export const ColorMaskValue = createToken({ name: "ColorMaskValue", pattern: Lexer.NA });
+export const R = createToken({ name: "R", pattern: /R/, categories: [ColorMaskValue] });
+export const G = createToken({ name: "G", pattern: /G/, categories: [ColorMaskValue] });
+export const B = createToken({ name: "B", pattern: /B/, categories: [ColorMaskValue] });
+export const A = createToken({ name: "A", pattern: /A/, categories: [ColorMaskValue] });
 
-export const ColorMaskValue = createToken({
-    name: "ColorMaskValue", pattern: Lexer.NA, categories: [
-        R,
-        G,
-        B,
-        A,
-    ]
-});
 
 // cull mode
-export const Front = createToken({ name: "Front", pattern: /Front/ });
-export const Back = createToken({ name: "Back", pattern: /Back/ });
+export const CullModeValue = createToken({ name: "CullModeValue", pattern: Lexer.NA });
+export const Front = createToken({ name: "Front", pattern: /Front/, categories: [CullModeValue] });
+export const Back = createToken({ name: "Back", pattern: /Back/, categories: [CullModeValue] });
 
-export const CullModeValue = createToken({
-    name: "CullModeValue", pattern: Lexer.NA, categories: [
-        Front,
-        Back,
-    ]
-});
 
 // lod
 export const LOD = createToken({ name: "LOD", pattern: /LOD/ });
@@ -245,7 +166,6 @@ export const renderStatesTokens = [
     Comment,
 
     AlphaToMask,
-    BlendOpValue,
     BlendOp,
     Blend,
     ColorMask,
@@ -257,6 +177,47 @@ export const renderStatesTokens = [
     ZWrite,
     Conservative,
 
+
+    Add,
+    Subtract,
+    ReverseSubtract,
+    Min,
+    Max,
+    LogicalClear,
+    LogicalSet,
+    LogicalCopyInverted,
+    LogicalCopy,
+    LogicalNoop,
+    LogicalInvert,
+    LogicalAndReverse,
+    LogicalAndInverted,
+    LogicalAnd,
+    LogicalNand,
+    LogicalOrReverse,
+    LogicalOrInverted,
+    LogicalOr,
+    LogicalNor,
+    LogicalXor,
+    LogicalEquiv,
+
+
+    Mutiply,
+    Screen,
+    Overlay,
+    Darken,
+    Lighten,
+    ColorDodge,
+    ColorBurn,
+    HardLight,
+    SoftLight,
+    Difference,
+    Exclusion,
+    HSLHue,
+    HSLSaturation,
+    HSLColor,
+    HSLLuminosity,
+
+    // BlendFactorValue,
     Zero,
     OneMinusConstantAlpha,
     OneMinusConstantColor,
@@ -267,14 +228,31 @@ export const renderStatesTokens = [
     SrcAlphaSaturate,
     ConstantColor,
     ConstantAlpha,
-    StencilOpValue,
-    CompareOpValue,
+
+    Keep,
+    Replace,
+    IncrSat,
+    DecrSat,
+    Invert,
+    IncrWrap,
+    DecrWrap,
+
+    Never,
+    Less,
+    LEqual,
+    GEqual,
+    NotEqual,
+    Equal,
+    Greater,
+    Always,
+
     SrcAlpha,
     DstAlpha,
     DstColor,
     SrcColor,
     One,
-    ZClipValue,
+    True,
+    False,
 
     Ref,
     ReadMask,
@@ -296,11 +274,16 @@ export const renderStatesTokens = [
     LeftBrace,
     RightBrace,
 
-    ColorMaskValue,
-    CullModeValue,
+    Front,
+    Back,
 
     Off,
     On,
+
+    R,
+    G,
+    B,
+    A,
 
     NumberLiteral,
     StringLiteral,

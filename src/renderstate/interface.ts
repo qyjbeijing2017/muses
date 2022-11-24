@@ -8,17 +8,21 @@ import { ZTestOp } from "./ztestop";
 export interface IRenderState {
     AlphaToMask: boolean;
     Blend: {
-        enabled: boolean;
-        sfactor: Factor;
-        dfactor: Factor;
+        targets: Map<number, {
+            enabled: boolean;
+            sfactor: Factor,
+            dfactor: Factor,
+            sfactorA?: Factor,
+            dfactorA?: Factor,
+        }>;
         op: BlendOp;
     };
     ColorMask: {
         enabled: boolean;
-        r: boolean;
-        g: boolean;
-        b: boolean;
-        a: boolean;
+        r?: boolean;
+        g?: boolean;
+        b?: boolean;
+        a?: boolean;
     };
     Conservative: boolean;
     Cull: {

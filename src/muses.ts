@@ -45,8 +45,14 @@ export class Muses {
         const column = fontText.length - fontText.lastIndexOf("\n");
 
         const lexer = propertiesLexer.tokenize(propertiesStr);
+        if(lexer.errors.length > 0) {
+            throw new Error(lexer.errors[0].message);
+        }
         propertiesParser.input = lexer.tokens;
         const parse = propertiesParser.parse();
+        if(propertiesParser.errors.length > 0) {
+            throw new Error(propertiesParser.errors[0].message);
+        }
         return parse;
     }
 

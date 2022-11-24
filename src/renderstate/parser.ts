@@ -1,4 +1,5 @@
 import { EmbeddedActionsParser } from 'chevrotain'
+import { Comma } from '../properties/lexer';
 import { BlendOp } from './blendop';
 import { CompOp } from './compop';
 import { CullState } from './cullstate';
@@ -48,23 +49,38 @@ export class RenderStateParser extends EmbeddedActionsParser {
     });
 
     blend = this.RULE('blend', () => {
-        const blend = {
-            enabled: false,
-            sfactor: Factor.One,
-            dfactor: Factor.Zero,
+        const blend: {
+            enabled: boolean,
+            target?: number,
+            sfactor: Factor,
+            dfactor: Factor,
+            sfactorA?: Factor,
+            dfactorA?: Factor,
+        } = {
+            enabled: true,
+            sfactor: Factor.SrcAlpha,
+            dfactor: Factor.OneMinusSrcAlpha,
         };
         this.CONSUME(Blend);
+        this.OPTION(() => {
+            const targetStr = this.CONSUME(NumberLiteral).image;
+            blend.target = parseInt(targetStr);
+        });
         this.OR([
             { ALT: () => blend.enabled = this.CONSUME(Off).image !== 'OFF' },
-            { ALT: () => blend.sfactor = this.CONSUME(Zero).image as Factor },
-            { ALT: () => blend.sfactor = this.CONSUME(BlendFactorValue).image as Factor },
+            {
+                ALT: () => {
+                    blend.sfactor = this.CONSUME(BlendFactorValue).image as Factor;
+                    blend.dfactor = this.CONSUME1(BlendFactorValue).image as Factor;
+                    this.OPTION1(() => {
+                        this.CONSUME(Comma);
+                        blend.sfactorA = this.CONSUME2(BlendFactorValue).image as Factor;
+                        blend.dfactorA = this.CONSUME3(BlendFactorValue).image as Factor;
+                    });
+                }
+            }
         ]);
-        this.OPTION(() => {
-            this.OR1([
-                { ALT: () => blend.dfactor = this.CONSUME1(Zero).image as Factor },
-                { ALT: () => blend.dfactor = this.CONSUME1(BlendFactorValue).image as Factor },
-            ]);
-        });
+
         return blend;
     });
 
@@ -106,7 +122,7 @@ export class RenderStateParser extends EmbeddedActionsParser {
         this.CONSUME(Cull);
         this.OR([
             { ALT: () => cull.mode = this.CONSUME(CullModeValue).image as CullState },
-            { ALT: () => cull.enabled = this.CONSUME(Off).image !== 'OFF' },
+            { ALT: () => cull.enabled = this.CONSUME(Off).image !== 'Off' },
         ]);
 
         return cull;
@@ -299,9 +315,13 @@ export class RenderStateParser extends EmbeddedActionsParser {
         let renderState: IRenderState = {
             AlphaToMask: false,
             Blend: {
-                enabled: false,
-                sfactor: Factor.One,
-                dfactor: Factor.Zero,
+                targets: new Map([
+                    [-1, {
+                        enabled: false,
+                        sfactor: Factor.SrcAlpha,
+                        dfactor: Factor.OneMinusSrcAlpha,
+                    }],
+                ]),
                 op: BlendOp.Add,
             },
             ColorMask: {
@@ -351,7 +371,17 @@ export class RenderStateParser extends EmbeddedActionsParser {
                 { ALT: () => renderState.Lod = this.SUBRULE(this.lod) },
                 { ALT: () => renderState.Tags = this.SUBRULE(this.tags) },
                 { ALT: () => renderState.AlphaToMask = this.SUBRULE(this.alphaToMash) },
-                { ALT: () => { let blen = this.SUBRULE(this.blend); renderState.Blend = Object.assign({}, renderState.Blend, blen) } },
+                {
+                    ALT: () => {
+                        let blen = this.SUBRULE(this.blend);
+                        if (blen.target) {
+                            renderState.Blend.targets.set(blen.target, blen);
+                        } else {
+                            renderState.Blend.targets.clear();
+                            renderState.Blend.targets.set(-1, blen);
+                        }
+                    }
+                },
                 { ALT: () => renderState.Blend.op = this.SUBRULE(this.blendOp) },
                 { ALT: () => renderState.ColorMask = this.SUBRULE(this.colorMask) },
                 { ALT: () => renderState.Conservative = this.SUBRULE(this.conservative) },
@@ -363,7 +393,7 @@ export class RenderStateParser extends EmbeddedActionsParser {
                 { ALT: () => renderState.ZWrite = this.SUBRULE(this.zwrite) },
             ]);
         });
-
+        
         return renderState;
     });
 }

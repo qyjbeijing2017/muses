@@ -8,7 +8,7 @@ Shader "Default" {
         _Cubemap ("Cubemap", Cube) = "white" {}
     }
     SubShader {
-        Cull Off
+        Cull Front
         Blend SrcAlpha One
         Pass {
         }
