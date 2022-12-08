@@ -110,6 +110,19 @@ export class GLSLContext {
         this._localVariables.pop();
     }
 
+    checkOperator(left: string, right: string, operator: string): string | null {
+        const type = this.getType(left);
+        if (!type) {
+            return null;
+        }
+        for (const rule of type.rules) {
+            if (rule.test.test(left + operator + right)) {
+                return rule.returnType;
+            }
+        }
+        return null;
+    }
+
     constructor() {
         this._variables = {};
         this._functions = {};
@@ -122,6 +135,8 @@ export class GLSLContext {
             'bool': {
                 name: 'bool',
                 rules: [
+                    { test: /^bool=bool$/, returnType: 'bool' },
+                    { test: /^bool\!=bool$/, returnType: 'bool' },
                     { test: /^bool\(int\)$/, returnType: 'bool' },
                     { test: /^bool\(float\)$/, returnType: 'bool' },
                 ],
@@ -129,6 +144,7 @@ export class GLSLContext {
             'float': {
                 name: 'float',
                 rules: [
+                    { test: /^float=float$/, returnType: 'float' },
                     { test: /^float+float$/, returnType: 'float' },
                     { test: /^float\-float$/, returnType: 'float' },
                     { test: /^float\*float$/, returnType: 'float' },
@@ -147,6 +163,7 @@ export class GLSLContext {
             'int': {
                 name: 'int',
                 rules: [
+                    { test: /^int=int$/, returnType: 'int' },
                     { test: /^int+int$/, returnType: 'int' },
                     { test: /^int\-int$/, returnType: 'int' },
                     { test: /^int\*int$/, returnType: 'int' },
@@ -159,6 +176,7 @@ export class GLSLContext {
             'vec2': {
                 name: 'vec2',
                 rules: [
+                    { test: /^vec2=vec2$/, returnType: 'vec2'},
                     { test: /^vec2+vec2$/, returnType: 'vec2' },
                     { test: /^vec2\-vec2$/, returnType: 'vec2' },
                     { test: /^vec2\*vec2$/, returnType: 'vec2' },
@@ -171,6 +189,7 @@ export class GLSLContext {
             'vec3': {
                 name: 'vec3',
                 rules: [
+                    { test: /^vec3=vec3$/, returnType: 'vec3'},
                     { test: /^vec3+vec3$/, returnType: 'vec3' },
                     { test: /^vec3\-vec3$/, returnType: 'vec3' },
                     { test: /^vec3\*vec3$/, returnType: 'vec3' },
@@ -183,6 +202,7 @@ export class GLSLContext {
             'vec4': {
                 name: 'vec4',
                 rules: [
+                    { test: /^vec4=vec4$/, returnType: 'vec4'},
                     { test: /^vec4+vec4$/, returnType: 'vec4' },
                     { test: /^vec4\-vec4$/, returnType: 'vec4' },
                     { test: /^vec4\*vec4$/, returnType: 'vec4' },

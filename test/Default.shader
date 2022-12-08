@@ -33,6 +33,7 @@ Shader "Default" {
             void vert(float a);
 
             void vert(float a){
+                float c,b=1.;
             }
 
             ENDGLSL

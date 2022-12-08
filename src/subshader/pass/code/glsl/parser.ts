@@ -7,8 +7,80 @@ export class GlslParser extends CstParser {
         this.performSelfAnalysis();
     }
 
+    auto = this.RULE("auto", () => {
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.Literials, { LABEL: 'literial' }) },
+        ]);
+    });
+
+    orExpression = this.RULE("orExpression", () => {
+        this.SUBRULE(this.auto, { LABEL: "left" });
+        this.MANY(() => {
+            this.CONSUME(musesToken.Or, { LABEL: "operator" });
+            this.SUBRULE1(this.auto, { LABEL: "right" });
+        });
+    });
+
+    conditionalExpression = this.RULE("conditionalExpression", () => {
+        this.SUBRULE(this.auto, { LABEL: "testExpression" });
+        this.OPTION(() => {
+            this.CONSUME(musesToken.QuestionMark);
+            this.SUBRULE1(this.conditionalExpression, { LABEL: "consequent" });
+            this.CONSUME(musesToken.Colon);
+            this.SUBRULE2(this.conditionalExpression, { LABEL: "alternate" });
+        });
+    });
+
+    assignExpression = this.RULE("assignExpression", () => {
+        this.SUBRULE(this.conditionalExpression, { LABEL: "left" });
+        this.OPTION(() => {
+            this.OR([
+                { ALT: () => this.CONSUME(musesToken.Assign, { LABEL: 'operator' }) },
+                { ALT: () => this.CONSUME(musesToken.AddAssign, { LABEL: 'operator' }) },
+                { ALT: () => this.CONSUME(musesToken.SubAssign, { LABEL: 'operator' }) },
+                { ALT: () => this.CONSUME(musesToken.MulAssign, { LABEL: 'operator' }) },
+                { ALT: () => this.CONSUME(musesToken.DivAssign, { LABEL: 'operator' }) },
+            ]);
+            this.SUBRULE2(this.assignExpression, { LABEL: "right" });
+        });
+    });
+
+    variableInitializer = this.RULE("variableInitializer", () => {
+        this.CONSUME(musesToken.Identifier, { LABEL: "name" });
+        this.OPTION(() => {
+            this.CONSUME(musesToken.Assign);
+            this.SUBRULE2(this.assignExpression, { LABEL: "init" });
+        });
+    });
+
+    variableDeclaration = this.RULE("variableDeclaration", () => {
+        this.OPTION(() => this.CONSUME(musesToken.Const, { LABEL: "const" }));
+        this.OPTION1(() => this.CONSUME(musesToken.Percision, { LABEL: "percision" }));
+        this.OR([
+            { ALT: () => this.CONSUME(musesToken.Types, { LABEL: 'typeName' }) },
+            { ALT: () => this.CONSUME(musesToken.Identifier, { LABEL: 'typeName' }) },
+        ]);
+        this.AT_LEAST_ONE_SEP({
+            SEP: musesToken.Comma,
+            DEF: () => {
+                this.SUBRULE(this.variableInitializer, { LABEL: "variable" });
+            },
+        });
+        this.CONSUME(musesToken.Semicolon);
+    });
+
+    statement = this.RULE("statement", () => {
+        this.OR([
+            { ALT: () => this.SUBRULE(this.variableDeclaration, { LABEL: "statement" }) },
+            { ALT: () => this.SUBRULE(this.blockStatement, { LABEL: "statement" }) },
+        ]);
+    });
+
     blockStatement = this.RULE("blockStatement", () => {
         this.CONSUME(musesToken.LeftBrace);
+        this.MANY(() => {
+            this.SUBRULE(this.statement, { LABEL: "statements" });
+        });
         this.CONSUME(musesToken.RightBrace);
     });
 
@@ -54,7 +126,7 @@ export class GlslParser extends CstParser {
         this.AT_LEAST_ONE_SEP({
             SEP: musesToken.Comma,
             DEF: () => {
-                this.CONSUME1(musesToken.Identifier, { LABEL: "variable" });
+                this.SUBRULE(this.variableInitializer, { LABEL: "variable" });
             },
         });
         this.CONSUME(musesToken.Semicolon);

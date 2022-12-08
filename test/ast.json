@@ -63,7 +63,25 @@
         ],
         "body": {
           "type": "blockStatement",
-          "body": []
+          "body": [
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "float",
+              "isConst": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "float",
+              "isConst": false,
+              "init": {
+                "type": "literial",
+                "typeName": "float",
+                "value": "1."
+              }
+            }
+          ]
         }
       }
     ]
@@ -132,7 +150,25 @@
         ],
         "body": {
           "type": "blockStatement",
-          "body": []
+          "body": [
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "float",
+              "isConst": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "float",
+              "isConst": false,
+              "init": {
+                "type": "literial",
+                "typeName": "float",
+                "value": "1."
+              }
+            }
+          ]
         }
       }
     ]

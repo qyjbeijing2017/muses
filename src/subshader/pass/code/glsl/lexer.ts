@@ -110,10 +110,11 @@ export const Dot = createToken({ name: 'Dot', pattern: /\./ });
 export const Colon = createToken({ name: 'Colon', pattern: /:/ });
 
 // Constants
-export const True = createToken({ name: 'True', pattern: /true/, longer_alt: Identifier });
-export const False = createToken({ name: 'False', pattern: /false/, longer_alt: Identifier });
-export const FloatLiterial = createToken({ name: 'FloatLiterial', pattern: /(0|[1-9]\d*)\.\d*/ });
-export const IntLiterial = createToken({ name: 'IntLiterial', pattern: /([1-9]\d*|0)|(0x[0-9A-F]*)|(0b[0-1]*)|(0[0-7]*)/ });
+export const Literials = createToken({ name: 'Literials', pattern: Lexer.NA });
+export const True = createToken({ name: 'True', pattern: /true/, longer_alt: Identifier, categories: Literials });
+export const False = createToken({ name: 'False', pattern: /false/, longer_alt: Identifier, categories: Literials });
+export const FloatLiterial = createToken({ name: 'FloatLiterial', pattern: /(0|[1-9]\d*)\.\d*/, categories: Literials });
+export const IntLiterial = createToken({ name: 'IntLiterial', pattern: /([1-9]\d*|0)|(0x[0-9A-F]*)|(0b[0-1]*)|(0[0-7]*)/, categories: Literials });
 export const StringLiterial = createToken({ name: 'StringLiterial', pattern: /"[^"]*"/ });
 
 
@@ -226,6 +227,7 @@ export const musesTokens: TokenType[] = [
     Dot,                            // .
 
     // constants
+    Literials,
     True,                           // true
     False,                          // false
     FloatLiterial,                  // 0|[1-9]\d*\.\d*
@@ -323,6 +325,7 @@ export const musesToken = {
     StorageQualifiers,
     GlobalStorageQualifiers,
     ParamStrorageQualifiers,
+    Literials,
 }
 
 // Lexer
