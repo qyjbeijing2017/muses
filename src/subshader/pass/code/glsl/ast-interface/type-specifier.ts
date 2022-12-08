@@ -4,6 +4,6 @@ import { IVariableDeclaration } from './declaration/variable-declaration';
 export interface ITypeSpecifier extends AstNode {
     type: 'typeSpecifier' | 'structDeclaration';
     name: string;
-    isStruct: boolean;
+    isStruct?: boolean;
     members?: IVariableDeclaration[];
 }

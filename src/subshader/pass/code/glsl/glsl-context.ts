@@ -17,7 +17,7 @@ export interface IGLSLVariableContext {
 
 export interface IGLSLFunctionContext {
     sign: string;
-    returnType: string;
+    returnTypeName: string;
     parameters: {
         name: string;
         typeName: string;
@@ -58,19 +58,19 @@ export class GLSLContext {
 
     setFunction(func: {
         name: string;
-        returnType: string;
+        returnTypeName: string;
         parameters: {
             name: string;
             typeName: string;
         }[]
     }) {
-        const sign = func.name + '(' + func.parameters.map((p) => p.typeName).join(',') + ')' + func.returnType;
+        const sign = func.name + '(' + func.parameters.map((p) => p.typeName).join(',') + ')' + func.returnTypeName;
         if (this._functions[sign]) {
             throw new Error('function ' + sign + ' already exists');
         }
         this._functions[sign] = {
             sign,
-            returnType: func.returnType,
+            returnTypeName: func.returnTypeName,
             parameters: func.parameters,
         };
     }
@@ -106,6 +106,10 @@ export class GLSLContext {
         this._functions = {};
         this._localVariables = [];
         this._types = {
+            'void': {
+                name: 'void',
+                rules: [],
+            },
             'bool': {
                 name: 'bool',
                 rules: [

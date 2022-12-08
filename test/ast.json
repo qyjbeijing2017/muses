@@ -7,23 +7,107 @@
         "declarators": [
           {
             "type": "variableDeclarator",
-            "name": "a",
-            "typeName": "float",
+            "name": "love1",
+            "typeName": "",
             "typeSpecifier": {
-              "type": "typeSpecifier",
-              "name": "float",
-              "isStruct": false
+              "type": "structDeclaration",
+              "name": "Love",
+              "isStruct": true,
+              "rules": [
+                {
+                  "test": {}
+                },
+                {
+                  "test": {}
+                }
+              ],
+              "members": [
+                {
+                  "type": "variableDeclaration",
+                  "declarators": [
+                    {
+                      "type": "variableDeclarator",
+                      "name": "a",
+                      "typeName": "",
+                      "typeSpecifier": {
+                        "type": "typeSpecifier",
+                        "name": "float",
+                        "isStruct": false
+                      },
+                      "const": false
+                    }
+                  ]
+                },
+                {
+                  "type": "variableDeclaration",
+                  "declarators": [
+                    {
+                      "type": "variableDeclarator",
+                      "name": "b",
+                      "typeName": "",
+                      "typeSpecifier": {
+                        "type": "typeSpecifier",
+                        "name": "int",
+                        "isStruct": false
+                      },
+                      "const": false
+                    }
+                  ]
+                }
+              ]
             },
             "const": false
           },
           {
             "type": "variableDeclarator",
-            "name": "b",
-            "typeName": "float",
+            "name": "love2",
+            "typeName": "",
             "typeSpecifier": {
-              "type": "typeSpecifier",
-              "name": "float",
-              "isStruct": false
+              "type": "structDeclaration",
+              "name": "Love",
+              "isStruct": true,
+              "rules": [
+                {
+                  "test": {}
+                },
+                {
+                  "test": {}
+                }
+              ],
+              "members": [
+                {
+                  "type": "variableDeclaration",
+                  "declarators": [
+                    {
+                      "type": "variableDeclarator",
+                      "name": "a",
+                      "typeName": "",
+                      "typeSpecifier": {
+                        "type": "typeSpecifier",
+                        "name": "float",
+                        "isStruct": false
+                      },
+                      "const": false
+                    }
+                  ]
+                },
+                {
+                  "type": "variableDeclaration",
+                  "declarators": [
+                    {
+                      "type": "variableDeclarator",
+                      "name": "b",
+                      "typeName": "",
+                      "typeSpecifier": {
+                        "type": "typeSpecifier",
+                        "name": "int",
+                        "isStruct": false
+                      },
+                      "const": false
+                    }
+                  ]
+                }
+              ]
             },
             "const": false
           }
@@ -39,23 +123,107 @@
         "declarators": [
           {
             "type": "variableDeclarator",
-            "name": "a",
-            "typeName": "float",
+            "name": "love1",
+            "typeName": "",
             "typeSpecifier": {
-              "type": "typeSpecifier",
-              "name": "float",
-              "isStruct": false
+              "type": "structDeclaration",
+              "name": "Love",
+              "isStruct": true,
+              "rules": [
+                {
+                  "test": {}
+                },
+                {
+                  "test": {}
+                }
+              ],
+              "members": [
+                {
+                  "type": "variableDeclaration",
+                  "declarators": [
+                    {
+                      "type": "variableDeclarator",
+                      "name": "a",
+                      "typeName": "",
+                      "typeSpecifier": {
+                        "type": "typeSpecifier",
+                        "name": "float",
+                        "isStruct": false
+                      },
+                      "const": false
+                    }
+                  ]
+                },
+                {
+                  "type": "variableDeclaration",
+                  "declarators": [
+                    {
+                      "type": "variableDeclarator",
+                      "name": "b",
+                      "typeName": "",
+                      "typeSpecifier": {
+                        "type": "typeSpecifier",
+                        "name": "int",
+                        "isStruct": false
+                      },
+                      "const": false
+                    }
+                  ]
+                }
+              ]
             },
             "const": false
           },
           {
             "type": "variableDeclarator",
-            "name": "b",
-            "typeName": "float",
+            "name": "love2",
+            "typeName": "",
             "typeSpecifier": {
-              "type": "typeSpecifier",
-              "name": "float",
-              "isStruct": false
+              "type": "structDeclaration",
+              "name": "Love",
+              "isStruct": true,
+              "rules": [
+                {
+                  "test": {}
+                },
+                {
+                  "test": {}
+                }
+              ],
+              "members": [
+                {
+                  "type": "variableDeclaration",
+                  "declarators": [
+                    {
+                      "type": "variableDeclarator",
+                      "name": "a",
+                      "typeName": "",
+                      "typeSpecifier": {
+                        "type": "typeSpecifier",
+                        "name": "float",
+                        "isStruct": false
+                      },
+                      "const": false
+                    }
+                  ]
+                },
+                {
+                  "type": "variableDeclaration",
+                  "declarators": [
+                    {
+                      "type": "variableDeclarator",
+                      "name": "b",
+                      "typeName": "",
+                      "typeSpecifier": {
+                        "type": "typeSpecifier",
+                        "name": "int",
+                        "isStruct": false
+                      },
+                      "const": false
+                    }
+                  ]
+                }
+              ]
             },
             "const": false
           }
