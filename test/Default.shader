@@ -23,13 +23,16 @@ Shader "Default" {
             GLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            struct Love {
-                float a;
-                int b;
-            } love1, love2;
 
-            void vert(float c, int a){
-                float b;
+            struct Love {
+                float c,a;
+            };
+
+            uniform Love love;
+
+            void vert(float a);
+
+            void vert(float a){
             }
 
             ENDGLSL

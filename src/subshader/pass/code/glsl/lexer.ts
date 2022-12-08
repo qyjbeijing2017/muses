@@ -48,14 +48,16 @@ export const SamplerCube = createToken({ name: 'SamplerCube', pattern: /samplerC
 
 // Qualifier
 export const StorageQualifiers = createToken({ name: 'StorageQualifiers', pattern: Lexer.NA });
-export const Attribute = createToken({ name: 'Attribute', pattern: /attribute/, longer_alt: Identifier, categories: StorageQualifiers });
-export const Uniform = createToken({ name: 'Uniform', pattern: /uniform/, longer_alt: Identifier, categories: StorageQualifiers });
-export const Varying = createToken({ name: 'Varying', pattern: /varying/, longer_alt: Identifier, categories: StorageQualifiers });
-export const InOut = createToken({ name: 'InOut', pattern: /inout/, longer_alt: Identifier, categories: StorageQualifiers });
+export const GlobalStorageQualifiers = createToken({ name: 'GlobalStorageQualifiers', pattern: Lexer.NA });
+export const ParamStrorageQualifiers = createToken({ name: 'ParamStrorageQualifiers', pattern: Lexer.NA });
+export const Attribute = createToken({ name: 'Attribute', pattern: /attribute/, longer_alt: Identifier, categories: [StorageQualifiers, GlobalStorageQualifiers] });
+export const Uniform = createToken({ name: 'Uniform', pattern: /uniform/, longer_alt: Identifier, categories: [StorageQualifiers, GlobalStorageQualifiers] });
+export const Varying = createToken({ name: 'Varying', pattern: /varying/, longer_alt: Identifier, categories: [StorageQualifiers, GlobalStorageQualifiers] });
+export const InOut = createToken({ name: 'InOut', pattern: /inout/, longer_alt: Identifier, categories: [StorageQualifiers, ParamStrorageQualifiers] });
 export const Invariant = createToken({ name: 'Invariant', pattern: /invariant/, longer_alt: Identifier });
-export const In = createToken({ name: 'In', pattern: /in/, longer_alt: Identifier, categories: StorageQualifiers });
-export const Out = createToken({ name: 'Out', pattern: /out/, longer_alt: Identifier, categories: StorageQualifiers });
-export const Const = createToken({ name: 'Const', pattern: /const/, longer_alt: Identifier, categories: StorageQualifiers });
+export const In = createToken({ name: 'In', pattern: /in/, longer_alt: Identifier, categories: [StorageQualifiers, ParamStrorageQualifiers] });
+export const Out = createToken({ name: 'Out', pattern: /out/, longer_alt: Identifier, categories: [StorageQualifiers, ParamStrorageQualifiers] });
+export const Const = createToken({ name: 'Const', pattern: /const/, longer_alt: Identifier, categories: [StorageQualifiers, GlobalStorageQualifiers] });
 
 // Precision
 export const PercisionQualifiers = createToken({ name: 'PercisionQualifiers', pattern: Lexer.NA });
@@ -161,6 +163,9 @@ export const musesTokens: TokenType[] = [
     Struct,                         // struct
 
     // qualifier
+    StorageQualifiers,
+    GlobalStorageQualifiers,
+    ParamStrorageQualifiers,
     Attribute,                      // attribute
     Uniform,                        // uniform
     Varying,                        // varying
@@ -316,6 +321,8 @@ export const musesToken = {
     Types,
     PercisionQualifiers,
     StorageQualifiers,
+    GlobalStorageQualifiers,
+    ParamStrorageQualifiers,
 }
 
 // Lexer

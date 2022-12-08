@@ -22,6 +22,7 @@ export interface IGLSLFunctionContext {
         name: string;
         typeName: string;
     }[];
+    onlyDefine?: boolean;
 }
 
 export class GLSLContext {
@@ -40,17 +41,20 @@ export class GLSLContext {
         return this._variables[name] || null;
     }
     setVariable(variable: IGLSLVariableContext) {
+        const name = variable.name;
         if (this._localVariables.length !== 0) {
-            if (this._localVariables[this._localVariables.length - 1][variable.name]) {
+            const lastIndex = this._localVariables.length - 1;
+            if (this._localVariables[lastIndex][name]) {
                 throw new Error('variable ' + name + ' already exists in current scope');
-            }
-            this._localVariables[this._localVariables.length - 1][variable.name] = variable;
+            };
+            this._localVariables[lastIndex][name] = variable;
             return;
         }
-        if (this._variables[variable.name]) {
+        if (this._variables[name]) {
             throw new Error('variable ' + name + ' already exists in global scope');
         }
-        this._variables[variable.name] = variable;
+        this._variables[name] = variable;
+
     }
     getFunction(sign: string): IGLSLFunctionContext | null {
         return this._functions[sign] || null;
@@ -62,16 +66,20 @@ export class GLSLContext {
         parameters: {
             name: string;
             typeName: string;
-        }[]
+        }[],
+        onlyDefine?: boolean;
     }) {
         const sign = func.name + '(' + func.parameters.map((p) => p.typeName).join(',') + ')' + func.returnTypeName;
         if (this._functions[sign]) {
-            throw new Error('function ' + sign + ' already exists');
+            if (!this._functions[sign].onlyDefine || func.onlyDefine) {
+                throw new Error('function ' + sign + ' already exists');
+            }
         }
         this._functions[sign] = {
             sign,
             returnTypeName: func.returnTypeName,
             parameters: func.parameters,
+            onlyDefine: func.onlyDefine,
         };
     }
 
@@ -91,13 +99,14 @@ export class GLSLContext {
         this._localVariables.push({});
     }
     addScope() {
-        if(this._isFunctionParameter) {
+        if (this._isFunctionParameter) {
             this._isFunctionParameter = false;
             return;
         }
         this._localVariables.push({});
     }
     popScope() {
+        this._isFunctionParameter = false;
         this._localVariables.pop();
     }
 
@@ -171,7 +180,7 @@ export class GLSLContext {
                     { test: /^vec3\(float(,float){0,2}\)$/, returnType: 'vec3' },
                 ],
             },
-            'vec4':{
+            'vec4': {
                 name: 'vec4',
                 rules: [
                     { test: /^vec4+vec4$/, returnType: 'vec4' },

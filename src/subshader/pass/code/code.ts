@@ -1,9 +1,7 @@
 import { parser } from '@shaderfrog/glsl-parser';
 import { IProperty } from '../../../properties/properties';
-import { MusesGLSL } from './glsl/ast/glsl';
-import { MusesGLSLContext } from './glsl/context/glsl';
-import { glslCtxDefine } from './glsl/context/glsl.ctx';
-import { MusesPassContext } from './glsl/context/pass';
+import { IProgram } from './glsl/ast-interface/program';
+import { GLSLContext } from './glsl/glsl-context';
 import { glslLexer } from './glsl/lexer';
 import { glslParser } from './glsl/parser';
 import { glslPreprocess } from './glsl/preprocess';
@@ -77,10 +75,12 @@ export class Code {
         }
 
         glslParser.input = lex.tokens;
-        const ast = glslParser.glsl();
+        const cst = glslParser.glsl();
         if (glslParser.errors.length > 0) {
             throw new Error(glslParser.errors[0].message);
         }
+        glslVisitor.ctx = new GLSLContext();
+        const  ast = glslVisitor.visit(cst) as IProgram;
         // const ast = glslVisitor.visit(cst) as MusesGLSL;
 
         // const ctx = new MusesPassContext(glslCtxDefine);
@@ -88,6 +88,7 @@ export class Code {
 
         return {
             ast: ast,
+            // ast: cst,
             vertexFunctionName,
             fragmentFunctionName,
         };
