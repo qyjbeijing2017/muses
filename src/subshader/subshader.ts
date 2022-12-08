@@ -1,19 +1,25 @@
 import { matchRecursiveRegExp } from "../../utils/matchRecursiveRegExp";
-import { IRenderState } from "../renderstate/interface";
+import { IRenderState } from "../renderstate/renderstate";
 import { renderStatesLexer } from "../renderstate/lexer";
 import { renderStateParser } from "../renderstate/parser";
+import { Pass } from "./pass/pass";
 
 export class SubShader {
-    readonly renderStates: IRenderState;
+    readonly renderStates: Partial<IRenderState>;
+    readonly passes: Pass[];
     constructor(readonly source: string) {
         const passesSource = matchRecursiveRegExp(source, "{", "}", "g");
+        const passesTitle = source.match(/Pass|Tags|Stencil/g) || [];
         let rsSource = source;
-        passesSource.forEach((passSource) => {
-            rsSource = rsSource.replace(new RegExp(`Pass\\s*{${passSource}}`), '');
+        this.passes = [];
+        passesSource.map((passSource, index) => {
+            rsSource = rsSource.replace(passSource, '');
+            rsSource = rsSource.replace(new RegExp(`Pass\\s*{}`), '');
+            if(passesTitle[index] === "Pass") {
+                this.passes.push(new Pass(passSource, this));
+            }
         });
-
         this.renderStates = SubShader.Parse(rsSource);
-        console.log(this.renderStates);
     }
 
     static Parse(source: string) {

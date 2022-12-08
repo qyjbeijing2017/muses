@@ -1,0 +1,66 @@
+{
+  "vertAst": {
+    "type": "program",
+    "statements": [
+      {
+        "type": "variableDeclaration",
+        "declarators": [
+          {
+            "type": "variableDeclarator",
+            "name": "a",
+            "typeName": "float",
+            "typeSpecifier": {
+              "type": "typeSpecifier",
+              "name": "float",
+              "isStruct": false
+            },
+            "const": false
+          },
+          {
+            "type": "variableDeclarator",
+            "name": "b",
+            "typeName": "float",
+            "typeSpecifier": {
+              "type": "typeSpecifier",
+              "name": "float",
+              "isStruct": false
+            },
+            "const": false
+          }
+        ]
+      }
+    ]
+  },
+  "fragAst": {
+    "type": "program",
+    "statements": [
+      {
+        "type": "variableDeclaration",
+        "declarators": [
+          {
+            "type": "variableDeclarator",
+            "name": "a",
+            "typeName": "float",
+            "typeSpecifier": {
+              "type": "typeSpecifier",
+              "name": "float",
+              "isStruct": false
+            },
+            "const": false
+          },
+          {
+            "type": "variableDeclarator",
+            "name": "b",
+            "typeName": "float",
+            "typeSpecifier": {
+              "type": "typeSpecifier",
+              "name": "float",
+              "isStruct": false
+            },
+            "const": false
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,11 +1,10 @@
 import { EmbeddedActionsParser } from 'chevrotain'
-import { Comma } from '../properties/lexer';
 import { BlendOp } from './blendop';
 import { CompOp } from './compop';
 import { CullState } from './cullstate';
 import { Factor } from './factor';
-import { IRenderState } from './interface';
-import { AlphaToMask, Assign, Blend, BlendFactorValue, BlendOp as BlendOpLex, BlendOpValue, ColorMask, ColorMaskValue, Comp, CompareOpValue, CompBack, CompFront, Conservative, Cull, CullModeValue, Fail, FailBack, FailFront, LeftBrace, LOD, NumberLiteral, Off, Offset, On, Pass, PassBack, PassFront, ReadMask, Ref, renderStatesTokens, RightBrace, Stencil, StencilOpValue, StringLiteral, Tags, True, WriteMask, ZClip, ZClipValue, Zero, ZFail, ZFailBack, ZFailFront, ZTest, ZWrite } from './lexer';
+import { IRenderState } from './renderstate';
+import { AlphaToMask, Assign, Blend, BlendFactorValue, BlendOp as BlendOpLex, BlendOpValue, ColorMask, ColorMaskValue, Comma, Comp, CompareOpValue, CompBack, CompFront, Conservative, Cull, CullModeValue, Fail, FailBack, FailFront, LeftBrace, LOD, NumberLiteral, Off, Offset, On, Pass, PassBack, PassFront, ReadMask, Ref, renderStatesTokens, RightBrace, Stencil, StencilOpValue, StringLiteral, Tags, True, WriteMask, ZClip, ZClipValue, Zero, ZFail, ZFailBack, ZFailFront, ZTest, ZWrite } from './lexer';
 import { StencilOp } from './stencilop';
 import { ZTestOp } from './ztestop';
 
@@ -21,9 +20,9 @@ export class RenderStateParser extends EmbeddedActionsParser {
         this.CONSUME(Tags);
         this.CONSUME(LeftBrace);
         this.MANY(() => {
-            const key = this.CONSUME(StringLiteral).image;
+            const key = this.CONSUME(StringLiteral).image.slice(1, -1);
             this.CONSUME(Assign);
-            const value = this.CONSUME1(StringLiteral).image;
+            const value = this.CONSUME1(StringLiteral).image.slice(1, -1);
             tags[key] = value;
         });
         this.CONSUME(RightBrace);
@@ -312,59 +311,7 @@ export class RenderStateParser extends EmbeddedActionsParser {
 
 
     parse = this.RULE('parse', () => {
-        let renderState: IRenderState = {
-            AlphaToMask: false,
-            Blend: {
-                targets: new Map([
-                    [-1, {
-                        enabled: false,
-                        sfactor: Factor.SrcAlpha,
-                        dfactor: Factor.OneMinusSrcAlpha,
-                    }],
-                ]),
-                op: BlendOp.Add,
-            },
-            ColorMask: {
-                enabled: false,
-                r: true,
-                g: true,
-                b: true,
-                a: true,
-            },
-            Conservative: false,
-            Cull: {
-                enabled: true,
-                mode: CullState.Back,
-            },
-            Offset: {
-                enabled: false,
-                factor: -1,
-                units: -1,
-            },
-            Stencil: {
-                enabled: false,
-                Ref: 0,
-                ReadMask: 0,
-                WriteMask: 0,
-                Comp: CompOp.Always,
-                Pass: StencilOp.Keep,
-                Fail: StencilOp.Keep,
-                ZFail: StencilOp.Keep,
-                CompBack: CompOp.Always,
-                PassBack: StencilOp.Keep,
-                FailBack: StencilOp.Keep,
-                ZFailBack: StencilOp.Keep,
-                CompFront: CompOp.Always,
-                PassFront: StencilOp.Keep,
-                FailFront: StencilOp.Keep,
-                ZFailFront: StencilOp.Keep,
-            },
-            ZClip: false,
-            ZTest: ZTestOp.Always,
-            ZWrite: true,
-            Tags: {},
-            Lod: 0,
-        };
+        let renderState: Partial<IRenderState> = {};
 
         this.MANY(() => {
             this.OR([
@@ -373,6 +320,18 @@ export class RenderStateParser extends EmbeddedActionsParser {
                 { ALT: () => renderState.AlphaToMask = this.SUBRULE(this.alphaToMash) },
                 {
                     ALT: () => {
+                        if (!renderState.Blend) {
+                            renderState.Blend = {
+                                targets: new Map([
+                                    [-1, {
+                                        enabled: false,
+                                        sfactor: Factor.SrcAlpha,
+                                        dfactor: Factor.OneMinusSrcAlpha,
+                                    }],
+                                ]),
+                                op: BlendOp.Add,
+                            };
+                        }
                         let blen = this.SUBRULE(this.blend);
                         if (blen.target) {
                             renderState.Blend.targets.set(blen.target, blen);
@@ -382,7 +341,23 @@ export class RenderStateParser extends EmbeddedActionsParser {
                         }
                     }
                 },
-                { ALT: () => renderState.Blend.op = this.SUBRULE(this.blendOp) },
+                {
+                    ALT: () => {
+                        if (!renderState.Blend) {
+                            renderState.Blend = {
+                                targets: new Map([
+                                    [-1, {
+                                        enabled: false,
+                                        sfactor: Factor.SrcAlpha,
+                                        dfactor: Factor.OneMinusSrcAlpha,
+                                    }],
+                                ]),
+                                op: BlendOp.Add,
+                            };
+                        }
+                        renderState.Blend.op = this.SUBRULE(this.blendOp)
+                    }
+                },
                 { ALT: () => renderState.ColorMask = this.SUBRULE(this.colorMask) },
                 { ALT: () => renderState.Conservative = this.SUBRULE(this.conservative) },
                 { ALT: () => renderState.Cull = this.SUBRULE(this.cull) },
@@ -393,7 +368,7 @@ export class RenderStateParser extends EmbeddedActionsParser {
                 { ALT: () => renderState.ZWrite = this.SUBRULE(this.zwrite) },
             ]);
         });
-        
+
         return renderState;
     });
 }

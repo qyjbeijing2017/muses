@@ -1,18 +1,43 @@
 Shader "Default" {
     Properties {
-        _MainTex ("Texture", 2D) = "white" {}
-        _Color ("Color", Color) = (1,1,1,1)
-        _Vector ("Vector", Vector) = (0,0,0,0)
-        _Float ("Float", Float) = 0
-        _Range ("Range", Range(0,1)) = 0
-        _Cubemap ("Cubemap", Cube) = "white" {}
     }
     SubShader {
         Cull Front
-        Blend SrcAlpha One
-        Pass {
+        Blend 1 SrcAlpha One, OneMinusSrcAlpha OneMinusSrcAlpha
+        Blend 2 SrcAlpha One, OneMinusSrcAlpha OneMinusSrcAlpha
+        LOD 100
+        Tags {
+            "Queue"="Transparent"
+            "IgnoreProjector"="True"
+            "RenderType"="Transparent"
+            "PreviewType"="Plane"
+            "CanUseSpriteAtlas"="True"
         }
+
         Pass {
+        
+            Cull Back
+            Blend SrcAlpha OneMinusSrcAlpha
+            LOD 100
+
+            GLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+
+            struct appdata {
+                vec4 vertex;
+                lowp vec4 color;
+            };
+
+            // struct Love {
+            //     lowp float love1;
+            // } a;
+
+            // void vert(float c, int a){
+            //     float b;
+            // }
+
+            ENDGLSL
         }
     }
     FallBack "Diffuse"

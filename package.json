@@ -42,6 +42,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "@shaderfrog/glsl-parser": "^0.3.0",
     "chevrotain": "^10.4.0",
     "uuid": "^9.0.0"
   }

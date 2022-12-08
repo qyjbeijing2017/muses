@@ -1,5 +1,5 @@
 import { EmbeddedActionsParser } from 'chevrotain'
-import { IProperty, PropertyType, PropertyValue } from './interface';
+import { IProperty, PropertyType, PropertyValue } from './properties';
 import { propertiesTokens, Comma, Equal, Identifier, LeftBrace, LeftParen, NumberLiteral, RightBrace, RightParen, StringLiteral, Type2D, Type3D, TypeColor, TypeCube, TypeFloat, TypeInt, TypeRange, TypeVector } from './lexer'
 
 export class PropertiesParser extends EmbeddedActionsParser {
@@ -91,7 +91,7 @@ export class PropertiesParser extends EmbeddedActionsParser {
         const type = this.CONSUME(Type2D, { LABEL: 'type' }).image as PropertyType;
         this.CONSUME(RightParen);
         this.CONSUME(Equal);
-        const value = this.CONSUME(StringLiteral, { LABEL: 'value' }).image;
+        const value = this.CONSUME(StringLiteral, { LABEL: 'value' }).image.slice(1, -1);
         this.CONSUME(LeftBrace);
         this.CONSUME1(RightBrace);
         return { type, value };
@@ -101,7 +101,7 @@ export class PropertiesParser extends EmbeddedActionsParser {
         const type = this.CONSUME(Type3D, { LABEL: 'type' }).image as PropertyType;
         this.CONSUME(RightParen);
         this.CONSUME(Equal);
-        const value = this.CONSUME(StringLiteral, { LABEL: 'value' }).image;
+        const value = this.CONSUME(StringLiteral, { LABEL: 'value' }).image.slice(1, -1);
         this.CONSUME(LeftBrace);
         this.CONSUME1(RightBrace);
         return { type, value };
@@ -111,7 +111,7 @@ export class PropertiesParser extends EmbeddedActionsParser {
         const type = this.CONSUME(TypeCube, { LABEL: 'type' }).image as PropertyType;
         this.CONSUME(RightParen);
         this.CONSUME(Equal);
-        const value = this.CONSUME(StringLiteral, { LABEL: 'value' }).image;
+        const value = this.CONSUME(StringLiteral, { LABEL: 'value' }).image.slice(1, -1);
         this.CONSUME(LeftBrace);
         this.CONSUME1(RightBrace);
         return { type, value };
@@ -129,7 +129,7 @@ export class PropertiesParser extends EmbeddedActionsParser {
             } | null = null;
             const name = this.CONSUME(Identifier, { LABEL: 'name' }).image;
             this.CONSUME(LeftParen);
-            const label = this.CONSUME(StringLiteral, { LABEL: 'label' }).image;
+            const label = this.CONSUME(StringLiteral, { LABEL: 'label' }).image.slice(1, -1);
             this.CONSUME(Comma);
             this.OR([
                 { ALT: () => typeAndValue = this.SUBRULE(this.floatType) },

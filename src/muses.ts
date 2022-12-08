@@ -1,8 +1,12 @@
 import { matchRecursiveRegExp } from "../utils/matchRecursiveRegExp";
-import { IProperty } from "./properties/interface";
+import { IProperty } from "./properties/properties";
 import { propertiesLexer } from "./properties/lexer";
 import { propertiesParser } from "./properties/parser";
 import { SubShader } from "./subshader/subshader";
+import { MusesManager } from "./muse-manager";
+import { ParserProgram } from '@shaderfrog/glsl-parser/dist/parser/parser';
+import { generate } from '@shaderfrog/glsl-parser';
+import { NodeVisitors, visit } from '@shaderfrog/glsl-parser/dist/ast';
 
 
 export class Muses {
@@ -10,12 +14,17 @@ export class Muses {
     readonly fallBack: string | null;
     readonly properties: IProperty[];
     readonly subShaders: SubShader[];
-    constructor(readonly source: string) {
+    readonly manager: MusesManager;
+
+    constructor(source: string, manager: MusesManager) {
         this.name = Muses.getName(source);
         this.fallBack = Muses.getFallBack(source);
         this.properties = Muses.getProperties(source);
         this.subShaders = Muses.getSubShaders(source);
+        manager.addMuses(this);
+        this.manager = manager;
     }
+
 
     static getName(source: string) {
         if (!/^\s*Shader\s*"[a-zA-Z_][a-zA-Z0-9_]*"/.test(source)) {
@@ -36,7 +45,7 @@ export class Muses {
 
     static getProperties(source: string) {
         const propertiesStr = Muses.splitProperties(source);
-        if(!propertiesStr) {
+        if (!propertiesStr) {
             return [];
         }
         const index = source.indexOf(propertiesStr);
@@ -45,12 +54,12 @@ export class Muses {
         const column = fontText.length - fontText.lastIndexOf("\n");
 
         const lexer = propertiesLexer.tokenize(propertiesStr);
-        if(lexer.errors.length > 0) {
+        if (lexer.errors.length > 0) {
             throw new Error(lexer.errors[0].message);
         }
         propertiesParser.input = lexer.tokens;
         const parse = propertiesParser.parse();
-        if(propertiesParser.errors.length > 0) {
+        if (propertiesParser.errors.length > 0) {
             throw new Error(propertiesParser.errors[0].message);
         }
         return parse;
@@ -64,17 +73,17 @@ export class Muses {
         const shaderBody = shaderBodyMatch[0];
         const propertiesMatch = matchRecursiveRegExp(shaderBody, "{", "}", "g");
         const propertiesTitleMatch = shaderBody.match(/Properties|SubShader/g);
-        if(propertiesTitleMatch?.length != propertiesMatch.length) {
+        if (propertiesTitleMatch?.length != propertiesMatch.length) {
             throw new Error("Properties or SubShader titles and bodies not same length");
         }
         for (let index = 0; index < propertiesTitleMatch.length; index++) {
             const element = propertiesTitleMatch[index];
-            if(element === "Properties") {
+            if (element === "Properties") {
                 return propertiesMatch[index];
             }
         }
     }
-    
+
     static getSubShaders(source: string) {
         const subShaders = Muses.splitSubShaders(source);
         return subShaders.map((subShader) => {
@@ -90,13 +99,13 @@ export class Muses {
         const shaderBody = shaderBodyMatch[0];
         const subShadersMatch = matchRecursiveRegExp(shaderBody, "{", "}", "g");
         const subShadersTitleMatch = shaderBody.match(/Properties|SubShader/g);
-        if(subShadersTitleMatch?.length != subShadersMatch.length) {
+        if (subShadersTitleMatch?.length != subShadersMatch.length) {
             throw new Error("Properties or SubShader titles and bodies not same length");
         }
         const subShaders: string[] = [];
         for (let index = 0; index < subShadersTitleMatch.length; index++) {
             const element = subShadersTitleMatch[index];
-            if(element === "SubShader") {
+            if (element === "SubShader") {
                 subShaders.push(subShadersMatch[index]);
             }
         }
@@ -105,5 +114,13 @@ export class Muses {
 
     static shaderBody(source: string) {
         return matchRecursiveRegExp(source, "{", "}", "g");
+    }
+
+    static generate(ast: ParserProgram) {
+        return generate(ast);
+    }
+
+    static visit(ast: ParserProgram, visitor: NodeVisitors) {
+        return visit(ast, visitor);
     }
 }

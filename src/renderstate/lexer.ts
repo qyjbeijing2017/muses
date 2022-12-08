@@ -157,6 +157,7 @@ export const Back = createToken({ name: "Back", pattern: /Back/, categories: [Cu
 // lod
 export const LOD = createToken({ name: "LOD", pattern: /LOD/ });
 
+export const Comma = createToken({ name: "Comma", pattern: /,/ });
 export const LeftBrace = createToken({ name: "LeftBrace", pattern: /\{/ });
 export const RightBrace = createToken({ name: "RightBrace", pattern: /\}/ });
 export const Assign = createToken({ name: "Assign", pattern: /=/ });
@@ -178,6 +179,7 @@ export const renderStatesTokens = [
     Conservative,
 
 
+    BlendOpValue,
     Add,
     Subtract,
     ReverseSubtract,
@@ -217,8 +219,7 @@ export const renderStatesTokens = [
     HSLColor,
     HSLLuminosity,
 
-    // BlendFactorValue,
-    Zero,
+    BlendFactorValue,
     OneMinusConstantAlpha,
     OneMinusConstantColor,
     OneMinusSrcColor,
@@ -228,7 +229,18 @@ export const renderStatesTokens = [
     SrcAlphaSaturate,
     ConstantColor,
     ConstantAlpha,
+    SrcAlpha,
+    DstAlpha,
+    DstColor,
+    SrcColor,
+    Zero,
+    One,
 
+    ZClipValue,
+    True,
+    False,
+
+    StencilOpValue,
     Keep,
     Replace,
     IncrSat,
@@ -237,6 +249,7 @@ export const renderStatesTokens = [
     IncrWrap,
     DecrWrap,
 
+    CompareOpValue,
     Never,
     Less,
     LEqual,
@@ -246,13 +259,6 @@ export const renderStatesTokens = [
     Greater,
     Always,
 
-    SrcAlpha,
-    DstAlpha,
-    DstColor,
-    SrcColor,
-    One,
-    True,
-    False,
 
     Ref,
     ReadMask,
@@ -271,15 +277,18 @@ export const renderStatesTokens = [
     ZFail,
 
     LOD,
+    Tags,
     LeftBrace,
     RightBrace,
 
+    CullModeValue,
     Front,
     Back,
 
     Off,
     On,
 
+    ColorMaskValue,
     R,
     G,
     B,
@@ -288,6 +297,7 @@ export const renderStatesTokens = [
     NumberLiteral,
     StringLiteral,
     Assign,
+    Comma,
 ];
 
 export const renderStatesLexer = new Lexer(renderStatesTokens);
