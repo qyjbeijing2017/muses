@@ -1,5 +1,6 @@
 import preprocess from '@shaderfrog/glsl-parser/dist/preprocessor';
 import { IProperty } from '../../../../properties/properties';
+import { GLSLContext } from './glsl-context';
 
 function properties2glsl(options: {
     properties: IProperty[]
@@ -42,6 +43,8 @@ export function glslPreprocess(source: string, options?: {
     output = output.replace(/#pragma\s+vertex\s+(\w+)/, '');
     output = output.replace(/#pragma\s+fragment\s+(\w+)/, '');
 
+    const ctx = new GLSLContext();
+
     // replace include
     const includeRegex = /#include\s+<(\w+)>/g;
     let match;
@@ -66,5 +69,6 @@ export function glslPreprocess(source: string, options?: {
         code: output,
         vertexFunctionName,
         fragmentFunctionName,
+        ctx,
     };
 }

@@ -6,6 +6,7 @@ import { glslLexer } from './glsl/lexer';
 import { glslParser } from './glsl/parser';
 import { glslPreprocess } from './glsl/preprocess';
 import { glslVisitor } from './glsl/visiter';
+import { ILexingResult } from 'chevrotain';
 
 export class Code {
     constructor(readonly source: string, readonly type: 'GLSL' | 'HLSL' | 'CG') {
@@ -21,6 +22,7 @@ export class Code {
             ast: any,
             vertexFunctionName: string,
             fragmentFunctionName: string,
+            lex: ILexingResult,
         } | null = null;
 
         switch (this.type) {
@@ -42,20 +44,8 @@ export class Code {
             throw new Error(`Unsupported code type ${this.type}`);
         }
 
-        // get all global variables
-        // visit(codeTree.ast, {
-        //     function: {
-        //         enter: (node) => {
-        //             console.log(node);
-        //         },
-        //     }
-        // })
-
-
-
         return {
-            vertAst: codeTree.ast,
-            fragAst: codeTree.ast,
+            ast: codeTree.ast,
         };
     }
 
@@ -65,7 +55,7 @@ export class Code {
         properties?: IProperty[];
         instance?: boolean;
     }) {
-        const { code, fragmentFunctionName, vertexFunctionName } = glslPreprocess(this.source, options);
+        const { code, fragmentFunctionName, vertexFunctionName, ctx } = glslPreprocess(this.source, options);
         // parse
         // const ast = parser.parse(code);
 
@@ -79,16 +69,12 @@ export class Code {
         if (glslParser.errors.length > 0) {
             throw new Error(glslParser.errors[0].message);
         }
-        glslVisitor.ctx = new GLSLContext();
-        const  ast = glslVisitor.visit(cst) as IProgram;
-        // const ast = glslVisitor.visit(cst) as MusesGLSL;
-
-        // const ctx = new MusesPassContext(glslCtxDefine);
-        // ast.check(ctx);
+        glslVisitor.ctx = ctx;
+        const ast = glslVisitor.visit(cst) as IProgram;
 
         return {
             ast: ast,
-            // ast: cst,
+            lex: lex,
             vertexFunctionName,
             fragmentFunctionName,
         };

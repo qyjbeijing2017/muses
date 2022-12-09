@@ -11,4 +11,5 @@ export interface IVariableDeclaration extends IDeclaration, IStatement {
     const?: boolean;
     storage?: 'in' | 'out' | 'inout' | 'uniform' | 'varying' | 'attribute';
     init?: IExpression
+    arrayLength?: IExpression;
 }

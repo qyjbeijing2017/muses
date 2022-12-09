@@ -5,6 +5,7 @@ export interface IGLSLTypeContext {
         test: RegExp;
         returnType: string;
     }[];
+    percision?: 'lowp' | 'mediump' | 'highp';
 }
 
 export interface IGLSLVariableContext {
@@ -13,6 +14,7 @@ export interface IGLSLVariableContext {
     percision?: 'lowp' | 'mediump' | 'highp';
     const?: boolean;
     storage?: 'in' | 'out' | 'inout' | 'uniform' | 'varying' | 'attribute';
+    arrayLength?: any;
 }
 
 export interface IGLSLFunctionContext {
@@ -56,8 +58,22 @@ export class GLSLContext {
         this._variables[name] = variable;
 
     }
-    getFunction(sign: string): IGLSLFunctionContext | null {
-        return this._functions[sign] || null;
+    getFunctionOrConstructor(sign: string): { isConstructor?: boolean, typeName: string } | null {
+        if (this._functions[sign]) {
+            return { typeName: this._functions[sign].returnTypeName };
+        }
+        const typeName = sign.split('(')[0];
+        const type = this.getType(typeName);
+        if (type) {
+            const rules = type.rules;
+            for (let i = 0; i < rules.length; i++) {
+                const rule = rules[i];
+                if (rule.test.test(sign)) {
+                    return { isConstructor: true, typeName };
+                }
+            }
+        }
+        return null;
     }
 
     setFunction(func: {
@@ -69,7 +85,7 @@ export class GLSLContext {
         }[],
         onlyDefine?: boolean;
     }) {
-        const sign = func.name + '(' + func.parameters.map((p) => p.typeName).join(',') + ')' + func.returnTypeName;
+        const sign = func.name + '(' + func.parameters.map((p) => p.typeName).join(',') + ')';
         if (this._functions[sign]) {
             if (!this._functions[sign].onlyDefine || func.onlyDefine) {
                 throw new Error('function ' + sign + ' already exists');
@@ -110,8 +126,18 @@ export class GLSLContext {
         this._localVariables.pop();
     }
 
-    checkOperator(left: string, right: string, operator: string): string | null {
-        const type = this.getType(left);
+    checkOperator(left: string | undefined, operator: string, right: string | undefined): string | null {
+        const typeName = left || right;
+        if (!typeName) {
+            return null;
+        }
+        if (/[]$/.test(typeName)) {
+            if (right === left && operator === '=') {
+                return typeName;
+            }
+            return null;
+        }
+        const type = this.getType(typeName);
         if (!type) {
             return null;
         }
@@ -119,6 +145,47 @@ export class GLSLContext {
             if (rule.test.test(left + operator + right)) {
                 return rule.returnType;
             }
+        }
+        return null;
+    }
+
+    getMemberType(structName: string, memberName: string): string | null {
+        const type = this.getType(structName);
+        if (!type) {
+            return null;
+        }
+        for (const rule of type.rules) {
+            if (rule.test.test(structName + '.' + memberName)) {
+                return rule.returnType;
+            }
+        }
+        return null;
+    }
+
+    getIndexType(arrayName: string): string | null {
+        if (/[]$/.test(arrayName)) {
+            return arrayName.replace(/[]$/, '');
+        }
+        const type = this.getType(arrayName);
+        if (!type) {
+            return null;
+        }
+        for (const rule of type.rules) {
+            if (rule.test.test(arrayName + '[]')) {
+                return rule.returnType;
+            }
+        }
+        return null;
+    }
+
+    setPercision(percision: 'lowp' | 'mediump' | 'highp', typeName: string): string | null {
+        const type = this.getType(typeName);
+        if (!type) {
+            return null;
+        }
+        if(type.percision) {
+            type.percision = percision;
+            return percision;
         }
         return null;
     }
@@ -135,83 +202,136 @@ export class GLSLContext {
             'bool': {
                 name: 'bool',
                 rules: [
-                    { test: /^bool=bool$/, returnType: 'bool' },
-                    { test: /^bool\!=bool$/, returnType: 'bool' },
-                    { test: /^bool\(int\)$/, returnType: 'bool' },
-                    { test: /^bool\(float\)$/, returnType: 'bool' },
+                    { test: /^bool(\|\||\^\^|\&\&|\!=|=|==)bool$/, returnType: 'bool' },
+                    { test: /^bool\(int|float\)$/, returnType: 'bool' },
                 ],
             },
             'float': {
                 name: 'float',
                 rules: [
-                    { test: /^float=float$/, returnType: 'float' },
-                    { test: /^float+float$/, returnType: 'float' },
-                    { test: /^float\-float$/, returnType: 'float' },
-                    { test: /^float\*float$/, returnType: 'float' },
-                    { test: /^float\/float$/, returnType: 'float' },
-                    { test: /^float\*vec2$/, returnType: 'vec2' },
-                    { test: /^float\*vec3$/, returnType: 'vec3' },
-                    { test: /^float\*vec4$/, returnType: 'vec4' },
-                    { test: /^float\*mat2$/, returnType: 'mat2' },
-                    { test: /^float\*mat3$/, returnType: 'mat3' },
-                    { test: /^float\*mat4$/, returnType: 'mat4' },
-                    { test: /^float\(int\)$/, returnType: 'float' },
-                    { test: /^float\(float\)$/, returnType: 'float' },
-                    { test: /^float\(bool\)$/, returnType: 'float' },
+                    { test: /^float(\+|\-|\*|\/){0,1}=float$/, returnType: 'float' },
+                    { test: /^float(\+|\-|\*|\/)float$/, returnType: 'float' },
+                    { test: /^float(\>|\<|\>=|\<=|!=|==)float$/, returnType: 'bool' },
+                    { test: /^float(\+|\-|\*|\/)vec[2-4]$/, returnType: 'vec2' },
+                    { test: /^float(\+|\-|\*|\/)mat[2-4]$/, returnType: 'mat2' },
+                    { test: /^float\((int|float|bool)\)$/, returnType: 'float' },
+                    { test: /^(\+{1,2}|\-{1,2})?float(\+\+|\-\-)?$/, returnType: 'float' },
                 ],
+                percision: 'mediump',
             },
             'int': {
                 name: 'int',
                 rules: [
-                    { test: /^int=int$/, returnType: 'int' },
-                    { test: /^int+int$/, returnType: 'int' },
-                    { test: /^int\-int$/, returnType: 'int' },
-                    { test: /^int\*int$/, returnType: 'int' },
-                    { test: /^int\/int$/, returnType: 'int' },
-                    { test: /^int\(int\)$/, returnType: 'int' },
-                    { test: /^int\(float\)$/, returnType: 'int' },
-                    { test: /^int\(bool\)$/, returnType: 'int' },
+                    { test: /^int(\+|\-|\*|\/){0,1}=int$/, returnType: 'int' },
+                    { test: /^int(\+|\-|\*|\/)int$/, returnType: 'int' },
+                    { test: /^int(\>|\<|\>=|\<=|!=|==)int$/, returnType: 'bool' },
+                    { test: /^int\((int|float|bool)\)$/, returnType: 'int' },
+                    { test: /^(\+{1,2}|\-{1,2})?int(\+\+|\-\-)?$/, returnType: 'int' },
                 ],
+                percision: 'mediump',
             },
             'vec2': {
                 name: 'vec2',
                 rules: [
-                    { test: /^vec2=vec2$/, returnType: 'vec2'},
-                    { test: /^vec2+vec2$/, returnType: 'vec2' },
-                    { test: /^vec2\-vec2$/, returnType: 'vec2' },
-                    { test: /^vec2\*vec2$/, returnType: 'vec2' },
-                    { test: /^vec2\/vec2$/, returnType: 'vec2' },
-                    { test: /^vec2\*float$/, returnType: 'vec2' },
-                    { test: /^vec2\/float$/, returnType: 'vec2' },
+                    { test: /^vec2(\+|\-|\*|\/){0,1}=vec2$/, returnType: 'vec2' },
+                    { test: /^vec2(\+|\-|\*|\/)vec2$/, returnType: 'vec2' },
+                    { test: /^vec2(\+|\-|\*|\/)float$/, returnType: 'vec2' },
+                    { test: /^vec2*mat3$/, returnType: 'vec2' },
                     { test: /^vec2\(float(,float){0,1}\)$/, returnType: 'vec2' },
+                    { test: /^vec2\[\]$/, returnType: 'float' },
+                    { test: /^vec2.[xyrgst]$/, returnType: 'float' },
+                    { test: /^vec2.[xyrgst]{2}$/, returnType: 'vec2' },
+                    { test: /^vec2.[xyrgst]{3}$/, returnType: 'vec3' },
+                    { test: /^vec2.[xyrgst]{4}$/, returnType: 'vec4' },
+                    { test: /^\-vec2$/, returnType: 'vec2' },
                 ],
+                percision: 'mediump',
             },
             'vec3': {
                 name: 'vec3',
                 rules: [
-                    { test: /^vec3=vec3$/, returnType: 'vec3'},
-                    { test: /^vec3+vec3$/, returnType: 'vec3' },
-                    { test: /^vec3\-vec3$/, returnType: 'vec3' },
-                    { test: /^vec3\*vec3$/, returnType: 'vec3' },
-                    { test: /^vec3\/vec3$/, returnType: 'vec3' },
-                    { test: /^vec3\*float$/, returnType: 'vec3' },
-                    { test: /^vec3\/float$/, returnType: 'vec3' },
+                    { test: /^vec3(\+|\-|\*|\/){0,1}=vec3$/, returnType: 'vec3' },
+                    { test: /^vec3(\+|\-|\*|\/)vec3$/, returnType: 'vec3' },
+                    { test: /^vec3(\+|\-|\*|\/)float$/, returnType: 'vec3' },
+                    { test: /^vec3*mat3$/, returnType: 'vec3' },
                     { test: /^vec3\(float(,float){0,2}\)$/, returnType: 'vec3' },
+                    { test: /^vec3\[\]$/, returnType: 'float' },
+                    { test: /^vec3.[xyzrgbstr]$/, returnType: 'float' },
+                    { test: /^vec3.[xyzrgbstr]{2}$/, returnType: 'vec2' },
+                    { test: /^vec3.[xyzrgbstr]{3}$/, returnType: 'vec3' },
+                    { test: /^vec3.[xyzrgbstr]{4}$/, returnType: 'vec4' },
+                    { test: /^\-vec3$/, returnType: 'vec3' },
                 ],
+                percision: 'mediump',
             },
             'vec4': {
                 name: 'vec4',
                 rules: [
-                    { test: /^vec4=vec4$/, returnType: 'vec4'},
-                    { test: /^vec4+vec4$/, returnType: 'vec4' },
-                    { test: /^vec4\-vec4$/, returnType: 'vec4' },
-                    { test: /^vec4\*vec4$/, returnType: 'vec4' },
-                    { test: /^vec4\/vec4$/, returnType: 'vec4' },
-                    { test: /^vec4\*float$/, returnType: 'vec4' },
-                    { test: /^vec4\/float$/, returnType: 'vec4' },
-                    { test: /^vec4\(float(,float){0,2}\)$/, returnType: 'vec4' },
+                    { test: /^vec4(\+|\-|\*|\/){0,1}=vec4$/, returnType: 'vec4' },
+                    { test: /^vec4(\+|\-|\*|\/)vec4$/, returnType: 'vec4' },
+                    { test: /^vec4(\+|\-|\*|\/)float$/, returnType: 'vec4' },
+                    { test: /^vec4*mat4$/, returnType: 'vec4' },
+                    { test: /^vec4\(float(,float){0,3}\)$/, returnType: 'vec4' },
+                    { test: /^vec4\[\]$/, returnType: 'float' },
+                    { test: /^vec4.[xyzwrgbastrq]$/, returnType: 'float' },
+                    { test: /^vec4.[xyzwrgbastrq]{2}$/, returnType: 'vec2' },
+                    { test: /^vec4.[xyzwrgbastrq]{3}$/, returnType: 'vec3' },
+                    { test: /^vec4.[xyzwrgbastrq]{4}$/, returnType: 'vec4' },
+                    { test: /^\-vec4$/, returnType: 'vec4' },
                 ],
-            }
+                percision: 'mediump',
+            },
+            'mat2': {
+                name: 'mat2',
+                rules: [
+                    { test: /^mat2(\+|\-|\*|\/){0,1}=mat2$/, returnType: 'mat2' },
+                    { test: /^mat2(\+|\-|\*|\/)mat2$/, returnType: 'mat2' },
+                    { test: /^mat2(\+|\-|\*|\/)float$/, returnType: 'mat2' },
+                    { test: /^mat2*vec2$/, returnType: 'vec2' },
+                    { test: /^mat2\(float(,float){0,3}\)$/, returnType: 'mat2' },
+                    { test: /^mat2\(vec2(,vec2){0,1}\)$/, returnType: 'mat2' },
+                    { test: /^mat2\[\]$/, returnType: 'vec2' },
+                ],
+                percision: 'mediump',
+            },
+            'mat3': {
+                name: 'mat3',
+                rules: [
+                    { test: /^mat3(\+|\-|\*|\/){0,1}=mat3$/, returnType: 'mat3' },
+                    { test: /^mat3(\+|\-|\*|\/)mat3$/, returnType: 'mat3' },
+                    { test: /^mat3(\+|\-|\*|\/)float$/, returnType: 'mat3' },
+                    { test: /^mat4*vec3$/, returnType: 'vec3' },
+                    { test: /^mat3\(float(,float){0,8}\)$/, returnType: 'mat3' },
+                    { test: /^mat3\(vec3(,vec3){0,2}\)$/, returnType: 'mat3' },
+                    { test: /^mat3\[\]$/, returnType: 'vec3' },
+                ],
+                percision: 'mediump',
+            },
+            'mat4': {
+                name: 'mat4',
+                rules: [
+                    { test: /^mat4(\+|\-|\*|\/){0,1}=mat4$/, returnType: 'mat4' },
+                    { test: /^mat4(\+|\-|\*|\/)mat4$/, returnType: 'mat4' },
+                    { test: /^mat4(\+|\-|\*|\/)float$/, returnType: 'mat4' },
+                    { test: /^mat4*vec4$/, returnType: 'vec4' },
+                    { test: /^mat4\(float(,float){0,15}\)$/, returnType: 'mat4' },
+                    { test: /^mat4\(vec4(,vec4){0,3}\)$/, returnType: 'mat4' },
+                    { test: /^mat4\[\]$/, returnType: 'vec4' },
+                ],
+                percision: 'mediump',
+            },
+            'sampler2D': {
+                name: 'sampler2D',
+                rules: [
+                    { test: /^sampler2D=sampler2D$/, returnType: 'sampler2D' },
+                ],
+            },
+            'samplerCube': {
+                name: 'samplerCube',
+                rules: [
+                    { test: /^samplerCube=samplerCube$/, returnType: 'samplerCube' },
+                ],
+            },
         };
     }
 }

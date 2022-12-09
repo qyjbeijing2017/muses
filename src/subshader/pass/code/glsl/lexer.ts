@@ -20,6 +20,7 @@ export const Continue = createToken({ name: 'Continue', pattern: /continue/, lon
 export const Struct = createToken({ name: 'Struct', pattern: /struct/, longer_alt: Identifier });
 export const Switch = createToken({ name: 'Switch', pattern: /switch/, longer_alt: Identifier });
 export const Case = createToken({ name: 'Case', pattern: /case/, longer_alt: Identifier });
+export const Default = createToken({ name: 'Default', pattern: /default/, longer_alt: Identifier });
 
 // Types
 export const Types = createToken({ name: 'Types', pattern: Lexer.NA });
@@ -162,6 +163,9 @@ export const musesTokens: TokenType[] = [
     Break,                          // break
     Continue,                       // continue
     Struct,                         // struct
+    Switch,                         // switch
+    Case,                           // case
+    Default,                        // default
 
     // qualifier
     StorageQualifiers,
@@ -294,6 +298,7 @@ export const musesToken = {
     Multiply,
     Not,
     NotEqual,
+    XOr,
     Or,
     Out,
     Plus,
@@ -326,6 +331,9 @@ export const musesToken = {
     GlobalStorageQualifiers,
     ParamStrorageQualifiers,
     Literials,
+    Switch,
+    Case,
+    Default,
 }
 
 // Lexer

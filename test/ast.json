@@ -1,54 +1,838 @@
 {
+  "lex": {
+    "tokens": [
+      {
+        "image": "void",
+        "startOffset": 44,
+        "endOffset": 47,
+        "startLine": 5,
+        "endLine": 5,
+        "startColumn": 13,
+        "endColumn": 16,
+        "tokenTypeIdx": 156,
+        "tokenType": {
+          "name": "Void",
+          "PATTERN": {},
+          "tokenTypeIdx": 156,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false,
+          "LONGER_ALT": {
+            "name": "Identifier",
+            "PATTERN": {},
+            "tokenTypeIdx": 141,
+            "CATEGORIES": [],
+            "categoryMatches": [],
+            "categoryMatchesMap": {},
+            "isParent": false
+          }
+        }
+      },
+      {
+        "image": "vert",
+        "startOffset": 49,
+        "endOffset": 52,
+        "startLine": 5,
+        "endLine": 5,
+        "startColumn": 18,
+        "endColumn": 21,
+        "tokenTypeIdx": 141,
+        "tokenType": {
+          "name": "Identifier",
+          "PATTERN": {},
+          "tokenTypeIdx": 141,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "(",
+        "startOffset": 53,
+        "endOffset": 53,
+        "startLine": 5,
+        "endLine": 5,
+        "startColumn": 22,
+        "endColumn": 22,
+        "tokenTypeIdx": 223,
+        "tokenType": {
+          "name": "LeftParen",
+          "PATTERN": {},
+          "tokenTypeIdx": 223,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "float",
+        "startOffset": 54,
+        "endOffset": 58,
+        "startLine": 5,
+        "endLine": 5,
+        "startColumn": 23,
+        "endColumn": 27,
+        "tokenTypeIdx": 158,
+        "tokenType": {
+          "name": "Float",
+          "PATTERN": {},
+          "CATEGORIES": [
+            {
+              "name": "Types",
+              "PATTERN": {},
+              "tokenTypeIdx": 155,
+              "CATEGORIES": [],
+              "categoryMatches": [
+                157,
+                158,
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176,
+                177
+              ],
+              "categoryMatchesMap": {
+                "157": true,
+                "158": true,
+                "159": true,
+                "160": true,
+                "161": true,
+                "162": true,
+                "163": true,
+                "164": true,
+                "165": true,
+                "166": true,
+                "167": true,
+                "168": true,
+                "169": true,
+                "170": true,
+                "171": true,
+                "172": true,
+                "173": true,
+                "174": true,
+                "175": true,
+                "176": true,
+                "177": true
+              },
+              "isParent": true
+            }
+          ],
+          "tokenTypeIdx": 158,
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false,
+          "LONGER_ALT": {
+            "name": "Identifier",
+            "PATTERN": {},
+            "tokenTypeIdx": 141,
+            "CATEGORIES": [],
+            "categoryMatches": [],
+            "categoryMatchesMap": {},
+            "isParent": false
+          }
+        }
+      },
+      {
+        "image": "a",
+        "startOffset": 60,
+        "endOffset": 60,
+        "startLine": 5,
+        "endLine": 5,
+        "startColumn": 29,
+        "endColumn": 29,
+        "tokenTypeIdx": 141,
+        "tokenType": {
+          "name": "Identifier",
+          "PATTERN": {},
+          "tokenTypeIdx": 141,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": ")",
+        "startOffset": 61,
+        "endOffset": 61,
+        "startLine": 5,
+        "endLine": 5,
+        "startColumn": 30,
+        "endColumn": 30,
+        "tokenTypeIdx": 224,
+        "tokenType": {
+          "name": "RightParen",
+          "PATTERN": {},
+          "tokenTypeIdx": 224,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "{",
+        "startOffset": 62,
+        "endOffset": 62,
+        "startLine": 5,
+        "endLine": 5,
+        "startColumn": 31,
+        "endColumn": 31,
+        "tokenTypeIdx": 225,
+        "tokenType": {
+          "name": "LeftBrace",
+          "PATTERN": {},
+          "tokenTypeIdx": 225,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "bool",
+        "startOffset": 81,
+        "endOffset": 84,
+        "startLine": 6,
+        "endLine": 6,
+        "startColumn": 17,
+        "endColumn": 20,
+        "tokenTypeIdx": 159,
+        "tokenType": {
+          "name": "Bool",
+          "PATTERN": {},
+          "CATEGORIES": [
+            {
+              "name": "Types",
+              "PATTERN": {},
+              "tokenTypeIdx": 155,
+              "CATEGORIES": [],
+              "categoryMatches": [
+                157,
+                158,
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176,
+                177
+              ],
+              "categoryMatchesMap": {
+                "157": true,
+                "158": true,
+                "159": true,
+                "160": true,
+                "161": true,
+                "162": true,
+                "163": true,
+                "164": true,
+                "165": true,
+                "166": true,
+                "167": true,
+                "168": true,
+                "169": true,
+                "170": true,
+                "171": true,
+                "172": true,
+                "173": true,
+                "174": true,
+                "175": true,
+                "176": true,
+                "177": true
+              },
+              "isParent": true
+            }
+          ],
+          "tokenTypeIdx": 159,
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false,
+          "LONGER_ALT": {
+            "name": "Identifier",
+            "PATTERN": {},
+            "tokenTypeIdx": 141,
+            "CATEGORIES": [],
+            "categoryMatches": [],
+            "categoryMatchesMap": {},
+            "isParent": false
+          }
+        }
+      },
+      {
+        "image": "c",
+        "startOffset": 86,
+        "endOffset": 86,
+        "startLine": 6,
+        "endLine": 6,
+        "startColumn": 22,
+        "endColumn": 22,
+        "tokenTypeIdx": 141,
+        "tokenType": {
+          "name": "Identifier",
+          "PATTERN": {},
+          "tokenTypeIdx": 141,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": ",",
+        "startOffset": 87,
+        "endOffset": 87,
+        "startLine": 6,
+        "endLine": 6,
+        "startColumn": 23,
+        "endColumn": 23,
+        "tokenTypeIdx": 229,
+        "tokenType": {
+          "name": "Comma",
+          "PATTERN": {},
+          "tokenTypeIdx": 229,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "d",
+        "startOffset": 88,
+        "endOffset": 88,
+        "startLine": 6,
+        "endLine": 6,
+        "startColumn": 24,
+        "endColumn": 24,
+        "tokenTypeIdx": 141,
+        "tokenType": {
+          "name": "Identifier",
+          "PATTERN": {},
+          "tokenTypeIdx": 141,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": ";",
+        "startOffset": 89,
+        "endOffset": 89,
+        "startLine": 6,
+        "endLine": 6,
+        "startColumn": 25,
+        "endColumn": 25,
+        "tokenTypeIdx": 230,
+        "tokenType": {
+          "name": "Semicolon",
+          "PATTERN": {},
+          "tokenTypeIdx": 230,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "const",
+        "startOffset": 108,
+        "endOffset": 112,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 17,
+        "endColumn": 21,
+        "tokenTypeIdx": 188,
+        "tokenType": {
+          "name": "Const",
+          "PATTERN": {},
+          "CATEGORIES": [
+            {
+              "name": "StorageQualifiers",
+              "PATTERN": {},
+              "tokenTypeIdx": 178,
+              "CATEGORIES": [],
+              "categoryMatches": [
+                181,
+                182,
+                183,
+                184,
+                186,
+                187,
+                188
+              ],
+              "categoryMatchesMap": {
+                "181": true,
+                "182": true,
+                "183": true,
+                "184": true,
+                "186": true,
+                "187": true,
+                "188": true
+              },
+              "isParent": true
+            },
+            {
+              "name": "GlobalStorageQualifiers",
+              "PATTERN": {},
+              "tokenTypeIdx": 179,
+              "CATEGORIES": [],
+              "categoryMatches": [
+                181,
+                182,
+                183,
+                188
+              ],
+              "categoryMatchesMap": {
+                "181": true,
+                "182": true,
+                "183": true,
+                "188": true
+              },
+              "isParent": true
+            }
+          ],
+          "tokenTypeIdx": 188,
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false,
+          "LONGER_ALT": {
+            "name": "Identifier",
+            "PATTERN": {},
+            "tokenTypeIdx": 141,
+            "CATEGORIES": [],
+            "categoryMatches": [],
+            "categoryMatchesMap": {},
+            "isParent": false
+          }
+        }
+      },
+      {
+        "image": "bool",
+        "startOffset": 114,
+        "endOffset": 117,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 23,
+        "endColumn": 26,
+        "tokenTypeIdx": 159,
+        "tokenType": {
+          "name": "Bool",
+          "PATTERN": {},
+          "CATEGORIES": [
+            {
+              "name": "Types",
+              "PATTERN": {},
+              "tokenTypeIdx": 155,
+              "CATEGORIES": [],
+              "categoryMatches": [
+                157,
+                158,
+                159,
+                160,
+                161,
+                162,
+                163,
+                164,
+                165,
+                166,
+                167,
+                168,
+                169,
+                170,
+                171,
+                172,
+                173,
+                174,
+                175,
+                176,
+                177
+              ],
+              "categoryMatchesMap": {
+                "157": true,
+                "158": true,
+                "159": true,
+                "160": true,
+                "161": true,
+                "162": true,
+                "163": true,
+                "164": true,
+                "165": true,
+                "166": true,
+                "167": true,
+                "168": true,
+                "169": true,
+                "170": true,
+                "171": true,
+                "172": true,
+                "173": true,
+                "174": true,
+                "175": true,
+                "176": true,
+                "177": true
+              },
+              "isParent": true
+            }
+          ],
+          "tokenTypeIdx": 159,
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false,
+          "LONGER_ALT": {
+            "name": "Identifier",
+            "PATTERN": {},
+            "tokenTypeIdx": 141,
+            "CATEGORIES": [],
+            "categoryMatches": [],
+            "categoryMatchesMap": {},
+            "isParent": false
+          }
+        }
+      },
+      {
+        "image": "b",
+        "startOffset": 119,
+        "endOffset": 119,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 28,
+        "endColumn": 28,
+        "tokenTypeIdx": 141,
+        "tokenType": {
+          "name": "Identifier",
+          "PATTERN": {},
+          "tokenTypeIdx": 141,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "=",
+        "startOffset": 121,
+        "endOffset": 121,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 30,
+        "endColumn": 30,
+        "tokenTypeIdx": 218,
+        "tokenType": {
+          "name": "Assign",
+          "PATTERN": {},
+          "tokenTypeIdx": 218,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "c",
+        "startOffset": 123,
+        "endOffset": 123,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 32,
+        "endColumn": 32,
+        "tokenTypeIdx": 141,
+        "tokenType": {
+          "name": "Identifier",
+          "PATTERN": {},
+          "tokenTypeIdx": 141,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "=",
+        "startOffset": 125,
+        "endOffset": 125,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 34,
+        "endColumn": 34,
+        "tokenTypeIdx": 218,
+        "tokenType": {
+          "name": "Assign",
+          "PATTERN": {},
+          "tokenTypeIdx": 218,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "d",
+        "startOffset": 127,
+        "endOffset": 127,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 36,
+        "endColumn": 36,
+        "tokenTypeIdx": 141,
+        "tokenType": {
+          "name": "Identifier",
+          "PATTERN": {},
+          "tokenTypeIdx": 141,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "=",
+        "startOffset": 129,
+        "endOffset": 129,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 38,
+        "endColumn": 38,
+        "tokenTypeIdx": 218,
+        "tokenType": {
+          "name": "Assign",
+          "PATTERN": {},
+          "tokenTypeIdx": 218,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "1.",
+        "startOffset": 131,
+        "endOffset": 132,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 40,
+        "endColumn": 41,
+        "tokenTypeIdx": 236,
+        "tokenType": {
+          "name": "FloatLiterial",
+          "PATTERN": {},
+          "CATEGORIES": [
+            {
+              "name": "Literials",
+              "PATTERN": {},
+              "tokenTypeIdx": 233,
+              "CATEGORIES": [],
+              "categoryMatches": [
+                234,
+                235,
+                236,
+                237
+              ],
+              "categoryMatchesMap": {
+                "234": true,
+                "235": true,
+                "236": true,
+                "237": true
+              },
+              "isParent": true
+            }
+          ],
+          "tokenTypeIdx": 236,
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "*",
+        "startOffset": 133,
+        "endOffset": 133,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 42,
+        "endColumn": 42,
+        "tokenTypeIdx": 215,
+        "tokenType": {
+          "name": "Multiply",
+          "PATTERN": {},
+          "tokenTypeIdx": 215,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "2.",
+        "startOffset": 134,
+        "endOffset": 135,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 43,
+        "endColumn": 44,
+        "tokenTypeIdx": 236,
+        "tokenType": {
+          "name": "FloatLiterial",
+          "PATTERN": {},
+          "CATEGORIES": [
+            {
+              "name": "Literials",
+              "PATTERN": {},
+              "tokenTypeIdx": 233,
+              "CATEGORIES": [],
+              "categoryMatches": [
+                234,
+                235,
+                236,
+                237
+              ],
+              "categoryMatchesMap": {
+                "234": true,
+                "235": true,
+                "236": true,
+                "237": true
+              },
+              "isParent": true
+            }
+          ],
+          "tokenTypeIdx": 236,
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "==",
+        "startOffset": 137,
+        "endOffset": 138,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 46,
+        "endColumn": 47,
+        "tokenTypeIdx": 196,
+        "tokenType": {
+          "name": "Equal",
+          "PATTERN": {},
+          "tokenTypeIdx": 196,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "2.",
+        "startOffset": 140,
+        "endOffset": 141,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 49,
+        "endColumn": 50,
+        "tokenTypeIdx": 236,
+        "tokenType": {
+          "name": "FloatLiterial",
+          "PATTERN": {},
+          "CATEGORIES": [
+            {
+              "name": "Literials",
+              "PATTERN": {},
+              "tokenTypeIdx": 233,
+              "CATEGORIES": [],
+              "categoryMatches": [
+                234,
+                235,
+                236,
+                237
+              ],
+              "categoryMatchesMap": {
+                "234": true,
+                "235": true,
+                "236": true,
+                "237": true
+              },
+              "isParent": true
+            }
+          ],
+          "tokenTypeIdx": 236,
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": ";",
+        "startOffset": 142,
+        "endOffset": 142,
+        "startLine": 7,
+        "endLine": 7,
+        "startColumn": 51,
+        "endColumn": 51,
+        "tokenTypeIdx": 230,
+        "tokenType": {
+          "name": "Semicolon",
+          "PATTERN": {},
+          "tokenTypeIdx": 230,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      },
+      {
+        "image": "}",
+        "startOffset": 157,
+        "endOffset": 157,
+        "startLine": 8,
+        "endLine": 8,
+        "startColumn": 13,
+        "endColumn": 13,
+        "tokenTypeIdx": 226,
+        "tokenType": {
+          "name": "RightBrace",
+          "PATTERN": {},
+          "tokenTypeIdx": 226,
+          "CATEGORIES": [],
+          "categoryMatches": [],
+          "categoryMatchesMap": {},
+          "isParent": false
+        }
+      }
+    ],
+    "groups": {},
+    "errors": []
+  },
   "vertAst": {
     "type": "program",
     "statements": [
-      {
-        "type": "structDeclaration",
-        "name": "Love",
-        "members": [
-          {
-            "type": "variableDeclaration",
-            "name": "c",
-            "typeName": "float"
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "float"
-          }
-        ],
-        "rules": [
-          {
-            "test": {},
-            "returnType": "float"
-          },
-          {
-            "test": {},
-            "returnType": "float"
-          }
-        ],
-        "isStruct": true
-      },
-      {
-        "type": "variableDeclaration",
-        "name": "love",
-        "typeName": "Love",
-        "const": false,
-        "storage": "uniform"
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "vert",
-        "returnTypeName": "void",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "float",
-            "const": false
-          }
-        ]
-      },
       {
         "type": "functionDeclaration",
         "name": "vert",
@@ -67,18 +851,64 @@
             {
               "type": "variableDeclaration",
               "name": "c",
-              "typeName": "float",
+              "typeName": "bool",
+              "isConst": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "d",
+              "typeName": "bool",
               "isConst": false
             },
             {
               "type": "variableDeclaration",
               "name": "b",
-              "typeName": "float",
-              "isConst": false,
+              "typeName": "bool",
+              "isConst": true,
               "init": {
-                "type": "literial",
-                "typeName": "float",
-                "value": "1."
+                "type": "binaryExpression",
+                "operator": "=",
+                "left": {
+                  "type": "identifierReference",
+                  "name": "c",
+                  "typeName": "bool"
+                },
+                "right": {
+                  "type": "binaryExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "identifierReference",
+                    "name": "d",
+                    "typeName": "bool"
+                  },
+                  "right": {
+                    "type": "binaryExpression",
+                    "operator": "==",
+                    "left": {
+                      "type": "binaryExpression",
+                      "operator": "*",
+                      "left": {
+                        "type": "literial",
+                        "typeName": "float",
+                        "value": "1."
+                      },
+                      "right": {
+                        "type": "literial",
+                        "typeName": "float",
+                        "value": "2."
+                      },
+                      "typeName": "float"
+                    },
+                    "right": {
+                      "type": "literial",
+                      "typeName": "float",
+                      "value": "2."
+                    },
+                    "typeName": "bool"
+                  },
+                  "typeName": "bool"
+                },
+                "typeName": "bool"
               }
             }
           ]
@@ -90,53 +920,6 @@
     "type": "program",
     "statements": [
       {
-        "type": "structDeclaration",
-        "name": "Love",
-        "members": [
-          {
-            "type": "variableDeclaration",
-            "name": "c",
-            "typeName": "float"
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "float"
-          }
-        ],
-        "rules": [
-          {
-            "test": {},
-            "returnType": "float"
-          },
-          {
-            "test": {},
-            "returnType": "float"
-          }
-        ],
-        "isStruct": true
-      },
-      {
-        "type": "variableDeclaration",
-        "name": "love",
-        "typeName": "Love",
-        "const": false,
-        "storage": "uniform"
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "vert",
-        "returnTypeName": "void",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "float",
-            "const": false
-          }
-        ]
-      },
-      {
         "type": "functionDeclaration",
         "name": "vert",
         "returnTypeName": "void",
@@ -154,18 +937,64 @@
             {
               "type": "variableDeclaration",
               "name": "c",
-              "typeName": "float",
+              "typeName": "bool",
+              "isConst": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "d",
+              "typeName": "bool",
               "isConst": false
             },
             {
               "type": "variableDeclaration",
               "name": "b",
-              "typeName": "float",
-              "isConst": false,
+              "typeName": "bool",
+              "isConst": true,
               "init": {
-                "type": "literial",
-                "typeName": "float",
-                "value": "1."
+                "type": "binaryExpression",
+                "operator": "=",
+                "left": {
+                  "type": "identifierReference",
+                  "name": "c",
+                  "typeName": "bool"
+                },
+                "right": {
+                  "type": "binaryExpression",
+                  "operator": "=",
+                  "left": {
+                    "type": "identifierReference",
+                    "name": "d",
+                    "typeName": "bool"
+                  },
+                  "right": {
+                    "type": "binaryExpression",
+                    "operator": "==",
+                    "left": {
+                      "type": "binaryExpression",
+                      "operator": "*",
+                      "left": {
+                        "type": "literial",
+                        "typeName": "float",
+                        "value": "1."
+                      },
+                      "right": {
+                        "type": "literial",
+                        "typeName": "float",
+                        "value": "2."
+                      },
+                      "typeName": "float"
+                    },
+                    "right": {
+                      "type": "literial",
+                      "typeName": "float",
+                      "value": "2."
+                    },
+                    "typeName": "bool"
+                  },
+                  "typeName": "bool"
+                },
+                "typeName": "bool"
               }
             }
           ]
