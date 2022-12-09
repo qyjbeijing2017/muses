@@ -205,6 +205,11 @@ export class GlslVisitor extends CstVisiter {
                 case 'callExpression':
                     const callExpression = operation as ICallExpression;
                     if(operand.type === 'typeConstructor') {
+                        const sign = `${operand.typeName}(${callExpression.params.map(param => param.typeName).join(',')})`;
+                        const info = this.ctx.getFunctionOrConstructor(sign);
+                        if (!info) {
+                            throw new Error(`Constructor ${sign} not found`);
+                        }
                         operand.params = callExpression.params;
                         break;
                     }
@@ -556,6 +561,10 @@ export class GlslVisitor extends CstVisiter {
                 test: new RegExp(`^${name}\.${member.name}$`),
                 returnType: member.typeName,
             }
+        });
+        rules.push({
+            test: new RegExp(`^${name}\\(${members.map(member=>member.typeName).join(',')}\\)$`),
+            returnType: name,
         });
         const structDeclaration: IStructDeclaration = {
             type: 'structDeclaration',
