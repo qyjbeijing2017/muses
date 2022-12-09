@@ -124,6 +124,14 @@ export class GlslVisitor extends CstVisiter {
             }
             return identifier;
         }
+        if (ctx.type) {
+            const typeConstructor: ITypeConstructor = {
+                type: 'typeConstructor',
+                typeName: (ctx.type[0] as IToken).image,
+                params: [],
+            }
+            return typeConstructor;
+        }
         return this.visit(ctx.expression[0] as CstNode);
     }
 
@@ -196,6 +204,10 @@ export class GlslVisitor extends CstVisiter {
                     break;
                 case 'callExpression':
                     const callExpression = operation as ICallExpression;
+                    if(operand.type === 'typeConstructor') {
+                        operand.params = callExpression.params;
+                        break;
+                    }
                     if (operand.type !== 'identifierReference') {
                         throw new Error(`Only identifier can be called`);
                     }

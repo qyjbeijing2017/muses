@@ -17,6 +17,7 @@ export class GlslParser extends CstParser {
         this.OR([
             { ALT: () => this.CONSUME(musesToken.Literials, { LABEL: 'literial' }) },
             { ALT: () => this.CONSUME(musesToken.Identifier, { LABEL: 'identifier' }) },
+            { ALT: () => this.CONSUME(musesToken.Types, { LABEL: 'type' }) },
             { ALT: () => this.SUBRULE(this.parenExpression, { LABEL: 'expression' }) },
         ]);
     });
@@ -271,8 +272,8 @@ export class GlslParser extends CstParser {
             { ALT: () => this.CONSUME(musesToken.Semicolon) }
         ]);
         this.SUBRULE(this.assignExpression, { LABEL: "test" });
-        this.CONSUME(musesToken.Semicolon);
-        this.OPTION(() => this.SUBRULE(this.assignExpression, { LABEL: "update" }));
+        this.CONSUME1(musesToken.Semicolon);
+        this.OPTION(() => this.SUBRULE1(this.assignExpression, { LABEL: "update" }));
         this.CONSUME(musesToken.RightParen);
         this.SUBRULE(this.blockStatement, { LABEL: "body" });
     });
@@ -286,7 +287,7 @@ export class GlslParser extends CstParser {
         this.OPTION(() => {
             this.CONSUME(musesToken.Else);
             this.OR([
-                { ALT: () => this.SUBRULE(this.blockStatement, { LABEL: "alternate" }) },
+                { ALT: () => this.SUBRULE1(this.blockStatement, { LABEL: "alternate" }) },
                 { ALT: () => this.SUBRULE(this.ifStatement, { LABEL: "alternate" }) },
             ]);
         });
