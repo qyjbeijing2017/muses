@@ -96,7 +96,26 @@ export class GlslVisitor extends CstVisiter {
         return left;
     }
 
-    ctx = new GLSLContext();
+    private _programCtx:IProgram| null = null;
+
+    set programCtx(ctx:IProgram | null){
+        this._programCtx = ctx;
+    }
+
+    get programCtx(): IProgram{
+        if(this._programCtx === null){
+            this._programCtx = {
+                type: 'program',
+                statements: [],
+                ctx: new GLSLContext(),
+            }
+        }
+        return this._programCtx!;
+    }
+
+    get ctx(){
+       return this.programCtx.ctx;
+    }
 
     parenExpression(ctx: CstChildrenDictionary) {
         return this.visit(ctx.expression[0] as CstNode);
@@ -186,7 +205,7 @@ export class GlslVisitor extends CstVisiter {
 
     postfixExpression(ctx: CstChildrenDictionary) {
         let operand = this.visit(ctx.operand[0] as CstNode);
-        if (!ctx.operation) {
+        if (!ctx.operations) {
             return operand;
         }
         for (let i = 0; i < ctx.operations.length; i++) {
@@ -680,14 +699,17 @@ export class GlslVisitor extends CstVisiter {
     }
 
     glsl(ctx: CstChildrenDictionary) {
-        const program: IProgram = {
-            type: 'program',
-            statements: [],
-        };
         ctx.statements.forEach((statement) => {
-            program.statements.push(...this.visit(statement as CstNode));
+            this.programCtx.statements.push(...this.visit(statement as CstNode));
         });
-        return program;
+        return this._programCtx;
+    }
+
+    compileDefinition(ctx: CstChildrenDictionary) {
+        ctx.statements.forEach((statement) => {
+            this.visit(statement as CstNode);
+        });
+        return this._programCtx;
     }
 }
 

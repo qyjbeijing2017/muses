@@ -1,3 +1,5 @@
+import { IProgram } from "./ast-interface/program";
+
 export interface IGLSLTypeContext {
     isStruct?: boolean;
     name: string;
@@ -188,6 +190,16 @@ export class GLSLContext {
             return percision;
         }
         return null;
+    }
+
+    static combineContexts(contexts: GLSLContext[]): GLSLContext {
+        const context = new GLSLContext();
+        for (const c of contexts) {
+            context._variables = { ...context._variables, ...c._variables };
+            context._functions = { ...context._functions, ...c._functions };
+            context._types = { ...context._types, ...c._types };
+        }
+        return context;
     }
 
     constructor() {

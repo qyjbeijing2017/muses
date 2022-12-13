@@ -4,6 +4,7 @@ export class MusesManager {
     private _muses: { [key: string]: Muses } = {};
 
     addMuses(muses: Muses) {
+
         if(this._muses[muses.name]){
             throw new Error(`Shader ${muses.name} already exists`);
         }

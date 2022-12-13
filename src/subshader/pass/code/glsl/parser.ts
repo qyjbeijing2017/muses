@@ -460,6 +460,12 @@ export class GlslParser extends CstParser {
             this.SUBRULE(this.globalStatement, { LABEL: "statements" });
         });
     });
+
+    compilerDefinition = this.RULE("compileDefinition", () => {
+        this.MANY(() => {
+            this.SUBRULE(this.globalStatement, { LABEL: "statements" });
+        });
+    });
     // #endregion
 }
 

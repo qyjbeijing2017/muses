@@ -1,12 +1,10 @@
-import { parser } from '@shaderfrog/glsl-parser';
 import { IProperty } from '../../../properties/properties';
-import { IProgram } from './glsl/ast-interface/program';
+import { getFunctionSignature, IParseCtx, parseGLSL } from './glsl/glsl-prarser';
 import { GLSLContext } from './glsl/glsl-context';
-import { glslLexer } from './glsl/lexer';
-import { glslParser } from './glsl/parser';
-import { glslPreprocess } from './glsl/preprocess';
-import { glslVisitor } from './glsl/visiter';
-import { ILexingResult } from 'chevrotain';
+import { visit } from './glsl/glsl-visiter'
+import { IIdentifierReference } from './glsl/ast-interface/expression/identifier-reference';
+import { ICallExpression } from './glsl/ast-interface/expression/call-expression';
+import { IProgram } from './glsl/ast-interface/program';
 
 export class Code {
     constructor(readonly source: string, readonly type: 'GLSL' | 'HLSL' | 'CG') {
@@ -18,34 +16,107 @@ export class Code {
         properties?: IProperty[];
         instance?: boolean;
     }) {
-        let codeTree: {
-            ast: any,
-            vertexFunctionName: string,
-            fragmentFunctionName: string,
-            lex: ILexingResult,
-        } | null = null;
+        let codeCtx: IParseCtx | null = null;
 
         switch (this.type) {
             case 'GLSL':
-                codeTree = this.fromGLSL(options);
+                codeCtx = this.fromGLSL(options);
                 break;
             case 'HLSL':
-                codeTree = this.fromHLSL(options);
+                codeCtx = this.fromHLSL(options);
                 break;
             case 'CG':
-                codeTree = this.fromCG(options);
+                codeCtx = this.fromCG(options);
                 break;
             default:
-                codeTree = this.fromGLSL(options);
+                codeCtx = this.fromGLSL(options);
                 break;
         }
 
-        if(!codeTree) {
+        if (codeCtx === null) {
             throw new Error(`Unsupported code type ${this.type}`);
         }
 
+        const ast = codeCtx.ast;
+        const fragNode = ast.statements.find((s) => s.type === 'functionDeclaration' && s.name === codeCtx?.fragmentFunctionName);
+        const vertNode = ast.statements.find((s) => s.type === 'functionDeclaration' && s.name === codeCtx?.vertexFunctionName);
+        if (fragNode === undefined || vertNode === undefined) {
+            throw new Error(`Could not find fragment or vertex function in code`);
+        }
+        const ctx = ast.ctx;
+        const vertRefs = new Set<string>();
+        visit(vertNode, {
+            identifierReference: {
+                enter: (node) => {
+                    const identifierReference: IIdentifierReference = node as IIdentifierReference;
+                    if(ctx.getVariable(identifierReference.name)){
+                        vertRefs.add(identifierReference.name);
+                    }
+                }
+            },
+            callExpression: {
+                enter: (node) => {
+                    const callExpression: ICallExpression = node as ICallExpression;
+                    const sign = getFunctionSignature(callExpression);
+                    if(ctx.getVariable(sign)){
+                        vertRefs.add(callExpression.callee.name);
+                    }
+                }
+            }
+        });
+        const fragRefs = new Set<string>();
+        visit(fragNode, {
+            identifierReference: {
+                enter: (node) => {
+                    const identifierReference: IIdentifierReference = node as IIdentifierReference;
+                    if(ctx.getVariable(identifierReference.name)){
+                        fragRefs.add(identifierReference.name);
+                    }
+                }
+            },
+            callExpression: {
+                enter: (node) => {
+                    const callExpression: ICallExpression = node as ICallExpression;
+                    const sign = getFunctionSignature(callExpression);
+                    if(ctx.getVariable(sign)){
+                        vertRefs.add(callExpression.callee.name);
+                    }
+                }
+            }
+        });
+        console.log(vertRefs, fragRefs);
+
+        const vertAst:IProgram = {
+            type: 'program',
+            statements: ast.statements.filter((s) => {
+                if(s.type === 'functionDeclaration'){
+                    return s.name === codeCtx?.vertexFunctionName || vertRefs.has(s.name);
+                }
+                if(s.type === 'variableDeclaration'){
+                    return vertRefs.has(s.name);
+                }
+                return true;
+            }),
+            ctx: ast.ctx,
+        }
+
+        const fragAst:IProgram = {
+            type: 'program',
+            statements: ast.statements.filter((s) => {
+                if(s.type === 'functionDeclaration'){
+                    return s.name === codeCtx?.fragmentFunctionName || fragRefs.has(s.name);
+                }
+                if(s.type === 'variableDeclaration'){
+                    return fragRefs.has(s.name);
+                }
+                return true;
+            }),
+            ctx: ast.ctx,
+        }
+
         return {
-            ast: codeTree.ast,
+            vertex: vertAst,
+            fragment: fragAst,
         };
     }
 
@@ -55,29 +126,19 @@ export class Code {
         properties?: IProperty[];
         instance?: boolean;
     }) {
-        const { code, fragmentFunctionName, vertexFunctionName, ctx } = glslPreprocess(this.source, options);
-        // parse
-        // const ast = parser.parse(code);
+        const ctx = parseGLSL(this.source, {
+            defines: options?.defines ? options.defines : {},
+            includes: options?.includes ? options.includes : {},
+            properties: options?.properties ? options.properties : [],
+            instance: options?.instance ? options.instance : false,
+            ast: {
+                type: 'program',
+                statements: [],
+                ctx: new GLSLContext(),
+            },
+        });
 
-        const lex = glslLexer.tokenize(code);
-        if (lex.errors.length > 0) {
-            throw new Error(lex.errors[0].message);
-        }
-
-        glslParser.input = lex.tokens;
-        const cst = glslParser.glsl();
-        if (glslParser.errors.length > 0) {
-            throw new Error(glslParser.errors[0].message);
-        }
-        glslVisitor.ctx = ctx;
-        const ast = glslVisitor.visit(cst) as IProgram;
-
-        return {
-            ast: ast,
-            lex: lex,
-            vertexFunctionName,
-            fragmentFunctionName,
-        };
+        return ctx;
     }
 
     private fromHLSL(options?: {

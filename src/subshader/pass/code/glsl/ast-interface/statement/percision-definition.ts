@@ -1,7 +1,7 @@
 import { IStatement } from "./statement";
 
 export interface IPercisionDefinition extends IStatement {
-    type: 'percisionDefine';
+    type: 'percisionDefinition';
     precision: string;
     typeName: string;
 }

@@ -3,6 +3,7 @@ import { IRenderState } from "../renderstate/renderstate";
 import { renderStatesLexer } from "../renderstate/lexer";
 import { renderStateParser } from "../renderstate/parser";
 import { Pass } from "./pass/pass";
+import { MusesManager } from "../muse-manager";
 
 export class SubShader {
     readonly renderStates: Partial<IRenderState>;

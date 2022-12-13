@@ -1,903 +1,7 @@
 {
-  "ast": {
+  "vertex": {
     "type": "program",
     "statements": [
-      {
-        "type": "variableDeclaration",
-        "name": "_Color",
-        "typeName": "vec4",
-        "percision": "lowp",
-        "const": false,
-        "storage": "attribute"
-      },
-      {
-        "type": "variableDeclaration",
-        "name": "_MainTex",
-        "typeName": "sampler2D",
-        "const": false,
-        "storage": "attribute"
-      },
-      {
-        "type": "variableDeclaration",
-        "name": "_Cutoff",
-        "typeName": "float",
-        "percision": "highp",
-        "const": false,
-        "storage": "attribute"
-      },
-      {
-        "type": "variableDeclaration",
-        "name": "gl_Position",
-        "typeName": "vec4",
-        "const": false
-      },
-      {
-        "type": "variableDeclaration",
-        "name": "gl_FragColor",
-        "typeName": "vec4",
-        "const": false
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "dot",
-        "returnTypeName": "float",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "dot",
-        "returnTypeName": "float",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "dot",
-        "returnTypeName": "float",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "length",
-        "returnTypeName": "float",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "length",
-        "returnTypeName": "float",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "length",
-        "returnTypeName": "float",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "distance",
-        "returnTypeName": "float",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "distance",
-        "returnTypeName": "float",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "distance",
-        "returnTypeName": "float",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "normalize",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "normalize",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "normalize",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "reflect",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "reflect",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "reflect",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "refract",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "c",
-            "typeName": "float",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "refract",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "c",
-            "typeName": "float",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "refract",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "c",
-            "typeName": "float",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "cross",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "cross",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "cross",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "abs",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "abs",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "abs",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "sign",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "sign",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "sign",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "floor",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "floor",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "floor",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "ceil",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "ceil",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "ceil",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "round",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "round",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "round",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "fract",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "fract",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "fract",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "mod",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "mod",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "mod",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "min",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "min",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "min",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "max",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "max",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "max",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "clamp",
-        "returnTypeName": "vec2",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec2",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "c",
-            "typeName": "vec2",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "clamp",
-        "returnTypeName": "vec3",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec3",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "c",
-            "typeName": "vec3",
-            "const": false
-          }
-        ]
-      },
-      {
-        "type": "functionDeclaration",
-        "name": "clamp",
-        "returnTypeName": "vec4",
-        "parameters": [
-          {
-            "type": "variableDeclaration",
-            "name": "a",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "b",
-            "typeName": "vec4",
-            "const": false
-          },
-          {
-            "type": "variableDeclaration",
-            "name": "c",
-            "typeName": "vec4",
-            "const": false
-          }
-        ]
-      },
       {
         "type": "functionDeclaration",
         "name": "vert",
@@ -914,25 +18,1405 @@
           "type": "blockStatement",
           "body": [
             {
-              "type": "expressionStatement",
-              "expression": {
+              "type": "ifStatement",
+              "test": {
                 "type": "binaryExpression",
-                "operator": "=",
+                "operator": ">",
                 "left": {
                   "type": "identifierReference",
-                  "name": "gl_Position",
-                  "typeName": "vec4"
+                  "name": "a",
+                  "typeName": "float"
                 },
                 "right": {
-                  "type": "typeConstructor",
-                  "typeName": "vec4",
-                  "params": []
+                  "type": "literial",
+                  "typeName": "float",
+                  "value": "0."
                 },
-                "typeName": "vec4"
+                "typeName": "bool"
+              },
+              "consequent": {
+                "type": "blockStatement",
+                "body": [
+                  {
+                    "type": "expressionStatement",
+                    "expression": {
+                      "type": "binaryExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "identifierReference",
+                        "name": "gl_Position",
+                        "typeName": "vec4"
+                      },
+                      "right": {
+                        "type": "typeConstructor",
+                        "typeName": "vec4",
+                        "params": [
+                          {
+                            "type": "literial",
+                            "typeName": "float",
+                            "value": "0."
+                          },
+                          {
+                            "type": "literial",
+                            "typeName": "float",
+                            "value": "0."
+                          },
+                          {
+                            "type": "literial",
+                            "typeName": "float",
+                            "value": "0."
+                          },
+                          {
+                            "type": "literial",
+                            "typeName": "float",
+                            "value": "0."
+                          }
+                        ]
+                      },
+                      "typeName": "vec4"
+                    }
+                  }
+                ]
+              },
+              "alternate": {
+                "type": "blockStatement",
+                "body": [
+                  {
+                    "type": "expressionStatement",
+                    "expression": {
+                      "type": "binaryExpression",
+                      "operator": "=",
+                      "left": {
+                        "type": "identifierReference",
+                        "name": "gl_Position",
+                        "typeName": "vec4"
+                      },
+                      "right": {
+                        "type": "typeConstructor",
+                        "typeName": "vec4",
+                        "params": [
+                          {
+                            "type": "literial",
+                            "typeName": "float",
+                            "value": "0."
+                          },
+                          {
+                            "type": "literial",
+                            "typeName": "float",
+                            "value": "0."
+                          },
+                          {
+                            "type": "literial",
+                            "typeName": "float",
+                            "value": "0."
+                          },
+                          {
+                            "type": "literial",
+                            "typeName": "float",
+                            "value": "0."
+                          }
+                        ]
+                      },
+                      "typeName": "vec4"
+                    }
+                  }
+                ]
               }
             }
           ]
         }
+      }
+    ],
+    "ctx": {
+      "_isFunctionParameter": false,
+      "_variables": {
+        "gl_Position": {
+          "type": "variableDeclaration",
+          "name": "gl_Position",
+          "typeName": "vec4",
+          "const": false
+        },
+        "gl_FragColor": {
+          "type": "variableDeclaration",
+          "name": "gl_FragColor",
+          "typeName": "vec4",
+          "const": false
+        },
+        "_Color": {
+          "type": "variableDeclaration",
+          "name": "_Color",
+          "typeName": "vec4",
+          "percision": "lowp",
+          "const": false,
+          "storage": "attribute"
+        },
+        "_MainTex": {
+          "type": "variableDeclaration",
+          "name": "_MainTex",
+          "typeName": "sampler2D",
+          "const": false,
+          "storage": "attribute"
+        },
+        "_Cutoff": {
+          "type": "variableDeclaration",
+          "name": "_Cutoff",
+          "typeName": "float",
+          "percision": "highp",
+          "const": false,
+          "storage": "attribute"
+        }
+      },
+      "_functions": {
+        "dot(vec2,vec2)": {
+          "sign": "dot(vec2,vec2)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "dot(vec3,vec3)": {
+          "sign": "dot(vec3,vec3)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "dot(vec4,vec4)": {
+          "sign": "dot(vec4,vec4)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "length(vec2)": {
+          "sign": "length(vec2)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "length(vec3)": {
+          "sign": "length(vec3)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "length(vec4)": {
+          "sign": "length(vec4)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "distance(vec2,vec2)": {
+          "sign": "distance(vec2,vec2)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "distance(vec3,vec3)": {
+          "sign": "distance(vec3,vec3)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "distance(vec4,vec4)": {
+          "sign": "distance(vec4,vec4)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "normalize(vec2)": {
+          "sign": "normalize(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "normalize(vec3)": {
+          "sign": "normalize(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "normalize(vec4)": {
+          "sign": "normalize(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "reflect(vec2,vec2)": {
+          "sign": "reflect(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "reflect(vec3,vec3)": {
+          "sign": "reflect(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "reflect(vec4,vec4)": {
+          "sign": "reflect(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "refract(vec2,vec2,float)": {
+          "sign": "refract(vec2,vec2,float)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "refract(vec3,vec3,float)": {
+          "sign": "refract(vec3,vec3,float)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "refract(vec4,vec4,float)": {
+          "sign": "refract(vec4,vec4,float)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "cross(vec2,vec2)": {
+          "sign": "cross(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "cross(vec3,vec3)": {
+          "sign": "cross(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "cross(vec4,vec4)": {
+          "sign": "cross(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "abs(vec2)": {
+          "sign": "abs(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "abs(vec3)": {
+          "sign": "abs(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "abs(vec4)": {
+          "sign": "abs(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "sign(vec2)": {
+          "sign": "sign(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "sign(vec3)": {
+          "sign": "sign(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "sign(vec4)": {
+          "sign": "sign(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "floor(vec2)": {
+          "sign": "floor(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "floor(vec3)": {
+          "sign": "floor(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "floor(vec4)": {
+          "sign": "floor(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "ceil(vec2)": {
+          "sign": "ceil(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "ceil(vec3)": {
+          "sign": "ceil(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "ceil(vec4)": {
+          "sign": "ceil(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "round(vec2)": {
+          "sign": "round(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "round(vec3)": {
+          "sign": "round(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "round(vec4)": {
+          "sign": "round(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "fract(vec2)": {
+          "sign": "fract(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "fract(vec3)": {
+          "sign": "fract(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "fract(vec4)": {
+          "sign": "fract(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "mod(vec2,vec2)": {
+          "sign": "mod(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "mod(vec3,vec3)": {
+          "sign": "mod(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "mod(vec4,vec4)": {
+          "sign": "mod(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "min(vec2,vec2)": {
+          "sign": "min(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "min(vec3,vec3)": {
+          "sign": "min(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "min(vec4,vec4)": {
+          "sign": "min(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "max(vec2,vec2)": {
+          "sign": "max(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "max(vec3,vec3)": {
+          "sign": "max(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "max(vec4,vec4)": {
+          "sign": "max(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "clamp(vec2,vec2,vec2)": {
+          "sign": "clamp(vec2,vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "clamp(vec3,vec3,vec3)": {
+          "sign": "clamp(vec3,vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "clamp(vec4,vec4,vec4)": {
+          "sign": "clamp(vec4,vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "vert(float)": {
+          "sign": "vert(float)",
+          "returnTypeName": "void",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": false
+        },
+        "frag(float)": {
+          "sign": "frag(float)",
+          "returnTypeName": "void",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": false
+        }
+      },
+      "_localVariables": [],
+      "_types": {
+        "void": {
+          "name": "void",
+          "rules": []
+        },
+        "bool": {
+          "name": "bool",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "bool"
+            },
+            {
+              "test": {},
+              "returnType": "bool"
+            }
+          ]
+        },
+        "float": {
+          "name": "float",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "bool"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "int": {
+          "name": "int",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "int"
+            },
+            {
+              "test": {},
+              "returnType": "int"
+            },
+            {
+              "test": {},
+              "returnType": "bool"
+            },
+            {
+              "test": {},
+              "returnType": "int"
+            },
+            {
+              "test": {},
+              "returnType": "int"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "vec2": {
+          "name": "vec2",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "vec3": {
+          "name": "vec3",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "vec4": {
+          "name": "vec4",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "mat2": {
+          "name": "mat2",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "mat3": {
+          "name": "mat3",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "mat4": {
+          "name": "mat4",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "sampler2D": {
+          "name": "sampler2D",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "sampler2D"
+            }
+          ]
+        },
+        "samplerCube": {
+          "name": "samplerCube",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "samplerCube"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "fragment": {
+    "type": "program",
+    "statements": [
+      {
+        "type": "variableDeclaration",
+        "name": "_Color",
+        "typeName": "vec4",
+        "percision": "lowp",
+        "const": false,
+        "storage": "attribute"
       },
       {
         "type": "functionDeclaration",
@@ -960,9 +1444,9 @@
                   "typeName": "vec4"
                 },
                 "right": {
-                  "type": "typeConstructor",
-                  "typeName": "vec4",
-                  "params": []
+                  "type": "identifierReference",
+                  "name": "_Color",
+                  "typeName": "vec4"
                 },
                 "typeName": "vec4"
               }
@@ -970,6 +1454,1285 @@
           ]
         }
       }
-    ]
+    ],
+    "ctx": {
+      "_isFunctionParameter": false,
+      "_variables": {
+        "gl_Position": {
+          "type": "variableDeclaration",
+          "name": "gl_Position",
+          "typeName": "vec4",
+          "const": false
+        },
+        "gl_FragColor": {
+          "type": "variableDeclaration",
+          "name": "gl_FragColor",
+          "typeName": "vec4",
+          "const": false
+        },
+        "_Color": {
+          "type": "variableDeclaration",
+          "name": "_Color",
+          "typeName": "vec4",
+          "percision": "lowp",
+          "const": false,
+          "storage": "attribute"
+        },
+        "_MainTex": {
+          "type": "variableDeclaration",
+          "name": "_MainTex",
+          "typeName": "sampler2D",
+          "const": false,
+          "storage": "attribute"
+        },
+        "_Cutoff": {
+          "type": "variableDeclaration",
+          "name": "_Cutoff",
+          "typeName": "float",
+          "percision": "highp",
+          "const": false,
+          "storage": "attribute"
+        }
+      },
+      "_functions": {
+        "dot(vec2,vec2)": {
+          "sign": "dot(vec2,vec2)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "dot(vec3,vec3)": {
+          "sign": "dot(vec3,vec3)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "dot(vec4,vec4)": {
+          "sign": "dot(vec4,vec4)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "length(vec2)": {
+          "sign": "length(vec2)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "length(vec3)": {
+          "sign": "length(vec3)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "length(vec4)": {
+          "sign": "length(vec4)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "distance(vec2,vec2)": {
+          "sign": "distance(vec2,vec2)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "distance(vec3,vec3)": {
+          "sign": "distance(vec3,vec3)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "distance(vec4,vec4)": {
+          "sign": "distance(vec4,vec4)",
+          "returnTypeName": "float",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "normalize(vec2)": {
+          "sign": "normalize(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "normalize(vec3)": {
+          "sign": "normalize(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "normalize(vec4)": {
+          "sign": "normalize(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "reflect(vec2,vec2)": {
+          "sign": "reflect(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "reflect(vec3,vec3)": {
+          "sign": "reflect(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "reflect(vec4,vec4)": {
+          "sign": "reflect(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "refract(vec2,vec2,float)": {
+          "sign": "refract(vec2,vec2,float)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "refract(vec3,vec3,float)": {
+          "sign": "refract(vec3,vec3,float)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "refract(vec4,vec4,float)": {
+          "sign": "refract(vec4,vec4,float)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "cross(vec2,vec2)": {
+          "sign": "cross(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "cross(vec3,vec3)": {
+          "sign": "cross(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "cross(vec4,vec4)": {
+          "sign": "cross(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "abs(vec2)": {
+          "sign": "abs(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "abs(vec3)": {
+          "sign": "abs(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "abs(vec4)": {
+          "sign": "abs(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "sign(vec2)": {
+          "sign": "sign(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "sign(vec3)": {
+          "sign": "sign(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "sign(vec4)": {
+          "sign": "sign(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "floor(vec2)": {
+          "sign": "floor(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "floor(vec3)": {
+          "sign": "floor(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "floor(vec4)": {
+          "sign": "floor(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "ceil(vec2)": {
+          "sign": "ceil(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "ceil(vec3)": {
+          "sign": "ceil(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "ceil(vec4)": {
+          "sign": "ceil(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "round(vec2)": {
+          "sign": "round(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "round(vec3)": {
+          "sign": "round(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "round(vec4)": {
+          "sign": "round(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "fract(vec2)": {
+          "sign": "fract(vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "fract(vec3)": {
+          "sign": "fract(vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "fract(vec4)": {
+          "sign": "fract(vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "mod(vec2,vec2)": {
+          "sign": "mod(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "mod(vec3,vec3)": {
+          "sign": "mod(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "mod(vec4,vec4)": {
+          "sign": "mod(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "min(vec2,vec2)": {
+          "sign": "min(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "min(vec3,vec3)": {
+          "sign": "min(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "min(vec4,vec4)": {
+          "sign": "min(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "max(vec2,vec2)": {
+          "sign": "max(vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "max(vec3,vec3)": {
+          "sign": "max(vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "max(vec4,vec4)": {
+          "sign": "max(vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "clamp(vec2,vec2,vec2)": {
+          "sign": "clamp(vec2,vec2,vec2)",
+          "returnTypeName": "vec2",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec2",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "vec2",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "clamp(vec3,vec3,vec3)": {
+          "sign": "clamp(vec3,vec3,vec3)",
+          "returnTypeName": "vec3",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec3",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "vec3",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "clamp(vec4,vec4,vec4)": {
+          "sign": "clamp(vec4,vec4,vec4)",
+          "returnTypeName": "vec4",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "b",
+              "typeName": "vec4",
+              "const": false
+            },
+            {
+              "type": "variableDeclaration",
+              "name": "c",
+              "typeName": "vec4",
+              "const": false
+            }
+          ],
+          "onlyDefine": true
+        },
+        "vert(float)": {
+          "sign": "vert(float)",
+          "returnTypeName": "void",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": false
+        },
+        "frag(float)": {
+          "sign": "frag(float)",
+          "returnTypeName": "void",
+          "parameters": [
+            {
+              "type": "variableDeclaration",
+              "name": "a",
+              "typeName": "float",
+              "const": false
+            }
+          ],
+          "onlyDefine": false
+        }
+      },
+      "_localVariables": [],
+      "_types": {
+        "void": {
+          "name": "void",
+          "rules": []
+        },
+        "bool": {
+          "name": "bool",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "bool"
+            },
+            {
+              "test": {},
+              "returnType": "bool"
+            }
+          ]
+        },
+        "float": {
+          "name": "float",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "bool"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "int": {
+          "name": "int",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "int"
+            },
+            {
+              "test": {},
+              "returnType": "int"
+            },
+            {
+              "test": {},
+              "returnType": "bool"
+            },
+            {
+              "test": {},
+              "returnType": "int"
+            },
+            {
+              "test": {},
+              "returnType": "int"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "vec2": {
+          "name": "vec2",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "vec3": {
+          "name": "vec3",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "vec4": {
+          "name": "vec4",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "float"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "mat2": {
+          "name": "mat2",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "mat2"
+            },
+            {
+              "test": {},
+              "returnType": "vec2"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "mat3": {
+          "name": "mat3",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            },
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "mat3"
+            },
+            {
+              "test": {},
+              "returnType": "vec3"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "mat4": {
+          "name": "mat4",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            },
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "mat4"
+            },
+            {
+              "test": {},
+              "returnType": "vec4"
+            }
+          ],
+          "percision": "mediump"
+        },
+        "sampler2D": {
+          "name": "sampler2D",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "sampler2D"
+            }
+          ]
+        },
+        "samplerCube": {
+          "name": "samplerCube",
+          "rules": [
+            {
+              "test": {},
+              "returnType": "samplerCube"
+            }
+          ]
+        }
+      }
+    }
   }
 }
