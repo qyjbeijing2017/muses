@@ -14,17 +14,13 @@ export class Muses {
     readonly fallBack: string | null;
     readonly properties: IProperty[];
     readonly subShaders: SubShader[];
-    readonly manager: MusesManager;
 
-    constructor(source: string, manager: MusesManager) {
+    constructor(source: string) {
         this.name = Muses.getName(source);
         this.fallBack = Muses.getFallBack(source);
         this.properties = Muses.getProperties(source);
         this.subShaders = Muses.getSubShaders(source);
-        manager.addMuses(this);
-        this.manager = manager;
     }
-
 
     static getName(source: string) {
         if (!/^\s*Shader\s*"[a-zA-Z_][a-zA-Z0-9_]*"/.test(source)) {

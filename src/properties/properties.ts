@@ -13,7 +13,7 @@ export type PropertyValue = number | [number, number, number, number] | string;
 
 export interface IProperty {
     name: string;
-    type: string;
+    type: PropertyType;
     label: string;
     value: PropertyValue;
     min?: number;

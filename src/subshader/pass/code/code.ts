@@ -15,7 +15,10 @@ export class Code {
         defines?: { [key: string]: Object };
         properties?: IProperty[];
         instance?: boolean;
-    }) {
+    }): {
+        vertex: IProgram;
+        fragment: IProgram;
+    } {
         let codeCtx: IParseCtx | null = null;
 
         switch (this.type) {
