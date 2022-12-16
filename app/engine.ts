@@ -130,6 +130,18 @@ export class Engine {
         }
     }
 
+    private setRenderStatesDefault(): void {
+        this._gl.enable(this._gl.DEPTH_TEST);
+        this._gl.depthFunc(this._gl.LEQUAL);
+        this._gl.enable(this._gl.CULL_FACE);
+        this._gl.cullFace(this._gl.BACK);
+        this._gl.frontFace(this._gl.CCW);
+        this._gl.enable(this._gl.BLEND);
+        this._gl.blendFunc(this._gl.SRC_ALPHA, this._gl.ONE_MINUS_SRC_ALPHA);
+        this._gl.blendEquation(this._gl.FUNC_ADD);
+    }
+
+
     private setRenderStates(renderStates: Partial<IRenderState>): void {
     }
 
@@ -181,6 +193,7 @@ export class Engine {
         const viewMatrix = this._camera.viewMatrix;
         const projectionMatrix = this._camera.projectionMatrix;
         for (const command of renderCommands) {
+            this.setRenderStatesDefault();
             this.setRenderStates(command.renderStates);
             this._gl.useProgram(command.program);
 
