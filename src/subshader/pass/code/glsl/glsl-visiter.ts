@@ -17,6 +17,7 @@ import { IDotExpression } from "./ast-interface/expression/dot-expression";
 import { IConditionalExpression } from "./ast-interface/expression/conditional-expression";
 import { ICallExpression } from "./ast-interface/expression/call-expression";
 import { IBinaryExpression } from "./ast-interface/expression/binary-expression";
+import { ITypeConstructor } from "./ast-interface/expression/type-constructor";
 
 export interface IAstVisitor {
     [key: string]: {
@@ -124,6 +125,10 @@ function typeConstructor(node: IAstNode, visitor: IAstVisitor) {
     if (visitor.typeConstructor?.enter) {
         visitor.typeConstructor.enter(node);
     }
+    const typeConstructor = node as ITypeConstructor;
+    typeConstructor.params.forEach((argument) => {
+        visit(argument, visitor);
+    });
     if (visitor.typeConstructor?.leave) {
         visitor.typeConstructor.leave(node);
     }

@@ -699,6 +699,9 @@ export class GlslVisitor extends CstVisiter {
     }
 
     glsl(ctx: CstChildrenDictionary) {
+        if(!ctx.statements){
+            return this._programCtx;
+        }
         ctx.statements.forEach((statement) => {
             this.programCtx.statements.push(...this.visit(statement as CstNode));
         });

@@ -65,6 +65,7 @@ export function glslPreprocess(source: string, options?: {
     output = preprocess(output, {
         defines: options?.defines,
     });
+    
     return {
         code: output,
         vertexFunctionName,

@@ -5,6 +5,7 @@ import { visit } from './glsl/glsl-visiter'
 import { IIdentifierReference } from './glsl/ast-interface/expression/identifier-reference';
 import { ICallExpression } from './glsl/ast-interface/expression/call-expression';
 import { IProgram } from './glsl/ast-interface/program';
+import { IFunctionDeclaration } from './glsl/ast-interface/declaration/function-declaration';
 
 export class Code {
     constructor(readonly source: string, readonly type: 'GLSL' | 'HLSL' | 'CG') {
@@ -87,7 +88,6 @@ export class Code {
                 }
             }
         });
-        console.log(vertRefs, fragRefs);
 
         const vertAst:IProgram = {
             type: 'program',
@@ -103,6 +103,13 @@ export class Code {
             ctx: ast.ctx,
         }
 
+        const vertFunc = vertAst.statements.find(statement=>{
+            return statement.type === 'functionDeclaration' && statement.name === codeCtx?.vertexFunctionName
+        }) as IFunctionDeclaration;
+        if(vertFunc){
+            vertFunc.name = 'main';
+        }
+
         const fragAst:IProgram = {
             type: 'program',
             statements: ast.statements.filter((s) => {
@@ -115,6 +122,13 @@ export class Code {
                 return true;
             }),
             ctx: ast.ctx,
+        }
+
+        const fragFunc = fragAst.statements.find(statement=>{
+            return statement.type === 'functionDeclaration' && statement.name === codeCtx?.fragmentFunctionName
+        }) as IFunctionDeclaration;
+        if(fragFunc){
+            fragFunc.name = 'main';
         }
 
         return {

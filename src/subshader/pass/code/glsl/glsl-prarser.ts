@@ -51,7 +51,7 @@ export function parseGLSLChunk(chunk: string, ctx: IProgram, isCompileDefine: bo
     return ast;
 }
 
-export interface IParseCtx{
+export interface IParseCtx {
     defines: { [key: string]: Object },
     includes: { [key: string]: string },
     properties: IProperty[];
@@ -64,14 +64,14 @@ export interface IParseCtx{
 export function parseGLSL(source: string, parseCtx: IParseCtx) {
     let code = source;
 
-    parseCtx.vertexFunctionName = source.match(/#pragma\s+vertex\s+(\w+)/)?.[1] || 'vertex';
-    parseCtx.fragmentFunctionName = source.match(/#pragma\s+fragment\s+(\w+)/)?.[1] || 'fragment';
-    code = code.replace(/#pragma\s+vertex\s+(\w+)/, '');
-    code = code.replace(/#pragma\s+fragment\s+(\w+)/, '');
+    parseCtx.vertexFunctionName = source.match(/#pragma\s+vertex\s+([\w_][\w\d_]+)/)?.[1] || 'vertex';
+    parseCtx.fragmentFunctionName = source.match(/#pragma\s+fragment\s+([\w_][\w\d_]+)/)?.[1] || 'fragment';
+    code = code.replace(/#pragma\s+vertex\s+([\w_][\w\d_]+)/, '');
+    code = code.replace(/#pragma\s+fragment\s+([\w_][\w\d_]+)/, '');
 
-    const includeRegex = /#include\s+"(\w+)"/g;
-    let match;
-    while (match = includeRegex.exec(code)) {
+    const includeRegex = /#include\s+"([\w_][\w\d_]+)"/;
+    let match = code.match(includeRegex);
+    while (match) {
         const includeName = match[1];
         let includeSource = parseCtx.includes[includeName] || null;
         if (includeSource) {
@@ -79,19 +79,20 @@ export function parseGLSL(source: string, parseCtx: IParseCtx) {
             if (isCompileDefine) {
                 includeSource = includeSource.replace(/#pragma\s+compiler/, '');
                 parseCtx.ast = parseGLSLChunk(includeSource, parseCtx.ast, true);
-            }else{
+            } else {
                 parseCtx.ast = parseGLSLChunk(includeSource, parseCtx.ast);
             }
         } else {
             throw new Error(`Include ${includeName} not found`);
         }
         code = code.replace(match[0], '');
+        match = code.match(includeRegex);
     }
     code = preprocess(code, {
         defines: parseCtx?.defines,
     });
 
-    if(parseCtx.properties){
+    if (parseCtx.properties && parseCtx.properties.length > 0) {
         const propertiesCode = properties2glsl(parseCtx);
         parseCtx.ast = parseGLSLChunk(propertiesCode, parseCtx.ast);
     }
@@ -99,10 +100,10 @@ export function parseGLSL(source: string, parseCtx: IParseCtx) {
     return parseCtx;
 }
 
-export function getFunctionSignature(func:IFunctionDeclaration | ICallExpression) {
-    if(func.type === 'functionDeclaration'){
+export function getFunctionSignature(func: IFunctionDeclaration | ICallExpression) {
+    if (func.type === 'functionDeclaration') {
         return `${func.name}(${func.parameters.map((param) => param.typeName).join(',')})`;
-    }else{
+    } else {
         return `${func.callee.name}(${func.params.map((arg) => arg.typeName).join(',')})`;
     }
 }
