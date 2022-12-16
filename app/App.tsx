@@ -13,8 +13,8 @@ export default () => {
         if (ref.current) {
             const engine = new Engine(ref.current);
             setEngine(engine);
+            engine.materialSrc = "http://localhost:3000/default.shader";
             engine.loop();
-
             return () => {
                 engine.exit();
             }

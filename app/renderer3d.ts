@@ -1,11 +1,13 @@
 import { Mesh } from "./mesh";
 import { Material } from "./material";
-import { glslCompiler, IProperty, Muses, PropertyType, IRenderState } from "../src";
-import { generate } from "@shaderfrog/glsl-parser";
+import { generateCode, glslCompiler, Muses, PropertyType } from "../src";
+import { IProperty } from "../src/properties/properties";
+import { IRenderState } from "../src/renderstate/renderstate";
+import { muses_define } from "./muses-define";
 
 export interface IUniform {
     type: PropertyType;
-    value: any;
+    value: number | [number, number, number, number] | WebGLTexture;
     property: IProperty;
 }
 
@@ -13,13 +15,15 @@ export interface IUniforms {
     [key: string]: IUniform;
 }
 
+export interface IUniformLocations {
+    [key: string]: WebGLUniformLocation;
+}
+
 export interface IRenderCommand {
     program: WebGLProgram;
     vao: WebGLVertexArrayObject;
     renderStates: Partial<IRenderState>;
-    uniformLocations: {
-        [key: string]: WebGLUniformLocation;
-    }
+    uniformLocations: IUniformLocations;
 }
 
 export interface IRenderInfo {
@@ -29,21 +33,21 @@ export interface IRenderInfo {
 
 export class Renderer3D {
     private _gl: WebGL2RenderingContext;
-    private _material: Material;
+    private _material: Material | null = null;
     private _mesh: Mesh;
     private _muses?: Muses;
     private _vbo: WebGLBuffer;
+    private _ebo: WebGLBuffer | null;
     private _renderInfo: IRenderInfo = {
         uniforms: {},
         commands: []
     }
 
-    constructor(gl: WebGL2RenderingContext, material: Material, mesh: Mesh) {
+    constructor(gl: WebGL2RenderingContext, mesh: Mesh) {
         this._gl = gl;
-        this._material = material;
         this._mesh = mesh;
         this._vbo = this._mesh.createVBO(gl);
-        this.material = material;
+        this._ebo = this._mesh.createEBO(gl);
     }
 
     private async createRenderInfo(muses: Muses) {
@@ -78,10 +82,14 @@ export class Renderer3D {
                         },
                         includes: {
                             glsl: glslCompiler,
+                            muses_define: muses_define,
                         },
                     });
-                    const vsSource = generate(ast.vertex)
-                    const fsSource = generate(ast.fragment);
+                    console.log(ast)
+                    const vsSource = generateCode(ast.vertex);
+                    console.log(`load vertex shader: \n${vsSource}`);
+                    const fsSource = generateCode(ast.fragment);
+                    console.log(`load fragment shader: \n${fsSource}`);
                     const program = Renderer3D.initShaderProgram(this._gl, vsSource, fsSource);
                     const vao = this.mesh.createVAO(this.gl, program, this._vbo);
                     const uniformLocations = this.initUniformLocations(program, unifroms);
@@ -214,11 +222,21 @@ export class Renderer3D {
         }
     }
 
-    set material(value: Material) {
-        value.addListener('ready', async (muses) => {
-            this._renderInfo = await this.createRenderInfo(muses);
-            this._muses = muses;
-        });
+    private async materialListener(muses: Muses) {
+        this._renderInfo = await this.createRenderInfo(muses);
+        this._muses = muses;
+    }
+
+    set material(value: Material | null) {
+        if (!value) {
+            this._renderInfo = {
+                commands: [],
+                uniforms: {},
+            }
+            this._material = null;
+            return;
+        }
+        value.addListener('ready', this.materialListener.bind(this));
         this._material = value;
     }
 
@@ -252,6 +270,10 @@ export class Renderer3D {
 
     get renderInfo() {
         return this._renderInfo;
+    }
+
+    get ebo() {
+        return this._ebo;
     }
 
     // #region shader

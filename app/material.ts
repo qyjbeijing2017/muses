@@ -1,5 +1,6 @@
 import EventEmitter from "events";
 import { Muses } from "../src";
+import { isUrl } from "../src/utils/isUrl";
 
 export class Material extends EventEmitter {
     private _url?: string;

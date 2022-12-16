@@ -1,10 +1,12 @@
 import { vec2, vec3 } from "gl-matrix";
+import { normalize } from "path";
 
 export interface IAttributes {
     [key: string]: {
         data: ArrayBuffer;
         type: number;
         size: 1 | 2 | 3 | 4;
+        normalized: boolean;
     }
 }
 
@@ -17,10 +19,37 @@ export interface IMeshOptions {
 export class Mesh {
     private _attributes: IAttributes;
     private _indices: Uint16Array | null = null;
+    mode: number;
+    count: number;
+    type: number;
+    offset: number = 0;
+    first: number = 0;
     constructor(options: IMeshOptions) {
         this._attributes = options.attributes;
         if (options.indices) {
             this._indices = options.indices;
+        }
+        this.mode = WebGL2RenderingContext.TRIANGLES;
+        const positionsAttribute = this._attributes.a_position;
+        const size = Mesh.glType2Size(positionsAttribute.type);
+        this.count = this._indices ? this._indices.length : positionsAttribute.data.byteLength / (positionsAttribute.size * size) ;
+        this.type = WebGL2RenderingContext.UNSIGNED_SHORT;
+    }
+
+    static glType2Size(type: number) {
+        switch (type) {
+            case WebGL2RenderingContext.BYTE:
+            case WebGL2RenderingContext.UNSIGNED_BYTE:
+                return 1;
+            case WebGL2RenderingContext.SHORT:
+            case WebGL2RenderingContext.UNSIGNED_SHORT:
+                return 2;
+            case WebGL2RenderingContext.INT:
+            case WebGL2RenderingContext.UNSIGNED_INT:
+            case WebGL2RenderingContext.FLOAT:
+                return 4;
+            default:
+                throw new Error("Unknown type");
         }
     }
 
@@ -67,7 +96,18 @@ export class Mesh {
         return vbo;
     }
 
-    calculateTangents(gl: WebGL2RenderingContext, positionsKey: string = "a_position", texCoordsKey: string = "a_texCoord", tangentsKey: string = "a_tangent"): void {
+    createEBO(gl: WebGL2RenderingContext) {
+        if (!this.indices) {
+            return null;
+        }
+        const ebo = gl.createBuffer()!;
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ebo);
+        gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, this.indices, gl.STATIC_DRAW);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
+        return ebo;
+    }
+
+    calculateTangents(gl: WebGL2RenderingContext, positionsKey: string = "a_position", texCoordsKey: string = "a_texcoord", tangentsKey: string = "a_tangent"): void {
         const positions = new Float32Array(this.attributes[positionsKey].data);
         const texCoords = new Float32Array(this.attributes[texCoordsKey].data);
         const tangents = new Float32Array(positions.length);
@@ -142,7 +182,64 @@ export class Mesh {
         this.attributes[tangentsKey] = {
             size: 3,
             type: gl.FLOAT,
-            data: tangents
+            data: tangents,
+            normalized: false,
+        };
+    }
+
+    calculateNormals(gl: WebGL2RenderingContext, positionsKey: string = "a_position", normalsKey: string = "a_normal"): void {
+        const positions = new Float32Array(this.attributes[positionsKey].data);
+        const normals = new Float32Array(positions.length);
+        const indices = this.indices;
+        if (indices) {
+            for (let i = 0; i < indices.length; i += 3) {
+                const i0 = indices[i];
+                const i1 = indices[i + 1];
+                const i2 = indices[i + 2];
+
+                const p0 = vec3.fromValues(positions[i0 * 3], positions[i0 * 3 + 1], positions[i0 * 3 + 2]);
+                const p1 = vec3.fromValues(positions[i1 * 3], positions[i1 * 3 + 1], positions[i1 * 3 + 2]);
+                const p2 = vec3.fromValues(positions[i2 * 3], positions[i2 * 3 + 1], positions[i2 * 3 + 2]);
+
+                const n = vec3.normalize(vec3.create(), vec3.cross(vec3.create(), vec3.sub(vec3.create(), p1, p0), vec3.sub(vec3.create(), p2, p0)));
+
+                const i0n = i0 * 3;
+                const i1n = i1 * 3;
+                const i2n = i2 * 3;
+                normals[i0n] += n[0];
+                normals[i0n + 1] += n[1];
+                normals[i0n + 2] += n[2];
+                normals[i1n] += n[0];
+                normals[i1n + 1] += n[1];
+                normals[i1n + 2] += n[2];
+                normals[i2n] += n[0];
+                normals[i2n + 1] += n[1];
+                normals[i2n + 2] += n[2];
+            }
+        } else {
+            for (let i = 0; i < positions.length; i += 9) {
+                const p0 = vec3.fromValues(positions[i], positions[i + 1], positions[i + 2]);
+                const p1 = vec3.fromValues(positions[i + 3], positions[i + 4], positions[i + 5]);
+                const p2 = vec3.fromValues(positions[i + 6], positions[i + 7], positions[i + 8]);
+
+                const n = vec3.normalize(vec3.create(), vec3.cross(vec3.create(), vec3.sub(vec3.create(), p1, p0), vec3.sub(vec3.create(), p2, p0)));
+
+                normals[i] = n[0];
+                normals[i + 1] = n[1];
+                normals[i + 2] = n[2];
+                normals[i + 3] = n[0];
+                normals[i + 4] = n[1];
+                normals[i + 5] = n[2];
+                normals[i + 6] = n[0];
+                normals[i + 7] = n[1];
+                normals[i + 8] = n[2];
+            }
+        }
+        this.attributes[normalsKey] = {
+            size: 3,
+            type: gl.FLOAT,
+            data: normals,
+            normalized: false,
         };
     }
 }
