@@ -1,6 +1,7 @@
 import { vec4 } from "gl-matrix";
 import { BlendOp, CullState, Factor, PropertyType } from "../src";
 import { IRenderState } from "../src/renderstate/renderstate";
+import { Camera } from "./camera";
 import { cubeNormals, cubePositions, cubeTexCoords } from "./cube";
 import { Material } from "./material";
 import { Mesh } from "./mesh";
@@ -14,9 +15,11 @@ export class Engine {
     backgroundTexture: WebGLTexture | null = null;
 
     private _renderer: Renderer3D;
+    private _camera: Camera;
 
     constructor(private readonly _container: HTMLCanvasElement) {
-        const gl = _container.getContext("webgl2"); 11
+        const gl = _container.getContext("webgl2");
+        this._camera = new Camera(_container);
         if (!gl) {
             throw new Error("WebGL not supported");
         }
@@ -49,6 +52,10 @@ export class Engine {
             mesh,
         );
         this.loop();
+    }
+
+    get camera(): Camera {
+        return this._camera;
     }
 
     get material(): Material | null {
@@ -170,9 +177,26 @@ export class Engine {
         const mesh = this._renderer.mesh;
         const uniforms = renderInfo.uniforms;
         const renderCommands = renderInfo.commands;
+        const modelMatrix = this._renderer.modelMatrix;
+        const viewMatrix = this._camera.viewMatrix;
+        const projectionMatrix = this._camera.projectionMatrix;
         for (const command of renderCommands) {
             this.setRenderStates(command.renderStates);
             this._gl.useProgram(command.program);
+
+            // set uniforms
+            const a_model = this._gl.getUniformLocation(command.program, "a_model");
+            if(a_model) {
+                this._gl.uniformMatrix4fv(a_model, false, modelMatrix);
+            }
+            const a_view = this._gl.getUniformLocation(command.program, "a_view");
+            if(a_view) {
+                this._gl.uniformMatrix4fv(a_view, false, viewMatrix);
+            }
+            const a_projection = this._gl.getUniformLocation(command.program, "a_projection");
+            if(a_projection) {
+                this._gl.uniformMatrix4fv(a_projection, false, projectionMatrix);
+            }
             this.setUniforms(uniforms, command.uniformLocations);
             this._gl.bindVertexArray(command.vao);
             if (this._renderer.ebo) {

@@ -26,7 +26,7 @@ export default () => {
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         </Sider>
         <Layout>
-            <canvas ref={ref} style={{ minHeight: '100vh' }} />
+            <canvas ref={ref} width={1920} height={1080} style={{ height: '100vh' }} />
         </Layout>
     </Layout>
 }

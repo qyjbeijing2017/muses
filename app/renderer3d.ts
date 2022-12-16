@@ -4,6 +4,7 @@ import { generateCode, glslCompiler, Muses, PropertyType } from "../src";
 import { IProperty } from "../src/properties/properties";
 import { IRenderState } from "../src/renderstate/renderstate";
 import { muses_define } from "./muses-define";
+import { mat4 } from "gl-matrix";
 
 export interface IUniform {
     type: PropertyType;
@@ -32,6 +33,15 @@ export interface IRenderInfo {
 }
 
 export class Renderer3D {
+    private _transform: {
+        position: [number, number, number],
+        euler: [number, number, number],
+        scale: [number, number, number],
+    } = {
+        position: [0, 0, 0],
+        euler: [0, 0, 0],
+        scale: [1, 1, 1],
+    }
     private _gl: WebGL2RenderingContext;
     private _material: Material | null = null;
     private _mesh: Mesh;
@@ -41,6 +51,16 @@ export class Renderer3D {
     private _renderInfo: IRenderInfo = {
         uniforms: {},
         commands: []
+    }
+
+    get modelMatrix(): mat4 {
+        const matrix = mat4.create();
+        mat4.translate(matrix, matrix, this._transform.position);
+        mat4.rotateX(matrix, matrix, this._transform.euler[0]);
+        mat4.rotateY(matrix, matrix, this._transform.euler[1]);
+        mat4.rotateZ(matrix, matrix, this._transform.euler[2]);
+        mat4.scale(matrix, matrix, this._transform.scale);
+        return matrix;
     }
 
     constructor(gl: WebGL2RenderingContext, mesh: Mesh) {

@@ -1,4 +1,5 @@
 export const muses_define = `
+precision mediump float;
 attribute vec3 a_position;
 attribute vec3 a_normal;
 attribute vec2 a_texcoord;
