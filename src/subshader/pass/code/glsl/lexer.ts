@@ -61,11 +61,11 @@ export const Out = createToken({ name: 'Out', pattern: /out/, longer_alt: Identi
 export const Const = createToken({ name: 'Const', pattern: /const/, longer_alt: Identifier, categories: [StorageQualifiers, GlobalStorageQualifiers] });
 
 // Precision
-export const PercisionQualifiers = createToken({ name: 'PercisionQualifiers', pattern: Lexer.NA });
-export const Percision = createToken({ name: 'Percision', pattern: /precision/, longer_alt: Identifier });
-export const Lowp = createToken({ name: 'Lowp', pattern: /lowp/, longer_alt: Identifier, categories: PercisionQualifiers });
-export const Mediump = createToken({ name: 'Mediump', pattern: /mediump/, longer_alt: Identifier, categories: PercisionQualifiers });
-export const Highp = createToken({ name: 'Highp', pattern: /highp/, longer_alt: Identifier, categories: PercisionQualifiers });
+export const PrecisionQualifiers = createToken({ name: 'PrecisionQualifiers', pattern: Lexer.NA });
+export const Precision = createToken({ name: 'Precision', pattern: /precision/, longer_alt: Identifier });
+export const Lowp = createToken({ name: 'Lowp', pattern: /lowp/, longer_alt: Identifier, categories: PrecisionQualifiers });
+export const Mediump = createToken({ name: 'Mediump', pattern: /mediump/, longer_alt: Identifier, categories: PrecisionQualifiers });
+export const Highp = createToken({ name: 'Highp', pattern: /highp/, longer_alt: Identifier, categories: PrecisionQualifiers });
 
 // Operators
 export const GreaterThenEqual = createToken({ name: 'GreaterThenEqual', pattern: />=/ });
@@ -181,8 +181,8 @@ export const musesTokens: TokenType[] = [
     Const,                          // const
 
     // precision
-    PercisionQualifiers,
-    Percision,                      // precision
+    PrecisionQualifiers,
+    Precision,                      // precision
     Lowp,                           // lowp
     Mediump,                        // mediump
     Highp,                          // highp
@@ -324,9 +324,9 @@ export const musesToken = {
     Vec4,
     Void,
     While,
-    Percision,                      // precision
+    Precision,                      // precision
     Types,
-    PercisionQualifiers,
+    PrecisionQualifiers,
     StorageQualifiers,
     GlobalStorageQualifiers,
     ParamStrorageQualifiers,

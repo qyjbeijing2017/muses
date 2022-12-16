@@ -7,13 +7,13 @@ export interface IGLSLTypeContext {
         test: RegExp;
         returnType: string;
     }[];
-    percision?: 'lowp' | 'mediump' | 'highp';
+    precision?: 'lowp' | 'mediump' | 'highp';
 }
 
 export interface IGLSLVariableContext {
     name: string;
     typeName: string;
-    percision?: 'lowp' | 'mediump' | 'highp';
+    precision?: 'lowp' | 'mediump' | 'highp';
     const?: boolean;
     storage?: 'in' | 'out' | 'inout' | 'uniform' | 'varying' | 'attribute';
     arrayLength?: any;
@@ -180,14 +180,14 @@ export class GLSLContext {
         return null;
     }
 
-    setPercision(percision: 'lowp' | 'mediump' | 'highp', typeName: string): string | null {
+    setprecision(precision: 'lowp' | 'mediump' | 'highp', typeName: string): string | null {
         const type = this.getType(typeName);
         if (!type) {
             return null;
         }
-        if(type.percision) {
-            type.percision = percision;
-            return percision;
+        if(type.precision) {
+            type.precision = precision;
+            return precision;
         }
         return null;
     }
@@ -229,7 +229,7 @@ export class GLSLContext {
                     { test: /^float\((int|float|bool)\)$/, returnType: 'float' },
                     { test: /^(\+{1,2}|\-{1,2})?float(\+\+|\-\-)?$/, returnType: 'float' },
                 ],
-                percision: 'mediump',
+                precision: 'mediump',
             },
             'int': {
                 name: 'int',
@@ -240,7 +240,7 @@ export class GLSLContext {
                     { test: /^int\((int|float|bool)\)$/, returnType: 'int' },
                     { test: /^(\+{1,2}|\-{1,2})?int(\+\+|\-\-)?$/, returnType: 'int' },
                 ],
-                percision: 'mediump',
+                precision: 'mediump',
             },
             'vec2': {
                 name: 'vec2',
@@ -258,7 +258,7 @@ export class GLSLContext {
                     { test: /^vec2.[xyrgst]{4}$/, returnType: 'vec4' },
                     { test: /^\-vec2$/, returnType: 'vec2' },
                 ],
-                percision: 'mediump',
+                precision: 'mediump',
             },
             'vec3': {
                 name: 'vec3',
@@ -277,7 +277,7 @@ export class GLSLContext {
                     { test: /^vec3.[xyzrgbstr]{4}$/, returnType: 'vec4' },
                     { test: /^\-vec3$/, returnType: 'vec3' },
                 ],
-                percision: 'mediump',
+                precision: 'mediump',
             },
             'vec4': {
                 name: 'vec4',
@@ -299,7 +299,7 @@ export class GLSLContext {
                     { test: /^vec4.[xyzwrgbastrq]{4}$/, returnType: 'vec4' },
                     { test: /^\-vec4$/, returnType: 'vec4' },
                 ],
-                percision: 'mediump',
+                precision: 'mediump',
             },
             'mat2': {
                 name: 'mat2',
@@ -312,7 +312,7 @@ export class GLSLContext {
                     { test: /^mat2\(vec2(,vec2){0,1}\)$/, returnType: 'mat2' },
                     { test: /^mat2\[\]$/, returnType: 'vec2' },
                 ],
-                percision: 'mediump',
+                precision: 'mediump',
             },
             'mat3': {
                 name: 'mat3',
@@ -325,7 +325,7 @@ export class GLSLContext {
                     { test: /^mat3\(vec3(,vec3){0,2}\)$/, returnType: 'mat3' },
                     { test: /^mat3\[\]$/, returnType: 'vec3' },
                 ],
-                percision: 'mediump',
+                precision: 'mediump',
             },
             'mat4': {
                 name: 'mat4',
@@ -338,7 +338,7 @@ export class GLSLContext {
                     { test: /^mat4\(vec4(,vec4){0,3}\)$/, returnType: 'mat4' },
                     { test: /^mat4\[\]$/, returnType: 'vec4' },
                 ],
-                percision: 'mediump',
+                precision: 'mediump',
             },
             'sampler2D': {
                 name: 'sampler2D',

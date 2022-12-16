@@ -300,15 +300,15 @@ function expressionStatement(node: IAstNode, visitor: IAstVisitor) {
 }
 visitors.expressionStatement = expressionStatement;
 
-function percisionDefinition(node: IAstNode, visitor: IAstVisitor) {
-    if (visitor.percisionDefine?.enter) {
-        visitor.percisionDefine.enter(node);
+function precisionDefinition(node: IAstNode, visitor: IAstVisitor) {
+    if (visitor.precisionDefine?.enter) {
+        visitor.precisionDefine.enter(node);
     }
-    if (visitor.percisionDefine?.leave) {
-        visitor.percisionDefine.leave(node);
+    if (visitor.precisionDefine?.leave) {
+        visitor.precisionDefine.leave(node);
     }
 }
-visitors.percisionDefinition = percisionDefinition;
+visitors.precisionDefinition = precisionDefinition;
 
 function returnStatement(node: IAstNode, visitor: IAstVisitor) {
     if (visitor.returnStatement?.enter) {

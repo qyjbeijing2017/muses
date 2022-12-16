@@ -22,7 +22,7 @@ import { ILiterial } from "./ast-interface/expression/literial";
 import { ITypeConstructor } from "./ast-interface/expression/type-constructor";
 import { IBreakStatement } from "./ast-interface/statement/break-statement";
 import { IExpressionStatement } from "./ast-interface/statement/expression-statement";
-import { IPercisionDefinition } from "./ast-interface/statement/percision-definition";
+import { IPrecisionDefinition } from "./ast-interface/statement/precision-definition";
 
 let generator: { [key: string]: (node: IAstNode) => string } = {};
 
@@ -161,11 +161,11 @@ function expressionStatement(node: IAstNode) {
 }
 generator.expressionStatement = expressionStatement;
 
-function percisionDefinition(node: IAstNode) {
-    const percisionDefinition = node as IPercisionDefinition;
-    return `precision ${percisionDefinition.precision} ${percisionDefinition.typeName}`;
+function precisionDefinition(node: IAstNode) {
+    const precisionDefinition = node as IPrecisionDefinition;
+    return `precision ${precisionDefinition.precision} ${precisionDefinition.typeName};`;
 }
-generator.percisionDefinition = percisionDefinition;
+generator.precisionDefinition = precisionDefinition;
 
 function returnStatement(node: IAstNode) {
     const returnStatement = node as IReturnStatement;
@@ -177,11 +177,11 @@ function variableDeclaration(node: IAstNode) {
     const variableDeclaration = node as IVariableDeclaration;
     const constant = variableDeclaration.constant ? 'const ' : '';
     const storage = variableDeclaration.storage ? variableDeclaration.storage + ' ' : '';
-    const percision = variableDeclaration.percision ? variableDeclaration.percision + ' ' : '';
+    const precision = variableDeclaration.precision ? variableDeclaration.precision + ' ' : '';
     const typeName = variableDeclaration.typeName;
     const name = variableDeclaration.name;
-    const initializer = variableDeclaration.initializer ? ' = ' + generateCode(variableDeclaration.initializer) : '';
-    return `${constant}${storage}${percision}${typeName} ${name}${initializer};`;
+    const initializer = variableDeclaration.init ? ' = ' + generateCode(variableDeclaration.init) : '';
+    return `${constant}${storage}${precision}${typeName} ${name}${initializer};`;
 }
 generator.variableDeclaration = variableDeclaration;
 

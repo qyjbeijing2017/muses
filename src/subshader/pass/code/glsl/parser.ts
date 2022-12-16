@@ -194,7 +194,6 @@ export class GlslParser extends CstParser {
             this.SUBRULE2(this.assignExpression, { LABEL: "right" });
         });
     });
-
     variableInitializer = this.RULE("variableInitializer", () => {
         this.CONSUME(musesToken.Identifier, { LABEL: "name" });
         this.OPTION(() => {
@@ -218,7 +217,7 @@ export class GlslParser extends CstParser {
 
     variableDeclaration = this.RULE("variableDeclaration", () => {
         this.OPTION(() => this.CONSUME(musesToken.Const, { LABEL: "const" }));
-        this.OPTION1(() => this.CONSUME(musesToken.Percision, { LABEL: "percision" }));
+        this.OPTION1(() => this.CONSUME(musesToken.PrecisionQualifiers, { LABEL: "precision" }));
         this.OR([
             { ALT: () => this.CONSUME(musesToken.Types, { LABEL: 'typeName' }) },
             { ALT: () => this.CONSUME(musesToken.Identifier, { LABEL: 'typeName' }) },
@@ -351,7 +350,7 @@ export class GlslParser extends CstParser {
     });
 
     structMemberDeclaration = this.RULE("structMemberDeclaration", () => {
-        this.OPTION(() => this.CONSUME(musesToken.PercisionQualifiers, { LABEL: "percision" }));
+        this.OPTION(() => this.CONSUME(musesToken.PrecisionQualifiers, { LABEL: "precision" }));
         this.OR([
             { ALT: () => this.CONSUME(musesToken.Types, { LABEL: 'typeName' }) },
             { ALT: () => this.CONSUME(musesToken.Identifier, { LABEL: 'typeName' }) },
@@ -389,7 +388,7 @@ export class GlslParser extends CstParser {
 
     globalVariableDeclarator = this.RULE("globalVariableDeclarator", () => {
         this.OPTION(() => this.CONSUME(musesToken.GlobalStorageQualifiers, { LABEL: "storage" }));
-        this.OPTION1(() => this.CONSUME(musesToken.PercisionQualifiers, { LABEL: "percision" }));
+        this.OPTION1(() => this.CONSUME(musesToken.PrecisionQualifiers, { LABEL: "precision" }));
         this.OR([
             { ALT: () => this.CONSUME(musesToken.Types, { LABEL: 'typeName' }) },
             { ALT: () => this.CONSUME(musesToken.Identifier, { LABEL: 'typeName' }) },
@@ -406,7 +405,7 @@ export class GlslParser extends CstParser {
     functionParameterDeclaration = this.RULE("functionParameterDeclaration", () => {
         this.OPTION(() => this.CONSUME(musesToken.Const, { LABEL: "const" }));
         this.OPTION1(() => this.CONSUME(musesToken.ParamStrorageQualifiers, { LABEL: "storage" }));
-        this.OPTION2(() => this.CONSUME(musesToken.PercisionQualifiers, { LABEL: "percision" }));
+        this.OPTION2(() => this.CONSUME(musesToken.PrecisionQualifiers, { LABEL: "precision" }));
         this.OR([
             { ALT: () => this.CONSUME(musesToken.Types, { LABEL: 'typeName' }) },
             { ALT: () => this.CONSUME(musesToken.Identifier, { LABEL: 'typeName' }) },
@@ -440,9 +439,9 @@ export class GlslParser extends CstParser {
         ]);
     });
 
-    percisionDefinition = this.RULE("percisionDefinition", () => {
-        this.CONSUME(musesToken.Percision);
-        this.CONSUME(musesToken.PercisionQualifiers, { LABEL: "percision" });
+    precisionDefinition = this.RULE("precisionDefinition", () => {
+        this.CONSUME(musesToken.Precision);
+        this.CONSUME(musesToken.PrecisionQualifiers, { LABEL: "precision" });
         this.CONSUME(musesToken.Types, { LABEL: "typeName" });
         this.CONSUME(musesToken.Semicolon);
     });
@@ -452,6 +451,7 @@ export class GlslParser extends CstParser {
             { ALT: () => this.SUBRULE(this.functionDeclaration, { LABEL: "statement" }) },
             { ALT: () => this.SUBRULE(this.globalVariableDeclarator, { LABEL: "statement" }) },
             { ALT: () => this.SUBRULE(this.structDeclaration, { LABEL: "statement" }) },
+            { ALT: () => this.SUBRULE(this.precisionDefinition, { LABEL: "statement" }) },
         ]);
     });
 

@@ -379,7 +379,7 @@ export class GlslVisitor extends CstVisiter {
 
     variableDeclaration(ctx: CstChildrenDictionary) {
         const isConst = ctx.const ? true : false;
-        const percision: 'highp' | 'mediump' | 'lowp' | undefined = ctx.percision ? (ctx.percision[0] as IToken).image as 'highp' | 'mediump' | 'lowp' : undefined;
+        const precision: 'highp' | 'mediump' | 'lowp' | undefined = ctx.precision ? (ctx.precision[0] as IToken).image as 'highp' | 'mediump' | 'lowp' : undefined;
         const typeName: string = (ctx.typeName[0] as IToken).image;
         if (!this.ctx.getType(typeName)) {
             throw new Error(`Type ${typeName} is not defined`);
@@ -396,7 +396,7 @@ export class GlslVisitor extends CstVisiter {
                 type: 'variableDeclaration',
                 name: name,
                 typeName: arrayLength ? `${typeName}[]` : typeName,
-                percision,
+                precision,
                 isConst,
                 init,
                 arrayLength,
@@ -546,7 +546,7 @@ export class GlslVisitor extends CstVisiter {
     }
 
     structMemberDeclaration(ctx: CstChildrenDictionary) {
-        const percision: 'highp' | 'mediump' | 'lowp' | undefined = ctx.percision ? (ctx.percision[0] as IToken).image as 'highp' | 'mediump' | 'lowp' : undefined;
+        const precision: 'highp' | 'mediump' | 'lowp' | undefined = ctx.precision ? (ctx.precision[0] as IToken).image as 'highp' | 'mediump' | 'lowp' : undefined;
         const typeName: string = (ctx.typeName[0] as IToken).image;
         if (!this.ctx.getType(typeName)) {
             throw new Error(`Type ${typeName} is not defined`);
@@ -558,7 +558,7 @@ export class GlslVisitor extends CstVisiter {
                 type: 'variableDeclaration',
                 name: (variable as IToken).image,
                 typeName: arrayLength ? `${typeName}[]` : typeName,
-                percision,
+                precision,
                 arrayLength,
             }
             this.ctx.setVariable(variableDeclaration);
@@ -600,7 +600,7 @@ export class GlslVisitor extends CstVisiter {
         const qualifier: 'uniform' | 'varying' | 'attribute' | 'const' | undefined = ctx.storage ? (ctx.storage[0] as IToken).image as 'uniform' | 'varying' | 'attribute' | 'const' : undefined;
         const constant: boolean = qualifier === 'const';
         const storage: 'uniform' | 'varying' | 'attribute' | undefined = qualifier === 'uniform' || qualifier === 'varying' || qualifier === 'attribute' ? qualifier : undefined;
-        const percision: 'lowp' | 'mediump' | 'highp' | undefined = ctx.percision ? (ctx.percision[0] as IToken).image as 'lowp' | 'mediump' | 'highp' : undefined;
+        const precision: 'lowp' | 'mediump' | 'highp' | undefined = ctx.precision ? (ctx.precision[0] as IToken).image as 'lowp' | 'mediump' | 'highp' : undefined;
         const typeName: string = (ctx.typeName[0] as IToken).image;
         if (!this.ctx.getType(typeName)) {
             throw new Error(`Type ${typeName} is not defined`);
@@ -624,7 +624,7 @@ export class GlslVisitor extends CstVisiter {
                 type: 'variableDeclaration',
                 name: name,
                 typeName: arrayLength ? `${typeName}[]` : typeName,
-                percision,
+                precision,
                 const: constant,
                 storage,
                 arrayLength,
@@ -648,7 +648,7 @@ export class GlslVisitor extends CstVisiter {
             typeName: arrayLength ? `${typeName}[]` : typeName,
             const: ctx.const ? true : false,
             storage: ctx.storage ? (ctx.storage[0] as IToken).image as 'in' | 'out' | 'inout' : undefined,
-            percision: ctx.percision ? (ctx.percision[0] as IToken).image as 'lowp' | 'mediump' | 'highp' : undefined,
+            precision: ctx.precision ? (ctx.precision[0] as IToken).image as 'lowp' | 'mediump' | 'highp' : undefined,
             arrayLength,
         }
         this.ctx.setVariable(variableDeclaration);
@@ -679,16 +679,16 @@ export class GlslVisitor extends CstVisiter {
         return functionDeclaration;
     }
 
-    percisionDefinition(ctx:CstChildrenDictionary){
-        const percision = (ctx.percision[0] as IToken).image as 'lowp' | 'mediump' | 'highp';
+    precisionDefinition(ctx:CstChildrenDictionary){
+        const precision = (ctx.precision[0] as IToken).image as 'lowp' | 'mediump' | 'highp';
         const typeName = (ctx.typeName[0] as IToken).image;
         if (!this.ctx.getType(typeName)) {
             throw new Error(`Type ${typeName} is not defined`);
         };
-        this.ctx.setPercision(percision, typeName);
+        this.ctx.setprecision(precision, typeName);
         return {
-            type: 'percisionDefinition',
-            percision,
+            type: 'precisionDefinition',
+            precision,
             typeName,
         }
     }
