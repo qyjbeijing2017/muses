@@ -1,5 +1,5 @@
-import { vec4 } from "gl-matrix";
-import { BlendOp, CullState, Factor, PropertyType } from "../src";
+import { mat4, vec4 } from "gl-matrix";
+import { BlendOp, CompOp, CullState, Factor, PropertyType, StencilOp, ZTestOp } from "../src";
 import { IRenderState } from "../src/renderstate/renderstate";
 import { Camera } from "./camera";
 import { cubeNormals, cubePositions, cubeTexCoords } from "./cube";
@@ -11,19 +11,16 @@ export class Engine {
     private readonly _gl: WebGL2RenderingContext;
     private _running: boolean = false;
 
-    backgroundColor = vec4.fromValues(1, 0, 0, 1);
-    backgroundTexture: WebGLTexture | null = null;
-
     private _renderer: Renderer3D;
     private _camera: Camera;
 
     constructor(private readonly _container: HTMLCanvasElement) {
         const gl = _container.getContext("webgl2");
-        this._camera = new Camera(_container);
         if (!gl) {
             throw new Error("WebGL not supported");
         }
         this._gl = gl;
+        this._camera = new Camera(_container, gl);
         const mesh = new Mesh({
             attributes: {
                 a_position: {
@@ -72,7 +69,8 @@ export class Engine {
                 return gl.BACK;
             case CullState.Front:
                 return gl.FRONT;
-
+            default:
+                return gl.BACK;
         }
     }
 
@@ -130,19 +128,140 @@ export class Engine {
         }
     }
 
-    private setRenderStatesDefault(): void {
-        this._gl.enable(this._gl.DEPTH_TEST);
-        this._gl.depthFunc(this._gl.LEQUAL);
-        this._gl.enable(this._gl.CULL_FACE);
-        this._gl.cullFace(this._gl.BACK);
-        this._gl.frontFace(this._gl.CCW);
-        this._gl.enable(this._gl.BLEND);
-        this._gl.blendFunc(this._gl.SRC_ALPHA, this._gl.ONE_MINUS_SRC_ALPHA);
-        this._gl.blendEquation(this._gl.FUNC_ADD);
+    private static compOp2gl(compOp: CompOp, gl: WebGL2RenderingContext): number {
+        switch (compOp) {
+            case CompOp.Never:
+                return gl.NEVER;
+            case CompOp.Less:
+                return gl.LESS;
+            case CompOp.Equal:
+                return gl.EQUAL;
+            case CompOp.LEqual:
+                return gl.LEQUAL;
+            case CompOp.Greater:
+                return gl.GREATER;
+            case CompOp.NotEqual:
+                return gl.NOTEQUAL;
+            case CompOp.GEqual:
+                return gl.GEQUAL;
+            case CompOp.Always:
+                return gl.ALWAYS;
+            default:
+                return gl.ALWAYS;
+        }
     }
 
+    private static stencilOp2gl(stencilOp: StencilOp, gl: WebGL2RenderingContext): number {
+        switch (stencilOp) {
+            case StencilOp.Keep:
+                return gl.KEEP;
+            case StencilOp.Zero:
+                return gl.ZERO;
+            case StencilOp.Replace:
+                return gl.REPLACE;
+            case StencilOp.IncrSat:
+                return gl.INCR;
+            case StencilOp.IncrWrap:
+                return gl.INCR_WRAP;
+            case StencilOp.DecrSat:
+                return gl.DECR;
+            case StencilOp.DecrWrap:
+                return gl.DECR_WRAP;
+            case StencilOp.Invert:
+                return gl.INVERT;
+            default:
+                return gl.KEEP;
+        }
+    }
 
-    private setRenderStates(renderStates: Partial<IRenderState>): void {
+    private static zTestOp2gl(zTestOp: ZTestOp, gl: WebGL2RenderingContext): number {
+        switch (zTestOp) {
+            case ZTestOp.Less:
+                return gl.LESS;
+            case ZTestOp.Equal:
+                return gl.EQUAL;
+            case ZTestOp.LEqual:
+                return gl.LEQUAL;
+            case ZTestOp.Greater:
+                return gl.GREATER;
+            case ZTestOp.NotEqual:
+                return gl.NOTEQUAL;
+            case ZTestOp.GEqual:
+                return gl.GEQUAL;
+            case ZTestOp.Always:
+                return gl.ALWAYS;
+            default:
+                return gl.ALWAYS;
+        }
+    }
+
+    private setRenderStates(renderStates: IRenderState): void {
+        if (renderStates.Blend) {
+            const blend = renderStates.Blend.targets.get(-1);
+            if (blend && blend.enabled) {
+                this._gl.enable(this._gl.BLEND);
+                if (blend.sfactorA === undefined || blend.dfactorA === undefined) {
+                    this._gl.blendFunc(
+                        Engine.factor2gl(blend.sfactor, this._gl),
+                        Engine.factor2gl(blend.dfactor, this._gl)
+                    );
+                } else {
+                    this._gl.blendFuncSeparate(
+                        Engine.factor2gl(blend.sfactor, this._gl),
+                        Engine.factor2gl(blend.dfactor, this._gl),
+                        Engine.factor2gl(blend.sfactorA, this._gl),
+                        Engine.factor2gl(blend.dfactorA, this._gl)
+                    );
+                }
+            } else {
+                this._gl.disable(this._gl.BLEND);
+            }
+            if (renderStates.Blend.op) {
+                this._gl.blendEquation(Engine.blendOp2gl(renderStates.Blend.op, this._gl));
+            }
+        } else {
+            this._gl.disable(this._gl.BLEND);
+        }
+        if (renderStates.Cull) {
+            if (renderStates.Cull.enabled === false) {
+                this._gl.disable(this._gl.CULL_FACE);
+            }
+            if (renderStates.Cull.mode) {
+                this._gl.cullFace(Engine.cullState2gl(renderStates.Cull.mode, this._gl));
+            } else {
+                this._gl.cullFace(this._gl.BACK);
+            }
+        } else {
+            this._gl.enable(this._gl.CULL_FACE);
+            this._gl.cullFace(this._gl.BACK);
+        }
+        if (renderStates.Stencil && renderStates.Stencil.enabled) {
+            this._gl.enable(this._gl.STENCIL_TEST);
+            const writeMask = renderStates.Stencil.WriteMask || 0xff;
+            const readMask = renderStates.Stencil.ReadMask || 0xff;
+            const ref = renderStates.Stencil.Ref || 0;
+            const comp = Engine.compOp2gl(renderStates.Stencil.Comp || CompOp.Always, this._gl);
+            const pass = Engine.stencilOp2gl(renderStates.Stencil.Pass || StencilOp.Keep, this._gl);
+            const sfail = Engine.stencilOp2gl(renderStates.Stencil.Fail || StencilOp.Keep, this._gl);
+            const dpfail = Engine.stencilOp2gl(renderStates.Stencil.ZFail || StencilOp.Keep, this._gl);
+            this._gl.stencilFunc(comp, ref, readMask);
+            this._gl.stencilMask(writeMask);
+            this._gl.stencilOp(sfail, dpfail, pass);
+
+        } else {
+            this._gl.disable(this._gl.STENCIL_TEST);
+        }
+        if (renderStates.ZClip === false) {
+            this._gl.disable(this._gl.DEPTH_TEST);
+        } else {
+            this._gl.enable(this._gl.DEPTH_TEST);
+        }
+        if (renderStates.ZTest) {
+            this._gl.depthFunc(Engine.zTestOp2gl(renderStates.ZTest, this._gl));
+        }
+        if (renderStates.ZWrite) {
+            this._gl.depthMask(renderStates.ZWrite);
+        }
     }
 
     private setUniforms(uniforms: IUniforms, locations: IUniformLocations): void {
@@ -170,11 +289,13 @@ export class Engine {
                     this._gl.activeTexture(this._gl.TEXTURE0 + textureIndex);
                     this._gl.bindTexture(this._gl.TEXTURE_2D, uniform.value as WebGLTexture);
                     this._gl.uniform1i(location, textureIndex);
+                    textureIndex++;
                     break;
                 case PropertyType.Cube:
                     this._gl.activeTexture(this._gl.TEXTURE0 + textureIndex);
                     this._gl.bindTexture(this._gl.TEXTURE_CUBE_MAP, uniform.value as WebGLTexture);
                     this._gl.uniform1i(location, textureIndex);
+                    textureIndex++;
                     break;
                 default:
                     throw new Error("Unknown uniform type");
@@ -182,42 +303,58 @@ export class Engine {
         }
     }
 
-    private update(): void {
-        this._gl.clearColor(this.backgroundColor[0], this.backgroundColor[1], this.backgroundColor[2], this.backgroundColor[3]);
-        this._gl.clear(this._gl.COLOR_BUFFER_BIT | this._gl.DEPTH_BUFFER_BIT | this._gl.STENCIL_BUFFER_BIT);
-        const renderInfo = this._renderer.renderInfo;
-        const mesh = this._renderer.mesh;
+    private renderer(renderer3d: Renderer3D, viewMatrix: mat4, projectionMatrix: mat4, backgroundTexture: WebGLTexture | null) {
+        const renderInfo = renderer3d.renderInfo;
+        const mesh = renderer3d.mesh;
         const uniforms = renderInfo.uniforms;
         const renderCommands = renderInfo.commands;
-        const modelMatrix = this._renderer.modelMatrix;
-        const viewMatrix = this._camera.viewMatrix;
-        const projectionMatrix = this._camera.projectionMatrix;
+        const modelMatrix = renderer3d.modelMatrix;
         for (const command of renderCommands) {
-            this.setRenderStatesDefault();
             this.setRenderStates(command.renderStates);
             this._gl.useProgram(command.program);
 
             // set uniforms
             const a_model = this._gl.getUniformLocation(command.program, "a_model");
-            if(a_model) {
+            if (a_model) {
                 this._gl.uniformMatrix4fv(a_model, false, modelMatrix);
             }
             const a_view = this._gl.getUniformLocation(command.program, "a_view");
-            if(a_view) {
+            if (a_view) {
                 this._gl.uniformMatrix4fv(a_view, false, viewMatrix);
             }
             const a_projection = this._gl.getUniformLocation(command.program, "a_projection");
-            if(a_projection) {
+            if (a_projection) {
                 this._gl.uniformMatrix4fv(a_projection, false, projectionMatrix);
+            }
+            if (backgroundTexture) {
+                const a_skybox = this._gl.getUniformLocation(command.program, "a_skybox");
+                if (a_skybox) {
+                    this._gl.activeTexture(this._gl.TEXTURE0);
+                    this._gl.bindTexture(this._gl.TEXTURE_CUBE_MAP, backgroundTexture);
+                    this._gl.uniform1i(location, 0);
+                }
             }
             this.setUniforms(uniforms, command.uniformLocations);
             this._gl.bindVertexArray(command.vao);
-            if (this._renderer.ebo) {
+            if (renderer3d.ebo) {
                 this._gl.drawElements(mesh.mode, mesh.count, mesh.type, mesh.offset);
             } else {
                 this._gl.drawArrays(mesh.mode, mesh.first, mesh.count);
             }
         }
+
+    }
+
+    private update(): void {
+        const viewMatrix = this.camera.viewMatrix;
+        const projectionMatrix = this.camera.projectionMatrix;
+        const skybox = this.camera.backgroundTexture;
+        this._gl.clearColor(this.camera.backgroundColor[0], this.camera.backgroundColor[1], this.camera.backgroundColor[2], this.camera.backgroundColor[3]);
+        this._gl.clear(this._gl.COLOR_BUFFER_BIT | this._gl.DEPTH_BUFFER_BIT | this._gl.STENCIL_BUFFER_BIT);
+        if(skybox){
+            this.renderer(this._camera.skyBoxRenderer, viewMatrix, projectionMatrix, skybox);
+        }
+        this.renderer(this._renderer, viewMatrix, projectionMatrix, skybox);
     }
 
     loop(): void {

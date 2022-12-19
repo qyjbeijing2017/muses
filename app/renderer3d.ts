@@ -23,7 +23,7 @@ export interface IUniformLocations {
 export interface IRenderCommand {
     program: WebGLProgram;
     vao: WebGLVertexArrayObject;
-    renderStates: Partial<IRenderState>;
+    renderStates: IRenderState;
     uniformLocations: IUniformLocations;
 }
 
@@ -64,6 +64,7 @@ export class Renderer3D {
     }
 
     constructor(gl: WebGL2RenderingContext, mesh: Mesh) {
+        console.log("Renderer3D constructor");
         this._gl = gl;
         this._mesh = mesh;
         this._vbo = this._mesh.createVBO(gl);
@@ -258,6 +259,7 @@ export class Renderer3D {
         }
         value.addListener('ready', this.materialListener.bind(this));
         this._material = value;
+        this._material.init();
     }
 
     set mesh(value: Mesh) {

@@ -13,7 +13,6 @@ export class Material extends EventEmitter {
         } else {
             this._source = code;
         }
-        this.init();
     }
 
     async init() {

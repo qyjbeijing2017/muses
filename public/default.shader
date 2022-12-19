@@ -6,7 +6,7 @@ Shader "Default" {
             // renderstate
             
             // Cull OFF
-            // ZWrite OFF
+            // ZWrite Off
 
             // glsl        
             GLSLPROGRAM

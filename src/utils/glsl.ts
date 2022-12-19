@@ -69,4 +69,11 @@ vec4 max(vec4 a, vec4 b);
 vec2 clamp(vec2 a, vec2 b, vec2 c);
 vec3 clamp(vec3 a, vec3 b, vec3 c);
 vec4 clamp(vec4 a, vec4 b, vec4 c);
+
+vec2 mix(vec2 a, vec2 b, float c);
+vec3 mix(vec3 a, vec3 b, float c);
+vec4 mix(vec4 a, vec4 b, float c);
+
+vec4 texture2D(sampler2D a, vec2 b);
+vec4 textureCube(samplerCube a, vec3 b);
 `
